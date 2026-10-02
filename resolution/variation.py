@@ -189,6 +189,113 @@ def _fit(x, y, query, k, dim, noise=None):
                           disagreement=disagreement, residual=residual, radius=radius)
 
 
+def shrinkage(count, dim):
+    """Weight on the identity for a shape estimated from `count` gradients.
+
+    A d x d covariance from fewer than about d+1 gradients is rank-deficient
+    and would declare whole directions irrelevant on no evidence, so small
+    regions are pulled toward the isotropic shape that plain VWRS assumes.
+    """
+    return float(min(1., (dim + 1)/max(count, 1)))
+
+
+def _unit_trace_shape(matrix, dim, alpha):
+    """d * matrix / trace, blended with the identity; identity if degenerate."""
+    trace = float(np.trace(matrix))
+    if not np.isfinite(trace) or trace <= 0:
+        return np.eye(dim)
+    return (1 - alpha)*dim*matrix/trace + alpha*np.eye(dim)
+
+
+def region_shapes(x, y, labels, query, k=None):
+    """Region-split anisotropy shape S(x), trace d, per query point.
+
+    The discontinuity splits the space into branch regions. Inside a region the
+    shape is that region's centered gradient covariance, from gradients fitted
+    on its own points only: centering removes the branch's constant slope, so
+    what is left is how the gradient changes, i.e. the bending a linear
+    reconstruction misses. A query whose stencil mixes labels sits at a fold;
+    its shape is rank one along the difference of the two regions' mean
+    gradients, which for a max of branches is the fold normal.
+
+    Measured against truth on the two-mode 5D/8D cases before adoption: fold
+    normals aligned at 0.91-1.00, single-peak regions at 0.94-0.99, and a
+    region holding two peaks plus a moderate axis at only 0.62-0.83. A global
+    gradient outer product, a global covariance and a local gradient covariance
+    were all worse; a full local Hessian failed outright above 2D, because its
+    (d+1)(d+2)/2 coefficients need a stencil spanning half the cube.
+
+    `labels` are the observed branch labels of the paid points. Query labels
+    come from the nearest paid point, never from the oracle.
+    """
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    labels = np.asarray(labels)
+    query = np.atleast_2d(np.asarray(query, float))
+    if x.ndim != 2 or y.shape != (len(x),) or labels.shape != (len(x),):
+        raise ValueError("one value and one label per observation required")
+    dim = x.shape[1]
+    k = min(stencil_size(dim, k), len(x))
+
+    means, shapes, alphas = {}, {}, {}
+    for label in np.unique(labels):
+        members = labels == label
+        count = int(members.sum())
+        alphas[label] = shrinkage(count, dim)
+        if count < dim + 3:
+            shapes[label] = np.eye(dim)
+            means[label] = None
+            continue
+        own = _observation_gradients(x[members], y[members], min(k, count - 1), dim)
+        centered = own - own.mean(axis=0)
+        means[label] = own.mean(axis=0)
+        shapes[label] = _unit_trace_shape(centered.T @ centered, dim, alphas[label])
+
+    stencil = np.reshape(cKDTree(x).query(query, k=k)[1], (len(query), k))
+    nearest = labels[stencil[:, 0]]
+    out = np.empty((len(query), dim, dim))
+    for i, row in enumerate(stencil):
+        present, counts = np.unique(labels[row], return_counts=True)
+        if len(present) == 1:
+            out[i] = shapes[nearest[i]]
+            continue
+        order = np.argsort(-counts, kind="stable")
+        first, second = present[order[0]], present[order[1]]
+        if means[first] is None or means[second] is None:
+            out[i] = np.eye(dim)
+            continue
+        normal = means[first] - means[second]
+        out[i] = _unit_trace_shape(np.outer(normal, normal), dim,
+                                   max(alphas[first], alphas[second]))
+    return out
+
+
+def metric_fill(x, y, query, labels=None, k=None, shortlist=None, shape=None):
+    """Anisotropic variation-weighted fill distance, in response units.
+
+        q_M(x) = min_i (x - x_i)^T M(x) (x - x_i) / 2,   M = 2 kappa(x) S(x)
+
+    kappa is the local curvature that plain VWRS already uses and S the
+    region-split shape with trace d. With S = I this is exactly the isotropic
+    h**2 * kappa, so the anisotropic arms differ from VWRS only through the
+    direction of the gap: across a fold or a peak's narrow axis it scores
+    high, along them low. The minimum runs over a Euclidean shortlist, which
+    can only miss an observation far in Euclidean distance yet near in M.
+    """
+    x = np.asarray(x, float)
+    query = np.atleast_2d(np.asarray(query, float))
+    dim = x.shape[1]
+    if shape is None:
+        shape = (np.broadcast_to(np.eye(dim), (len(query), dim, dim)) if labels is None
+                 else region_shapes(x, y, labels, query, k))
+    curvature = knn_variation(x, y, query, k).curvature
+    shortlist = min(shortlist or 2*stencil_size(dim), len(x))
+    index = np.reshape(cKDTree(x).query(query, k=shortlist)[1], (len(query), shortlist))
+    gaps = x[index] - query[:, None, :]                         # (m, s, dim)
+    forms = np.einsum("msi,mij,msj->ms", gaps, shape, gaps)
+    return curvature*forms.min(axis=1)
+
+
 def _observation_gradients(x, y, k, dim):
     distance, index = cKDTree(x).query(x, k=min(k + 1, len(x)))
     distance = np.atleast_2d(distance)[:, 1:]

@@ -16,12 +16,12 @@ import subprocess
 import time
 from threadpoolctl import threadpool_limits
 from .cases import CASES
-from .ionut import CASES as IONUT_CASES
+from .ionut import BUMPED_CASES, CASES as IONUT_CASES
 from .core import calibrating
 from .strategies import ARMS
 from .worker import case_dim, execute
 
-ALL_CASES = list(CASES) + list(IONUT_CASES)
+ALL_CASES = list(CASES) + list(IONUT_CASES) + list(BUMPED_CASES)
 
 
 # The high-dimensional field. Tetrahedral refinement and the dyadic grid do not

@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from benchmarknd.ionut import IonutSurface
+from benchmarknd.ionut import CASES, IonutSurface
 
 TEM, KBM = "ionut-itg-tem-argmax-gamma", "ionut-itg-kbm-argmax-gamma"
 
@@ -41,3 +41,33 @@ def test_the_mask_does_not_depend_on_the_query_batch():
     single = np.array([surface.distance(p[None, :])[0] for p in x[:50]])
     np.testing.assert_array_equal(whole, pieces)
     np.testing.assert_array_equal(whole[:50], single)
+
+
+@pytest.mark.parametrize("case", CASES)
+def test_isolated_bumps_stay_out_of_the_transition_and_keep_omega_sign(case):
+    from scipy.stats import qmc
+    from benchmarknd.ionut import isolated_bumps
+    plain, bumped = IonutSurface(case), IonutSurface(case + "-bumped")
+    x = qmc.Sobol(6, scramble=True, seed=7).random_base2(15)
+    y0, y1 = plain(x), bumped(x)
+    live = plain.distance(x) < .05
+    height = max(abs(a) for a in bumped.bump_amplitudes())
+    assert np.abs(y1-y0)[live].max() < .02*height
+    assert (plain.region(x) == bumped.region(x)).all()
+    assert np.allclose(bumped.distance(x), plain.distance(x), equal_nan=True)
+    inside = bumped.peak_distance(x) < 2
+    assert inside.any()
+    if case.endswith("omega"):
+        assert (np.sign(y0[inside]) == np.sign(y1[inside])).all()
+    else:
+        assert (y1[inside] > y0[inside]).all()
+    narrow = [set(b["narrow"]) for b in isolated_bumps(case)]
+    assert narrow[0] != narrow[1]
+
+
+def test_bumped_pairs_share_one_geometry():
+    from benchmarknd.ionut import isolated_bumps
+    for kind in ("itg-tem", "itg-kbm"):
+        names = [f"ionut-{kind}-{m}-{o}" for m in ("argmax", "softmax") for o in ("gamma", "omega")]
+        centers = [np.array([b["center"] for b in isolated_bumps(n)]) for n in names]
+        assert all(np.array_equal(centers[0], c) for c in centers[1:])

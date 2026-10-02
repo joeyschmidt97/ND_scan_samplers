@@ -8,9 +8,11 @@ import numpy as np
 import pytest
 
 from benchmarknd.core import Observations, SurfaceND, evaluation_set, score, truth_variation
-from benchmarknd.strategies import run_arm
-from resolution import fit_free_scores, knn_variation, spine_targets
-from resolution.variation import stencil_size
+from benchmarknd.strategies import resolution_sampling, run_arm
+from resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
+from scipy.spatial import cKDTree
+
+from resolution.variation import shrinkage, stencil_size
 
 DIMS = (2, 5, 8)
 
@@ -123,6 +125,88 @@ def test_resolution_sampling_spends_the_exact_budget_and_declares_its_weights(ca
         assert metadata["acquisition_weights"]["uncertainty"] == pytest.approx(uncertainty)
         assert sum(metadata["acquisition_weights"].values()) == pytest.approx(1.)
         assert (predict is None) == (arm == "vwrs")
+
+
+def top_direction(shapes):
+    return np.linalg.eigh(shapes)[1][..., -1]
+
+
+@pytest.mark.parametrize("dim", DIMS)
+def test_a_fold_gets_a_rank_one_shape_along_its_normal(dim):
+    """At a max of two planes the fold normal is the mean-gradient difference."""
+    rng = np.random.default_rng(6)
+    first, second = rng.normal(size=dim), rng.normal(size=dim)
+    x = design(dim, 800)
+    values = np.stack([(x - .5) @ first, (x - .5) @ second], axis=1)   # fold through the centre
+    labels, y = values.argmax(axis=1), values.max(axis=1)
+    normal = (first - second)/np.linalg.norm(first - second)
+    probe = design(dim, 20000, seed=1)
+    gap = (probe - .5) @ normal
+    near = probe[np.abs(gap) < .02][:40]
+    shapes = region_shapes(x, y, labels, near)
+    assert np.allclose(np.trace(shapes, axis1=1, axis2=2), dim)
+    alignment = np.abs(top_direction(shapes) @ normal)
+    assert np.median(alignment) > .95
+    tangent = np.linalg.svd(normal[None, :])[2][-1]          # any unit vector orthogonal to the normal
+    across = np.einsum("i,mij,j->m", normal, shapes, normal)
+    along = np.einsum("i,mij,j->m", tangent, shapes, tangent)
+    assert np.median(across) > 10*np.median(along)
+
+
+@pytest.mark.parametrize("dim", DIMS)
+def test_centering_ignores_a_steep_slope_and_finds_the_peak_axis(dim):
+    """Raw gradients point along the slope; the bending is along axis 0."""
+    x = design(dim, 800)
+    width = np.full(dim, .6); width[0] = .08
+    y = 3.*x[:, 1] + np.exp(-.5*np.sum(((x - .5)/width)**2, axis=1))
+    near = .5 + design(dim, 40, seed=1)*.1 - .05
+    shapes = region_shapes(x, y, np.zeros(len(x), int), near)
+    assert np.median(np.abs(top_direction(shapes)[:, 0])) > .9
+
+
+@pytest.mark.parametrize("dim", DIMS)
+def test_without_labels_the_metric_is_exactly_plain_vwrs(dim):
+    x = design(dim, 200)
+    y = np.exp(-.5*np.sum(((x - .5)/.2)**2, axis=1))
+    query = design(dim, 30, seed=1)
+    spacing = cKDTree(x).query(query)[0]
+    curvature = knn_variation(x, y, query).curvature
+    assert np.allclose(metric_fill(x, y, query), spacing**2*curvature, rtol=1e-9)
+
+
+@pytest.mark.parametrize("dim", DIMS)
+def test_small_regions_fall_back_to_the_isotropic_shape(dim):
+    assert shrinkage(1, dim) == 1. and shrinkage(10*(dim + 1), dim) == pytest.approx(.1)
+    x = design(dim, 400)
+    y = x[:, 0]**2
+    labels = np.zeros(len(x), int)
+    labels[:dim + 2] = 1                                      # too few to fit a shape
+    query = x[:dim + 2] + 1e-6
+    shapes = region_shapes(x, y, labels, query, k=dim + 2)
+    lonely = [i for i, row in enumerate(cKDTree(x).query(query, k=dim + 2)[1])
+              if (labels[row] == 1).all()]
+    for i in lonely:
+        assert np.allclose(shapes[i], np.eye(dim))
+
+
+@pytest.mark.parametrize("case", ("5d-m2-rotated", "8d-m2-disjoint"))
+def test_anisotropic_arms_spend_the_exact_budget_and_declare_the_metric(case):
+    surface = SurfaceND(case, 0)
+    for arm in ("vwrs-m", "vurs-m"):
+        obs = Observations(surface, 2*surface.dim+8, surface.dim, 0)
+        predict, metadata = run_arm(arm, obs, 0)
+        assert len(obs.x) == obs.budget
+        assert metadata["anisotropic"] is True
+        assert (predict is None) == (arm == "vwrs-m")
+
+
+def test_anisotropic_arms_refuse_noise_flags_and_unlabelled_oracles():
+    surface = SurfaceND("5d-m2-rotated", 0)
+    with pytest.raises(ValueError):
+        resolution_sampling(Observations(surface, 20, 5, 0), 0, anisotropic=True, replicate=True)
+    unlabelled = Observations(lambda x: surface(x), 20, 5, 0)
+    with pytest.raises(ValueError):
+        run_arm("vwrs-m", unlabelled, 0)
 
 
 def test_holistic_score_is_not_silently_inherited_across_dimension():

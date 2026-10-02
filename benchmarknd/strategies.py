@@ -16,7 +16,7 @@ from sklearn.gaussian_process.kernels import ConstantKernel, Matern
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import PolynomialFeatures
 
-from resolution import knn_variation
+from resolution import knn_variation, metric_fill
 from resolution.variation import stencil_size
 
 # GP-uncertainty share of the blended acquisition; the rest weights the
@@ -25,7 +25,7 @@ GP_BLENDS = {"gpr-u50-g50": .5, "gpr-u70-g30": .7, "gpr-u30-g70": .3}
 
 ARMS = (("space-filling", "gpr-var", "gpr-grad", "moe", "sglib", "sgpp",
          "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs",
-         "vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r")
+         "vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r", "vwrs-m", "vurs-m")
         + tuple(GP_BLENDS))
 
 # Arms that require an oracle reporting a spread per evaluation.
@@ -136,6 +136,19 @@ def gpr(obs, seed, gradient=False, blend=None, nu=1.5, noise_aware=False):
                             {"gpr-grad": 1-blend, "gpr-var": blend})
 
 
+def observed_labels(obs):
+    """Branch label of every paid point, as the oracle reports it.
+
+    The stand-in for a GENE run's classified mode: known only where a run was
+    paid for. Candidates are labelled from their nearest paid point inside the
+    metric, never from this call.
+    """
+    region = getattr(getattr(obs, "_evaluate", None), "region", None)
+    if region is None:
+        raise ValueError("the anisotropic arms need an oracle that reports branch labels")
+    return np.asarray(region(obs.x))
+
+
 def reported_noise(obs):
     """The oracle's per-observation spread, or None for a clean oracle."""
     return getattr(obs, "sigma", None)
@@ -185,7 +198,8 @@ def replicate_choice(obs, best_candidate_deficit):
 
 
 def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
-                        noise_aware=False, allocation=False, replicate=False):
+                        noise_aware=False, allocation=False, replicate=False,
+                        anisotropic=False):
     """VWRS and VURS with a dimension-free variation estimator.
 
     The 2D and 3D implementations weight fill distance by an observed Delaunay
@@ -197,7 +211,15 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
 
     Normalization is by candidate-cloud maximum, matching the 2D and 3D arms,
     so the fixed weights keep their preregistered meaning.
+
+    `anisotropic` swaps the isotropic variation term h**2 * curvature for the
+    metric fill distance q_M under the region-split local resolution metric
+    (anisotropic VWRS/VURS, arms vwrs-m and vurs-m). Regions come from the
+    branch labels the oracle reports at paid points. The coverage term stays
+    isotropic: it is the protection against features the metric has not seen.
     """
+    if anisotropic and (noise_aware or allocation or replicate):
+        raise ValueError("the anisotropic metric has no noise-aware variant yet")
     weights = VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
     if (noise_aware or allocation) and reported_noise(obs) is None:
         raise ValueError("noise-aware placement needs an oracle that reports a spread")
@@ -208,8 +230,11 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
         candidates = sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
         spacing = cKDTree(obs.x).query(candidates)[0]
         observed_noise = reported_noise(obs) if (noise_aware or allocation) else None
-        local = knn_variation(obs.x, obs.y, candidates, noise=observed_noise)
-        variation = spacing*local.indicator(spacing, mode)
+        if anisotropic:
+            variation = metric_fill(obs.x, obs.y, candidates, labels=observed_labels(obs))
+        else:
+            local = knn_variation(obs.x, obs.y, candidates, noise=observed_noise)
+            variation = spacing*local.indicator(spacing, mode)
         merit = (weights["coverage"]*spacing/max(float(spacing.max()), 1e-12)
                  + weights["variation"]*variation/max(float(variation.max()), 1e-12))
         if uncertainty:
@@ -233,8 +258,11 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
     metadata = dict(acquisition_weights=dict(weights), variation_mode=mode,
                     replicates_bought=replicated, max_replicates=MAX_REPLICATES,
                     noise_aware=bool(noise_aware or allocation),
-                    variation="fill distance times knn weighted-least-squares "
-                              "local-linear residual curvature",
+                    variation=("metric fill distance under the region-split local "
+                               "resolution metric" if anisotropic else
+                               "fill distance times knn weighted-least-squares "
+                               "local-linear residual curvature"),
+                    anisotropic=bool(anisotropic),
                     stencil=stencil_size(obs.dim), candidates=candidate_count(obs.dim))
     if uncertainty:
         gp, count = fit_gp(obs, seed, nu=.5)
@@ -323,6 +351,8 @@ def run_arm(name, obs, seed):
                    blend=.5 if name == "gpr-m05-blend" else None, nu=.5)
     if name in ("vwrs", "vurs"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs")
+    if name in ("vwrs-m", "vurs-m"):
+        return resolution_sampling(obs, seed, uncertainty=name == "vurs-m", anisotropic=True)
     if name in ("vwrs-n", "vurs-n"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs-n", noise_aware=True)
     if name == "vurs-a":

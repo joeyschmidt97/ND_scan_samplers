@@ -249,3 +249,39 @@ def test_merge_refuses_mismatched_configurations_and_duplicate_arms(tmp_path):
     same.write_text(json.dumps(_payload(["grid"], dict(grid=.01))))
     with pytest.raises(ValueError, match="already exist"):
         merge(base_path, [same], top=1)
+
+
+@pytest.mark.parametrize("seed", (0, 1, 2))
+def test_isolated_case_keeps_bumps_off_the_fold_and_inside_their_regions(seed):
+    from benchmark2d.core import Surface, evaluation_set
+    surface = Surface("two-plane-isolated", seed)
+    centers = surface.centers()
+    assert ((centers > .05) & (centers < .95)).all()
+    assert np.allclose(surface.distance(centers[2:]), .30)
+    assert list(surface.region(centers)) == [0, 1, 0, 1]
+    fold, isolated = surface.peak_masks(evaluation_set(surface, 4096)[0])
+    assert fold.any() and isolated.any() and not (fold & isolated).any()
+
+
+def test_existing_cases_report_split_peak_scores_without_changing_old_ones():
+    from benchmark2d.core import Surface, Observations, evaluation_set, score
+    from benchmark2d.strategies import run_arm
+    surface = Surface("three-plane-three-peaks", 0)
+    obs = Observations(surface, 24)
+    run_arm("vwrs", obs, 0)
+    row = score(surface, obs, evaluation_set(surface, 4096), secondary=False)
+    assert row["peak_fold_error"] is not None and row["peak_isolated_error"] is not None
+    plain = score(Surface("two-plane-four-peaks", 0), obs, evaluation_set(Surface("two-plane-four-peaks", 0), 4096), secondary=False)
+    assert plain["peak_isolated_error"] is None
+    assert plain["peak_fold_error"] == pytest.approx(plain["peak_error"])
+
+
+@pytest.mark.parametrize("arm", ("vwrs-k", "vurs-k", "vwrs-m", "vurs-m"))
+def test_curvature_and_anisotropic_arms_spend_the_exact_budget(arm):
+    from benchmark2d.core import Surface, Observations
+    from benchmark2d.strategies import run_arm
+    obs = Observations(Surface("two-plane-isolated", 0), 20)
+    predict, metadata = run_arm(arm, obs, 0)
+    assert len(obs.x) == 20
+    assert metadata["anisotropic"] is arm.endswith("-m")
+    assert (predict is None) == arm.startswith("vwrs")

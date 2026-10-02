@@ -5,7 +5,14 @@ from scipy.interpolate import LinearNDInterpolator, RBFInterpolator
 from scipy.spatial import cKDTree, distance
 
 CORNERS = np.array([[0., 0.], [1., 0.], [0., 1.], [1., 1.]])
-CASES = ("smooth", "two-plane-four-peaks", "three-plane-three-peaks", "two-plane-asymmetric")
+CASES = ("smooth", "two-plane-four-peaks", "three-plane-three-peaks", "two-plane-asymmetric",
+         "two-plane-isolated")
+# Isolated anisotropic bumps of "two-plane-isolated": (offset along the fold
+# normal, offset along the tangent, sigma along the normal, sigma along the
+# tangent, amplitude). One per region, three sigma or more from the fold,
+# elongated in perpendicular directions so a region-wide shape cannot fit
+# both the fold-adjacent peak and the isolated bump in region 1.
+ISOLATED_BUMPS = ((.30, -.15, .035, .10, .8), (-.30, -.05, .10, .035, .7))
 TRANSITION_PEAK_OFFSET = .08
 HOLISTIC_TARGETS = dict(nmae=.05, band_nmae=.10, p95_error=.15, vwfd_p95=.25)
 
@@ -62,6 +69,13 @@ class Surface:
             return np.array([base+TRANSITION_PEAK_OFFSET*across,
                              base-TRANSITION_PEAK_OFFSET*across, .5+.27*n2])
         tangent = np.array([-self.normal[1], self.normal[0]])
+        if self.case == "two-plane-isolated":
+            # One fold-adjacent pair (the transition-competition probe) plus one
+            # isolated bump per region: a mode that is neither weak nor competing.
+            pair = [.5+TRANSITION_PEAK_OFFSET*self.normal+.18*tangent,
+                    .5-TRANSITION_PEAK_OFFSET*self.normal+.18*tangent]
+            isolated = [.5+a*self.normal+b*tangent for a, b, *_ in ISOLATED_BUMPS]
+            return np.array(pair+isolated)
         # Paired peaks straddle the fold at two tangential locations. Their
         # centers are close enough to make peak and transition objectives
         # compete, while remaining assigned to opposite modes.
@@ -76,11 +90,49 @@ class Surface:
         y = .25+.15*x[:, 0]+.08*x[:, 1]
         if self.case != "smooth":
             y += .65*np.max((x-.5) @ self.normals.T, axis=1)
+        if self.case == "two-plane-isolated":
+            return y + self._isolated_case_bumps(x)
         # Shared additive bumps preserve the affine-envelope switch boundaries.
         for i, center in enumerate(self.centers()):
             width = .085 if self.case == "smooth" else (.055, .065, .06, .05)[i]
             y += (.9, .7, .8, .6)[i]*np.exp(-.5*np.sum(((x-center)/width)**2, axis=1))
         return y
+
+
+    def _isolated_case_bumps(self, x):
+        centers = self.centers()
+        tangent = np.array([-self.normal[1], self.normal[0]])
+        out = np.zeros(len(x))
+        for center, width, amplitude in zip(centers[:2], (.055, .065), (.9, .7)):
+            out += amplitude*np.exp(-.5*np.sum(((x-center)/width)**2, axis=1))
+        for center, (_, _, sn, st, amplitude) in zip(centers[2:], ISOLATED_BUMPS):
+            along_n, along_t = (x-center) @ self.normal, (x-center) @ tangent
+            out += amplitude*np.exp(-.5*((along_n/sn)**2 + (along_t/st)**2))
+        return out
+
+    def peak_masks(self, x):
+        """(fold-adjacent, isolated) peak masks; the isolated set may be empty.
+
+        Fold-adjacent peaks use the original 0.1 radius. Isolated bumps use two
+        sigma in their own anisotropic frame, so an elongated bump is not cut
+        short along its long axis.
+        """
+        x = np.atleast_2d(x)
+        centers = self.centers()
+        near = lambda cs: (np.min(np.linalg.norm(x[:, None, :]-np.asarray(cs)[None], axis=2), axis=1) < .1
+                           if len(cs) else np.zeros(len(x), bool))
+        if self.case == "two-plane-isolated":
+            tangent = np.array([-self.normal[1], self.normal[0]])
+            isolated = np.zeros(len(x), bool)
+            for center, (_, _, sn, st, _) in zip(centers[2:], ISOLATED_BUMPS):
+                along_n, along_t = (x-center) @ self.normal, (x-center) @ tangent
+                isolated |= (along_n/sn)**2 + (along_t/st)**2 < 4.
+            return near(centers[:2]), isolated
+        if self.case == "three-plane-three-peaks":
+            return near(centers[:2]), near(centers[2:])
+        if self.case == "smooth":
+            return np.zeros(len(x), bool), near(centers)
+        return near(centers), np.zeros(len(x), bool)
 
 
 class BudgetExceeded(RuntimeError):
@@ -165,6 +217,8 @@ def evaluation_set(surface, n=16384):
     scale = float(np.ptp(y))
     band = np.abs(surface.distance(x)) < .06
     peak = np.min(np.linalg.norm(x[:, None, :]-surface.centers()[None, :, :], axis=2), axis=1) < .1
+    if surface.case == "two-plane-isolated":
+        peak = np.logical_or(*surface.peak_masks(x))
     grad2 = np.zeros(n)
     for axis in range(2):
         plus, minus = x.copy(), x.copy()
@@ -199,6 +253,10 @@ def score(surface, observations, test, secondary=True, targets=None):
                vwfd_coverage_10=float(np.mean(vwfd <= .10)),
                rbf_error=rmse(rbf, truth, scale) if secondary else None, scale=scale,
                x=observations.x.tolist(), y=observations.y.tolist())
+    fold_peak, isolated_peak = surface.peak_masks(x)
+    for name, mask in (("peak_fold", fold_peak), ("peak_isolated", isolated_peak)):
+        out[f"{name}_error"] = rmse(yhat[mask], truth[mask], scale) if mask.any() else None
+        out[f"{name}_nmae"] = float(np.mean(absolute[mask])) if mask.any() else None
     limits = HOLISTIC_TARGETS if targets is None else targets
     out["vwfd_coverage_target"] = float(np.mean(vwfd <= limits["vwfd_p95"]))
     out["holistic_error"] = float(max(out[name]/limits[name] for name in HOLISTIC_TARGETS))

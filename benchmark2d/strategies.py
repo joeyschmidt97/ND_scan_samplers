@@ -16,7 +16,8 @@ GP_BLENDS = {"gpr-blend": .5, "gpr-u20-g80": .2, "gpr-u30-g70": .3,
 ARMS = ("grid", "moe", "sglib", "sgpp", "gpr-var", "gpr-grad", "triangles",
         "gpr-blend", "moe-tri75", "moe-tri50",
         "gpr-u20-g80", "gpr-u30-g70", "gpr-u50-g50", "gpr-u70-g30", "gpr-u80-g20",
-        "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs")
+        "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs",
+        "vwrs-k", "vurs-k", "vwrs-m", "vurs-m")
 
 # Keep the primary rematch readable. Older MoE and GP-weight sweeps remain
 # selectable through ARMS without being repeated in every default run.
@@ -132,6 +133,47 @@ def resolution_sampling(obs, seed, uncertainty=False):
     return None, metadata
 
 
+def metric_resolution(obs, seed, uncertainty=False, anisotropic=False):
+    """VWRS/VURS on the dimension-free curvature variation, as in benchmarknd.
+
+    `vwrs-k`/`vurs-k` use the isotropic h**2 * curvature term; `vwrs-m`/`vurs-m`
+    the region-split metric fill distance. The -k pair is the control: the two
+    differ only in S, so any gap between them is the anisotropy alone, not the
+    change from the Delaunay gradient that plain `vwrs`/`vurs` use here.
+    """
+    from resolution import metric_fill
+    initialize(obs, seed)
+    region = getattr(obs._evaluate, "region", None) if anisotropic else None
+    if anisotropic and region is None:
+        raise ValueError("the anisotropic arms need an oracle that reports branch labels")
+    rng = np.random.default_rng(seed)
+    warning_count = 0
+    while obs.remaining:
+        candidates = rng.random((1024, 2))
+        distance = cKDTree(obs.x).query(candidates)[0]
+        labels = None if region is None else np.asarray(region(obs.x))
+        variation = metric_fill(obs.x, obs.y, candidates, labels=labels)
+        terms = [distance, variation]
+        if uncertainty:
+            gp, count = fit_gp(obs, seed, nu=.5)
+            warning_count += count
+            terms.append(gp.predict(candidates, return_std=True)[1])
+        merit = sum(t/max(float(t.max()), 1e-12) for t in terms)/len(terms)
+        merit[distance < 1e-6] = -np.inf
+        obs(candidates[int(np.argmax(merit))])
+    share = 1/3 if uncertainty else .5
+    metadata = dict(coverage_weight=share, variation_weight=share,
+                    uncertainty_weight=share if uncertainty else 0.,
+                    anisotropic=bool(anisotropic),
+                    variation=("metric fill distance under the region-split local resolution metric"
+                               if anisotropic else "fill distance squared times knn local curvature"))
+    if uncertainty:
+        gp, count = fit_gp(obs, seed, nu=.5)
+        metadata.update(fit_warnings=warning_count+count, kernel=str(gp.kernel_), matern_nu=.5)
+        return gp.predict, metadata
+    return None, metadata
+
+
 def triangles(obs, seed):
     """Proposed heuristic: area times neighboring-gradient disagreement.
 
@@ -183,6 +225,9 @@ def run_arm(name, obs, seed):
                    blend=.5 if name == "gpr-m05-blend" else None, nu=.5)
     if name in ("vwrs", "vurs"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs")
+    if name in ("vwrs-k", "vurs-k", "vwrs-m", "vurs-m"):
+        return metric_resolution(obs, seed, uncertainty=name.startswith("vurs"),
+                                 anisotropic=name.endswith("-m"))
     if name == "triangles":
         return triangles(obs, seed)
     if name == "sglib":

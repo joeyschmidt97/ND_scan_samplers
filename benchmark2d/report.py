@@ -17,7 +17,10 @@ COLORS = dict(grid="#758398", moe="#343a40", sglib="#b07813", sgpp="#9b59b6",
                  "gpr-u20-g80": "#d94801", "gpr-u30-g70": "#fdae61", "gpr-u50-g50": "#e7298a",
                  "gpr-u70-g30": "#6a3d9a", "gpr-u80-g20": "#1f78b4",
                  "gpr-m05-var": "#005f73", "gpr-m05-grad": "#ca6702", "gpr-m05-blend": "#bb3e03",
-                 "vwrs": "#2a9d8f", "vurs": "#6d597a"})
+                 "vwrs": "#2a9d8f", "vurs": "#6d597a",
+                 # Curvature controls in light tones, anisotropic arms dark.
+                 "vwrs-k": "#8ecae6", "vurs-k": "#cdb4db",
+                 "vwrs-m": "#023047", "vurs-m": "#3c096c"})
 
 
 def render_reference(cases, seed, out):
@@ -206,7 +209,9 @@ def render(payload, out):
              "gpr-u50-g50": "GP unc/grad 50/50", "gpr-u70-g30": "GP unc/grad 70/30",
              "gpr-u80-g20": "GP unc/grad 80/20",
              "gpr-m05-var": "GP Matern .5 uncertainty", "gpr-m05-grad": "GP Matern .5 gradient",
-             "gpr-m05-blend": "GP Matern .5 grad/unc", "vwrs": "VWRS", "vurs": "VURS"}
+             "gpr-m05-blend": "GP Matern .5 grad/unc", "vwrs": "VWRS", "vurs": "VURS",
+             "vwrs-k": "VWRS curvature", "vurs-k": "VURS curvature",
+             "vwrs-m": "Anisotropic VWRS", "vurs-m": "Anisotropic VURS"}
     a, b = np.meshgrid(np.linspace(0, 1, 101), np.linspace(0, 1, 101))
     query = np.column_stack([a.ravel(), b.ravel()])
     surfaces = {case: Surface(case, seed) for case in cases}

@@ -94,11 +94,44 @@ def sobol_candidates(rng, dim, count):
     return qmc.Sobol(dim, scramble=True, seed=int(rng.integers(2**31))).random(count)
 
 
+def oracle_pool(obs):
+    """The fixed point set the oracle answers at, or None for a continuous one."""
+    return getattr(getattr(obs, "_evaluate", None), "pool", None)
+
+
+def candidates_for(obs, rng):
+    """Candidates for the next placement.
+
+    Continuous oracles get a fresh Sobol cloud. A pool oracle (finite set of
+    completed runs, `benchmarknd.pool`) offers exactly its unpaid points, so
+    every arm chooses among real runs through the same acquisition code.
+    """
+    pool = oracle_pool(obs)
+    if pool is None:
+        return sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
+    paid = {obs.key(p) for p in obs.x}
+    unpaid = np.array([p for p in pool if obs.key(p) not in paid])
+    if not len(unpaid):
+        raise RuntimeError("pool exhausted before the budget was spent")
+    return unpaid
+
+
+def mask_duplicates(merit, spacing, obs):
+    """Forbid near-duplicates of paid points; a pool has none to forbid.
+
+    Pool candidates are distinct runs that were never paid, so a distance rule
+    would only discard real neighbours on a fine radial or ky grid.
+    """
+    if oracle_pool(obs) is None:
+        merit[spacing < duplicate_radius(obs.dim, len(obs.x))] = -np.inf
+    return merit
+
+
 def space_filling(obs, seed):
     """Baseline: extend one scrambled Sobol sequence, skipping paid points."""
     rng = np.random.default_rng(seed)
     while obs.remaining:
-        pool = sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
+        pool = candidates_for(obs, rng)
         distance = cKDTree(obs.x).query(pool)[0]
         obs(pool[int(distance.argmax())])
     return None, dict(pool=candidate_count(obs.dim))
@@ -113,7 +146,7 @@ def gpr(obs, seed, gradient=False, blend=None, nu=1.5, noise_aware=False):
     while obs.remaining:
         gp, count = fit_gp(obs, seed, nu, noise_aware)
         warning_count += count
-        candidates = sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
+        candidates = candidates_for(obs, rng)
         nearest = cKDTree(obs.x).query(candidates)[0]
         _, sd = gp.predict(candidates, return_std=True)
         merit = sd.copy()
@@ -127,7 +160,7 @@ def gpr(obs, seed, gradient=False, blend=None, nu=1.5, noise_aware=False):
             merit *= .1 + np.sqrt(grad)
             if blend is not None:
                 merit = normalized_blend(merit, sd, 1-blend)
-        merit[nearest < duplicate_radius(obs.dim, len(obs.x))] = -np.inf
+        merit = mask_duplicates(merit, nearest, obs)
         obs(candidates[int(np.argmax(merit))])
     gp, count = fit_gp(obs, seed, nu, noise_aware)
     return gp.predict, dict(fit_warnings=warning_count+count, kernel=str(gp.kernel_),
@@ -227,7 +260,7 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
     warning_count = 0
     replicated = 0
     while obs.remaining:
-        candidates = sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
+        candidates = candidates_for(obs, rng)
         spacing = cKDTree(obs.x).query(candidates)[0]
         observed_noise = reported_noise(obs) if (noise_aware or allocation) else None
         if anisotropic:
@@ -245,7 +278,7 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
         if allocation:
             aleatoric = candidate_noise(obs, candidates)
             merit = merit + weights["aleatoric"]*aleatoric/max(float(aleatoric.max()), 1e-12)
-        merit[spacing < duplicate_radius(obs.dim, len(obs.x))] = -np.inf
+        merit = mask_duplicates(merit, spacing, obs)
         index = int(np.argmax(merit))
         if replicate:
             # The deficit the best new point would remove, in response units.
@@ -302,7 +335,7 @@ def mixture(obs, seed):
 
     while obs.remaining:
         gp, experts = fit()
-        candidates = sobol_candidates(rng, obs.dim, candidate_count(obs.dim))
+        candidates = candidates_for(obs, rng)
         predictions = experts(candidates)
         gates = gating(candidates, history_x, history_errors, obs.dim)
         distance = cKDTree(obs.x).query(candidates)[0]
@@ -313,7 +346,7 @@ def mixture(obs, seed):
         merit = np.sum(gates*merits, axis=1)+.25*disagreement/max(disagreement.max(), 1e-12)
         if len(history_x) % 5 == 0:
             merit = distance
-        merit[distance < duplicate_radius(obs.dim, len(obs.x))] = -np.inf
+        merit = mask_duplicates(merit, distance, obs)
         index = int(merit.argmax())
         point, before = candidates[index], predictions[index].copy()
         value = obs(point)[0]

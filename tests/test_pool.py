@@ -78,6 +78,41 @@ def test_load_pool_drops_sentinels_and_averages_repeats(tmp_path):
     assert (oracle.pool >= 0).all() and (oracle.pool <= 1).all()
 
 
+def test_per_mode_scores_use_each_modes_own_scale():
+    oracle = grid_oracle()
+    band = transition_band(oracle)
+    out = score_prefix(oracle, np.arange(0, len(oracle.pool), 3), band)
+    assert set(out["mode_nrmse"]) == {"low", "high"}
+    live = [v for v in out["mode_nrmse"].values() if v is not None]
+    assert np.isclose(out["macro_nrmse"], np.mean(live))
+    assert out["worst_mode_nrmse"] == max(live)
+
+
+def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
+    import json
+    from benchmarknd.pool import rescore
+    oracle = grid_oracle(side=6)
+    names = oracle.label_names
+    path = tmp_path/"pool.csv"
+    with open(path, "w", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["factor_T", "factor_n", "x0", "ky", "gamma", "omega", "mode_ID"])
+        for p, y, k in zip(oracle.pool, oracle.y, oracle.labels):
+            writer.writerow([1+p[0], 1+p[1], .9+.1*p[2], .1+p[2], y, 0., names[k]])
+    loaded, meta = load_pool(path)
+    rows = replay(loaded, "vwrs", seed=0, budget=25, n_checkpoints=3)
+    for row in rows:
+        for key in ("mode_nrmse", "mode_nmae", "macro_nrmse", "worst_mode_nrmse"):
+            row.pop(key)
+    results = tmp_path/"results.json"
+    results.write_text(json.dumps(dict(pool=meta, rows=rows)))
+    again = json.loads(rescore(results).read_text())["rows"]
+    assert len(again) == len(rows)
+    for old, new in zip(rows, again):
+        assert np.isclose(old["nrmse"], new["nrmse"])
+        assert new["macro_nrmse"] is not None
+
+
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
     from benchmarknd.strategies import candidates_for, candidate_count

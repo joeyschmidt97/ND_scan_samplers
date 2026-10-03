@@ -171,7 +171,64 @@ def score_prefix(oracle, paid_index, band):
     counts = Counter(oracle.labels[paid])
     out["paid_per_label"] = {oracle.label_names[k]: int(counts.get(k, 0))
                              for k in range(len(oracle.label_names))}
+    out.update(per_mode_scores(oracle, held, yhat))
     return out
+
+
+def per_mode_scores(oracle, held, yhat):
+    """Reconstruction error inside each true mode, on that mode's own scale.
+
+    The pooled `nrmse` divides by the range of the whole pool, so the branch
+    with the largest growth rates (high-ky ETG) dominates it and an arm that
+    spends its budget there wins by construction. Here each mode's error is
+    normalized by that mode's own response range over the pool, and the
+    macro average weights every mode equally regardless of size or scale.
+    """
+    truth, labels = oracle.y[held], oracle.labels[held]
+    per_nrmse, per_nmae = {}, {}
+    for k, name in enumerate(oracle.label_names):
+        mask = labels == k
+        span = float(np.ptp(oracle.y[oracle.labels == k]))
+        if not mask.any() or span <= 0:
+            per_nrmse[name] = per_nmae[name] = None
+            continue
+        error = np.abs(yhat[mask]-truth[mask])/span
+        per_nrmse[name] = float(np.sqrt(np.mean(error**2)))
+        per_nmae[name] = float(np.mean(error))
+    live = [v for v in per_nrmse.values() if v is not None]
+    return dict(mode_nrmse=per_nrmse, mode_nmae=per_nmae,
+                macro_nrmse=float(np.mean(live)) if live else None,
+                worst_mode_nrmse=float(np.max(live)) if live else None)
+
+
+def rescore(results_path, output_path=None):
+    """Recompute every checkpoint score from the stored selection orders.
+
+    Placement does not depend on the scorer, so a scoring change needs no
+    rerun: each finished trajectory stores its full paid order, and every
+    checkpoint is a prefix of it.
+    """
+    results_path = pathlib.Path(results_path)
+    payload = json.loads(results_path.read_text())
+    oracle, meta = load_pool(payload["pool"]["path"], payload["pool"]["target"])
+    if meta["sha256"] != payload["pool"]["sha256"]:
+        raise ValueError("pool file changed since the run; refusing to rescore")
+    band = transition_band(oracle)
+    ends = {(r["arm"], r["seed"]): r["selected"] for r in payload["rows"]
+            if r["status"] == "ok" and "selected" in r}
+    rows = []
+    for row in payload["rows"]:
+        if row["status"] != "ok" or (row["arm"], row["seed"]) not in ends:
+            continue
+        order = ends[(row["arm"], row["seed"])]
+        fresh = dict(row)
+        fresh.update(score_prefix(oracle, np.asarray(order[:row["n"]]), band))
+        rows.append(fresh)
+    out = dict(payload, rows=rows, rescored_from=str(results_path),
+               rescore_note="per-mode scores added; placements unchanged")
+    output_path = pathlib.Path(output_path or results_path.with_name("rescored.json"))
+    output_path.write_text(json.dumps(out, indent=2, allow_nan=False), encoding="utf-8")
+    return output_path
 
 
 def checkpoints(start, budget, count):
@@ -202,14 +259,21 @@ def replay(oracle, arm, seed, budget, n_checkpoints=8, band=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pool", type=pathlib.Path, required=True)
+    parser.add_argument("--rescore", type=pathlib.Path,
+                        help="recompute scores of an existing results.json and exit")
+    parser.add_argument("--pool", type=pathlib.Path)
     parser.add_argument("--target", default="gamma", choices=("gamma", "omega"))
     parser.add_argument("--arms", nargs="+", choices=POOL_ARMS, default=list(DEFAULT_POOL_ARMS))
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--budget", type=int, default=256)
     parser.add_argument("--checkpoints", type=int, default=8)
-    parser.add_argument("--output", type=pathlib.Path, required=True)
+    parser.add_argument("--output", type=pathlib.Path)
     args = parser.parse_args()
+    if args.rescore:
+        print(f"saved {rescore(args.rescore, args.output)}")
+        return
+    if args.pool is None or args.output is None:
+        parser.error("--pool and --output are required unless --rescore is given")
 
     oracle, meta = load_pool(args.pool, args.target)
     band = transition_band(oracle)

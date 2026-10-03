@@ -37,6 +37,12 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 RIDGE = 1e-10           # stabilizes the normal equations on degenerate stencils
+# Minimum identity share of the rank-one fold shape. Without it a gap along the
+# fold scores zero, and the 2D benchmark (82036f9) showed vwrs-m sampling the
+# fold band below the uniform share: the linear reconstruction's error depends
+# on the containing simplex, which can span the kink even when the nearest
+# paid point sits on the fold.
+FOLD_FLOOR = .25
 MIN_RADIUS = 1e-12
 
 
@@ -207,7 +213,7 @@ def _unit_trace_shape(matrix, dim, alpha):
     return (1 - alpha)*dim*matrix/trace + alpha*np.eye(dim)
 
 
-def region_shapes(x, y, labels, query, k=None):
+def region_shapes(x, y, labels, query, k=None, fold_floor=FOLD_FLOOR):
     """Region-split anisotropy shape S(x), trace d, per query point.
 
     The discontinuity splits the space into branch regions. Inside a region the
@@ -216,7 +222,8 @@ def region_shapes(x, y, labels, query, k=None):
     what is left is how the gradient changes, i.e. the bending a linear
     reconstruction misses. A query whose stencil mixes labels sits at a fold;
     its shape is rank one along the difference of the two regions' mean
-    gradients, which for a max of branches is the fold normal.
+    gradients, which for a max of branches is the fold normal, blended with at
+    least `fold_floor` of the identity so gaps along the fold still count.
 
     Measured against truth on the two-mode 5D/8D cases before adoption: fold
     normals aligned at 0.91-1.00, single-peak regions at 0.94-0.99, and a
@@ -266,11 +273,12 @@ def region_shapes(x, y, labels, query, k=None):
             continue
         normal = means[first] - means[second]
         out[i] = _unit_trace_shape(np.outer(normal, normal), dim,
-                                   max(alphas[first], alphas[second]))
+                                   max(alphas[first], alphas[second], fold_floor))
     return out
 
 
-def metric_fill(x, y, query, labels=None, k=None, shortlist=None, shape=None):
+def metric_fill(x, y, query, labels=None, k=None, shortlist=None, shape=None,
+                fold_floor=FOLD_FLOOR):
     """Anisotropic variation-weighted fill distance, in response units.
 
         q_M(x) = min_i (x - x_i)^T M(x) (x - x_i) / 2,   M = 2 kappa(x) S(x)
@@ -287,7 +295,7 @@ def metric_fill(x, y, query, labels=None, k=None, shortlist=None, shape=None):
     dim = x.shape[1]
     if shape is None:
         shape = (np.broadcast_to(np.eye(dim), (len(query), dim, dim)) if labels is None
-                 else region_shapes(x, y, labels, query, k))
+                 else region_shapes(x, y, labels, query, k, fold_floor))
     curvature = knn_variation(x, y, query, k).curvature
     shortlist = min(shortlist or 2*stencil_size(dim), len(x))
     index = np.reshape(cKDTree(x).query(query, k=shortlist)[1], (len(query), shortlist))

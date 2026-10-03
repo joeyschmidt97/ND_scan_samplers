@@ -172,7 +172,48 @@ def score_prefix(oracle, paid_index, band):
     out["paid_per_label"] = {oracle.label_names[k]: int(counts.get(k, 0))
                              for k in range(len(oracle.label_names))}
     out.update(per_mode_scores(oracle, held, yhat))
+
+    # Classify-then-regress: the label each held point is predicted to carry
+    # chooses which mode's own interpolant reconstructs it. The oracle-label
+    # variant uses the true held labels instead; it is a diagnostic that
+    # separates regression error from classification error and is not
+    # available to a real campaign.
+    predicted = oracle.labels[paid][nearest]
+    ctr = classify_then_regress(oracle, paid, held, predicted, yhat)
+    ctr_oracle = classify_then_regress(oracle, paid, held, oracle.labels[held], yhat)
+    ctr_absolute = np.abs(ctr["yhat"]-oracle.y[held])/scale
+    out.update(ctr_nrmse=float(np.sqrt(np.mean(ctr_absolute**2))),
+               ctr_fallback_points=ctr["fallback_points"])
+    out.update({"ctr_" + k: v for k, v in per_mode_scores(oracle, held, ctr["yhat"]).items()})
+    out.update({"ctr_oracle_" + k: v for k, v in
+                per_mode_scores(oracle, held, ctr_oracle["yhat"]).items()
+                if k in ("mode_nrmse", "macro_nrmse", "worst_mode_nrmse")})
     return out
+
+
+def classify_then_regress(oracle, paid, held, held_labels, fallback):
+    """Reconstruct each held point from the paid points of its assigned mode.
+
+    One thin-plate RBF per mode, fitted only on paid points carrying that
+    label, so a small-growth branch is not smeared by a neighbouring branch
+    with growth rates ten times larger. A mode whose paid points cannot carry
+    the interpolant's linear tail -- fewer than dim + 2, or all on one
+    hyperplane, e.g. every paid MTM point at a single ky -- falls back to the
+    global reconstruction for its held points; the count is reported.
+    """
+    yhat = np.array(fallback, float)
+    fallback_points = 0
+    paid_x, paid_y, paid_labels = oracle.pool[paid], oracle.y[paid], oracle.labels[paid]
+    held_x = oracle.pool[held]
+    for k in np.unique(held_labels):
+        target = held_labels == k
+        source = paid_labels == k
+        tail = np.column_stack([np.ones(source.sum()), paid_x[source]])
+        if source.sum() < oracle.dim+2 or np.linalg.matrix_rank(tail) < oracle.dim+1:
+            fallback_points += int(target.sum())
+            continue
+        yhat[target] = reconstruct(paid_x[source], paid_y[source], held_x[target])
+    return dict(yhat=yhat, fallback_points=fallback_points)
 
 
 def per_mode_scores(oracle, held, yhat):

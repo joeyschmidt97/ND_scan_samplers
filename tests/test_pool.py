@@ -88,6 +88,24 @@ def test_per_mode_scores_use_each_modes_own_scale():
     assert out["worst_mode_nrmse"] == max(live)
 
 
+def test_classify_then_regress_separates_a_small_branch_from_a_large_one():
+    """A flat small branch beside a steep large one: per-mode fits recover it."""
+    axis = np.linspace(0, 1, 7)
+    x = np.array(np.meshgrid(axis, axis, axis, indexing="ij")).reshape(3, -1).T
+    labels = (x[:, 0] > .5).astype(int)
+    y = np.where(labels == 1, 10+5*x[:, 1], .01*x[:, 2])
+    oracle = PoolOracle(x, y, labels, ("small", "large"))
+    out = score_prefix(oracle, np.arange(0, len(x), 2), transition_band(oracle))
+    # With true labels the small branch is recovered exactly; the global
+    # interpolant smears the large branch into it.
+    assert out["ctr_oracle_mode_nrmse"]["small"] < 1e-6 < out["mode_nrmse"]["small"]
+    assert out["ctr_fallback_points"] == 0
+    # With predicted labels a misclassified point beside the fold takes the
+    # other branch's value, so the predicted-label score is finite but can be
+    # worse than the global one: classification error is not hidden.
+    assert np.isfinite(out["ctr_macro_nrmse"])
+
+
 def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
     import json
     from benchmarknd.pool import rescore

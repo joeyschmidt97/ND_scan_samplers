@@ -23,10 +23,20 @@ from resolution.variation import stencil_size
 # gradient-weighted merit. The three ratios are the 2-D sweep winners.
 GP_BLENDS = {"gpr-u50-g50": .5, "gpr-u70-g30": .7, "gpr-u30-g70": .3}
 
+# VURS uncertainty variants: the kernel of its GP-uncertainty term, or the
+# share of the acquisition that term carries. Plain `vurs` is Matern-1/2 with
+# equal thirds; each variant changes exactly one of the two.
+VURS_VARIANTS = {
+    "vurs-nu15": dict(nu=1.5),
+    "vurs-nu25": dict(nu=2.5),
+    "vurs-u50": dict(weights=dict(coverage=.25, variation=.25, uncertainty=.5)),
+    "vurs-u20": dict(weights=dict(coverage=.4, variation=.4, uncertainty=.2)),
+}
+
 ARMS = (("space-filling", "gpr-var", "gpr-grad", "moe", "sglib", "sgpp",
          "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs",
          "vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r", "vwrs-m", "vurs-m")
-        + tuple(GP_BLENDS))
+        + tuple(GP_BLENDS) + tuple(VURS_VARIANTS))
 
 # Arms that require an oracle reporting a spread per evaluation.
 NOISE_AWARE_ARMS = ("vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r")
@@ -232,7 +242,7 @@ def replicate_choice(obs, best_candidate_deficit):
 
 def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                         noise_aware=False, allocation=False, replicate=False,
-                        anisotropic=False):
+                        anisotropic=False, nu=.5, weights=None):
     """VWRS and VURS with a dimension-free variation estimator.
 
     The 2D and 3D implementations weight fill distance by an observed Delaunay
@@ -253,7 +263,10 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
     """
     if anisotropic and (noise_aware or allocation or replicate):
         raise ValueError("the anisotropic metric has no noise-aware variant yet")
-    weights = VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
+    if weights is None:
+        weights = VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
+    elif not uncertainty or abs(sum(weights.values())-1) > 1e-9:
+        raise ValueError("custom weights apply to VURS and must sum to one")
     if (noise_aware or allocation) and reported_noise(obs) is None:
         raise ValueError("noise-aware placement needs an oracle that reports a spread")
     rng = np.random.default_rng(seed)
@@ -271,7 +284,7 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
         merit = (weights["coverage"]*spacing/max(float(spacing.max()), 1e-12)
                  + weights["variation"]*variation/max(float(variation.max()), 1e-12))
         if uncertainty:
-            gp, count = fit_gp(obs, seed, nu=.5)
+            gp, count = fit_gp(obs, seed, nu=nu)
             warning_count += count
             sd = gp.predict(candidates, return_std=True)[1]
             merit = merit + weights["uncertainty"]*sd/max(float(sd.max()), 1e-12)
@@ -298,8 +311,8 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                     anisotropic=bool(anisotropic),
                     stencil=stencil_size(obs.dim), candidates=candidate_count(obs.dim))
     if uncertainty:
-        gp, count = fit_gp(obs, seed, nu=.5)
-        metadata.update(fit_warnings=warning_count+count, kernel=str(gp.kernel_), matern_nu=.5)
+        gp, count = fit_gp(obs, seed, nu=nu)
+        metadata.update(fit_warnings=warning_count+count, kernel=str(gp.kernel_), matern_nu=nu)
         return gp.predict, metadata
     return None, metadata
 
@@ -384,6 +397,8 @@ def run_arm(name, obs, seed):
                    blend=.5 if name == "gpr-m05-blend" else None, nu=.5)
     if name in ("vwrs", "vurs"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs")
+    if name in VURS_VARIANTS:
+        return resolution_sampling(obs, seed, uncertainty=True, **VURS_VARIANTS[name])
     if name in ("vwrs-m", "vurs-m"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs-m", anisotropic=True)
     if name in ("vwrs-n", "vurs-n"):

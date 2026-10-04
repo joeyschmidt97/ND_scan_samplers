@@ -141,6 +141,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -221,6 +229,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7843866171003717,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.36119232683468905,
       "modes_found": 4,
@@ -301,6 +317,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.753731343283582,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": -0.1440173852522349,
+        "KBM": -0.6442446023286932,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.197065496895232,
+      "mode_sensitivity_worst": -0.6442446023286932,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.40576383493185497,
       "modes_found": 4,
@@ -381,6 +405,14 @@
       "transition_budget_share": 0.15789473684210525,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6428571428571429,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9890588546344354,
+        "ITG_TEM": 0.9577591326091291,
+        "KBM": 0.7246573360640347,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6678688308268999,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4290577388487502,
       "modes_found": 4,
@@ -461,6 +493,14 @@
       "transition_budget_share": 0.19672131147540983,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.48846153846153845,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9894791619977817,
+        "ITG_TEM": 0.8399598016492097,
+        "KBM": 0.9262509548830572,
+        "MTM": 0.9833374897039928
+      },
+      "mode_sensitivity_macro": 0.9347568520585103,
+      "mode_sensitivity_worst": 0.8399598016492097,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.6459807246344014,
       "modes_found": 4,
@@ -541,6 +581,14 @@
       "transition_budget_share": 0.20408163265306123,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5912698412698413,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9948213276986257,
+        "ITG_TEM": 0.9028054111024775,
+        "KBM": 0.993585612371616,
+        "MTM": 0.9719901510748455
+      },
+      "mode_sensitivity_macro": 0.9658006255618912,
+      "mode_sensitivity_worst": 0.9028054111024775,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7035703429059131,
       "modes_found": 4,
@@ -621,6 +669,14 @@
       "transition_budget_share": 0.20754716981132076,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.702928870292887,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9546727579848453,
+        "ITG_TEM": 0.9571134915132841,
+        "KBM": 0.9901499441136468,
+        "MTM": 0.9356616966289119
+      },
+      "mode_sensitivity_macro": 0.9593994725601721,
+      "mode_sensitivity_worst": 0.9356616966289119,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7202617227979509,
       "modes_found": 4,
@@ -961,6 +1017,14 @@
       "transition_budget_share": 0.2265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.677570093457944,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9967685313051783,
+        "ITG_TEM": 0.9445944121286385,
+        "KBM": 0.9597104332481804,
+        "MTM": 0.9810863291469789
+      },
+      "mode_sensitivity_macro": 0.970539926457244,
+      "mode_sensitivity_worst": 0.9445944121286385,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.8202068845636377,
       "modes_found": 4,
@@ -1041,6 +1105,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -1121,6 +1193,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8208955223880597,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.25838855820627343,
       "modes_found": 4,
@@ -1201,6 +1281,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7330827067669173,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8081536272411004,
+        "KBM": 0.0,
+        "MTM": 0.9537479899433581
+      },
+      "mode_sensitivity_macro": 0.44047540429611465,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3140133325782962,
       "modes_found": 4,
@@ -1281,6 +1369,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6339622641509434,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9425800558402102,
+        "ITG_TEM": 0.47148184855893027,
+        "KBM": 0.8371051775733882,
+        "MTM": 0.9537479899433581
+      },
+      "mode_sensitivity_macro": 0.8012287679789718,
+      "mode_sensitivity_worst": 0.47148184855893027,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5286350250038091,
       "modes_found": 4,
@@ -1361,6 +1457,14 @@
       "transition_budget_share": 0.16393442622950818,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5343511450381679,
+      "mode_sensitivity_cos": {
+        "ETG": 0.98879033185263,
+        "ITG_TEM": 0.6308461476147024,
+        "KBM": 0.8303464416997396,
+        "MTM": 0.2358170896438058
+      },
+      "mode_sensitivity_macro": 0.6714500027027194,
+      "mode_sensitivity_worst": 0.2358170896438058,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.535526303600533,
       "modes_found": 4,
@@ -1441,6 +1545,14 @@
       "transition_budget_share": 0.19387755102040816,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5177865612648221,
+      "mode_sensitivity_cos": {
+        "ETG": 0.97686147375658,
+        "ITG_TEM": 0.9312003099175037,
+        "KBM": 0.9827182642821494,
+        "MTM": 0.008822309425637678
+      },
+      "mode_sensitivity_macro": 0.7249005893454677,
+      "mode_sensitivity_worst": 0.008822309425637678,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7052676537974109,
       "modes_found": 4,
@@ -1521,6 +1633,14 @@
       "transition_budget_share": 0.20125786163522014,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.575,
+      "mode_sensitivity_cos": {
+        "ETG": 0.96424974360819,
+        "ITG_TEM": 0.9942112676643537,
+        "KBM": 0.995972915544828,
+        "MTM": 0.9944214783491367
+      },
+      "mode_sensitivity_macro": 0.9872138512916272,
+      "mode_sensitivity_worst": 0.96424974360819,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7762865471847255,
       "modes_found": 4,
@@ -1864,6 +1984,14 @@
       "transition_budget_share": 0.203125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5727272727272728,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9826257530459843,
+        "ITG_TEM": 0.9921250048586973,
+        "KBM": 0.9981879313445063,
+        "MTM": 0.9893886617008534
+      },
+      "mode_sensitivity_macro": 0.9905818377375102,
+      "mode_sensitivity_worst": 0.9826257530459843,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.8152842430372599,
       "modes_found": 4,
@@ -1944,6 +2072,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -2024,6 +2160,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8805970149253731,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.11665852383949353,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.029164630959873383,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2684717752130347,
       "modes_found": 4,
@@ -2104,6 +2248,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8694029850746269,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.42937215295606584,
+        "MTM": 0.11487810405669548
+      },
+      "mode_sensitivity_macro": 0.13606256425319033,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.28834269864890927,
       "modes_found": 4,
@@ -2184,6 +2336,14 @@
       "transition_budget_share": 0.13157894736842105,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7228464419475655,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.25712536007298675,
+        "KBM": 0.6438598247640446,
+        "MTM": 0.8200241900483078
+      },
+      "mode_sensitivity_macro": 0.4302523437213348,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2905488546391206,
       "modes_found": 4,
@@ -2264,6 +2424,14 @@
       "transition_budget_share": 0.11475409836065574,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7245283018867924,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9682191633103568,
+        "ITG_TEM": 0.3586635427498929,
+        "KBM": 0.6980057220091251,
+        "MTM": 0.8200241900483078
+      },
+      "mode_sensitivity_macro": 0.7112281545294207,
+      "mode_sensitivity_worst": 0.3586635427498929,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.37096896379810673,
       "modes_found": 4,
@@ -2344,6 +2512,14 @@
       "transition_budget_share": 0.12244897959183673,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6846153846153846,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9699896649964929,
+        "ITG_TEM": 0.2477438150612547,
+        "KBM": 0.8347113881688024,
+        "MTM": 0.6078536303202011
+      },
+      "mode_sensitivity_macro": 0.6650746246366877,
+      "mode_sensitivity_worst": 0.2477438150612547,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5081453732193962,
       "modes_found": 4,
@@ -2424,6 +2600,14 @@
       "transition_budget_share": 0.23270440251572327,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6042553191489362,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9724415640269258,
+        "ITG_TEM": 0.6844696051080383,
+        "KBM": 0.9146261938333105,
+        "MTM": 0.754776968756391
+      },
+      "mode_sensitivity_macro": 0.8315785829311664,
+      "mode_sensitivity_worst": 0.6844696051080383,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.7060738115138964,
       "modes_found": 4,
@@ -2767,6 +2951,14 @@
       "transition_budget_share": 0.1796875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4424778761061947,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9947049274440318,
+        "ITG_TEM": 0.7032780058123022,
+        "KBM": 0.9280518423837532,
+        "MTM": 0.772871487333916
+      },
+      "mode_sensitivity_macro": 0.8497265657435007,
+      "mode_sensitivity_worst": 0.7032780058123022,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.8886071696766731,
       "modes_found": 4,
@@ -2847,6 +3039,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -2927,6 +3127,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7164179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2563173622892185,
       "modes_found": 4,
@@ -3007,6 +3215,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6779026217228464,
+      "mode_sensitivity_cos": {
+        "ETG": 0.6450716705728982,
+        "ITG_TEM": 0.8837025649725602,
+        "KBM": -0.07063809035635225,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.36453403629727654,
+      "mode_sensitivity_worst": -0.07063809035635225,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.32873830813980964,
       "modes_found": 4,
@@ -3087,6 +3303,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6628787878787878,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9469705010386089,
+        "ITG_TEM": -0.0017511944958859633,
+        "KBM": 0.4937133996821217,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3597331765562112,
+      "mode_sensitivity_worst": -0.0017511944958859633,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5488477967727152,
       "modes_found": 4,
@@ -3167,6 +3391,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5930232558139535,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9547570774714604,
+        "ITG_TEM": 0.4153558192028185,
+        "KBM": 0.9749497903797507,
+        "MTM": 0.41161183946203317
+      },
+      "mode_sensitivity_macro": 0.6891686316290158,
+      "mode_sensitivity_worst": 0.41161183946203317,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.6044690727775546,
       "modes_found": 4,
@@ -3247,6 +3479,14 @@
       "transition_budget_share": 0.2755102040816326,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5510204081632653,
+      "mode_sensitivity_cos": {
+        "ETG": 0.964425901578987,
+        "ITG_TEM": 0.5916664027175523,
+        "KBM": 0.9746808723147301,
+        "MTM": 0.801719274450111
+      },
+      "mode_sensitivity_macro": 0.8331231127653451,
+      "mode_sensitivity_worst": 0.5916664027175523,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.6331674038664816,
       "modes_found": 4,
@@ -3327,6 +3567,14 @@
       "transition_budget_share": 0.22012578616352202,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5316455696202531,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9733665127501017,
+        "ITG_TEM": 0.6787022769017421,
+        "KBM": 0.9728648954425785,
+        "MTM": 0.9305038014219257
+      },
+      "mode_sensitivity_macro": 0.888859371629087,
+      "mode_sensitivity_worst": 0.6787022769017421,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.6978563439586476,
       "modes_found": 4,
@@ -3673,6 +3921,14 @@
       "transition_budget_share": 0.1796875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.41150442477876104,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9910474167435418,
+        "ITG_TEM": 0.9012642321405225,
+        "KBM": 0.9782706447730013,
+        "MTM": 0.9028531486824349
+      },
+      "mode_sensitivity_macro": 0.9433588605848751,
+      "mode_sensitivity_worst": 0.9012642321405225,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.8886071696766731,
       "modes_found": 4,
@@ -3753,6 +4009,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -3833,6 +4097,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7686567164179104,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -3913,6 +4185,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6353383458646616,
+      "mode_sensitivity_cos": {
+        "ETG": 0.988926920958781,
+        "ITG_TEM": 0.9485105971822234,
+        "KBM": 0.36726302394754146,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.5761751355221365,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34025292903288074,
       "modes_found": 4,
@@ -3993,6 +4273,14 @@
       "transition_budget_share": 0.34210526315789475,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5637065637065637,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9924557592032734,
+        "ITG_TEM": 0.9485105971822234,
+        "KBM": -0.05830814587508241,
+        "MTM": 0.8358534414382777
+      },
+      "mode_sensitivity_macro": 0.679627912987173,
+      "mode_sensitivity_worst": -0.05830814587508241,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3490899057064586,
       "modes_found": 4,
@@ -4073,6 +4361,14 @@
       "transition_budget_share": 0.3114754098360656,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5375494071146245,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9934939935736075,
+        "ITG_TEM": 0.8739963394269841,
+        "KBM": -0.7606763956079149,
+        "MTM": 0.8924123811793265
+      },
+      "mode_sensitivity_macro": 0.4998065796430008,
+      "mode_sensitivity_worst": -0.7606763956079149,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.6664705198066189,
       "modes_found": 4,
@@ -4153,6 +4449,14 @@
       "transition_budget_share": 0.22448979591836735,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.54,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9913694276061684,
+        "ITG_TEM": 0.8831023269964289,
+        "KBM": 0.9835532467759075,
+        "MTM": 0.3028378593433834
+      },
+      "mode_sensitivity_macro": 0.7902157151804721,
+      "mode_sensitivity_worst": 0.3028378593433834,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.8275516990107539,
       "modes_found": 4,
@@ -4233,6 +4537,14 @@
       "transition_budget_share": 0.22641509433962265,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.576271186440678,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9927704523052482,
+        "ITG_TEM": 0.9706319528777415,
+        "KBM": 0.9552761267079635,
+        "MTM": 0.9207136617257315
+      },
+      "mode_sensitivity_macro": 0.9598480484041713,
+      "mode_sensitivity_worst": 0.9207136617257315,
       "peak_top5_recall": 0.39999999999999997,
       "peak_best_ratio": 0.8958463113459048,
       "modes_found": 4,
@@ -4579,6 +4891,14 @@
       "transition_budget_share": 0.1953125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5495495495495496,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9932786925395206,
+        "ITG_TEM": 0.9049966986526493,
+        "KBM": 0.9473216117382569,
+        "MTM": 0.8263905532961251
+      },
+      "mode_sensitivity_macro": 0.9179968890566379,
+      "mode_sensitivity_worst": 0.8263905532961251,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9472477226720648,
       "modes_found": 4,
@@ -4659,6 +4979,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -4739,6 +5067,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7472118959107806,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2837129557932701,
       "modes_found": 4,
@@ -4819,6 +5155,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6940298507462687,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.736051889996262,
+        "KBM": 0.8350206238724347,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3927681284671742,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3102618875041937,
       "modes_found": 4,
@@ -4899,6 +5243,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6590909090909091,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8777268356116791,
+        "ITG_TEM": 0.8189876945050352,
+        "KBM": 0.910091746658594,
+        "MTM": 0.8043135772164381
+      },
+      "mode_sensitivity_macro": 0.8527799634979366,
+      "mode_sensitivity_worst": 0.8043135772164381,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.4471434997263177,
       "modes_found": 4,
@@ -4979,6 +5331,14 @@
       "transition_budget_share": 0.2786885245901639,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6313725490196078,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8704819030493443,
+        "ITG_TEM": 0.8405434662131648,
+        "KBM": 0.9565492880505647,
+        "MTM": 0.6282827387313491
+      },
+      "mode_sensitivity_macro": 0.8239643490111057,
+      "mode_sensitivity_worst": 0.6282827387313491,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5272646593463328,
       "modes_found": 4,
@@ -5059,6 +5419,14 @@
       "transition_budget_share": 0.336734693877551,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6108786610878661,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8575132463965888,
+        "ITG_TEM": 0.9066594830690635,
+        "KBM": 0.9542904119462728,
+        "MTM": 0.8974592195276035
+      },
+      "mode_sensitivity_macro": 0.9039805902348822,
+      "mode_sensitivity_worst": 0.8575132463965888,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.7096255155335609,
       "modes_found": 4,
@@ -5139,6 +5507,14 @@
       "transition_budget_share": 0.2641509433962264,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5347826086956522,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9789271408232753,
+        "ITG_TEM": 0.9736516921802676,
+        "KBM": 0.9922338579328641,
+        "MTM": 0.9249585926991503
+      },
+      "mode_sensitivity_macro": 0.9674428209088893,
+      "mode_sensitivity_worst": 0.9249585926991503,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.882703373861919,
       "modes_found": 4,
@@ -5488,6 +5864,14 @@
       "transition_budget_share": 0.203125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4909090909090909,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9842700512483891,
+        "ITG_TEM": 0.9718163379088205,
+        "KBM": 0.9801970949207378,
+        "MTM": 0.8961321036998792
+      },
+      "mode_sensitivity_macro": 0.9581038969444566,
+      "mode_sensitivity_worst": 0.8961321036998792,
       "peak_top5_recall": 0.65,
       "peak_best_ratio": 0.9762145748987854,
       "modes_found": 4,
@@ -5568,6 +5952,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -5648,6 +6040,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6877323420074349,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": -0.6108121885003072,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.1527030471250768,
+      "mode_sensitivity_worst": -0.6108121885003072,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2751927855934162,
       "modes_found": 4,
@@ -5728,6 +6128,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5842696629213483,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9029675484616649,
+        "KBM": 0.9321541595255257,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.45878042699679766,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.460607534274038,
       "modes_found": 4,
@@ -5808,6 +6216,14 @@
       "transition_budget_share": 0.2894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5363984674329502,
+      "mode_sensitivity_cos": {
+        "ETG": -0.621888914593873,
+        "ITG_TEM": 0.8099854673202579,
+        "KBM": 0.8378145199185668,
+        "MTM": -0.06830654670575229
+      },
+      "mode_sensitivity_macro": 0.23940113148479983,
+      "mode_sensitivity_worst": -0.621888914593873,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.6380344964698221,
       "modes_found": 4,
@@ -5888,6 +6304,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5426356589147286,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9797563697525488,
+        "ITG_TEM": 0.8323681928024803,
+        "KBM": 0.8350755896187181,
+        "MTM": 0.568374028127365
+      },
+      "mode_sensitivity_macro": 0.803893545075278,
+      "mode_sensitivity_worst": 0.568374028127365,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.6801830185709127,
       "modes_found": 4,
@@ -5968,6 +6392,14 @@
       "transition_budget_share": 0.23469387755102042,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5060240963855421,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9894713568733784,
+        "ITG_TEM": 0.9582704619710829,
+        "KBM": 0.9276928064645614,
+        "MTM": 0.9575375973613007
+      },
+      "mode_sensitivity_macro": 0.9582430556675808,
+      "mode_sensitivity_worst": 0.9276928064645614,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7160460901722914,
       "modes_found": 4,
@@ -6048,6 +6480,14 @@
       "transition_budget_share": 0.2830188679245283,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5814977973568282,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9991208967416009,
+        "ITG_TEM": 0.9576871863720535,
+        "KBM": 0.9763402217722381,
+        "MTM": 0.8402915245871764
+      },
+      "mode_sensitivity_macro": 0.9433599573682673,
+      "mode_sensitivity_worst": 0.8402915245871764,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.8785301127478662,
       "modes_found": 4,
@@ -6397,6 +6837,14 @@
       "transition_budget_share": 0.2734375,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6039603960396039,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9828076203303785,
+        "ITG_TEM": 0.9381253282915116,
+        "KBM": 0.9847630507849515,
+        "MTM": 0.9827678454155545
+      },
+      "mode_sensitivity_macro": 0.972115961205599,
+      "mode_sensitivity_worst": 0.9381253282915116,
       "peak_top5_recall": 0.65,
       "peak_best_ratio": 0.9500956174555495,
       "modes_found": 4,
@@ -6477,6 +6925,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -6557,6 +7013,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7472118959107806,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2837129557932701,
       "modes_found": 4,
@@ -6637,6 +7101,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6940298507462687,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.736051889996262,
+        "KBM": 0.8350206238724347,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3927681284671742,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3102618875041937,
       "modes_found": 4,
@@ -6717,6 +7189,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6501901140684411,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9348751588724704,
+        "ITG_TEM": 0.379292439453703,
+        "KBM": 0.9481236377552508,
+        "MTM": 0.9313020070167352
+      },
+      "mode_sensitivity_macro": 0.7983983107745398,
+      "mode_sensitivity_worst": 0.379292439453703,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.4051600940116865,
       "modes_found": 4,
@@ -6797,6 +7277,14 @@
       "transition_budget_share": 0.3442622950819672,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6294820717131474,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9498028473372823,
+        "ITG_TEM": 0.8294247729226226,
+        "KBM": 0.9475051830246346,
+        "MTM": 0.4574375418755915
+      },
+      "mode_sensitivity_macro": 0.7960425862900328,
+      "mode_sensitivity_worst": 0.4574375418755915,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.5818859994963597,
       "modes_found": 4,
@@ -6877,6 +7365,14 @@
       "transition_budget_share": 0.37755102040816324,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5659574468085107,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8802144495096915,
+        "ITG_TEM": 0.9161429074948149,
+        "KBM": 0.9707442096494817,
+        "MTM": 0.9498022730850492
+      },
+      "mode_sensitivity_macro": 0.9292259599347593,
+      "mode_sensitivity_worst": 0.8802144495096915,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.7251406426114915,
       "modes_found": 4,
@@ -6957,6 +7453,14 @@
       "transition_budget_share": 0.27672955974842767,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6228070175438597,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9436294162972068,
+        "ITG_TEM": 0.8269023329264906,
+        "KBM": 0.9800641320095436,
+        "MTM": 0.8953237925423648
+      },
+      "mode_sensitivity_macro": 0.9114799184439014,
+      "mode_sensitivity_worst": 0.8269023329264906,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.8987664182167577,
       "modes_found": 4,
@@ -7306,6 +7810,14 @@
       "transition_budget_share": 0.21484375,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4838709677419355,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9872539492733853,
+        "ITG_TEM": 0.8729709051465017,
+        "KBM": 0.9777956336935846,
+        "MTM": 0.9614652983138506
+      },
+      "mode_sensitivity_macro": 0.9498714466068305,
+      "mode_sensitivity_worst": 0.8729709051465017,
       "peak_top5_recall": 0.65,
       "peak_best_ratio": 0.9762145748987854,
       "modes_found": 4,
@@ -7386,6 +7898,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -7466,6 +7986,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6877323420074349,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": -0.6108121885003072,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.1527030471250768,
+      "mode_sensitivity_worst": -0.6108121885003072,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2751927855934162,
       "modes_found": 4,
@@ -7546,6 +8074,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5917602996254682,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9029675484616649,
+        "KBM": 0.8729677265599983,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4439838187554158,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5809905362163659,
       "modes_found": 4,
@@ -7626,6 +8162,14 @@
       "transition_budget_share": 0.2631578947368421,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6183206106870229,
+      "mode_sensitivity_cos": {
+        "ETG": 0.96547017163871,
+        "ITG_TEM": 0.893064694713143,
+        "KBM": 0.8731442998389356,
+        "MTM": -0.031161151672248536
+      },
+      "mode_sensitivity_macro": 0.6751295036296351,
+      "mode_sensitivity_worst": -0.031161151672248536,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.664995923140619,
       "modes_found": 4,
@@ -7706,6 +8250,14 @@
       "transition_budget_share": 0.29508196721311475,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5708661417322834,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9631116921459371,
+        "ITG_TEM": 0.8811993727818724,
+        "KBM": 0.8888125226504171,
+        "MTM": 0.20612155038391522
+      },
+      "mode_sensitivity_macro": 0.7348112844905356,
+      "mode_sensitivity_worst": 0.20612155038391522,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.6682901357370952,
       "modes_found": 4,
@@ -7786,6 +8338,14 @@
       "transition_budget_share": 0.25510204081632654,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5789473684210527,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9788994346783588,
+        "ITG_TEM": 0.8867069092363665,
+        "KBM": 0.9526008826944302,
+        "MTM": 0.28115381955747465
+      },
+      "mode_sensitivity_macro": 0.7748402615416575,
+      "mode_sensitivity_worst": 0.28115381955747465,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7165620251380169,
       "modes_found": 4,
@@ -7866,6 +8426,14 @@
       "transition_budget_share": 0.24528301886792453,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6008583690987125,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9942040232662661,
+        "ITG_TEM": 0.9799028602500728,
+        "KBM": 0.9795296738941821,
+        "MTM": 0.8685535682973582
+      },
+      "mode_sensitivity_macro": 0.9555475314269697,
+      "mode_sensitivity_worst": 0.8685535682973582,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.8243989313876797,
       "modes_found": 4,
@@ -8215,6 +8783,14 @@
       "transition_budget_share": 0.26953125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5714285714285714,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9867336399206988,
+        "ITG_TEM": 0.9974430672946907,
+        "KBM": 0.9741749343408139,
+        "MTM": 0.9695896267488852
+      },
+      "mode_sensitivity_macro": 0.9819853170762721,
+      "mode_sensitivity_worst": 0.9695896267488852,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9121923916490979,
       "modes_found": 4,
@@ -8295,6 +8871,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8921933085501859,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.24942608369249458,
       "modes_found": 4,
@@ -8375,6 +8959,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7732342007434945,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.693899250534245,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.17347481263356124,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.330900115311775,
       "modes_found": 4,
@@ -8455,6 +9047,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7790262172284644,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9430338130243449,
+        "ITG_TEM": 0.7510177024956338,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.42351287887999467,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6558177096206588,
       "modes_found": 4,
@@ -8535,6 +9135,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7110266159695817,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9874815399536524,
+        "ITG_TEM": 0.8123898328188168,
+        "KBM": 0.8690349281795251,
+        "MTM": 0.797906369525305
+      },
+      "mode_sensitivity_macro": 0.8667031676193249,
+      "mode_sensitivity_worst": 0.797906369525305,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7296685372131146,
       "modes_found": 4,
@@ -8615,6 +9223,14 @@
       "transition_budget_share": 0.26229508196721313,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.57421875,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9963226688547006,
+        "ITG_TEM": 0.8326716129747169,
+        "KBM": 0.8396904021338412,
+        "MTM": 0.9761833981887662
+      },
+      "mode_sensitivity_macro": 0.9112170205380061,
+      "mode_sensitivity_worst": 0.8326716129747169,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7883090902085064,
       "modes_found": 4,
@@ -8695,6 +9311,14 @@
       "transition_budget_share": 0.23469387755102042,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5662650602409639,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9957577125216385,
+        "ITG_TEM": 0.8744230828246586,
+        "KBM": 0.9176735719299224,
+        "MTM": 0.9843075346047482
+      },
+      "mode_sensitivity_macro": 0.943040475470242,
+      "mode_sensitivity_worst": 0.8744230828246586,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.8145782466598255,
       "modes_found": 4,
@@ -8775,6 +9399,14 @@
       "transition_budget_share": 0.2389937106918239,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5427350427350427,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9954418471862069,
+        "ITG_TEM": 0.9105631315598942,
+        "KBM": 0.9900592098844575,
+        "MTM": 0.9977276300916483
+      },
+      "mode_sensitivity_macro": 0.9734479546805518,
+      "mode_sensitivity_worst": 0.9105631315598942,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.9055701059535852,
       "modes_found": 4,
@@ -9117,6 +9749,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6142857142857143,
+      "mode_sensitivity_cos": {
+        "ETG": 0.99678383959248,
+        "ITG_TEM": 0.9720968080865243,
+        "KBM": 0.9942411198484223,
+        "MTM": 0.9845930423150673
+      },
+      "mode_sensitivity_macro": 0.9869287024606235,
+      "mode_sensitivity_worst": 0.9720968080865243,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9056046319174117,
       "modes_found": 4,
@@ -9197,6 +9837,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -9277,6 +9925,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7649253731343284,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9098960162789642,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.22747400406974105,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30064914759254213,
       "modes_found": 4,
@@ -9357,6 +10013,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7340823970037453,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.924926161202806,
+        "KBM": -0.24763462263444605,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.16932288464209,
+      "mode_sensitivity_worst": -0.24763462263444605,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4090716339875464,
       "modes_found": 4,
@@ -9437,6 +10101,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7310606060606061,
+      "mode_sensitivity_cos": {
+        "ETG": 0.6166870588958967,
+        "ITG_TEM": 0.9221854710753874,
+        "KBM": 0.6812518532155025,
+        "MTM": 0.10260476805077257
+      },
+      "mode_sensitivity_macro": 0.5806822878093898,
+      "mode_sensitivity_worst": 0.10260476805077257,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4799529703930764,
       "modes_found": 4,
@@ -9517,6 +10189,14 @@
       "transition_budget_share": 0.26229508196721313,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7265625,
+      "mode_sensitivity_cos": {
+        "ETG": 0.6080834699689346,
+        "ITG_TEM": 0.9366510226038838,
+        "KBM": 0.8932306608073902,
+        "MTM": 0.7218531116912706
+      },
+      "mode_sensitivity_macro": 0.7899545662678699,
+      "mode_sensitivity_worst": 0.6080834699689346,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5555103776413314,
       "modes_found": 4,
@@ -9597,6 +10277,14 @@
       "transition_budget_share": 0.25510204081632654,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7165991902834008,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9257769051141093,
+        "ITG_TEM": 0.89186854401736,
+        "KBM": 0.9369371916491974,
+        "MTM": 0.9502100017646042
+      },
+      "mode_sensitivity_macro": 0.9261981606363178,
+      "mode_sensitivity_worst": 0.89186854401736,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.781977649021308,
       "modes_found": 4,
@@ -9677,6 +10365,14 @@
       "transition_budget_share": 0.2641509433962264,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7260869565217392,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9639425052528726,
+        "ITG_TEM": 0.9331935895826226,
+        "KBM": 0.9900748237400122,
+        "MTM": 0.97636713307884
+      },
+      "mode_sensitivity_macro": 0.9658945129135869,
+      "mode_sensitivity_worst": 0.9331935895826226,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.8793869460888419,
       "modes_found": 4,
@@ -10017,6 +10713,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6047619047619047,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9681502468519297,
+        "ITG_TEM": 0.9514897473469524,
+        "KBM": 0.9906052150622553,
+        "MTM": 0.9709191271119015
+      },
+      "mode_sensitivity_macro": 0.9702910840932597,
+      "mode_sensitivity_worst": 0.9514897473469524,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.9214124019726736,
       "modes_found": 4,
@@ -10097,6 +10801,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -10177,6 +10889,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6133828996282528,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4381444565132775,
       "modes_found": 4,
@@ -10257,6 +10977,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7276119402985075,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8992634744211997,
+        "KBM": 0.6590699060339487,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3895833451137871,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4742689731773295,
       "modes_found": 4,
@@ -10337,6 +11065,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6188679245283019,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9897957997618263,
+        "ITG_TEM": 0.9261605533922578,
+        "KBM": 0.7363488856236278,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.663076309694428,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.48679777502064747,
       "modes_found": 4,
@@ -10417,6 +11153,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6162790697674418,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9710625028009302,
+        "ITG_TEM": 0.9890885550103521,
+        "KBM": 0.9248253379410516,
+        "MTM": -0.2425465248506306
+      },
+      "mode_sensitivity_macro": 0.6606074677254259,
+      "mode_sensitivity_worst": -0.2425465248506306,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7536578761911159,
       "modes_found": 4,
@@ -10497,6 +11241,14 @@
       "transition_budget_share": 0.1836734693877551,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6417322834645669,
+      "mode_sensitivity_cos": {
+        "ETG": 0.985166083158138,
+        "ITG_TEM": 0.9573430852353394,
+        "KBM": 0.9821508313537847,
+        "MTM": 0.5040575690575152
+      },
+      "mode_sensitivity_macro": 0.8571793922011943,
+      "mode_sensitivity_worst": 0.5040575690575152,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7843056064426689,
       "modes_found": 4,
@@ -10577,6 +11329,14 @@
       "transition_budget_share": 0.18238993710691823,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6131687242798354,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9975565346735122,
+        "ITG_TEM": 0.9814365288798896,
+        "KBM": 0.9886692888475604,
+        "MTM": 0.44325905660634896
+      },
+      "mode_sensitivity_macro": 0.8527303522518278,
+      "mode_sensitivity_worst": 0.44325905660634896,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.8775014900510267,
       "modes_found": 4,
@@ -10920,6 +11680,14 @@
       "transition_budget_share": 0.20703125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6073059360730594,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9967624812026772,
+        "ITG_TEM": 0.9956223599886033,
+        "KBM": 0.9976577438871934,
+        "MTM": 0.822070149761605
+      },
+      "mode_sensitivity_macro": 0.9530281837100197,
+      "mode_sensitivity_worst": 0.822070149761605,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.8775014900510267,
       "modes_found": 4,
@@ -11000,6 +11768,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -11080,6 +11856,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.667910447761194,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8398128221442275,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20995320553605687,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.38945857550492696,
       "modes_found": 4,
@@ -11160,6 +11944,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6119402985074627,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9107649670237116,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2276912417559279,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5247696354127611,
       "modes_found": 4,
@@ -11240,6 +12032,14 @@
       "transition_budget_share": 0.13157894736842105,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.550561797752809,
+      "mode_sensitivity_cos": {
+        "ETG": 0.972165594596361,
+        "ITG_TEM": 0.5616268711401458,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3834481164341267,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5247696354127611,
       "modes_found": 4,
@@ -11320,6 +12120,14 @@
       "transition_budget_share": 0.08196721311475409,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.550561797752809,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9912610727977506,
+        "ITG_TEM": 0.5616268711401458,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3882219859844741,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5370626331270122,
       "modes_found": 4,
@@ -11400,6 +12208,14 @@
       "transition_budget_share": 0.07142857142857142,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5660377358490566,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9982847918274057,
+        "ITG_TEM": 0.6936853619474256,
+        "KBM": 0.3211432360527802,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.5032783474569029,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5530364691594009,
       "modes_found": 4,
@@ -11480,6 +12296,14 @@
       "transition_budget_share": 0.16981132075471697,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5510204081632653,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9996028519862753,
+        "ITG_TEM": 0.9017019046522821,
+        "KBM": 0.9612317959510202,
+        "MTM": 0.6649954431552162
+      },
+      "mode_sensitivity_macro": 0.8818829989361984,
+      "mode_sensitivity_worst": 0.6649954431552162,
       "peak_top5_recall": 0.39999999999999997,
       "peak_best_ratio": 0.9472477226720648,
       "modes_found": 4,
@@ -11823,6 +12647,14 @@
       "transition_budget_share": 0.17578125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.45374449339207046,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9994422623862692,
+        "ITG_TEM": 0.8269347715243562,
+        "KBM": 0.888334590361048,
+        "MTM": 0.849964026287217
+      },
+      "mode_sensitivity_macro": 0.8911689126397226,
+      "mode_sensitivity_worst": 0.8269347715243562,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9472477226720648,
       "modes_found": 4,
@@ -11903,6 +12735,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -11983,6 +12823,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6007462686567164,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.43303576444501907,
       "modes_found": 4,
@@ -12063,6 +12911,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5895522388059702,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9465590247936998,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23663975619842495,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4549539672099961,
       "modes_found": 4,
@@ -12143,6 +12999,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5795454545454546,
+      "mode_sensitivity_cos": {
+        "ETG": 0.976279614063318,
+        "ITG_TEM": 0.16770985518785908,
+        "KBM": 0.49171095374523005,
+        "MTM": -0.16311981761163785
+      },
+      "mode_sensitivity_macro": 0.3681451513461923,
+      "mode_sensitivity_worst": -0.16311981761163785,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7976002614833297,
       "modes_found": 4,
@@ -12223,6 +13087,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6046511627906976,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9896677936844466,
+        "ITG_TEM": 0.997255658554179,
+        "KBM": 0.28395459081532903,
+        "MTM": 0.2480100408342064
+      },
+      "mode_sensitivity_macro": 0.6297220209720403,
+      "mode_sensitivity_worst": 0.2480100408342064,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7976002614833297,
       "modes_found": 4,
@@ -12303,6 +13175,14 @@
       "transition_budget_share": 0.22448979591836735,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9915730409602816,
+        "ITG_TEM": 0.9048165563373447,
+        "KBM": 0.9184285878484277,
+        "MTM": 0.16998399219947116
+      },
+      "mode_sensitivity_macro": 0.7462005443363813,
+      "mode_sensitivity_worst": 0.16998399219947116,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.8396257173671614,
       "modes_found": 4,
@@ -12383,6 +13263,14 @@
       "transition_budget_share": 0.20125786163522014,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5875,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9926088650617603,
+        "ITG_TEM": 0.8968898137007058,
+        "KBM": 0.9353255195984844,
+        "MTM": 0.855347424920042
+      },
+      "mode_sensitivity_macro": 0.9200429058202481,
+      "mode_sensitivity_worst": 0.855347424920042,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.8774320544692998,
       "modes_found": 4,
@@ -12729,6 +13617,14 @@
       "transition_budget_share": 0.17578125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5242290748898678,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9996225832764132,
+        "ITG_TEM": 0.9230782257726531,
+        "KBM": 0.9874960178410395,
+        "MTM": 0.8781358743237374
+      },
+      "mode_sensitivity_macro": 0.9470831753034608,
+      "mode_sensitivity_worst": 0.8781358743237374,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.8886071696766731,
       "modes_found": 4,
@@ -12809,6 +13705,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -12889,6 +13793,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7211895910780669,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5048235014648061,
       "modes_found": 4,
@@ -12969,6 +13881,14 @@
       "transition_budget_share": 0.13043478260869565,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6059479553903345,
+      "mode_sensitivity_cos": {
+        "ETG": 0.7840458392037044,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.1960114598009261,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5828476950131932,
       "modes_found": 4,
@@ -13049,6 +13969,14 @@
       "transition_budget_share": 0.07894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5947955390334573,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9943783171220664,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2485945792805166,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5828476950131932,
       "modes_found": 4,
@@ -13129,6 +14057,14 @@
       "transition_budget_share": 0.09836065573770492,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5902255639097744,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9885206657614106,
+        "ITG_TEM": 0.0,
+        "KBM": 0.5317042314773179,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3800562243096821,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7729123050893243,
       "modes_found": 4,
@@ -13209,6 +14145,14 @@
       "transition_budget_share": 0.16326530612244897,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.59765625,
+      "mode_sensitivity_cos": {
+        "ETG": 0.987858312142741,
+        "ITG_TEM": 0.8459957374913926,
+        "KBM": 0.9074095591869525,
+        "MTM": 0.2520921755787004
+      },
+      "mode_sensitivity_macro": 0.7483389460999466,
+      "mode_sensitivity_worst": 0.2520921755787004,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.8508008325745346,
       "modes_found": 4,
@@ -13289,6 +14233,14 @@
       "transition_budget_share": 0.1761006289308176,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5573770491803278,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9816134416555208,
+        "ITG_TEM": 0.9722298853524745,
+        "KBM": 0.877686410662526,
+        "MTM": 0.8114342912084926
+      },
+      "mode_sensitivity_macro": 0.9107410072197535,
+      "mode_sensitivity_worst": 0.8114342912084926,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9312738866396761,
       "modes_found": 4,
@@ -13635,6 +14587,14 @@
       "transition_budget_share": 0.16015625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5930735930735931,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9905814819716589,
+        "ITG_TEM": 0.8562654400398333,
+        "KBM": 0.9083061093073486,
+        "MTM": 0.8165319044204746
+      },
+      "mode_sensitivity_macro": 0.8929212339348289,
+      "mode_sensitivity_worst": 0.8165319044204746,
       "peak_top5_recall": 0.6,
       "peak_best_ratio": 0.9472477226720648,
       "modes_found": 4,
@@ -13715,6 +14675,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -13795,6 +14763,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6865671641791045,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": -0.41947998588687224,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.10486999647171806,
+      "mode_sensitivity_worst": -0.41947998588687224,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3297237252536741,
       "modes_found": 4,
@@ -13875,6 +14851,14 @@
       "transition_budget_share": 0.30434782608695654,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7169811320754716,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": -0.44101691845796115,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.11025422961449029,
+      "mode_sensitivity_worst": -0.44101691845796115,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3297237252536741,
       "modes_found": 4,
@@ -13955,6 +14939,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7224334600760456,
+      "mode_sensitivity_cos": {
+        "ETG": -0.06399803019837963,
+        "ITG_TEM": 0.8768203236611356,
+        "KBM": 0.2822620210265492,
+        "MTM": 0.9738009582696058
+      },
+      "mode_sensitivity_macro": 0.5172213181897277,
+      "mode_sensitivity_worst": -0.06399803019837963,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6180990869983387,
       "modes_found": 4,
@@ -14035,6 +15027,14 @@
       "transition_budget_share": 0.2786885245901639,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7058823529411765,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9333853378024539,
+        "ITG_TEM": 0.8405461054795061,
+        "KBM": 0.7256877402582674,
+        "MTM": 0.9658297454663382
+      },
+      "mode_sensitivity_macro": 0.8663622322516414,
+      "mode_sensitivity_worst": 0.7256877402582674,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.816370616425877,
       "modes_found": 4,
@@ -14115,6 +15115,14 @@
       "transition_budget_share": 0.3469387755102041,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7142857142857143,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8235725189135136,
+        "ITG_TEM": 0.9154891132988738,
+        "KBM": 0.9958997715028438,
+        "MTM": 0.9298265234166178
+      },
+      "mode_sensitivity_macro": 0.9161969817829623,
+      "mode_sensitivity_worst": 0.8235725189135136,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.8538257299576485,
       "modes_found": 4,
@@ -14195,6 +15203,14 @@
       "transition_budget_share": 0.29559748427672955,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6711111111111111,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9944406612551451,
+        "ITG_TEM": 0.8945545808843158,
+        "KBM": 0.9948874830823685,
+        "MTM": 0.9511803530463928
+      },
+      "mode_sensitivity_macro": 0.9587657695670556,
+      "mode_sensitivity_worst": 0.8945545808843158,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.8538257299576485,
       "modes_found": 4,
@@ -14544,6 +15560,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6619047619047619,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9987425418328497,
+        "ITG_TEM": 0.9436115097337563,
+        "KBM": 0.9976096325923121,
+        "MTM": 0.9558641075010197
+      },
+      "mode_sensitivity_macro": 0.9739569479149844,
+      "mode_sensitivity_worst": 0.9436115097337563,
       "peak_top5_recall": 0.6000000000000001,
       "peak_best_ratio": 0.940398147819922,
       "modes_found": 4,
@@ -14624,6 +15648,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -14704,6 +15736,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7201492537313433,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30635716380042344,
       "modes_found": 4,
@@ -14784,6 +15824,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7677902621722846,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9785819435227197,
+        "KBM": 0.5071446876381427,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3714316577902156,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30823581587415616,
       "modes_found": 4,
@@ -14864,6 +15912,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6628787878787878,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9060135510142469,
+        "ITG_TEM": 0.8814651593064765,
+        "KBM": 0.6295137756923495,
+        "MTM": 0.859823918760244
+      },
+      "mode_sensitivity_macro": 0.8192041011933292,
+      "mode_sensitivity_worst": 0.6295137756923495,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7415299539118382,
       "modes_found": 4,
@@ -14944,6 +16000,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6254826254826255,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9165443847558284,
+        "ITG_TEM": 0.8812765530769865,
+        "KBM": 0.9109831911628496,
+        "MTM": 0.810313102888398
+      },
+      "mode_sensitivity_macro": 0.8797793079710157,
+      "mode_sensitivity_worst": 0.810313102888398,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7415299539118382,
       "modes_found": 4,
@@ -15024,6 +16088,14 @@
       "transition_budget_share": 0.21428571428571427,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5776892430278885,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9136113803319649,
+        "ITG_TEM": 0.9995282812876981,
+        "KBM": 0.9835284151677298,
+        "MTM": 0.8055370763091996
+      },
+      "mode_sensitivity_macro": 0.9255512882741481,
+      "mode_sensitivity_worst": 0.8055370763091996,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7415299539118382,
       "modes_found": 4,
@@ -15104,6 +16176,14 @@
       "transition_budget_share": 0.24528301886792453,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5622317596566524,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9555325239550603,
+        "ITG_TEM": 0.9925226395198579,
+        "KBM": 0.9933564052249543,
+        "MTM": 0.8759421716589179
+      },
+      "mode_sensitivity_macro": 0.9543384350896976,
+      "mode_sensitivity_worst": 0.8759421716589179,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.7902671376923613,
       "modes_found": 4,
@@ -15453,6 +16533,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5047619047619047,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9774121045997544,
+        "ITG_TEM": 0.9746985112636798,
+        "KBM": 0.9809726800914325,
+        "MTM": 0.9926217484677985
+      },
+      "mode_sensitivity_macro": 0.9814262611056663,
+      "mode_sensitivity_worst": 0.9746985112636798,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.9098993761544059,
       "modes_found": 4,
@@ -15533,6 +16621,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -15613,6 +16709,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6865671641791045,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": -0.41947998588687224,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.10486999647171806,
+      "mode_sensitivity_worst": -0.41947998588687224,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3297237252536741,
       "modes_found": 4,
@@ -15693,6 +16797,14 @@
       "transition_budget_share": 0.30434782608695654,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7169811320754716,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": -0.44101691845796115,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.11025422961449029,
+      "mode_sensitivity_worst": -0.44101691845796115,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3297237252536741,
       "modes_found": 4,
@@ -15773,6 +16885,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7224334600760456,
+      "mode_sensitivity_cos": {
+        "ETG": -0.06399803019837963,
+        "ITG_TEM": 0.8768203236611356,
+        "KBM": 0.2822620210265492,
+        "MTM": 0.9738009582696058
+      },
+      "mode_sensitivity_macro": 0.5172213181897277,
+      "mode_sensitivity_worst": -0.06399803019837963,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6180990869983387,
       "modes_found": 4,
@@ -15853,6 +16973,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7054263565891473,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9884332401070763,
+        "ITG_TEM": 0.7829853584670474,
+        "KBM": 0.6769390908093977,
+        "MTM": 0.9743117775070156
+      },
+      "mode_sensitivity_macro": 0.8556673667226342,
+      "mode_sensitivity_worst": 0.6769390908093977,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7384820889406667,
       "modes_found": 4,
@@ -15933,6 +17061,14 @@
       "transition_budget_share": 0.35714285714285715,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7341772151898734,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9851326663263673,
+        "ITG_TEM": 0.8928410377908106,
+        "KBM": 0.994611085615592,
+        "MTM": 0.9296121260032466
+      },
+      "mode_sensitivity_macro": 0.9505492289340041,
+      "mode_sensitivity_worst": 0.8928410377908106,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.816370616425877,
       "modes_found": 4,
@@ -16013,6 +17149,14 @@
       "transition_budget_share": 0.2893081761006289,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.672566371681416,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9961536529753872,
+        "ITG_TEM": 0.8283247441753792,
+        "KBM": 0.9830603766373237,
+        "MTM": 0.8947113837363035
+      },
+      "mode_sensitivity_macro": 0.9255625393810984,
+      "mode_sensitivity_worst": 0.8283247441753792,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.892823425810183,
       "modes_found": 4,
@@ -16362,6 +17506,14 @@
       "transition_budget_share": 0.23046875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.596244131455399,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9957015414738746,
+        "ITG_TEM": 0.8547343186481878,
+        "KBM": 0.978584710430599,
+        "MTM": 0.8901033028392904
+      },
+      "mode_sensitivity_macro": 0.929780968347988,
+      "mode_sensitivity_worst": 0.8547343186481878,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9527776093459455,
       "modes_found": 4,
@@ -16442,6 +17594,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -16522,6 +17682,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7201492537313433,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30635716380042344,
       "modes_found": 4,
@@ -16602,6 +17770,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7677902621722846,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9785819435227197,
+        "KBM": 0.5071446876381427,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3714316577902156,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30823581587415616,
       "modes_found": 4,
@@ -16682,6 +17858,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6792452830188679,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9060135510142469,
+        "ITG_TEM": 0.8515947831291416,
+        "KBM": 0.7512731902223369,
+        "MTM": 0.6452833244763617
+      },
+      "mode_sensitivity_macro": 0.7885412122105218,
+      "mode_sensitivity_worst": 0.6452833244763617,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7415299539118382,
       "modes_found": 4,
@@ -16762,6 +17946,14 @@
       "transition_budget_share": 0.2459016393442623,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6575875486381323,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9302009522877998,
+        "ITG_TEM": 0.9758224354085966,
+        "KBM": 0.8928637517863269,
+        "MTM": 0.8273529714942749
+      },
+      "mode_sensitivity_macro": 0.9065600277442496,
+      "mode_sensitivity_worst": 0.8273529714942749,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7415299539118382,
       "modes_found": 4,
@@ -16842,6 +18034,14 @@
       "transition_budget_share": 0.2755102040816326,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6775510204081633,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9826764521150556,
+        "ITG_TEM": 0.9824065740558663,
+        "KBM": 0.936668810020395,
+        "MTM": 0.4604196311046299
+      },
+      "mode_sensitivity_macro": 0.8405428668239867,
+      "mode_sensitivity_worst": 0.4604196311046299,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.8269450341838581,
       "modes_found": 4,
@@ -16922,6 +18122,14 @@
       "transition_budget_share": 0.2893081761006289,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5752212389380531,
+      "mode_sensitivity_cos": {
+        "ETG": 0.980530086222831,
+        "ITG_TEM": 0.9797068786947534,
+        "KBM": 0.9566352784507081,
+        "MTM": 0.8882909161327897
+      },
+      "mode_sensitivity_macro": 0.9512907898752705,
+      "mode_sensitivity_worst": 0.8882909161327897,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.8677671532564615,
       "modes_found": 4,
@@ -17271,6 +18479,14 @@
       "transition_budget_share": 0.25,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6442307692307693,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9916066958309546,
+        "ITG_TEM": 0.9719569427632068,
+        "KBM": 0.9928096164134215,
+        "MTM": 0.9969073376606906
+      },
+      "mode_sensitivity_macro": 0.9883201481670684,
+      "mode_sensitivity_worst": 0.9719569427632068,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9097926091402933,
       "modes_found": 4,
@@ -17351,6 +18567,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7137546468401487,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.29945516479064127,
       "modes_found": 4,
@@ -17431,6 +18655,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6367041198501873,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.36204020314019597,
       "modes_found": 4,
@@ -17511,6 +18743,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6541353383458647,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8565206630176392,
+        "KBM": -0.3886250520790321,
+        "MTM": -0.19976428701174803
+      },
+      "mode_sensitivity_macro": 0.06703283098171477,
+      "mode_sensitivity_worst": -0.3886250520790321,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4075927354355975,
       "modes_found": 4,
@@ -17591,6 +18831,14 @@
       "transition_budget_share": 0.34210526315789475,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7181467181467182,
+      "mode_sensitivity_cos": {
+        "ETG": 0.6369030305167632,
+        "ITG_TEM": 0.9042436931498832,
+        "KBM": 0.7962789944322557,
+        "MTM": -0.5183964353241853
+      },
+      "mode_sensitivity_macro": 0.45475732069367925,
+      "mode_sensitivity_worst": -0.5183964353241853,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6907664040429639,
       "modes_found": 4,
@@ -17671,6 +18919,14 @@
       "transition_budget_share": 0.2786885245901639,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6470588235294118,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9916789927292885,
+        "ITG_TEM": 0.9040526528515963,
+        "KBM": 0.9697523314735073,
+        "MTM": 0.9679680505229835
+      },
+      "mode_sensitivity_macro": 0.958363006894344,
+      "mode_sensitivity_worst": 0.9040526528515963,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.9312738866396761,
       "modes_found": 4,
@@ -17751,6 +19007,14 @@
       "transition_budget_share": 0.2755102040816326,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6408163265306123,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9960841477666137,
+        "ITG_TEM": 0.9367482210223572,
+        "KBM": 0.9938529967843263,
+        "MTM": 0.9715700614258621
+      },
+      "mode_sensitivity_macro": 0.9745638567497897,
+      "mode_sensitivity_worst": 0.9367482210223572,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.9312738866396761,
       "modes_found": 4,
@@ -17831,6 +19095,14 @@
       "transition_budget_share": 0.27672955974842767,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6535087719298246,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9746284192856526,
+        "ITG_TEM": 0.9700896365175297,
+        "KBM": 0.9988150531525595,
+        "MTM": 0.9814684609453498
+      },
+      "mode_sensitivity_macro": 0.9812503924752729,
+      "mode_sensitivity_worst": 0.9700896365175297,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.9312738866396761,
       "modes_found": 4,
@@ -18173,6 +19445,14 @@
       "transition_budget_share": 0.265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5686274509803921,
+      "mode_sensitivity_cos": {
+        "ETG": 0.988453782702975,
+        "ITG_TEM": 0.9907107484291694,
+        "KBM": 0.9929264349694721,
+        "MTM": 0.993242256209853
+      },
+      "mode_sensitivity_macro": 0.9913333055778674,
+      "mode_sensitivity_worst": 0.988453782702975,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 1.0,
       "modes_found": 4,
@@ -18253,6 +19533,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -18333,6 +19621,14 @@
       "transition_budget_share": 0.13333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8148148148148148,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.49309998156194135,
       "modes_found": 4,
@@ -18413,6 +19709,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7686567164179104,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.251976779263613,
+        "KBM": 0.2805454759121196,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.13313056379393315,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5957709435934725,
       "modes_found": 4,
@@ -18493,6 +19797,14 @@
       "transition_budget_share": 0.15789473684210525,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6729323308270677,
+      "mode_sensitivity_cos": {
+        "ETG": 0.3664239960472483,
+        "ITG_TEM": 0.9767823005749663,
+        "KBM": 0.15167651206666358,
+        "MTM": 0.8615365939397515
+      },
+      "mode_sensitivity_macro": 0.5891048506571575,
+      "mode_sensitivity_worst": 0.15167651206666358,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5957709435934725,
       "modes_found": 4,
@@ -18573,6 +19885,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6988416988416989,
+      "mode_sensitivity_cos": {
+        "ETG": 0.3948634457579222,
+        "ITG_TEM": 0.944738177263858,
+        "KBM": 0.3519329274184326,
+        "MTM": -0.2531013903298876
+      },
+      "mode_sensitivity_macro": 0.3596082900275813,
+      "mode_sensitivity_worst": -0.2531013903298876,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5979477507042619,
       "modes_found": 4,
@@ -18653,6 +19973,14 @@
       "transition_budget_share": 0.2755102040816326,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6653061224489796,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8499978143179083,
+        "ITG_TEM": 0.9419698137770907,
+        "KBM": 0.879461491490159,
+        "MTM": 0.41641792498456764
+      },
+      "mode_sensitivity_macro": 0.7719617611424314,
+      "mode_sensitivity_worst": 0.41641792498456764,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6904223899211209,
       "modes_found": 4,
@@ -18733,6 +20061,14 @@
       "transition_budget_share": 0.25157232704402516,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5905172413793104,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8606864684151847,
+        "ITG_TEM": 0.977826845570715,
+        "KBM": 0.9146542506974866,
+        "MTM": 0.9459664229857337
+      },
+      "mode_sensitivity_macro": 0.9247834969172801,
+      "mode_sensitivity_worst": 0.8606864684151847,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.7021419125257092,
       "modes_found": 4,
@@ -19073,6 +20409,14 @@
       "transition_budget_share": 0.2265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5420560747663551,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9466828534700712,
+        "ITG_TEM": 0.9810844800329355,
+        "KBM": 0.9387957521286013,
+        "MTM": 0.8904796929191777
+      },
+      "mode_sensitivity_macro": 0.9392606946376965,
+      "mode_sensitivity_worst": 0.8904796929191777,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.815801287156455,
       "modes_found": 4,
@@ -19153,6 +20497,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -19233,6 +20585,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7865168539325843,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.25196128116136707,
       "modes_found": 4,
@@ -19313,6 +20673,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7191011235955056,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": -0.00891631848545784,
+        "KBM": -0.26840009293998146,
+        "MTM": 0.6282394788688819
+      },
+      "mode_sensitivity_macro": 0.08773076686086065,
+      "mode_sensitivity_worst": -0.26840009293998146,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3608453048812831,
       "modes_found": 4,
@@ -19393,6 +20761,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.690566037735849,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9204135486038162,
+        "ITG_TEM": 0.9453059992048904,
+        "KBM": 0.9605030304071789,
+        "MTM": 0.6282394788688819
+      },
+      "mode_sensitivity_macro": 0.8636155142711919,
+      "mode_sensitivity_worst": 0.6282394788688819,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4035177438974342,
       "modes_found": 4,
@@ -19473,6 +20849,14 @@
       "transition_budget_share": 0.16393442622950818,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5648854961832062,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9979823566870887,
+        "ITG_TEM": 0.9619667019261658,
+        "KBM": 0.9729985121464194,
+        "MTM": 0.7801276765964594
+      },
+      "mode_sensitivity_macro": 0.9282688118390334,
+      "mode_sensitivity_worst": 0.7801276765964594,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7118375501600348,
       "modes_found": 4,
@@ -19553,6 +20937,14 @@
       "transition_budget_share": 0.19387755102040816,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.541501976284585,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9961722839957765,
+        "ITG_TEM": 0.9808563819481774,
+        "KBM": 0.9839705814230765,
+        "MTM": 0.8706170424912799
+      },
+      "mode_sensitivity_macro": 0.9579040724645776,
+      "mode_sensitivity_worst": 0.8706170424912799,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.8009824265388178,
       "modes_found": 4,
@@ -19633,6 +21025,14 @@
       "transition_budget_share": 0.2138364779874214,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6134453781512605,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9984433075765903,
+        "ITG_TEM": 0.9775101898048055,
+        "KBM": 0.9960254769197577,
+        "MTM": 0.9536845365608446
+      },
+      "mode_sensitivity_macro": 0.9814158777154995,
+      "mode_sensitivity_worst": 0.9536845365608446,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.853734703866753,
       "modes_found": 4,
@@ -19976,6 +21376,14 @@
       "transition_budget_share": 0.2109375,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6284403669724771,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9995572196816781,
+        "ITG_TEM": 0.9838363588454184,
+        "KBM": 0.9991357087174987,
+        "MTM": 0.9919081424534055
+      },
+      "mode_sensitivity_macro": 0.9936093574245002,
+      "mode_sensitivity_worst": 0.9838363588454184,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.8864435653723114,
       "modes_found": 4,
@@ -20056,6 +21464,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -20136,6 +21552,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.79182156133829,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.7435532351902518,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.18588830879756296,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.3083802801873129,
       "modes_found": 4,
@@ -20216,6 +21640,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6629213483146067,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": -0.15424081625896793,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.03856020406474198,
+      "mode_sensitivity_worst": -0.15424081625896793,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.3083802801873129,
       "modes_found": 4,
@@ -20296,6 +21728,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6174242424242424,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9874039061137377,
+        "ITG_TEM": 0.4425353884799077,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3574848236484114,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5773680346248676,
       "modes_found": 4,
@@ -20376,6 +21816,14 @@
       "transition_budget_share": 0.13114754098360656,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5568181818181818,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9719741569726393,
+        "ITG_TEM": 0.4425353884799077,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.35362738636313673,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5961756383115036,
       "modes_found": 4,
@@ -20456,6 +21904,14 @@
       "transition_budget_share": 0.09183673469387756,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5513307984790875,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9956757324163571,
+        "ITG_TEM": 0.4425353884799077,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.3595527802240662,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.6496420345814043,
       "modes_found": 4,
@@ -20536,6 +21992,14 @@
       "transition_budget_share": 0.11320754716981132,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5078740157480315,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9974371495928672,
+        "ITG_TEM": 0.7288465211087221,
+        "KBM": 0.9613032497089415,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6718967301026327,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.6496420345814043,
       "modes_found": 4,
@@ -20879,6 +22343,14 @@
       "transition_budget_share": 0.17578125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4669603524229075,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9958153943946321,
+        "ITG_TEM": 0.8118770857276911,
+        "KBM": 0.9524042954393752,
+        "MTM": 0.7915489040421907
+      },
+      "mode_sensitivity_macro": 0.8879114199009722,
+      "mode_sensitivity_worst": 0.7915489040421907,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9799539170506912,
       "modes_found": 4,
@@ -20959,6 +22431,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -21039,6 +22519,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7546468401486989,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3866675023595238,
       "modes_found": 4,
@@ -21119,6 +22607,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7276119402985075,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9861242087279903,
+        "ITG_TEM": 0.0,
+        "KBM": 0.7723512987331008,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4396188768652728,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3866675023595238,
       "modes_found": 4,
@@ -21199,6 +22695,14 @@
       "transition_budget_share": 0.10526315789473684,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9943089969202851,
+        "ITG_TEM": 0.0,
+        "KBM": 0.02776399605161812,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2555182482429758,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.49311137570252245,
       "modes_found": 4,
@@ -21279,6 +22783,14 @@
       "transition_budget_share": 0.18032786885245902,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6168582375478927,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9929719727919042,
+        "ITG_TEM": 0.7233767217564483,
+        "KBM": 0.9663103745631917,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.670664767277886,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7166029779137978,
       "modes_found": 4,
@@ -21359,6 +22871,14 @@
       "transition_budget_share": 0.17346938775510204,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5686274509803921,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9967572988540437,
+        "ITG_TEM": 0.6351420302521603,
+        "KBM": 0.9632117044177059,
+        "MTM": 0.923724384853732
+      },
+      "mode_sensitivity_macro": 0.8797088545944105,
+      "mode_sensitivity_worst": 0.6351420302521603,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.7961380813426864,
       "modes_found": 4,
@@ -21439,6 +22959,14 @@
       "transition_budget_share": 0.1761006289308176,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.47540983606557374,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9979054331679441,
+        "ITG_TEM": 0.9463240682910544,
+        "KBM": 0.9873773994932421,
+        "MTM": 0.8332026812662698
+      },
+      "mode_sensitivity_macro": 0.9412023955546276,
+      "mode_sensitivity_worst": 0.8332026812662698,
       "peak_top5_recall": 0.39999999999999997,
       "peak_best_ratio": 0.9288075573549257,
       "modes_found": 4,
@@ -21785,6 +23313,14 @@
       "transition_budget_share": 0.171875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.45614035087719296,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9943749782043518,
+        "ITG_TEM": 0.9436975476909312,
+        "KBM": 0.9865887933325,
+        "MTM": 0.8643699846064747
+      },
+      "mode_sensitivity_macro": 0.9472578259585644,
+      "mode_sensitivity_worst": 0.8643699846064747,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9472477226720648,
       "modes_found": 4,
@@ -21865,6 +23401,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -21945,6 +23489,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7992565055762082,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5519025208128729,
       "modes_found": 4,
@@ -22025,6 +23577,14 @@
       "transition_budget_share": 0.13043478260869565,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7397769516728625,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8915309477506417,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.22288273693766042,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5519025208128729,
       "modes_found": 4,
@@ -22105,6 +23665,14 @@
       "transition_budget_share": 0.07894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7211895910780669,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9529758194348811,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23824395485872027,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5519025208128729,
       "modes_found": 4,
@@ -22185,6 +23753,14 @@
       "transition_budget_share": 0.13114754098360656,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6818181818181818,
+      "mode_sensitivity_cos": {
+        "ETG": 0.994335120331029,
+        "ITG_TEM": 0.0,
+        "KBM": 0.8073743654333242,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4504273714410883,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6376319756170455,
       "modes_found": 4,
@@ -22265,6 +23841,14 @@
       "transition_budget_share": 0.1326530612244898,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7258687258687259,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9942054770033123,
+        "ITG_TEM": 0.30194395880897096,
+        "KBM": 0.5926087366241369,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4721895431091051,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7245518769214114,
       "modes_found": 4,
@@ -22345,6 +23929,14 @@
       "transition_budget_share": 0.1509433962264151,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6854838709677419,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9119851677585921,
+        "ITG_TEM": 0.9671616678959158,
+        "KBM": 0.7362365315963764,
+        "MTM": 0.2188408495612857
+      },
+      "mode_sensitivity_macro": 0.7085560542030425,
+      "mode_sensitivity_worst": 0.2188408495612857,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7932779902817353,
       "modes_found": 4,
@@ -22691,6 +24283,14 @@
       "transition_budget_share": 0.16015625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5714285714285714,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9526241772378687,
+        "ITG_TEM": 0.9732872810585816,
+        "KBM": 0.8714373412499659,
+        "MTM": 0.699207888384018
+      },
+      "mode_sensitivity_macro": 0.8741391719826086,
+      "mode_sensitivity_worst": 0.699207888384018,
       "peak_top5_recall": 0.39999999999999997,
       "peak_best_ratio": 0.8728103560731074,
       "modes_found": 4,
@@ -22771,6 +24371,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -22851,6 +24459,14 @@
       "transition_budget_share": 0.13333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7962962962962963,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.36928177145828983,
       "modes_found": 4,
@@ -22931,6 +24547,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7201492537313433,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.04650919276741848,
+        "MTM": 0.7254073291644197
+      },
+      "mode_sensitivity_macro": 0.19297913048295956,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4596797581927411,
       "modes_found": 4,
@@ -23011,6 +24635,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6958174904942965,
+      "mode_sensitivity_cos": {
+        "ETG": 0.6548264241269058,
+        "ITG_TEM": 0.2840414378375904,
+        "KBM": 0.03537893289515676,
+        "MTM": 0.7254073291644197
+      },
+      "mode_sensitivity_macro": 0.4249135310060182,
+      "mode_sensitivity_worst": 0.03537893289515676,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5304856889310088,
       "modes_found": 4,
@@ -23091,6 +24723,14 @@
       "transition_budget_share": 0.29508196721311475,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6653543307086615,
+      "mode_sensitivity_cos": {
+        "ETG": 0.871120267391214,
+        "ITG_TEM": 0.49575229928258036,
+        "KBM": 0.927016684882549,
+        "MTM": 0.841344916597753
+      },
+      "mode_sensitivity_macro": 0.7838085420385241,
+      "mode_sensitivity_worst": 0.49575229928258036,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.6563699195376714,
       "modes_found": 4,
@@ -23171,6 +24811,14 @@
       "transition_budget_share": 0.3469387755102041,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6260504201680672,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9670773063287676,
+        "ITG_TEM": 0.8843685698646433,
+        "KBM": 0.9646611176093335,
+        "MTM": 0.9071897567078948
+      },
+      "mode_sensitivity_macro": 0.9308241876276598,
+      "mode_sensitivity_worst": 0.8843685698646433,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.7562665261909844,
       "modes_found": 4,
@@ -23251,6 +24899,14 @@
       "transition_budget_share": 0.2641509433962264,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5826086956521739,
+      "mode_sensitivity_cos": {
+        "ETG": 0.996716664683537,
+        "ITG_TEM": 0.9215303962697687,
+        "KBM": 0.9903543538758319,
+        "MTM": 0.8970356465323528
+      },
+      "mode_sensitivity_macro": 0.9514092653403726,
+      "mode_sensitivity_worst": 0.8970356465323528,
       "peak_top5_recall": 0.4,
       "peak_best_ratio": 0.8274860529428829,
       "modes_found": 4,
@@ -23600,6 +25256,14 @@
       "transition_budget_share": 0.21875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5231481481481481,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9917065350134908,
+        "ITG_TEM": 0.9279459219363791,
+        "KBM": 0.9799001435032118,
+        "MTM": 0.983405393064194
+      },
+      "mode_sensitivity_macro": 0.9707394983793189,
+      "mode_sensitivity_worst": 0.9279459219363791,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9625448864682284,
       "modes_found": 4,
@@ -23680,6 +25344,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -23760,6 +25432,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8327137546468402,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.25110362795670566,
       "modes_found": 4,
@@ -23840,6 +25520,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7827715355805244,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9484248983772753,
+        "KBM": -0.5881770589619513,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.090061959853831,
+      "mode_sensitivity_worst": -0.5881770589619513,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3042548849531048,
       "modes_found": 4,
@@ -23920,6 +25608,14 @@
       "transition_budget_share": 0.2894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6666666666666666,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9540760048639363,
+        "ITG_TEM": 0.9487312535576953,
+        "KBM": 0.8582343942354184,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6902604131642625,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.41074018596879613,
       "modes_found": 4,
@@ -24000,6 +25696,14 @@
       "transition_budget_share": 0.29508196721311475,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7165354330708661,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9475398229272669,
+        "ITG_TEM": 0.9230700667207441,
+        "KBM": 0.8394446272894431,
+        "MTM": 0.9569715397190386
+      },
+      "mode_sensitivity_macro": 0.9167565141641232,
+      "mode_sensitivity_worst": 0.8394446272894431,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7830760307732576,
       "modes_found": 4,
@@ -24080,6 +25784,14 @@
       "transition_budget_share": 0.2653061224489796,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6747967479674797,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9888094446883363,
+        "ITG_TEM": 0.9497503152032029,
+        "KBM": 0.8639421685675179,
+        "MTM": 0.9508702552805456
+      },
+      "mode_sensitivity_macro": 0.9383430459349007,
+      "mode_sensitivity_worst": 0.8639421685675179,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.8687103598014889,
       "modes_found": 4,
@@ -24160,6 +25872,14 @@
       "transition_budget_share": 0.27044025157232704,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6768558951965066,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9347928000399722,
+        "ITG_TEM": 0.9099176126392028,
+        "KBM": 0.9486764583128909,
+        "MTM": 0.9449369114539133
+      },
+      "mode_sensitivity_macro": 0.9345809456114949,
+      "mode_sensitivity_worst": 0.9099176126392028,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.8728410278176831,
       "modes_found": 4,
@@ -24509,6 +26229,14 @@
       "transition_budget_share": 0.25,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6490384615384616,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9986641939824797,
+        "ITG_TEM": 0.9113204129480948,
+        "KBM": 0.9805990627940515,
+        "MTM": 0.9663265034972058
+      },
+      "mode_sensitivity_macro": 0.964227543305458,
+      "mode_sensitivity_worst": 0.9113204129480948,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9685399291497976,
       "modes_found": 4,
@@ -24589,6 +26317,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -24669,6 +26405,14 @@
       "transition_budget_share": 0.13333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7962962962962963,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.36928177145828983,
       "modes_found": 4,
@@ -24749,6 +26493,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7201492537313433,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.04650919276741848,
+        "MTM": 0.7254073291644197
+      },
+      "mode_sensitivity_macro": 0.19297913048295956,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4596797581927411,
       "modes_found": 4,
@@ -24829,6 +26581,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6867924528301886,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9828692738293161,
+        "ITG_TEM": 0.8180183879190613,
+        "KBM": 0.2731776201954031,
+        "MTM": 0.9469431948722582
+      },
+      "mode_sensitivity_macro": 0.7552521192040096,
+      "mode_sensitivity_worst": 0.2731776201954031,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5848930383046218,
       "modes_found": 4,
@@ -24909,6 +26669,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6447876447876448,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9870679108691308,
+        "ITG_TEM": 0.9345155658919262,
+        "KBM": 0.9188438164215473,
+        "MTM": 0.9607997080884362
+      },
+      "mode_sensitivity_macro": 0.9503067503177601,
+      "mode_sensitivity_worst": 0.9188438164215473,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.6773676775214809,
       "modes_found": 4,
@@ -24989,6 +26757,14 @@
       "transition_budget_share": 0.2755102040816326,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6653061224489796,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9609361772693442,
+        "ITG_TEM": 0.9361969390378629,
+        "KBM": 0.9552625070501017,
+        "MTM": 0.9450265131332568
+      },
+      "mode_sensitivity_macro": 0.9493555341226414,
+      "mode_sensitivity_worst": 0.9361969390378629,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.7594977346063516,
       "modes_found": 4,
@@ -25069,6 +26845,14 @@
       "transition_budget_share": 0.29559748427672955,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6622222222222223,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9535488689243609,
+        "ITG_TEM": 0.9383328989224886,
+        "KBM": 0.9768071685181904,
+        "MTM": 0.9732245582164267
+      },
+      "mode_sensitivity_macro": 0.9604783736453666,
+      "mode_sensitivity_worst": 0.9383328989224886,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.8436981103503175,
       "modes_found": 4,
@@ -25418,6 +27202,14 @@
       "transition_budget_share": 0.23828125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6113744075829384,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9882301486722264,
+        "ITG_TEM": 0.8106323581221148,
+        "KBM": 0.9910118703404518,
+        "MTM": 0.9742825609791237
+      },
+      "mode_sensitivity_macro": 0.9410392345284792,
+      "mode_sensitivity_worst": 0.8106323581221148,
       "peak_top5_recall": 0.6000000000000001,
       "peak_best_ratio": 0.9470401181303134,
       "modes_found": 4,
@@ -25498,6 +27290,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -25578,6 +27378,14 @@
       "transition_budget_share": 0.2,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8327137546468402,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.25110362795670566,
       "modes_found": 4,
@@ -25658,6 +27466,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7827715355805244,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9484248983772753,
+        "KBM": -0.5881770589619513,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.090061959853831,
+      "mode_sensitivity_worst": -0.5881770589619513,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3042548849531048,
       "modes_found": 4,
@@ -25738,6 +27554,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6515151515151515,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9826468024484657,
+        "ITG_TEM": 0.9282350267760672,
+        "KBM": -0.1668528257451207,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.43600725086985304,
+      "mode_sensitivity_worst": -0.1668528257451207,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4209884018099568,
       "modes_found": 4,
@@ -25818,6 +27642,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6356589147286822,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9894081706169902,
+        "ITG_TEM": 0.9055053840855126,
+        "KBM": 0.9673678508276633,
+        "MTM": 0.8970980847475724
+      },
+      "mode_sensitivity_macro": 0.9398448725694346,
+      "mode_sensitivity_worst": 0.8970980847475724,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.811624558478574,
       "modes_found": 4,
@@ -25898,6 +27730,14 @@
       "transition_budget_share": 0.2653061224489796,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7154471544715447,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9833042578158777,
+        "ITG_TEM": 0.9551998977305748,
+        "KBM": 0.9821523417492114,
+        "MTM": 0.9456797938557371
+      },
+      "mode_sensitivity_macro": 0.9665840727878503,
+      "mode_sensitivity_worst": 0.9456797938557371,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.8536500143624055,
       "modes_found": 4,
@@ -25978,6 +27818,14 @@
       "transition_budget_share": 0.2830188679245283,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6167400881057269,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9912098527672959,
+        "ITG_TEM": 0.9571239691900578,
+        "KBM": 0.9911918525734132,
+        "MTM": 0.9565306659232982
+      },
+      "mode_sensitivity_macro": 0.9740140851135163,
+      "mode_sensitivity_worst": 0.9565306659232982,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9762145748987854,
       "modes_found": 4,
@@ -26327,6 +28175,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5904761904761905,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9922445571411698,
+        "ITG_TEM": 0.9672165343542001,
+        "KBM": 0.980340533758106,
+        "MTM": 0.9834380820915668
+      },
+      "mode_sensitivity_macro": 0.9808099268362607,
+      "mode_sensitivity_worst": 0.9672165343542001,
       "peak_top5_recall": 0.6,
       "peak_best_ratio": 0.9762145748987854,
       "modes_found": 4,
@@ -26407,6 +28263,14 @@
       "transition_budget_share": 0.2222222222222222,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8629629629629629,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.2250244384194316,
       "modes_found": 4,
@@ -26487,6 +28351,14 @@
       "transition_budget_share": 0.13333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8185185185185185,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": -0.5988779972149788,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": -0.1497194993037447,
+      "mode_sensitivity_worst": -0.5988779972149788,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.49309998156194135,
       "modes_found": 4,
@@ -26567,6 +28439,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7873134328358209,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9150799467848825,
+        "ITG_TEM": 0.521002757256268,
+        "KBM": -0.5988779972149788,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20930117670654294,
+      "mode_sensitivity_worst": -0.5988779972149788,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.49309998156194135,
       "modes_found": 4,
@@ -26647,6 +28527,14 @@
       "transition_budget_share": 0.13157894736842105,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.651685393258427,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9973028442371954,
+        "ITG_TEM": 0.9071721691159368,
+        "KBM": -0.08675354091136182,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4544303681104426,
+      "mode_sensitivity_worst": -0.08675354091136182,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5500694422792103,
       "modes_found": 4,
@@ -26727,6 +28615,14 @@
       "transition_budget_share": 0.14754098360655737,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6273764258555133,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9990439345953704,
+        "ITG_TEM": 0.9837261938390316,
+        "KBM": 0.3290914161879986,
+        "MTM": 0.8615365939397516
+      },
+      "mode_sensitivity_macro": 0.7933495346405381,
+      "mode_sensitivity_worst": 0.3290914161879986,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.6566407358279084,
       "modes_found": 4,
@@ -26807,6 +28703,14 @@
       "transition_budget_share": 0.19387755102040816,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6403162055335968,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9311840366267451,
+        "ITG_TEM": 0.9346141692285037,
+        "KBM": 0.9847903845570954,
+        "MTM": 0.9603423932314834
+      },
+      "mode_sensitivity_macro": 0.9527327459109569,
+      "mode_sensitivity_worst": 0.9311840366267451,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.8862976661810502,
       "modes_found": 4,
@@ -26887,6 +28791,14 @@
       "transition_budget_share": 0.22641509433962265,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6483050847457628,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9740651808591118,
+        "ITG_TEM": 0.9592751560483593,
+        "KBM": 0.9946902096525846,
+        "MTM": 0.9620088200447988
+      },
+      "mode_sensitivity_macro": 0.9725098416512136,
+      "mode_sensitivity_worst": 0.9592751560483593,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.9645748987854251,
       "modes_found": 4,
@@ -27229,6 +29141,14 @@
       "transition_budget_share": 0.23828125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5545023696682464,
+      "mode_sensitivity_cos": {
+        "ETG": 0.992397979843615,
+        "ITG_TEM": 0.9937041366372302,
+        "KBM": 0.9822574505782682,
+        "MTM": 0.97077198960052
+      },
+      "mode_sensitivity_macro": 0.9847828891649084,
+      "mode_sensitivity_worst": 0.97077198960052,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9645748987854251,
       "modes_found": 4,
@@ -27309,6 +29229,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -27389,6 +29317,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7276119402985075,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9568172655046655,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23920431637616638,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4397347243934332,
       "modes_found": 4,
@@ -27469,6 +29405,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.704119850187266,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9164663130243008,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2291165782560752,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.493575387079623,
       "modes_found": 4,
@@ -27549,6 +29493,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6856060606060606,
+      "mode_sensitivity_cos": {
+        "ETG": 0.45070746887550295,
+        "ITG_TEM": 0.9334852233231744,
+        "KBM": 0.2615111566230938,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4114259622054428,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.606823738534381,
       "modes_found": 4,
@@ -27629,6 +29581,14 @@
       "transition_budget_share": 0.19672131147540983,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6038461538461538,
+      "mode_sensitivity_cos": {
+        "ETG": 0.91010699057905,
+        "ITG_TEM": 0.9376888862168017,
+        "KBM": 0.8352846341635801,
+        "MTM": 0.2545462413773242
+      },
+      "mode_sensitivity_macro": 0.734406688084189,
+      "mode_sensitivity_worst": 0.2545462413773242,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.606823738534381,
       "modes_found": 4,
@@ -27709,6 +29669,14 @@
       "transition_budget_share": 0.17346938775510204,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6235294117647059,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8160220092834509,
+        "ITG_TEM": 0.9796692645329803,
+        "KBM": 0.875232373728608,
+        "MTM": 0.39176774278392945
+      },
+      "mode_sensitivity_macro": 0.7656728475822421,
+      "mode_sensitivity_worst": 0.39176774278392945,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.664829069813663,
       "modes_found": 4,
@@ -27789,6 +29757,14 @@
       "transition_budget_share": 0.2389937106918239,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6623931623931624,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9728936432734652,
+        "ITG_TEM": 0.9731359866341645,
+        "KBM": 0.9631887166706976,
+        "MTM": 0.7221129525479297
+      },
+      "mode_sensitivity_macro": 0.9078328247815641,
+      "mode_sensitivity_worst": 0.7221129525479297,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.664829069813663,
       "modes_found": 4,
@@ -28129,6 +30105,14 @@
       "transition_budget_share": 0.23046875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5821596244131455,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9666218797004177,
+        "ITG_TEM": 0.9965394431046962,
+        "KBM": 0.9771911877521304,
+        "MTM": 0.5641186736478521
+      },
+      "mode_sensitivity_macro": 0.876117796051274,
+      "mode_sensitivity_worst": 0.5641186736478521,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7762484113893392,
       "modes_found": 4,
@@ -28209,6 +30193,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -28289,6 +30281,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6716417910447762,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9664368963661516,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2416092240915379,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3651091483565669,
       "modes_found": 4,
@@ -28369,6 +30369,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5746268656716418,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9329029694712986,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23322574236782465,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5171828810754608,
       "modes_found": 4,
@@ -28449,6 +30457,14 @@
       "transition_budget_share": 0.15789473684210525,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5902255639097744,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9832796603470351,
+        "ITG_TEM": 0.9129327496444771,
+        "KBM": 0.8158595535049801,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6780179908741231,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5748764154464148,
       "modes_found": 4,
@@ -28529,6 +30545,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.627906976744186,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9880964605220138,
+        "ITG_TEM": 0.9288692034815519,
+        "KBM": 0.4724478454298614,
+        "MTM": 0.3971823386980255
+      },
+      "mode_sensitivity_macro": 0.6966489620328632,
+      "mode_sensitivity_worst": 0.3971823386980255,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6519327310465003,
       "modes_found": 4,
@@ -28609,6 +30633,14 @@
       "transition_budget_share": 0.22448979591836735,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.552,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9938929540062381,
+        "ITG_TEM": 0.951138122494957,
+        "KBM": 0.9503056543243729,
+        "MTM": 0.43757826079192197
+      },
+      "mode_sensitivity_macro": 0.8332287479043725,
+      "mode_sensitivity_worst": 0.43757826079192197,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.8178716322653744,
       "modes_found": 4,
@@ -28689,6 +30721,14 @@
       "transition_budget_share": 0.1949685534591195,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5435684647302904,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9974731449253895,
+        "ITG_TEM": 0.9691596726188441,
+        "KBM": 0.994690847479621,
+        "MTM": 0.6699733514395514
+      },
+      "mode_sensitivity_macro": 0.9078242541158515,
+      "mode_sensitivity_worst": 0.6699733514395514,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.8178716322653744,
       "modes_found": 4,
@@ -29032,6 +31072,14 @@
       "transition_budget_share": 0.2265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5981308411214953,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9911384956967552,
+        "ITG_TEM": 0.9822240688721852,
+        "KBM": 0.9961807557548782,
+        "MTM": 0.6970452368738406
+      },
+      "mode_sensitivity_macro": 0.9166471392994148,
+      "mode_sensitivity_worst": 0.6970452368738406,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.9002789714450399,
       "modes_found": 4,
@@ -29112,6 +31160,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -29192,6 +31248,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6853932584269663,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8812452332668079,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.22031130831670198,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.35230642087772357,
       "modes_found": 4,
@@ -29272,6 +31336,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7030075187969925,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.7928436725088763,
+        "KBM": 0.26958436282991793,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.26560700883469857,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5139985335396493,
       "modes_found": 4,
@@ -29352,6 +31424,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6477272727272727,
+      "mode_sensitivity_cos": {
+        "ETG": 0.7446182392165295,
+        "ITG_TEM": 0.788329395294471,
+        "KBM": 0.8630154476956572,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.5989907705516644,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.6064731727565084,
       "modes_found": 4,
@@ -29432,6 +31512,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5542635658914729,
+      "mode_sensitivity_cos": {
+        "ETG": 0.857536433896392,
+        "ITG_TEM": 0.7728371022901417,
+        "KBM": 0.7469690011475545,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.594335634333522,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.64849862864034,
       "modes_found": 4,
@@ -29512,6 +31600,14 @@
       "transition_budget_share": 0.24489795918367346,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.46774193548387094,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9496652802327207,
+        "ITG_TEM": 0.6754036696116034,
+        "KBM": 0.8718799913357048,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6242372352950072,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.8410472194469576,
       "modes_found": 4,
@@ -29592,6 +31688,14 @@
       "transition_budget_share": 0.20754716981132076,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4769874476987448,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9852377650349688,
+        "ITG_TEM": 0.7395171360898817,
+        "KBM": 0.971208274098142,
+        "MTM": 0.9056639950767336
+      },
+      "mode_sensitivity_macro": 0.9004067925749315,
+      "mode_sensitivity_worst": 0.7395171360898817,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9316912395753651,
       "modes_found": 4,
@@ -29935,6 +32039,14 @@
       "transition_budget_share": 0.1640625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.43043478260869567,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9893988623805955,
+        "ITG_TEM": 0.8977426257535518,
+        "KBM": 0.9275947507362343,
+        "MTM": 0.8918423273585683
+      },
+      "mode_sensitivity_macro": 0.9266446415572375,
+      "mode_sensitivity_worst": 0.8918423273585683,
       "peak_top5_recall": 0.6,
       "peak_best_ratio": 0.9316912395753651,
       "modes_found": 4,
@@ -30015,6 +32127,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -30095,6 +32215,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.667910447761194,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9274752093817289,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23186880234543222,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.3957964688565595,
       "modes_found": 4,
@@ -30175,6 +32303,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6404494382022472,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9220396508955007,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23050991272387517,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.41981091991452935,
       "modes_found": 4,
@@ -30255,6 +32391,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6425855513307985,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9761534848895067,
+        "ITG_TEM": 0.8820680816537813,
+        "KBM": 0.021898051517165527,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4700299045151134,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5112185537708496,
       "modes_found": 4,
@@ -30335,6 +32479,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5868725868725869,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9976145619712026,
+        "ITG_TEM": 0.8482215371198252,
+        "KBM": 0.3081914259300302,
+        "MTM": -0.32640141856515686
+      },
+      "mode_sensitivity_macro": 0.45690652661397524,
+      "mode_sensitivity_worst": -0.32640141856515686,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5879036349067712,
       "modes_found": 4,
@@ -30415,6 +32567,14 @@
       "transition_budget_share": 0.16326530612244897,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.51953125,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9980877879653813,
+        "ITG_TEM": 0.8370087028262159,
+        "KBM": 0.935678799318172,
+        "MTM": -0.37605957043049476
+      },
+      "mode_sensitivity_macro": 0.5986789299198185,
+      "mode_sensitivity_worst": -0.37605957043049476,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.7570487810360726,
       "modes_found": 4,
@@ -30495,6 +32655,14 @@
       "transition_budget_share": 0.18867924528301888,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4628099173553719,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9939901283623057,
+        "ITG_TEM": 0.8623335399477365,
+        "KBM": 0.9851205941895925,
+        "MTM": 0.9340084611531189
+      },
+      "mode_sensitivity_macro": 0.9438631809131883,
+      "mode_sensitivity_worst": 0.8623335399477365,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.9701417004048583,
       "modes_found": 4,
@@ -30841,6 +33009,14 @@
       "transition_budget_share": 0.16796875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4366812227074236,
+      "mode_sensitivity_cos": {
+        "ETG": 0.993702674718035,
+        "ITG_TEM": 0.9147811933405346,
+        "KBM": 0.9768156132162388,
+        "MTM": 0.9295273560569055
+      },
+      "mode_sensitivity_macro": 0.9537067093329284,
+      "mode_sensitivity_worst": 0.9147811933405346,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.9701417004048583,
       "modes_found": 4,
@@ -30921,6 +33097,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -31001,6 +33185,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6791044776119403,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9575806150573636,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2393951537643409,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.35149979774435586,
       "modes_found": 4,
@@ -31081,6 +33273,14 @@
       "transition_budget_share": 0.17391304347826086,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8781176976110506,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.21952942440276266,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.35849370800076613,
       "modes_found": 4,
@@ -31161,6 +33361,14 @@
       "transition_budget_share": 0.15789473684210525,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.462406015037594,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9548106296015002,
+        "KBM": 0.4246632005164851,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.34486845752949635,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.4679597802026928,
       "modes_found": 4,
@@ -31241,6 +33449,14 @@
       "transition_budget_share": 0.09836065573770492,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.462406015037594,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9224937402246967,
+        "ITG_TEM": 0.9548106296015002,
+        "KBM": 0.404592069083954,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.5704741097275378,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.4910434754791905,
       "modes_found": 4,
@@ -31321,6 +33537,14 @@
       "transition_budget_share": 0.07142857142857142,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.39245283018867927,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9982583571002993,
+        "ITG_TEM": 0.9548106296015002,
+        "KBM": 0.735608334708565,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6721693303525911,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.543592281646031,
       "modes_found": 4,
@@ -31401,6 +33625,14 @@
       "transition_budget_share": 0.13836477987421383,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.516,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9964047381808991,
+        "ITG_TEM": 0.7927470531011903,
+        "KBM": 0.9792758042193273,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6921068988753543,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.8728957704118533,
       "modes_found": 4,
@@ -31747,6 +33979,14 @@
       "transition_budget_share": 0.15234375,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.4721030042918455,
+      "mode_sensitivity_cos": {
+        "ETG": 0.994559160955413,
+        "ITG_TEM": 0.9300014055469221,
+        "KBM": 0.9530193795729829,
+        "MTM": 0.7668230327793921
+      },
+      "mode_sensitivity_macro": 0.9111007447136775,
+      "mode_sensitivity_worst": 0.7668230327793921,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.8988583780568936,
       "modes_found": 4,
@@ -31827,6 +34067,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -31907,6 +34155,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7153558052434457,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8343614141940711,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20859035354851777,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3348062529979582,
       "modes_found": 4,
@@ -31987,6 +34243,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8651685393258427,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.7847426775614061,
+        "KBM": 0.4518111471583777,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.30913845617994595,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5580183884435111,
       "modes_found": 4,
@@ -32067,6 +34331,14 @@
       "transition_budget_share": 0.18421052631578946,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8113207547169812,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8552744178760147,
+        "KBM": 0.15336805689430788,
+        "MTM": 0.6174154214583073
+      },
+      "mode_sensitivity_macro": 0.40651447405715746,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5614688120385185,
       "modes_found": 4,
@@ -32147,6 +34419,14 @@
       "transition_budget_share": 0.22950819672131148,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7635658914728682,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8181692555682022,
+        "KBM": 0.7660847327608147,
+        "MTM": 0.8524743426812809
+      },
+      "mode_sensitivity_macro": 0.6091820827525745,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.608765639425897,
       "modes_found": 4,
@@ -32227,6 +34507,14 @@
       "transition_budget_share": 0.29591836734693877,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7777777777777778,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9844973349307522,
+        "ITG_TEM": 0.8225297023392667,
+        "KBM": 0.889416017204708,
+        "MTM": 0.7680133062609252
+      },
+      "mode_sensitivity_macro": 0.866114090183913,
+      "mode_sensitivity_worst": 0.7680133062609252,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.8726264904692715,
       "modes_found": 4,
@@ -32307,6 +34595,14 @@
       "transition_budget_share": 0.29559748427672955,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.64,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9548660467298891,
+        "ITG_TEM": 0.8236717443403554,
+        "KBM": 0.9498074282396948,
+        "MTM": 0.9877090437012929
+      },
+      "mode_sensitivity_macro": 0.929013565752808,
+      "mode_sensitivity_worst": 0.8236717443403554,
       "peak_top5_recall": 0.5,
       "peak_best_ratio": 0.8944589915390213,
       "modes_found": 4,
@@ -32656,6 +34952,14 @@
       "transition_budget_share": 0.22265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5953488372093023,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9876503648203054,
+        "ITG_TEM": 0.8784710863425861,
+        "KBM": 0.9448573124291125,
+        "MTM": 0.9695398248358984
+      },
+      "mode_sensitivity_macro": 0.9451296471069757,
+      "mode_sensitivity_worst": 0.8784710863425861,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.926124437955932,
       "modes_found": 4,
@@ -32736,6 +35040,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -32816,6 +35128,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6455223880597015,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.91640483791139,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2291012094778475,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3348062529979582,
       "modes_found": 4,
@@ -32896,6 +35216,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.797752808988764,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9375961847634328,
+        "ITG_TEM": 0.893448455465122,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4577611600571387,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5158378403538263,
       "modes_found": 4,
@@ -32976,6 +35304,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7224334600760456,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9892010400000847,
+        "ITG_TEM": 0.9022027730576655,
+        "KBM": 0.10992657005656235,
+        "MTM": -0.16338543572370826
+      },
+      "mode_sensitivity_macro": 0.45948623684765105,
+      "mode_sensitivity_worst": -0.16338543572370826,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.7094463481802036,
       "modes_found": 4,
@@ -33056,6 +35392,14 @@
       "transition_budget_share": 0.2459016393442623,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.642023346303502,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9698697066826706,
+        "ITG_TEM": 0.9417468211996698,
+        "KBM": 0.6581134932764265,
+        "MTM": 0.943621405438286
+      },
+      "mode_sensitivity_macro": 0.8783378566492632,
+      "mode_sensitivity_worst": 0.6581134932764265,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7312788492499533,
       "modes_found": 4,
@@ -33136,6 +35480,14 @@
       "transition_budget_share": 0.25510204081632654,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6477732793522267,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9550248962412999,
+        "ITG_TEM": 0.9657194807157377,
+        "KBM": 0.7818880080366357,
+        "MTM": 0.9859165085460266
+      },
+      "mode_sensitivity_macro": 0.922137223384925,
+      "mode_sensitivity_worst": 0.7818880080366357,
       "peak_top5_recall": 0.30000000000000004,
       "peak_best_ratio": 0.7640118766690145,
       "modes_found": 4,
@@ -33216,6 +35568,14 @@
       "transition_budget_share": 0.2830188679245283,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6740088105726872,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9839420722411103,
+        "ITG_TEM": 0.8903038614545886,
+        "KBM": 0.9667096754117916,
+        "MTM": 0.9845612539747917
+      },
+      "mode_sensitivity_macro": 0.9563792157705706,
+      "mode_sensitivity_worst": 0.8903038614545886,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.8710636977485587,
       "modes_found": 4,
@@ -33565,6 +35925,14 @@
       "transition_budget_share": 0.2265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5700934579439252,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9982363665904671,
+        "ITG_TEM": 0.9862856834693168,
+        "KBM": 0.9890017841763622,
+        "MTM": 0.9839636943134151
+      },
+      "mode_sensitivity_macro": 0.9893718821373902,
+      "mode_sensitivity_worst": 0.9839636943134151,
       "peak_top5_recall": 0.65,
       "peak_best_ratio": 1.0,
       "modes_found": 4,
@@ -33645,6 +36013,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -33725,6 +36101,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7153558052434457,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8343614141940711,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20859035354851777,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3348062529979582,
       "modes_found": 4,
@@ -33805,6 +36189,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.8726591760299626,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8343614141940711,
+        "KBM": 0.4841946437849647,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.32963901449475896,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5614688120385185,
       "modes_found": 4,
@@ -33885,6 +36277,14 @@
       "transition_budget_share": 0.2894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.789272030651341,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8746341132907733,
+        "KBM": 0.7090348542592986,
+        "MTM": 0.7124484357634167
+      },
+      "mode_sensitivity_macro": 0.5740293508283721,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.5614688120385185,
       "modes_found": 4,
@@ -33965,6 +36365,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7760617760617761,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9707284762929265,
+        "ITG_TEM": 0.8552744178760145,
+        "KBM": 0.9762350271145304,
+        "MTM": 0.8723561998620374
+      },
+      "mode_sensitivity_macro": 0.9186485302863773,
+      "mode_sensitivity_worst": 0.8552744178760145,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.6663115835790864,
       "modes_found": 4,
@@ -34045,6 +36453,14 @@
       "transition_budget_share": 0.30612244897959184,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7272727272727273,
+      "mode_sensitivity_cos": {
+        "ETG": 0.09126234610565977,
+        "ITG_TEM": 0.9073633374548518,
+        "KBM": 0.8950776003501152,
+        "MTM": 0.8588233772644116
+      },
+      "mode_sensitivity_macro": 0.6881316652937596,
+      "mode_sensitivity_worst": 0.09126234610565977,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.9312670434646632,
       "modes_found": 4,
@@ -34125,6 +36541,14 @@
       "transition_budget_share": 0.23270440251572327,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.676595744680851,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9979845449826611,
+        "ITG_TEM": 0.8556571348129128,
+        "KBM": 0.9670801882182006,
+        "MTM": 0.9542678818642135
+      },
+      "mode_sensitivity_macro": 0.943747437469497,
+      "mode_sensitivity_worst": 0.8556571348129128,
       "peak_top5_recall": 0.55,
       "peak_best_ratio": 0.9530995445344129,
       "modes_found": 4,
@@ -34474,6 +36898,14 @@
       "transition_budget_share": 0.20703125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5616438356164384,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9925060319467541,
+        "ITG_TEM": 0.9213472498496881,
+        "KBM": 0.9930345844178947,
+        "MTM": 0.960173440820849
+      },
+      "mode_sensitivity_macro": 0.9667653267587965,
+      "mode_sensitivity_worst": 0.9213472498496881,
       "peak_top5_recall": 0.65,
       "peak_best_ratio": 0.9645748987854251,
       "modes_found": 4,
@@ -34554,6 +36986,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -34634,6 +37074,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6455223880597015,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.91640483791139,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2291012094778475,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.3348062529979582,
       "modes_found": 4,
@@ -34714,6 +37162,14 @@
       "transition_budget_share": 0.21739130434782608,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.797752808988764,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9375961847634328,
+        "ITG_TEM": 0.893448455465122,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4577611600571387,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5158378403538263,
       "modes_found": 4,
@@ -34794,6 +37250,14 @@
       "transition_budget_share": 0.23684210526315788,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7186311787072244,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9892010400000847,
+        "ITG_TEM": 0.9308917770062753,
+        "KBM": 0.7384006325242988,
+        "MTM": 0.7975239268416353
+      },
+      "mode_sensitivity_macro": 0.8640043440930736,
+      "mode_sensitivity_worst": 0.7384006325242988,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7357155046315227,
       "modes_found": 4,
@@ -34874,6 +37338,14 @@
       "transition_budget_share": 0.2459016393442623,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6459143968871596,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8832604178277913,
+        "ITG_TEM": 0.9647208677541191,
+        "KBM": 0.8860493866214215,
+        "MTM": 0.7853743613635897
+      },
+      "mode_sensitivity_macro": 0.8798512583917304,
+      "mode_sensitivity_worst": 0.7853743613635897,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.7975077166130895,
       "modes_found": 4,
@@ -34954,6 +37426,14 @@
       "transition_budget_share": 0.24489795918367346,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6411290322580645,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9623027975686885,
+        "ITG_TEM": 0.9998591757098626,
+        "KBM": 0.9023982995393488,
+        "MTM": 0.9665370204152027
+      },
+      "mode_sensitivity_macro": 0.9577743233082756,
+      "mode_sensitivity_worst": 0.9023982995393488,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.8047657969099857,
       "modes_found": 4,
@@ -35034,6 +37514,14 @@
       "transition_budget_share": 0.2641509433962264,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5695652173913044,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9796433127884137,
+        "ITG_TEM": 0.9780401934633428,
+        "KBM": 0.9408237006247031,
+        "MTM": 0.9535499959764618
+      },
+      "mode_sensitivity_macro": 0.9630143007132304,
+      "mode_sensitivity_worst": 0.9408237006247031,
       "peak_top5_recall": 0.3,
       "peak_best_ratio": 0.8408840122654497,
       "modes_found": 4,
@@ -35383,6 +37871,14 @@
       "transition_budget_share": 0.24609375,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5598086124401914,
+      "mode_sensitivity_cos": {
+        "ETG": 0.995869034390359,
+        "ITG_TEM": 0.983856222204839,
+        "KBM": 0.9798065780727147,
+        "MTM": 0.934617235285279
+      },
+      "mode_sensitivity_macro": 0.9735372674882979,
+      "mode_sensitivity_worst": 0.934617235285279,
       "peak_top5_recall": 0.45,
       "peak_best_ratio": 0.8829094681492814,
       "modes_found": 4,
@@ -35463,6 +37959,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.664179104477612,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8367493562340694,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.20918733905851736,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.34767764992661704,
       "modes_found": 3,
@@ -35543,6 +38047,14 @@
       "transition_budget_share": 0.26666666666666666,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7238805970149254,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9670910408187268,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.2417727602046817,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4397347243934332,
       "modes_found": 4,
@@ -35623,6 +38135,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6090225563909775,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.9592229809584037,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.23980574523960094,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.4786342520981168,
       "modes_found": 4,
@@ -35703,6 +38223,14 @@
       "transition_budget_share": 0.2631578947368421,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5954198473282443,
+      "mode_sensitivity_cos": {
+        "ETG": 0.893833216452788,
+        "ITG_TEM": 0.9796564929404609,
+        "KBM": -0.2957385277590978,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.39443779540853774,
+      "mode_sensitivity_worst": -0.2957385277590978,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.5706317026797085,
       "modes_found": 4,
@@ -35783,6 +38311,14 @@
       "transition_budget_share": 0.19672131147540983,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9631135155376286,
+        "ITG_TEM": 0.9714051712148841,
+        "KBM": 0.6183827326044445,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6382253548392394,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6798997566686745,
       "modes_found": 4,
@@ -35863,6 +38399,14 @@
       "transition_budget_share": 0.19387755102040816,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6086956521739131,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9776552120684778,
+        "ITG_TEM": 0.991236537346958,
+        "KBM": 0.9120122074039936,
+        "MTM": 0.6063617276989082
+      },
+      "mode_sensitivity_macro": 0.8718164211295845,
+      "mode_sensitivity_worst": 0.6063617276989082,
       "peak_top5_recall": 0.15,
       "peak_best_ratio": 0.7293860917191383,
       "modes_found": 4,
@@ -35943,6 +38487,14 @@
       "transition_budget_share": 0.25157232704402516,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6206896551724138,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9952636567221204,
+        "ITG_TEM": 0.9785355154025236,
+        "KBM": 0.9902517266324304,
+        "MTM": 0.9355118399726039
+      },
+      "mode_sensitivity_macro": 0.9748906846824196,
+      "mode_sensitivity_worst": 0.9355118399726039,
       "peak_top5_recall": 0.35,
       "peak_best_ratio": 0.8509863386102889,
       "modes_found": 4,
@@ -36285,6 +38837,14 @@
       "transition_budget_share": 0.2421875,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.638095238095238,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9922507732430256,
+        "ITG_TEM": 0.9831975425883588,
+        "KBM": 0.9978911243482258,
+        "MTM": 0.9483242229701011
+      },
+      "mode_sensitivity_macro": 0.9804159157874278,
+      "mode_sensitivity_worst": 0.9483242229701011,
       "peak_top5_recall": 0.44999999999999996,
       "peak_best_ratio": 0.9625448864682284,
       "modes_found": 4,
@@ -36365,6 +38925,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7350746268656716,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.16995142313073996,
       "modes_found": 4,
@@ -36445,6 +39013,14 @@
       "transition_budget_share": 0.3333333333333333,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6741573033707865,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8864700364949499,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.22161750912373748,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.22599224634261583,
       "modes_found": 4,
@@ -36525,6 +39101,14 @@
       "transition_budget_share": 0.2608695652173913,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5714285714285714,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8661496143703149,
+        "KBM": 0.31974802541741654,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.29647440994693286,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.23436927153295695,
       "modes_found": 4,
@@ -36605,6 +39189,14 @@
       "transition_budget_share": 0.21052631578947367,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6893939393939394,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.8640322611480195,
+        "KBM": 0.8655101289355281,
+        "MTM": 0.061438591402885386
+      },
+      "mode_sensitivity_macro": 0.44774524537160826,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.45553311396647506,
       "modes_found": 4,
@@ -36685,6 +39277,14 @@
       "transition_budget_share": 0.21311475409836064,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6293436293436293,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9889676483219284,
+        "ITG_TEM": 0.973049807580093,
+        "KBM": 0.9295648482892942,
+        "MTM": -0.03444963178388807
+      },
+      "mode_sensitivity_macro": 0.7142831681018568,
+      "mode_sensitivity_worst": -0.03444963178388807,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6717611499453319,
       "modes_found": 4,
@@ -36765,6 +39365,14 @@
       "transition_budget_share": 0.2653061224489796,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7276422764227642,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9292041231711143,
+        "ITG_TEM": 0.9766451126366485,
+        "KBM": 0.9809302936186647,
+        "MTM": -0.07319673622878786
+      },
+      "mode_sensitivity_macro": 0.70339569829941,
+      "mode_sensitivity_worst": -0.07319673622878786,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.6717611499453319,
       "modes_found": 4,
@@ -36845,6 +39453,14 @@
       "transition_budget_share": 0.22641509433962265,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6991525423728814,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9581844313661125,
+        "ITG_TEM": 0.9644950154320024,
+        "KBM": 0.9923094437562403,
+        "MTM": 0.9025270052484221
+      },
+      "mode_sensitivity_macro": 0.9543789739506944,
+      "mode_sensitivity_worst": 0.9025270052484221,
       "peak_top5_recall": 0.1,
       "peak_best_ratio": 0.785253260662677,
       "modes_found": 4,
@@ -37185,6 +39801,14 @@
       "transition_budget_share": 0.2265625,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6448598130841121,
+      "mode_sensitivity_cos": {
+        "ETG": 0.970806858788842,
+        "ITG_TEM": 0.9781694194265464,
+        "KBM": 0.9899266062152724,
+        "MTM": 0.9940033628372694
+      },
+      "mode_sensitivity_macro": 0.9832265618169825,
+      "mode_sensitivity_worst": 0.970806858788842,
       "peak_top5_recall": 0.25,
       "peak_best_ratio": 0.8535478729978279,
       "modes_found": 4,
@@ -37265,6 +39889,14 @@
       "transition_budget_share": 0.4444444444444444,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7350746268656716,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.0,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.0,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.16995142313073996,
       "modes_found": 4,
@@ -37345,6 +39977,14 @@
       "transition_budget_share": 0.4,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7142857142857143,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.7579479104606243,
+        "KBM": 0.0,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.18948697761515607,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.28908266469619204,
       "modes_found": 4,
@@ -37425,6 +40065,14 @@
       "transition_budget_share": 0.34782608695652173,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6136363636363636,
+      "mode_sensitivity_cos": {
+        "ETG": 0.0,
+        "ITG_TEM": 0.913708379597461,
+        "KBM": 0.8776638182764639,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.4478430494684812,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.30011445905103074,
       "modes_found": 4,
@@ -37505,6 +40153,14 @@
       "transition_budget_share": 0.2894736842105263,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.7088122605363985,
+      "mode_sensitivity_cos": {
+        "ETG": 0.8920822231741223,
+        "ITG_TEM": 0.9977296531207052,
+        "KBM": 0.8385504369430933,
+        "MTM": 0.0
+      },
+      "mode_sensitivity_macro": 0.6820905783094802,
+      "mode_sensitivity_worst": 0.0,
       "peak_top5_recall": 0.0,
       "peak_best_ratio": 0.42253196751016836,
       "modes_found": 4,
@@ -37585,6 +40241,14 @@
       "transition_budget_share": 0.26229508196721313,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6640625,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9456910506157061,
+        "ITG_TEM": 0.9821650840202983,
+        "KBM": 0.9643380250238466,
+        "MTM": 0.8557372902313827
+      },
+      "mode_sensitivity_macro": 0.9369828624728085,
+      "mode_sensitivity_worst": 0.8557372902313827,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.48418174821192267,
       "modes_found": 4,
@@ -37665,6 +40329,14 @@
       "transition_budget_share": 0.24489795918367346,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.6612903225806451,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9404546163225396,
+        "ITG_TEM": 0.990250136201084,
+        "KBM": 0.9708005698761997,
+        "MTM": 0.7681623317136906
+      },
+      "mode_sensitivity_macro": 0.9174169135283785,
+      "mode_sensitivity_worst": 0.7681623317136906,
       "peak_top5_recall": 0.05,
       "peak_best_ratio": 0.5592779961588373,
       "modes_found": 4,
@@ -37745,6 +40417,14 @@
       "transition_budget_share": 0.23270440251572327,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5872340425531914,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9807144608342238,
+        "ITG_TEM": 0.9911348764511035,
+        "KBM": 0.9900918592550967,
+        "MTM": 0.8289307127759461
+      },
+      "mode_sensitivity_macro": 0.9477179773290926,
+      "mode_sensitivity_worst": 0.8289307127759461,
       "peak_top5_recall": 0.15000000000000002,
       "peak_best_ratio": 0.7722297615326299,
       "modes_found": 4,
@@ -38088,6 +40768,14 @@
       "transition_budget_share": 0.20703125,
       "transition_pool_share": 0.20512820512820512,
       "transition_detection": 0.5799086757990868,
+      "mode_sensitivity_cos": {
+        "ETG": 0.9948132752277745,
+        "ITG_TEM": 0.9973203042284736,
+        "KBM": 0.9896912532857871,
+        "MTM": 0.6993134077928492
+      },
+      "mode_sensitivity_macro": 0.9202845601337212,
+      "mode_sensitivity_worst": 0.6993134077928492,
       "peak_top5_recall": 0.2,
       "peak_best_ratio": 0.8580988339540472,
       "modes_found": 4,

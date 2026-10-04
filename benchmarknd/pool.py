@@ -26,6 +26,8 @@ import numpy as np
 from scipy.spatial import cKDTree
 from scipy.stats import qmc
 
+from resolution import knn_variation
+
 from .core import Observations, reconstruct
 from .strategies import ARMS, NOISE_AWARE_ARMS, run_arm
 
@@ -188,7 +190,48 @@ def score_prefix(oracle, paid_index, band):
     out.update({"ctr_oracle_" + k: v for k, v in
                 per_mode_scores(oracle, held, ctr_oracle["yhat"]).items()
                 if k in ("mode_nrmse", "macro_nrmse", "worst_mode_nrmse")})
+    out.update(truth_free_scores(oracle.pool[paid], oracle.y[paid], oracle.labels[paid],
+                                 oracle.pool))
     return out
+
+
+def truth_free_scores(x, y, labels, candidates, folds=10, seed=0):
+    """Scores computable without ground truth, from paid runs alone.
+
+    These are what a live campaign (NSTX GENE, no reference manifold) can
+    report. Every input is something the campaign owns: the paid inputs and
+    responses, the labels classified at paid runs, and the candidate set or
+    domain it could have sampled. Prefixed `tf_`.
+
+    Validated against truth on the Hatch DIII-D pool (seeds 0-3, ten arms):
+    - `tf_observed_vwfd_p95` (fill distance times the variation estimated
+      from paid runs) tracks per-mode truth error, Spearman +0.84 at N=61 and
+      N=256. It is the same quantity VWRS/VURS minimize, so it flatters them;
+      the GP and space-filling arms still order correctly under it.
+    - `tf_fill_p95` (pure coverage) tracks label accuracy, Spearman -0.84.
+    - `tf_paid_boundary` (share of paid runs with a differently labelled paid
+      neighbour) tracks label accuracy, +0.92 at N=256.
+    - `tf_cv_nrmse` and `tf_loo_label` are reported as warnings, not merits:
+      under concentrated designs they reward clustering (space-filling has
+      the lowest CV error and a poor truth error; gradient GPs have the
+      highest neighbour-label agreement and the worst truth error).
+    """
+    x, y, labels = np.asarray(x, float), np.asarray(y, float), np.asarray(labels)
+    scale = max(float(np.ptp(y)), 1e-12)
+    spacing = cKDTree(x).query(candidates)[0]
+    gradient = knn_variation(x, y, candidates).gradient
+    order = np.random.default_rng(seed).permutation(len(x)) % folds
+    residual = np.empty(len(x))
+    for fold in range(folds):
+        test = order == fold
+        residual[test] = reconstruct(x[~test], y[~test], x[test])-y[test]
+    k = min(2*x.shape[1]+2, len(x))
+    neighbours = cKDTree(x).query(x, k=k)[1]
+    return dict(tf_fill_p95=float(np.quantile(spacing, .95)),
+                tf_observed_vwfd_p95=float(np.quantile(spacing*gradient/scale, .95)),
+                tf_paid_boundary=float(np.mean([len(set(labels[row])) > 1 for row in neighbours])),
+                tf_cv_nrmse=float(np.sqrt(np.mean((residual/scale)**2))),
+                tf_loo_label=float(np.mean(labels[neighbours[:, 1]] == labels)))
 
 
 def classify_then_regress(oracle, paid, held, held_labels, fallback):

@@ -131,6 +131,20 @@ def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
         assert new["macro_nrmse"] is not None
 
 
+def test_truth_free_scores_need_only_paid_runs():
+    """Same answer whatever the unpaid truth is: no reference values are read."""
+    from benchmarknd.pool import truth_free_scores
+    oracle = grid_oracle()
+    paid = np.arange(0, len(oracle.pool), 4)
+    a = truth_free_scores(oracle.pool[paid], oracle.y[paid], oracle.labels[paid], oracle.pool)
+    scrambled = oracle.y.copy()
+    scrambled[np.setdiff1d(np.arange(len(scrambled)), paid)] = 99.
+    b = truth_free_scores(oracle.pool[paid], scrambled[paid], oracle.labels[paid], oracle.pool)
+    assert a == b
+    assert set(a) == {"tf_fill_p95", "tf_observed_vwfd_p95", "tf_paid_boundary",
+                      "tf_cv_nrmse", "tf_loo_label"}
+
+
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
     from benchmarknd.strategies import candidates_for, candidate_count

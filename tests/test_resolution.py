@@ -12,7 +12,7 @@ from benchmarknd.strategies import resolution_sampling, run_arm
 from resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
 from scipy.spatial import cKDTree
 
-from resolution.variation import FOLD_FLOOR, shrinkage, stencil_size
+from resolution.variation import FOLD_RATIO, fold_floor, shrinkage, stencil_size
 
 DIMS = (2, 5, 8)
 
@@ -150,12 +150,19 @@ def test_a_fold_gets_a_rank_one_shape_along_its_normal(dim):
     tangent = np.linalg.svd(normal[None, :])[2][-1]          # any unit vector orthogonal to the normal
     across = np.einsum("i,mij,j->m", normal, shapes, normal)
     along = np.einsum("i,mij,j->m", tangent, shapes, tangent)
-    # Identity floor: across = (1-a) d + a, along = a, with a = FOLD_FLOOR here.
-    assert np.median(across) == pytest.approx((1-FOLD_FLOOR)*dim + FOLD_FLOOR, rel=.05)
-    assert np.median(along) == pytest.approx(FOLD_FLOOR, rel=.05)
-    sharp = region_shapes(x, y, labels, near, fold_floor=0.)
+    # Fixed anisotropy: across/along = FOLD_RATIO at every dimension.
+    a = fold_floor(dim)
+    assert np.median(along) == pytest.approx(a, rel=.05)
+    assert np.median(across)/np.median(along) == pytest.approx(FOLD_RATIO, rel=.05)
+    sharp = region_shapes(x, y, labels, near, fold_ratio=np.inf)
     sharp_along = np.einsum("i,mij,j->m", tangent, sharp, tangent)
     assert np.median(sharp_along) < .1          # only the small-sample shrinkage (d+1)/n remains
+
+
+def test_fold_floor_keeps_the_2d_value_and_grows_with_dimension():
+    assert fold_floor(2) == pytest.approx(.25)          # unchanged from 8050a3f in 2D
+    assert fold_floor(6) == pytest.approx(.5)
+    assert fold_floor(8) > fold_floor(6) > fold_floor(2)
 
 
 @pytest.mark.parametrize("dim", DIMS)

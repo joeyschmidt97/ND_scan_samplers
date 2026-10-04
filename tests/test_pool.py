@@ -145,6 +145,21 @@ def test_truth_free_scores_need_only_paid_runs():
                       "tf_cv_nrmse", "tf_loo_label"}
 
 
+def test_region_scores_cover_the_three_jobs():
+    from benchmarknd.pool import exploration_regions
+    oracle = grid_oracle()
+    regions = exploration_regions(oracle)
+    assert regions["design_band"].any() and regions["peak"].any() and regions["quiet"].any()
+    assert not (regions["quiet"] & regions["peak"]).any()
+    rows = replay(oracle, "space-filling", seed=0, budget=40, n_checkpoints=2)
+    last = rows[-1]
+    assert last["modes_found"] == 2
+    assert all(1 <= v <= 40 for v in last["first_hit"].values())
+    assert 0 <= last["transition_budget_share"] <= 1
+    assert 0 <= last["transition_detection"] <= 1
+    assert 0 < last["peak_best_ratio"] <= 1
+
+
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
     from benchmarknd.strategies import candidates_for, candidate_count

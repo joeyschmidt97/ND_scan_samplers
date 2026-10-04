@@ -192,6 +192,103 @@ def score_prefix(oracle, paid_index, band):
                 if k in ("mode_nrmse", "macro_nrmse", "worst_mode_nrmse")})
     out.update(truth_free_scores(oracle.pool[paid], oracle.y[paid], oracle.labels[paid],
                                  oracle.pool))
+    out.update(region_scores(oracle, np.asarray(paid_index), held, ctr["yhat"]))
+    return out
+
+
+# Share of each mode's largest growth rates that counts as its peak region.
+PEAK_SHARE = .10
+
+
+def exploration_regions(oracle):
+    """Truth masks for the three exploration jobs, cached on the oracle.
+
+    - design_band: the mode changes when only the gradient factors change, at
+      fixed radius and ky: the two nearest pool points in the gradient-factor
+      plane carry another label. This is the transition the campaign scans
+      for. Wider neighbourhoods were tried and rejected: at fixed ky alone the
+      labels flip so often over radius that 44-65% of the pool qualified;
+      this definition marks about 20%.
+    - peak: the top PEAK_SHARE of growth rates within each mode.
+    - quiet: neither, i.e. smooth single-mode interior.
+    Assumes the pool axes are (factor_T, factor_n, x0, ky), the AXES order.
+    """
+    cached = getattr(oracle, "_regions", None)
+    if cached is not None:
+        return cached
+    design = np.zeros(len(oracle.pool), bool)
+    group = np.round(oracle.pool[:, 2:], 10)
+    for value in np.unique(group, axis=0):
+        rows = np.flatnonzero((group == value).all(axis=1))
+        if len(rows) < 2:
+            continue
+        plane = oracle.pool[rows][:, :2]
+        neighbours = np.atleast_2d(cKDTree(plane).query(plane, k=min(3, len(rows)))[1])
+        design[rows] = [len(set(oracle.labels[rows][r])) > 1 for r in neighbours]
+    peak = np.zeros(len(oracle.pool), bool)
+    for label in np.unique(oracle.labels):
+        rows = np.flatnonzero(oracle.labels == label)
+        cut = np.quantile(oracle.y[rows], 1-PEAK_SHARE)
+        peak[rows[oracle.y[rows] >= cut]] = True
+    oracle._regions = dict(design_band=design, peak=peak, quiet=~design & ~peak)
+    return oracle._regions
+
+
+def region_scores(oracle, order, held, yhat):
+    """Scores per exploration job, from the paid prefix `order` (in pay order).
+
+    Errors use the classify-then-regress prediction, each point normalized by
+    its own mode's growth-rate range. Transition scores separate cost (share
+    of the budget spent in the design band) from detection (held band points
+    whose nearest paid runs already show two labels), because a campaign
+    wants to see a transition coming without paying to resolve it.
+    """
+    regions = exploration_regions(oracle)
+    span = {k: max(float(np.ptp(oracle.y[oracle.labels == k])), 1e-12)
+            for k in np.unique(oracle.labels)}
+    held_index = np.flatnonzero(held)
+    error = np.abs(yhat-oracle.y[held])/np.array([span[k] for k in oracle.labels[held]])
+    out = {}
+    for name, mask in regions.items():
+        m = mask[held_index]
+        out[f"region_{name}_nrmse"] = float(np.sqrt(np.mean(error[m]**2))) if m.any() else None
+
+    paid = np.zeros(len(oracle.pool), bool)
+    paid[order] = True
+    design = regions["design_band"]
+    out["transition_budget_share"] = float(design[order].mean())
+    out["transition_pool_share"] = float(design.mean())
+    # The two nearest paid runs, not a wider stencil: labels on this pool are
+    # fragmented enough that a 2d+1 stencil saw two labels around 99% of band
+    # points for every arm, which measures nothing.
+    k = min(2, len(order))
+    neighbours = cKDTree(oracle.pool[order]).query(oracle.pool[design & held], k=k)[1]
+    neighbours = np.atleast_2d(neighbours)
+    out["transition_detection"] = (float(np.mean([len(set(oracle.labels[order][r])) > 1
+                                                  for r in neighbours]))
+                                   if (design & held).any() else None)
+
+    peak_hits, peak_ratio, first_hit = [], [], {}
+    for label in np.unique(oracle.labels):
+        rows = np.flatnonzero(oracle.labels == label)
+        top = rows[np.argsort(oracle.y[rows])[::-1][:5]]
+        peak_hits.append(float(paid[top].mean()))
+        paid_rows = rows[paid[rows]]
+        best = float(oracle.y[paid_rows].max()) if len(paid_rows) else None
+        peak_ratio.append(None if best is None else best/float(oracle.y[rows].max()))
+        position = np.flatnonzero(oracle.labels[order] == label)
+        first_hit[oracle.label_names[label]] = int(position[0])+1 if len(position) else None
+    out["peak_top5_recall"] = float(np.mean(peak_hits))
+    live = [r for r in peak_ratio if r is not None]
+    out["peak_best_ratio"] = float(np.mean(live)) if live else None
+    out["modes_found"] = int(sum(v is not None for v in first_hit.values()))
+    out["first_hit"] = first_hit
+    # Coverage of the rarest mode relative to its share of the pool: 1 means
+    # sampled at its natural rate, below 1 starved, above 1 sought out.
+    counts = np.bincount(oracle.labels, minlength=len(oracle.label_names))
+    rare = int(np.argmin(np.where(counts > 0, counts, np.iinfo(int).max)))
+    out["rare_mode"] = oracle.label_names[rare]
+    out["rare_mode_coverage"] = float(np.mean(oracle.labels[order] == rare)/(counts[rare]/counts.sum()))
     return out
 
 

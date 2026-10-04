@@ -160,6 +160,32 @@ def test_region_scores_cover_the_three_jobs():
     assert 0 < last["peak_best_ratio"] <= 1
 
 
+def test_label_terms_mark_the_switch_and_favour_rare_modes():
+    from benchmarknd.strategies import label_terms
+    # four mode-0 runs on the left edge, one mode-1 run on the right edge
+    x = np.array([[0., 0.], [0., .33], [0., .67], [0., 1.], [1., .5]])
+    labels = np.array([0, 0, 0, 0, 1])
+    candidates = np.array([[.5, .5], [.1, .5], [.8, .5]])
+    mode_term, boundary = label_terms(x, labels, candidates)
+    assert np.isclose(boundary[0], 1., atol=.05)      # equidistant: the switch
+    assert boundary[1] < .5 < boundary[0]             # inside mode 0 vs on the switch
+    # equal gaps, but the lone mode-1 run's side is weighted by 1/sqrt(1)
+    # against 1/sqrt(4) on the mode-0 side
+    gap_left = np.min(np.linalg.norm(x[labels == 0]-candidates[1], axis=1))
+    assert np.isclose(mode_term[1], gap_left/2)
+    assert np.isclose(mode_term[2], .2)
+    assert 0 <= boundary.min() and boundary.max() <= 1
+
+
+@pytest.mark.parametrize("arm", ["vurs-coverage", "vurs-default", "vurs-modeid",
+                                 "vurs-boundary", "vurs-avoid"])
+def test_exploration_profiles_run_and_report_sensitivity(arm):
+    rows = replay(grid_oracle(), arm, seed=0, budget=30, n_checkpoints=2)
+    last = rows[-1]
+    assert last["n"] == 30 and len(set(last["selected"])) == 30
+    assert -1 <= last["mode_sensitivity_macro"] <= 1
+
+
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
     from benchmarknd.strategies import candidates_for, candidate_count

@@ -33,10 +33,27 @@ VURS_VARIANTS = {
     "vurs-u20": dict(weights=dict(coverage=.4, variation=.4, uncertainty=.2)),
 }
 
+# Exploration profiles: VURS with two label-aware terms whose signed weights
+# set what a campaign is exploring for. Positive weights sum to one; the
+# boundary weight may be negative (avoidance). Plain `vurs` is the thirds
+# profile with no label terms. See `label_terms`.
+#   coverage   broad space filling of the domain
+#   mode       fill each predicted mode's own region, rarest modes first, so
+#              every mode gets enough spread runs to fit its sensitivities
+#   boundary   +: seek points equidistant from two modes (map the switch)
+#              -: stay off them (see the transition coming, do not pay for it)
+EXPLORATION_PROFILES = {
+    "vurs-coverage": dict(coverage=.5, variation=.2, uncertainty=.3),
+    "vurs-default": dict(coverage=.3, variation=.25, uncertainty=.25, mode=.2),
+    "vurs-modeid": dict(coverage=.2, variation=.2, uncertainty=.2, mode=.4),
+    "vurs-boundary": dict(coverage=.2, variation=.2, uncertainty=.2, boundary=.4),
+    "vurs-avoid": dict(coverage=1/3, variation=1/3, uncertainty=1/3, boundary=-.3),
+}
+
 ARMS = (("space-filling", "gpr-var", "gpr-grad", "moe", "sglib", "sgpp",
          "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs",
          "vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r", "vwrs-m", "vurs-m")
-        + tuple(GP_BLENDS) + tuple(VURS_VARIANTS))
+        + tuple(GP_BLENDS) + tuple(VURS_VARIANTS) + tuple(EXPLORATION_PROFILES))
 
 # Arms that require an oracle reporting a spread per evaluation.
 NOISE_AWARE_ARMS = ("vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r")
@@ -240,6 +257,43 @@ def replicate_choice(obs, best_candidate_deficit):
     return best if gain[best] > best_candidate_deficit else None
 
 
+def label_terms(x, labels, candidates):
+    """Mode-filling and boundary-proximity terms from labels at paid points.
+
+    A candidate's predicted mode is its nearest paid point's label: the
+    nearest-paid classifier the pool scorer also uses, nothing the oracle
+    reveals about the candidate itself.
+
+    mode(c)     = d_same(c) / sqrt(n_mode): distance to the nearest paid point
+                  of the candidate's own mode -- equal to the plain spacing,
+                  so the term fills each mode's region -- over the square
+                  root of that mode's paid count, so rare modes fill first.
+    boundary(c) = 2 min(d_same, d_other) / (d_same + d_other), in [0, 1]:
+                  1 when the candidate is equidistant from two modes (the
+                  predicted switch), near 0 deep inside one mode. d_other is the
+                  distance to the nearest paid point of any other mode.
+    With a single observed mode both terms reduce to plain coverage and zero.
+    """
+    labels = np.asarray(labels)
+    d_near, i_near = cKDTree(x).query(candidates)
+    predicted = labels[i_near]
+    counts = {k: int(np.sum(labels == k)) for k in np.unique(labels)}
+    mode_term = d_near/np.sqrt(np.array([counts[k] for k in predicted], float))
+    d_other = np.full(len(candidates), np.inf)
+    for k in counts:
+        others = labels != k
+        if not others.any():
+            continue
+        rows = predicted == k
+        if rows.any():
+            d_other[rows] = cKDTree(x[others]).query(candidates[rows])[0]
+    finite = np.isfinite(d_other)
+    boundary_term = np.zeros(len(candidates))
+    total = d_near[finite] + d_other[finite]
+    boundary_term[finite] = 2*np.minimum(d_near[finite], d_other[finite])/np.maximum(total, 1e-12)
+    return mode_term, boundary_term
+
+
 def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                         noise_aware=False, allocation=False, replicate=False,
                         anisotropic=False, nu=.5, weights=None):
@@ -265,8 +319,10 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
         raise ValueError("the anisotropic metric has no noise-aware variant yet")
     if weights is None:
         weights = VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
-    elif not uncertainty or abs(sum(weights.values())-1) > 1e-9:
-        raise ValueError("custom weights apply to VURS and must sum to one")
+    elif not uncertainty or abs(sum(v for v in weights.values() if v > 0)-1) > 1e-9:
+        raise ValueError("custom weights apply to VURS and their positive part must sum to one")
+    if set(weights) - {"coverage", "variation", "uncertainty", "mode", "boundary", "aleatoric"}:
+        raise ValueError(f"unknown acquisition terms: {sorted(weights)}")
     if (noise_aware or allocation) and reported_noise(obs) is None:
         raise ValueError("noise-aware placement needs an oracle that reports a spread")
     rng = np.random.default_rng(seed)
@@ -288,6 +344,10 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
             warning_count += count
             sd = gp.predict(candidates, return_std=True)[1]
             merit = merit + weights["uncertainty"]*sd/max(float(sd.max()), 1e-12)
+        if weights.get("mode") or weights.get("boundary"):
+            mode_term, boundary_term = label_terms(obs.x, observed_labels(obs), candidates)
+            merit = (merit + weights.get("mode", 0.)*mode_term/max(float(mode_term.max()), 1e-12)
+                     + weights.get("boundary", 0.)*boundary_term)
         if allocation:
             aleatoric = candidate_noise(obs, candidates)
             merit = merit + weights["aleatoric"]*aleatoric/max(float(aleatoric.max()), 1e-12)
@@ -397,6 +457,9 @@ def run_arm(name, obs, seed):
                    blend=.5 if name == "gpr-m05-blend" else None, nu=.5)
     if name in ("vwrs", "vurs"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs")
+    if name in EXPLORATION_PROFILES:
+        return resolution_sampling(obs, seed, uncertainty=True,
+                                   weights=dict(EXPLORATION_PROFILES[name]))
     if name in VURS_VARIANTS:
         return resolution_sampling(obs, seed, uncertainty=True, **VURS_VARIANTS[name])
     if name in ("vwrs-m", "vurs-m"):

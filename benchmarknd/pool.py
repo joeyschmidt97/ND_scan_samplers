@@ -234,6 +234,35 @@ def exploration_regions(oracle):
     return oracle._regions
 
 
+def mode_sensitivity(oracle, order):
+    """How well the paid runs of each mode recover that mode's sensitivity axes.
+
+    Per mode, a linear fit of growth rate on the inputs using only the paid
+    runs of that mode is compared with the same fit on every pool run of the
+    mode. Reported: the cosine between the two gradient vectors (direction of
+    sensitivity, 1 = recovered) and the macro average over modes. A mode with
+    fewer than dim + 2 paid runs, or paid runs that do not span the axes,
+    scores 0 -- its sensitivities cannot be estimated at all.
+    """
+    cosines = {}
+    for label in np.unique(oracle.labels):
+        rows = np.flatnonzero(oracle.labels == label)
+        design = np.column_stack([np.ones(len(rows)), oracle.pool[rows]])
+        truth = np.linalg.lstsq(design, oracle.y[rows], rcond=None)[0][1:]
+        paid = order[oracle.labels[order] == label]
+        name = oracle.label_names[label]
+        sub = np.column_stack([np.ones(len(paid)), oracle.pool[paid]])
+        if len(paid) < oracle.dim+2 or np.linalg.matrix_rank(sub) < oracle.dim+1:
+            cosines[name] = 0.
+            continue
+        estimate = np.linalg.lstsq(sub, oracle.y[paid], rcond=None)[0][1:]
+        norm = np.linalg.norm(truth)*np.linalg.norm(estimate)
+        cosines[name] = float(truth @ estimate/norm) if norm > 0 else 0.
+    return dict(mode_sensitivity_cos=cosines,
+                mode_sensitivity_macro=float(np.mean(list(cosines.values()))),
+                mode_sensitivity_worst=float(np.min(list(cosines.values()))))
+
+
 def region_scores(oracle, order, held, yhat):
     """Scores per exploration job, from the paid prefix `order` (in pay order).
 
@@ -278,6 +307,7 @@ def region_scores(oracle, order, held, yhat):
         peak_ratio.append(None if best is None else best/float(oracle.y[rows].max()))
         position = np.flatnonzero(oracle.labels[order] == label)
         first_hit[oracle.label_names[label]] = int(position[0])+1 if len(position) else None
+    out.update(mode_sensitivity(oracle, order))
     out["peak_top5_recall"] = float(np.mean(peak_hits))
     live = [r for r in peak_ratio if r is not None]
     out["peak_best_ratio"] = float(np.mean(live)) if live else None

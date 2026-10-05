@@ -196,6 +196,9 @@ def score_prefix(oracle, paid_index, band):
     return out
 
 
+# Tolerance for "same ky" on the unit log-ky axis when marking the design band.
+KY_MATCH = .02
+
 # Share of each mode's largest growth rates that counts as its peak region.
 PEAK_SHARE = .10
 
@@ -217,14 +220,19 @@ def exploration_regions(oracle):
     if cached is not None:
         return cached
     design = np.zeros(len(oracle.pool), bool)
-    group = np.round(oracle.pool[:, 2:], 10)
-    for value in np.unique(group, axis=0):
-        rows = np.flatnonzero((group == value).all(axis=1))
-        if len(rows) < 2:
+    # Same radius exactly, same ky within KY_MATCH of the unit (log-ky) axis:
+    # campaigns whose ky shifts slightly with the profile variant (pscans3)
+    # would otherwise leave every point alone in its group.
+    fixed, ky = oracle.pool[:, 2:-1], oracle.pool[:, -1]
+    for i in range(len(oracle.pool)):
+        same = (np.abs(fixed-fixed[i]) < 1e-9).all(axis=1) if fixed.shape[1] else True
+        rows = np.flatnonzero(same & (np.abs(ky-ky[i]) <= KY_MATCH))
+        rows = rows[rows != i]
+        if not len(rows):
             continue
-        plane = oracle.pool[rows][:, :2]
-        neighbours = np.atleast_2d(cKDTree(plane).query(plane, k=min(3, len(rows)))[1])
-        design[rows] = [len(set(oracle.labels[rows][r])) > 1 for r in neighbours]
+        gap = np.linalg.norm(oracle.pool[rows, :2]-oracle.pool[i, :2], axis=1)
+        nearest = rows[np.argsort(gap)[:2]]
+        design[i] = bool((oracle.labels[nearest] != oracle.labels[i]).any())
     peak = np.zeros(len(oracle.pool), bool)
     for label in np.unique(oracle.labels):
         rows = np.flatnonzero(oracle.labels == label)

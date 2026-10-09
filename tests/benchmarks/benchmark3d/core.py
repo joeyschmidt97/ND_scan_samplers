@@ -7,7 +7,7 @@ import numpy as np
 from scipy.interpolate import LinearNDInterpolator, RBFInterpolator
 from scipy.spatial import cKDTree, distance
 
-from ND_scan_samplers.scripts.datasets import load_dataset, surface_for
+from ND_scan_samplers.scripts.data.datasets import load_dataset, surface_for
 
 
 CORNERS = np.asarray(list(product((0., 1.), repeat=3)))

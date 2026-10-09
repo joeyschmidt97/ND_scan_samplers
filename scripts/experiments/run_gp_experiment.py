@@ -8,7 +8,7 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import ConstantKernel, Matern
 from sklearn.exceptions import ConvergenceWarning
 from threadpoolctl import threadpool_limits
-from ND_scan_samplers.scripts.datasets import load_dataset
+from ND_scan_samplers.scripts.data.datasets import load_dataset
 
 
 def score_prediction(error, evaluation, scale):

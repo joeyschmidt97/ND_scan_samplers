@@ -8,7 +8,7 @@ import subprocess
 import numpy as np
 import scipy
 from scipy.stats import qmc
-from ND_scan_samplers.scripts.datasets import surface_for
+from ND_scan_samplers.scripts.data.datasets import surface_for
 from ND_scan_samplers import ROOT
 
 
@@ -49,7 +49,7 @@ def generate(output, dim, case, seed, pool_size, test_size, pool_seed=1729, test
         band, peak, region = surface.distance(q) < .06, surface.peak_distance(q) < 2., surface.region(q)
     evaluation = dict(x=q, y=truth, band=band, peak=peak, region=region)
     source_paths = [ROOT / "tests/benchmarks/benchmark2d/core.py"] if dim == 2 else [ROOT / "tests/benchmarks/benchmarknd/core.py", ROOT / "tests/benchmarks/benchmarknd/cases.py"]
-    source_paths += [Path(__file__), ROOT / "scripts/datasets.py"]
+    source_paths += [Path(__file__), ROOT / "scripts/data/datasets.py"]
     source_hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()

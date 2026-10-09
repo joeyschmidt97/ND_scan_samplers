@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 import numpy as np
 
-from ND_scan_samplers.scripts.datasets import load_dataset
-from ND_scan_samplers.scripts.generate_ionut_slices import values
+from ND_scan_samplers.scripts.data.datasets import load_dataset
+from ND_scan_samplers.scripts.data.generate_ionut_slices import values
 from ND_scan_samplers import ROOT
 
 

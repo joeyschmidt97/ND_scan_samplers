@@ -15,8 +15,8 @@ import numpy as np
 import scipy
 from scipy.stats import qmc
 
-from ND_scan_samplers.scripts.generate_data import power_of_two
-from ND_scan_samplers.scripts.generate_ionut_data import UPSTREAM, values as native_values
+from ND_scan_samplers.scripts.data.generate_data import power_of_two
+from ND_scan_samplers.scripts.data.generate_ionut_data import UPSTREAM, values as native_values
 from ND_scan_samplers import ROOT
 
 
@@ -64,8 +64,8 @@ def generate(output, case, pool_size=4096, test_size=65536):
     mode = "argmax" if "argmax" in case else "softmax"
     out = "gamma" if case.endswith("gamma") else "omega"
     spec = SLICE_SPECS[kind]
-    sources = [ROOT/"scripts/ionut_proxies.py", ROOT/"scripts/generate_ionut_data.py",
-               Path(__file__), ROOT/"scripts/datasets.py"]
+    sources = [ROOT/"scripts/data/ionut_proxies.py", ROOT/"scripts/data/generate_ionut_data.py",
+               Path(__file__), ROOT/"scripts/data/datasets.py"]
     manifest = dict(
         schema_version=1, family="ionut-phenomenological-microinstability-3d-slice",
         dimension=3, case=case, surface_seed=0, bounds=[[0., 1.]]*3,

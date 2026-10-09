@@ -57,7 +57,7 @@ from sklearn.manifold import trustworthiness
 from sklearn.metrics import adjusted_rand_score, roc_auc_score
 from sklearn.neighbors import NearestNeighbors
 
-from ND_scan_samplers.scripts.generate_ionut_data import values
+from ND_scan_samplers.scripts.data.generate_ionut_data import values
 from ND_scan_samplers import ROOT
 from ND_scan_samplers.src.resolution.noise import competition
 

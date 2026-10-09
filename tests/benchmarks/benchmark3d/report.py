@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 import numpy as np
 
-from ND_scan_samplers.scripts.render_ionut_3d_report import render_reference
+from ND_scan_samplers.scripts.analysis.render_ionut_3d_report import render_reference
 from ND_scan_samplers.tests.benchmarks.benchmark3d.strategies import ARMS
 
 

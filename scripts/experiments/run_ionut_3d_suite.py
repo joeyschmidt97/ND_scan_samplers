@@ -4,8 +4,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import json
 from pathlib import Path
 
-from ND_scan_samplers.scripts.generate_ionut_slices import CASES
-from ND_scan_samplers.scripts.run_gp_experiment import run
+from ND_scan_samplers.scripts.data.generate_ionut_slices import CASES
+from ND_scan_samplers.scripts.experiments.run_gp_experiment import run
 from ND_scan_samplers import ROOT
 
 

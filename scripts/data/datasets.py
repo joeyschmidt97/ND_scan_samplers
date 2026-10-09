@@ -8,12 +8,12 @@ from ND_scan_samplers import ROOT
 
 def surface_for(dim, case, seed):
     if dim == 3:
-        from ND_scan_samplers.scripts.generate_ionut_slices import CASES, values
+        from ND_scan_samplers.scripts.data.generate_ionut_slices import CASES, values
         if case not in CASES or seed != 0:
             raise ValueError('3D Ionut slices require a known case and surface seed 0')
         return lambda x: values(case, x)['y']
     if dim == 6:
-        from ND_scan_samplers.scripts.generate_ionut_data import CASES, values
+        from ND_scan_samplers.scripts.data.generate_ionut_data import CASES, values
         if case not in CASES or seed != 0:
             raise ValueError('Ionut proxies require a known case and surface seed 0')
         return lambda x: values(case, x)['y']

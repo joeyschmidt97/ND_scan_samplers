@@ -8,7 +8,7 @@ import pathlib
 import platform
 import subprocess
 
-from ND_scan_samplers.scripts.generate_ionut_slices import CASES
+from ND_scan_samplers.scripts.data.generate_ionut_slices import CASES
 from ND_scan_samplers.tests.benchmarks.benchmark3d.strategies import ARMS
 from ND_scan_samplers.tests.benchmarks.benchmark3d.worker import execute
 from ND_scan_samplers import ROOT

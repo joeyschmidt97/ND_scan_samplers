@@ -7,8 +7,8 @@ from pathlib import Path
 import numpy as np
 import scipy
 from scipy.stats import qmc
-from ND_scan_samplers.scripts import ionut_proxies as proxy
-from ND_scan_samplers.scripts.generate_data import power_of_two
+from ND_scan_samplers.scripts.data import ionut_proxies as proxy
+from ND_scan_samplers.scripts.data.generate_data import power_of_two
 from ND_scan_samplers import ROOT
 
 UPSTREAM = '13f87b95f90be9dbb5942e317739bb15a1918e0e'
@@ -38,7 +38,7 @@ def generate(output, case, pool_size=4096, test_size=65536):
     test=values(case,qmc.Sobol(6,scramble=True,seed=91479).random_base2(test_size.bit_length()-1))
     test.update(band=np.zeros(test_size,dtype=bool),peak=np.zeros(test_size,dtype=bool),
                 region=np.argmax(test['G'],axis=1) if 'G' in test else np.zeros(test_size,dtype=int))
-    paths=[ROOT/'scripts/ionut_proxies.py',Path(__file__),ROOT/'scripts/datasets.py',ROOT/'scripts/generate_data.py']
+    paths=[ROOT/'scripts/data/ionut_proxies.py',Path(__file__),ROOT/'scripts/data/datasets.py',ROOT/'scripts/data/generate_data.py']
     manifest=dict(schema_version=1,family='ionut-phenomenological-microinstability',dimension=6,
                   case=case,surface_seed=0,bounds=[[0.,1.]]*6,measure='uniform unit box',
                   pool_size=pool_size,test_size=test_size,pool_seed=1729,test_seed=91479,

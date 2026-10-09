@@ -161,7 +161,7 @@ def test_region_scores_cover_the_three_jobs():
 
 
 def test_label_terms_mark_the_switch_and_favour_rare_modes():
-    from ND_scan_samplers.benchmarknd.strategies import label_terms
+    from ND_scan_samplers.src.strategies import label_terms
     # four mode-0 runs on the left edge, one mode-1 run on the right edge
     x = np.array([[0., 0.], [0., .33], [0., .67], [0., 1.], [1., .5]])
     labels = np.array([0, 0, 0, 0, 1])
@@ -188,6 +188,6 @@ def test_exploration_profiles_run_and_report_sensitivity(arm):
 
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
-    from ND_scan_samplers.benchmarknd.strategies import candidates_for, candidate_count
+    from ND_scan_samplers.src.strategies import candidates_for, candidate_count
     obs = Observations(lambda x: x.sum(axis=1), 40, 3, seed=0)
     assert len(candidates_for(obs, np.random.default_rng(0))) == candidate_count(3)

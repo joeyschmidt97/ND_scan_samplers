@@ -61,7 +61,7 @@ def main():
     config = {k: v for k, v in vars(args).items() if k not in ("output", "plots_only", "resume", "quick")}
     config["protocol"] = "single trajectory, every integer N from 4; four charged corners"
     root = ROOT
-    sources = list((root/"benchmark2d").glob("*.py")) + list((root/"arms").glob("*.py"))
+    sources = list((root/"benchmark2d").glob("*.py")) + list((root/"src"/"arms").glob("*.py"))
     source_hash = hashlib.sha256(b"".join(p.read_bytes() for p in sorted(sources))).hexdigest()
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, stderr=subprocess.DEVNULL, text=True).strip()

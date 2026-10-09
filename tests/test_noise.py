@@ -3,9 +3,9 @@ import numpy as np
 import pytest
 
 from ND_scan_samplers.benchmarknd.noisy import NoisyIonutSurface, NoisyObservations
-from ND_scan_samplers.benchmarknd.strategies import NOISE_AWARE_ARMS, candidate_noise, run_arm
-from ND_scan_samplers.resolution import knn_variation
-from ND_scan_samplers.resolution.noise import TransitionNoise, competition, denoise_residual
+from ND_scan_samplers.src.strategies import NOISE_AWARE_ARMS, candidate_noise, run_arm
+from ND_scan_samplers.src.resolution import knn_variation
+from ND_scan_samplers.src.resolution.noise import TransitionNoise, competition, denoise_residual
 
 CASE = "ionut-itg-tem-argmax-gamma"
 
@@ -125,7 +125,7 @@ def test_noise_aware_arms_spend_the_exact_budget(arm):
 
 
 def test_allocation_weight_is_negative_on_the_aleatoric_term():
-    from ND_scan_samplers.benchmarknd.strategies import VURS_A_WEIGHTS
+    from ND_scan_samplers.src.strategies import VURS_A_WEIGHTS
     assert VURS_A_WEIGHTS["aleatoric"] < 0
     assert sum(v for k, v in VURS_A_WEIGHTS.items() if k != "aleatoric") == pytest.approx(1.)
 
@@ -165,7 +165,7 @@ def test_a_zero_deficit_makes_a_magnitude_comparison_meaningless():
     Once the denoised deficit is zero, any positive replicate gain wins the
     comparison regardless of whether replicating is actually worthwhile.
     """
-    from ND_scan_samplers.benchmarknd.strategies import replicate_choice
+    from ND_scan_samplers.src.strategies import replicate_choice
     surface = NoisyIonutSurface(CASE, noise=TransitionNoise(peak=.60))
     obs = NoisyObservations(surface, 40, 6, 0)
     assert replicate_choice(obs, 0.) is not None       # zero deficit: always replicate

@@ -26,10 +26,10 @@ import numpy as np
 from scipy.spatial import cKDTree
 from scipy.stats import qmc
 
-from ND_scan_samplers.resolution import knn_variation
+from ND_scan_samplers.src.resolution import knn_variation
 
 from ND_scan_samplers.benchmarknd.core import Observations, reconstruct
-from ND_scan_samplers.benchmarknd.strategies import ARMS, NOISE_AWARE_ARMS, run_arm
+from ND_scan_samplers.src.strategies import ARMS, NOISE_AWARE_ARMS, run_arm
 from ND_scan_samplers import ROOT
 
 # Coordinates of a pool row, in the order they become unit-box axes. ky is

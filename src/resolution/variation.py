@@ -185,7 +185,7 @@ def _fit(x, y, query, k, dim, noise=None):
     residual = np.sqrt(np.einsum("mk,mk->m", weights, (values - prediction)**2)/weight_sum)
     gradient = np.linalg.norm(coefficients[:, 1:], axis=1)
     if noise is not None:
-        from ND_scan_samplers.resolution.noise import denoise_residual
+        from ND_scan_samplers.src.resolution.noise import denoise_residual
         stencil_noise = np.sqrt(np.einsum("mk,mk->m", weights, noise[index]**2)/weight_sum)
         residual = denoise_residual(residual, stencil_noise, k, dim)
     curvature = 2*residual/radius**2

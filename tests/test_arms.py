@@ -15,7 +15,7 @@ import sys
 import numpy as np
 
 
-from ND_scan_samplers.arms import design_metrics, score_arm                      # noqa: E402
+from ND_scan_samplers.src.arms import design_metrics, score_arm                      # noqa: E402
 from ND_scan_samplers.tests.manifold import Manifold                                   # noqa: E402
 
 
@@ -31,7 +31,7 @@ def test_sglib_spends_a_real_budget():
     reference script's fixed-step loop -- stopped the method after 3 steps and
     10 points regardless of budget. Anything in that range means the bug is back.
     """
-    from ND_scan_samplers.arms import SgLibArm
+    from ND_scan_samplers.src.arms import SgLibArm
     m = Manifold(mode="argmax", align="gap")
     oracle = m.oracle("gamma")
     arm = SgLibArm().fit(oracle, m.dim, 250)
@@ -52,7 +52,7 @@ def test_sglib_predict_works_after_a_budget_stop():
     naming the unpaid multiindex (e.g. '[5, 1, 1, 1, 1, 2]'). This hit 5 of 8
     sweep runs in the first report build.
     """
-    from ND_scan_samplers.arms import SgLibArm
+    from ND_scan_samplers.src.arms import SgLibArm
     m = Manifold(mode="argmax", align="gap")
     X = np.random.default_rng(0).random((25, m.dim))
     for budget in (60, 100, 150):
@@ -63,7 +63,7 @@ def test_sglib_predict_works_after_a_budget_stop():
 
 def test_sglib_is_dimension_adaptive():
     """The whole selling point: unequal levels across axes, not a uniform grid."""
-    from ND_scan_samplers.arms import SgLibArm
+    from ND_scan_samplers.src.arms import SgLibArm
     m = Manifold(mode="argmax", align="gap")
     arm = SgLibArm().fit(m.oracle("gamma"), m.dim, 250)
     lv = arm.axis_levels()
@@ -72,7 +72,7 @@ def test_sglib_is_dimension_adaptive():
 
 
 def test_sglib_budget_is_respected_when_small():
-    from ND_scan_samplers.arms import SgLibArm
+    from ND_scan_samplers.src.arms import SgLibArm
     m = Manifold(mode="argmax")
     for budget in (20, 60):
         oracle = m.oracle("gamma")
@@ -84,7 +84,7 @@ def test_sglib_budget_is_respected_when_small():
 # GPR
 # ===========================================================================
 def test_gpr_hits_budget_exactly():
-    from ND_scan_samplers.arms import GPRArm
+    from ND_scan_samplers.src.arms import GPRArm
     m = Manifold(mode="argmax", align="gap")
     for budget in (60, 150):
         oracle = m.oracle("gamma")
@@ -95,7 +95,7 @@ def test_gpr_hits_budget_exactly():
 def test_gpr_drops_failed_runs_instead_of_filling():
     """The structural advantage over both sparse grids: points are free, so a
     failed run is a dropped sample, not a hole to be papered over."""
-    from ND_scan_samplers.arms import GPRArm
+    from ND_scan_samplers.src.arms import GPRArm
     m = Manifold(mode="argmax", fail_rate=0.25, seed=3)
     oracle = m.oracle("gamma")
     arm = GPRArm("var").fit(oracle, m.dim, 150)
@@ -107,7 +107,7 @@ def test_gpr_drops_failed_runs_instead_of_filling():
 def test_gpr_batches_do_not_collapse():
     """Without the distance penalty every point in a batch lands on the same
     argmax. A collapsed design shows up as a near-zero minimum pairwise gap."""
-    from ND_scan_samplers.arms import GPRArm
+    from ND_scan_samplers.src.arms import GPRArm
     m = Manifold(mode="argmax", align="gap")
     arm = GPRArm("var", batch=8).fit(m.oracle("gamma"), m.dim, 120)
     d = design_metrics(arm.X, m)
@@ -117,7 +117,7 @@ def test_gpr_batches_do_not_collapse():
 def test_gpr_acquisitions_differ_in_where_they_look():
     """'ucb' chases the peak, 'grad' chases the transition. If the two produce
     the same targeting profile, the acquisition switch is not doing anything."""
-    from ND_scan_samplers.arms import GPRArm
+    from ND_scan_samplers.src.arms import GPRArm
     m = Manifold(mode="argmax", align="gap", out="gamma")
     res = {}
     for acq in ("ucb", "grad"):
@@ -143,7 +143,7 @@ def test_design_metrics_flag_a_clumped_design():
 def test_scoring_is_against_clean_truth():
     """An arm trained on noisy data must not be able to score perfectly by
     memorizing the noise."""
-    from ND_scan_samplers.arms import RandomNearestArm
+    from ND_scan_samplers.src.arms import RandomNearestArm
     clean = Manifold(mode="argmax")
     noisy = Manifold(mode="argmax", noise_rel=0.30, seed=5)
     test = clean.test_set(n=600)

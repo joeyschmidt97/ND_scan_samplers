@@ -9,8 +9,9 @@ from dataclasses import dataclass, field
 import numpy as np
 from scipy.interpolate import RBFInterpolator
 from scipy.stats import qmc
-from ND_scan_samplers.resolution import fit_free_scores, knn_variation
+from ND_scan_samplers.src.resolution import fit_free_scores, knn_variation
 from ND_scan_samplers.benchmarknd.cases import CASES, strengths
+from ND_scan_samplers.src.strategies import BudgetExceeded   # re-exported for callers of core
 
 # Holistic tolerances, per input dimension, measured against the `space-filling`
 # reference arm at the declared budget (results/nd-calibration-2026-09-20).
@@ -62,10 +63,6 @@ NARROW, WIDE = .06, .5          # peak sigma at full strength and at weak streng
 ENVELOPE, BASE = .65, .15       # affine-envelope and base-slope amplitudes
 AMPLITUDES = (.9, .7, .8, .6)
 KERNEL, SMOOTHING = "thin_plate_spline", 0.
-
-
-class BudgetExceeded(RuntimeError):
-    pass
 
 
 @dataclass(frozen=True)

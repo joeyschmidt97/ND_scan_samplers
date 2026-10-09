@@ -37,7 +37,7 @@ from threadpoolctl import threadpool_limits
 
 from ND_scan_samplers.benchmark2d.core import evaluation_set, reconstruct, rmse
 from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
-from ND_scan_samplers.benchmarknd.strategies import run_arm
+from ND_scan_samplers.src.strategies import run_arm
 from ND_scan_samplers.scripts.run_noise_2d import CORNERS, Noisy2DSurface
 
 GRID = 161

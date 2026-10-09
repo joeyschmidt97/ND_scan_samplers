@@ -16,8 +16,12 @@ from sklearn.gaussian_process.kernels import ConstantKernel, Matern
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import PolynomialFeatures
 
-from ND_scan_samplers.resolution import knn_variation, metric_fill
-from ND_scan_samplers.resolution.variation import stencil_size
+from ND_scan_samplers.src.resolution import knn_variation, metric_fill
+from ND_scan_samplers.src.resolution.variation import stencil_size
+
+
+class BudgetExceeded(RuntimeError):
+    pass
 
 # GP-uncertainty share of the blended acquisition; the rest weights the
 # gradient-weighted merit. The three ratios are the 2-D sweep winners.
@@ -474,14 +478,13 @@ def run_arm(name, obs, seed):
     if name == "gpr-n":
         return gpr(obs, seed, blend=.5, noise_aware=True)
     if name == "sglib":
-        from ND_scan_samplers.arms.sglib_arm import SgLibArm
+        from ND_scan_samplers.src.arms.sglib_arm import SgLibArm
         arm = SgLibArm(tol=0., max_level=20, budget_driven=True, nan_policy="error")
     elif name == "sgpp":
-        from ND_scan_samplers.arms.sgpp_arm import SGppArm
+        from ND_scan_samplers.src.arms.sgpp_arm import SGppArm
         arm = SGppArm(basis="modlinear", refine="surplus", refine_batch=1, target_surplus=-1., nan_policy="error")
     else:
         raise ValueError(name)
-    from ND_scan_samplers.benchmarknd.core import BudgetExceeded
     batch_sizes = []
 
     def prescribed(points):

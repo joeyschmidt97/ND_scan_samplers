@@ -20,7 +20,7 @@ noisy samples.
 """
 import numpy as np
 
-from ND_scan_samplers.resolution.noise import TransitionNoise
+from ND_scan_samplers.src.resolution.noise import TransitionNoise
 from ND_scan_samplers.benchmarknd.core import BudgetExceeded
 from ND_scan_samplers.benchmarknd.ionut import IonutSurface
 

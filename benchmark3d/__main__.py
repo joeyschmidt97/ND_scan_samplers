@@ -42,7 +42,7 @@ def main():
         parser.error("budget >= 16 and a power-of-two test size >= 1024 required")
     args.output.mkdir(parents=True, exist_ok=True)
     root = ROOT
-    sources = sorted(list((root/"benchmark3d").glob("*.py")) + list((root/"arms").glob("*.py")))
+    sources = sorted(list((root/"benchmark3d").glob("*.py")) + list((root/"src"/"arms").glob("*.py")))
     source_hash = hashlib.sha256(b"".join(path.read_bytes() for path in sources)).hexdigest()
     config = dict(cases=args.cases, arms=args.arms, seeds=args.seeds, budget=args.budget,
                   test_size=args.test_size, secondary=args.secondary,

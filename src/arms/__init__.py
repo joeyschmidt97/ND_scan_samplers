@@ -1,6 +1,6 @@
 """Benchmark arms. Heavy/optional backends are imported lazily."""
 
-from ND_scan_samplers.arms.base import Arm, Score, score_arm, design_metrics, RandomNearestArm
+from ND_scan_samplers.src.arms.base import Arm, Score, score_arm, design_metrics, RandomNearestArm
 
 __all__ = ["Arm", "Score", "score_arm", "design_metrics", "RandomNearestArm",
            "SGppArm", "SGppRegularArm", "HAVE_PYSGPP",

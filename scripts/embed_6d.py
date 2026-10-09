@@ -59,7 +59,7 @@ from sklearn.neighbors import NearestNeighbors
 
 from ND_scan_samplers.scripts.generate_ionut_data import values
 from ND_scan_samplers import ROOT
-from ND_scan_samplers.resolution.noise import competition
+from ND_scan_samplers.src.resolution.noise import competition
 
 CASE = "ionut-itg-tem-argmax-gamma"
 INPUTS = ("R/L_Ti", "R/L_Te", "R/L_n", "ν", "β", "k_y scale")

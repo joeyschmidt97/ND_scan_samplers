@@ -8,11 +8,11 @@ import numpy as np
 import pytest
 
 from ND_scan_samplers.benchmarknd.core import Observations, SurfaceND, evaluation_set, score, truth_variation
-from ND_scan_samplers.benchmarknd.strategies import resolution_sampling, run_arm
-from ND_scan_samplers.resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
+from ND_scan_samplers.src.strategies import resolution_sampling, run_arm
+from ND_scan_samplers.src.resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
 from scipy.spatial import cKDTree
 
-from ND_scan_samplers.resolution.variation import FOLD_RATIO, fold_floor, shrinkage, stencil_size
+from ND_scan_samplers.src.resolution.variation import FOLD_RATIO, fold_floor, shrinkage, stencil_size
 
 DIMS = (2, 5, 8)
 

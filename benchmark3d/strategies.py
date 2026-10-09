@@ -140,10 +140,10 @@ def grid(obs):
 
 def external_grid(name, obs):
     if name == "sglib":
-        from ND_scan_samplers.arms.sglib_arm import SgLibArm
+        from ND_scan_samplers.src.arms.sglib_arm import SgLibArm
         arm = SgLibArm(tol=0., max_level=20, budget_driven=True, nan_policy="error")
     else:
-        from ND_scan_samplers.arms.sgpp_arm import SGppArm
+        from ND_scan_samplers.src.arms.sgpp_arm import SGppArm
         arm = SGppArm(basis="modlinear", refine="surplus", refine_batch=1,
                       target_surplus=-1., nan_policy="error")
     from ND_scan_samplers.benchmark3d.core import BudgetExceeded

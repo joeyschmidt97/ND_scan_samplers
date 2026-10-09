@@ -30,8 +30,8 @@ cd "$REPO_ROOT"
 export PYTHONPATH="$(dirname "$REPO_ROOT")${PYTHONPATH:+:$PYTHONPATH}"   # imports are rooted at the parent of the repo
 python - <<'PY'
 import pysgpp
-from ND_scan_samplers.arms.sgpp_arm import HAVE_PYSGPP
-from ND_scan_samplers.arms.sglib_arm import HAVE_SG_LIB
+from ND_scan_samplers.src.arms.sgpp_arm import HAVE_PYSGPP
+from ND_scan_samplers.src.arms.sglib_arm import HAVE_SG_LIB
 assert HAVE_PYSGPP and HAVE_SG_LIB
 print("SG++ and sg_lib imports passed")
 PY

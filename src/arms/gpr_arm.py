@@ -37,7 +37,7 @@ import warnings
 
 import numpy as np
 
-from ND_scan_samplers.arms.base import Arm
+from ND_scan_samplers.src.arms.base import Arm
 
 try:
     from sklearn.exceptions import ConvergenceWarning

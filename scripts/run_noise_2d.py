@@ -34,9 +34,9 @@ from threadpoolctl import threadpool_limits
 
 from ND_scan_samplers.benchmark2d.core import CASES, Surface, evaluation_set, reconstruct, rmse
 from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
-from ND_scan_samplers.benchmarknd.strategies import run_arm
-from ND_scan_samplers.resolution import fit_free_scores
-from ND_scan_samplers.resolution.noise import ABSOLUTE_FLOOR
+from ND_scan_samplers.src.strategies import run_arm
+from ND_scan_samplers.src.resolution import fit_free_scores
+from ND_scan_samplers.src.resolution.noise import ABSOLUTE_FLOOR
 from ND_scan_samplers import ROOT
 
 CORNERS = np.array(list(itertools.product((0., 1.), repeat=2)))
@@ -213,8 +213,8 @@ def main():
     tasks.sort(key=lambda t: (not (t[0] == args.cases[0] and t[1] == args.seeds[0]), -t[3]))
 
     root = ROOT
-    sources = sorted((root/"resolution").glob("*.py")) + [
-        root/"benchmarknd/noisy.py", root/"benchmarknd/strategies.py", pathlib.Path(__file__)]
+    sources = sorted((root/"src"/"resolution").glob("*.py")) + [
+        root/"benchmarknd/noisy.py", root/"src/strategies.py", pathlib.Path(__file__)]
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root,
                                          stderr=subprocess.DEVNULL, text=True).strip()

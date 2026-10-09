@@ -37,7 +37,7 @@ import sys
 
 import numpy as np
 
-from ND_scan_samplers.arms.base import Arm
+from ND_scan_samplers.src.arms.base import Arm
 
 DEFAULT_SG_LIB_PATH = os.environ.get(
     "SG_LIB_PATH", r"C:\Users\joesc\git\sensitivity-driven-sparse-grid-approx")

@@ -1,4 +1,9 @@
-# UQ discontinuities: equal-point 2-D benchmark
+# ND-scan-samplers: equal-point 2-D benchmark
+
+Sampler algorithms (ask/tell) and their benchmarks for adaptive N-D parameter
+scans. Continues `joeyschmidt97/UQ_discontinuties` (a fork of
+[ionutfarcas/UQ_discontinuties](https://github.com/ionutfarcas/UQ_discontinuties))
+with full history; the root commit is Ionut Farcas's.
 
 Compare simulation-placement strategies with complementary error and resolution
 metrics applied to the same low-poly reconstruction at **every integer number

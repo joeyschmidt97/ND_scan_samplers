@@ -11,14 +11,14 @@ jobs must declare a CPU or GPU constraint, and the account should be explicit:
 - https://docs.nersc.gov/jobs/
 - https://docs.nersc.gov/jobs/policy/
 
-## 1. Put the branch on NERSC
+## 1. Put the repository on NERSC
 
-Push the local branch from the workstation first, then on Perlmutter:
+Push from the workstation first, then on Perlmutter:
 
 ```bash
 cd "$PSCRATCH"
-git clone --branch codex/benchmark-2d https://github.com/joeyschmidt97/UQ_discontinuties.git
-cd UQ_discontinuties
+git clone https://github.com/joeyschmidt97/ND-scan-samplers.git
+cd ND-scan-samplers
 git status --short
 git log -1 --oneline
 ```

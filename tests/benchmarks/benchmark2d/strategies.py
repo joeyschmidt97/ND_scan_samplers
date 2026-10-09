@@ -216,7 +216,7 @@ def run_arm(name, obs, seed):
             level += 1
         return None, dict(nested=True, ordering="maximin within dyadic grid level")
     if name in ("moe", "moe-tri75", "moe-tri50"):
-        from ND_scan_samplers.benchmark2d.mixture import mixture
+        from ND_scan_samplers.tests.benchmarks.benchmark2d.mixture import mixture
         return mixture(obs, seed, triangle_weight={"moe": 0., "moe-tri75": .25, "moe-tri50": .5}[name])
     if name in ("gpr-var", "gpr-grad") or name in GP_BLENDS:
         return gpr(obs, seed, gradient=name == "gpr-grad", blend=GP_BLENDS.get(name))
@@ -240,7 +240,7 @@ def run_arm(name, obs, seed):
         raise ValueError(name)
     # External methods prescribe their own nodes. The common corners count
     # toward reconstruction/cost but do not alter those methods' native grids.
-    from ND_scan_samplers.benchmark2d.core import BudgetExceeded
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.core import BudgetExceeded
     batch_sizes = []
     def prescribed(points):
         points = np.atleast_2d(points)

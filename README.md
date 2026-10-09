@@ -71,10 +71,10 @@ python3.11 -m venv .venv
 .venv/bin/python -m pip install -r requirements-sgpp.txt
 export SG_LIB_PATH=/path/to/sensitivity-driven-sparse-grid-approx
 export PYTHONPATH="$(dirname "$PWD")"   # run from the repo root; imports are rooted at its parent
-.venv/bin/python -m ND_scan_samplers.benchmark2d --quick --output outputs/quick
-.venv/bin/python -m ND_scan_samplers.benchmark2d --seeds 0 1 2 --budgets 32 64 128 256 --native-test-size 1024 --output outputs/full
-.venv/bin/python -m ND_scan_samplers.benchmark2d --reference-only --output outputs/transition-peaks-reference
-.venv/bin/python -m ND_scan_samplers.benchmark2d --plots-only --output results/2d
+.venv/bin/python -m ND_scan_samplers.tests.benchmarks.benchmark2d --quick --output outputs/quick
+.venv/bin/python -m ND_scan_samplers.tests.benchmarks.benchmark2d --seeds 0 1 2 --budgets 32 64 128 256 --native-test-size 1024 --output outputs/full
+.venv/bin/python -m ND_scan_samplers.tests.benchmarks.benchmark2d --reference-only --output outputs/transition-peaks-reference
+.venv/bin/python -m ND_scan_samplers.tests.benchmarks.benchmark2d --plots-only --output results/2d
 ```
 
 The default rematch contains twelve arms: grid, sg_lib, SG++, triangles,
@@ -159,10 +159,10 @@ are not rerun.
 
 ```bash
 for arm in gpr-u20-g80 gpr-u30-g70 gpr-u50-g50 gpr-u70-g30 gpr-u80-g20; do
-  python -m ND_scan_samplers.benchmark2d --arms $arm --seeds 0 1 2 --budgets 32 64 128 256     --native-test-size 1024 --output outputs/ratio-$arm
+  python -m ND_scan_samplers.tests.benchmarks.benchmark2d --arms $arm --seeds 0 1 2 --budgets 32 64 128 256     --native-test-size 1024 --output outputs/ratio-$arm
 done
 cp results/2d/results.json /tmp/pilot-base.json
-python -m ND_scan_samplers.benchmark2d.merge --base /tmp/pilot-base.json   --add outputs/ratio-*/results.json --top 3 --output results/2d
+python -m ND_scan_samplers.tests.benchmarks.benchmark2d.merge --base /tmp/pilot-base.json   --add outputs/ratio-*/results.json --top 3 --output results/2d
 ```
 
 The merge re-renders the pilot report in place, so copy the base payload aside
@@ -202,11 +202,11 @@ Scoring happens at ten log-spaced checkpoints: at d=8 the scorer costs about
 and the trajectory is identical either way.
 
 ```bash
-python -m ND_scan_samplers.benchmarknd --cases 5d-m2-rotated --seeds 0 --output outputs/nd-run/5d-m2-rotated-s0
-python -m ND_scan_samplers.benchmarknd.collect --run outputs/nd-run --dims 5 8 --output results
-python -m ND_scan_samplers.benchmarknd.checks          # geometry and scorer validation
+python -m ND_scan_samplers.tests.benchmarks.benchmarknd --cases 5d-m2-rotated --seeds 0 --output outputs/nd-run/5d-m2-rotated-s0
+python -m ND_scan_samplers.tests.benchmarks.benchmarknd.collect --run outputs/nd-run --dims 5 8 --output results
+python -m ND_scan_samplers.tests.benchmarks.benchmarknd.checks          # geometry and scorer validation
 python tools/nd_progress.py --logs $TEMP/ndlogs --results outputs/nd-run --watch
-python -m ND_scan_samplers.benchmarknd.tables      # strength tables into results/<dim>d/figures
+python -m ND_scan_samplers.tests.benchmarks.benchmarknd.tables      # strength tables into results/<dim>d/figures
 ```
 
 `collect` refuses to write a dimension until every case, seed and arm finished,

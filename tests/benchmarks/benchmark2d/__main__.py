@@ -8,8 +8,8 @@ import platform
 import subprocess
 import time
 from threadpoolctl import threadpool_limits
-from ND_scan_samplers.benchmark2d.core import CASES, HOLISTIC_TARGETS, Surface, Observations, evaluation_set, score, rmse
-from ND_scan_samplers.benchmark2d.strategies import ARMS, DEFAULT_ARMS, run_arm
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import CASES, HOLISTIC_TARGETS, Surface, Observations, evaluation_set, score, rmse
+from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import ARMS, DEFAULT_ARMS, run_arm
 from ND_scan_samplers import ROOT
 
 
@@ -41,7 +41,7 @@ def main():
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--quick", action="store_true", help="one case/seed, budgets 32 and 64")
     args = parser.parse_args()
-    from ND_scan_samplers.benchmark2d.report import render, render_reference
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.report import render, render_reference
     if args.reference_only:
         render_reference(args.cases, min(args.seeds), args.output)
         return
@@ -61,7 +61,7 @@ def main():
     config = {k: v for k, v in vars(args).items() if k not in ("output", "plots_only", "resume", "quick")}
     config["protocol"] = "single trajectory, every integer N from 4; four charged corners"
     root = ROOT
-    sources = list((root/"benchmark2d").glob("*.py")) + list((root/"src"/"arms").glob("*.py"))
+    sources = list((root/"tests"/"benchmarks"/"benchmark2d").glob("*.py")) + list((root/"src"/"arms").glob("*.py"))
     source_hash = hashlib.sha256(b"".join(p.read_bytes() for p in sorted(sources))).hexdigest()
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, stderr=subprocess.DEVNULL, text=True).strip()

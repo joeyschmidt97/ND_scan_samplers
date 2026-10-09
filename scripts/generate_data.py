@@ -15,9 +15,9 @@ from ND_scan_samplers import ROOT
 
 def cases_for(dim):
     if dim == 2:
-        from ND_scan_samplers.benchmark2d.core import CASES
+        from ND_scan_samplers.tests.benchmarks.benchmark2d.core import CASES
         return list(CASES)
-    from ND_scan_samplers.benchmarknd.cases import CASES
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.cases import CASES
     return [name for name, spec in CASES.items() if spec["dim"] == dim]
 
 
@@ -48,7 +48,7 @@ def generate(output, dim, case, seed, pool_size, test_size, pool_seed=1729, test
     else:
         band, peak, region = surface.distance(q) < .06, surface.peak_distance(q) < 2., surface.region(q)
     evaluation = dict(x=q, y=truth, band=band, peak=peak, region=region)
-    source_paths = [ROOT / "benchmark2d/core.py"] if dim == 2 else [ROOT / "benchmarknd/core.py", ROOT / "benchmarknd/cases.py"]
+    source_paths = [ROOT / "tests/benchmarks/benchmark2d/core.py"] if dim == 2 else [ROOT / "tests/benchmarks/benchmarknd/core.py", ROOT / "tests/benchmarks/benchmarknd/cases.py"]
     source_paths += [Path(__file__), ROOT / "scripts/datasets.py"]
     source_hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
     try:

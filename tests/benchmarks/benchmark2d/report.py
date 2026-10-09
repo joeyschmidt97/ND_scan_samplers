@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from ND_scan_samplers.benchmark2d.core import Surface, reconstruct
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Surface, reconstruct
 
 COLORS = dict(grid="#758398", moe="#343a40", sglib="#b07813", sgpp="#9b59b6",
               **{"gpr-var": "#007c91", "gpr-grad": "#dd5f42", "triangles": "#318448", "gpr-blend": "#e7298a",

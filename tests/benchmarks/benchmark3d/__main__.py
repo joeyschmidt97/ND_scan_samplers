@@ -9,8 +9,8 @@ import platform
 import subprocess
 
 from ND_scan_samplers.scripts.generate_ionut_slices import CASES
-from ND_scan_samplers.benchmark3d.strategies import ARMS
-from ND_scan_samplers.benchmark3d.worker import execute
+from ND_scan_samplers.tests.benchmarks.benchmark3d.strategies import ARMS
+from ND_scan_samplers.tests.benchmarks.benchmark3d.worker import execute
 from ND_scan_samplers import ROOT
 
 
@@ -34,7 +34,7 @@ def main():
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--plots-only", action="store_true")
     args = parser.parse_args()
-    from ND_scan_samplers.benchmark3d.report import render
+    from ND_scan_samplers.tests.benchmarks.benchmark3d.report import render
     if args.plots_only:
         render(json.loads((args.output/"results.json").read_text()), args.data, args.output)
         return
@@ -42,7 +42,7 @@ def main():
         parser.error("budget >= 16 and a power-of-two test size >= 1024 required")
     args.output.mkdir(parents=True, exist_ok=True)
     root = ROOT
-    sources = sorted(list((root/"benchmark3d").glob("*.py")) + list((root/"src"/"arms").glob("*.py")))
+    sources = sorted(list((root/"tests"/"benchmarks"/"benchmark3d").glob("*.py")) + list((root/"src"/"arms").glob("*.py")))
     source_hash = hashlib.sha256(b"".join(path.read_bytes() for path in sources)).hexdigest()
     config = dict(cases=args.cases, arms=args.arms, seeds=args.seeds, budget=args.budget,
                   test_size=args.test_size, secondary=args.secondary,

@@ -10,7 +10,7 @@ import numpy as np
 from scipy.interpolate import RBFInterpolator
 from scipy.stats import qmc
 from ND_scan_samplers.src.resolution import fit_free_scores, knn_variation
-from ND_scan_samplers.benchmarknd.cases import CASES, strengths
+from ND_scan_samplers.tests.benchmarks.benchmarknd.cases import CASES, strengths
 from ND_scan_samplers.src.strategies import BudgetExceeded   # re-exported for callers of core
 
 # Holistic tolerances, per input dimension, measured against the `space-filling`

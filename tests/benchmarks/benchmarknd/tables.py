@@ -10,7 +10,7 @@ import pathlib
 
 import numpy as np
 from scipy.spatial import cKDTree
-from ND_scan_samplers.benchmarknd.cases import CASES, strengths
+from ND_scan_samplers.tests.benchmarks.benchmarknd.cases import CASES, strengths
 from ND_scan_samplers import ROOT
 
 
@@ -111,7 +111,7 @@ def main():
     """Render one strength table per case into results/<dim>d/figures."""
     import argparse
     from scipy.stats import qmc
-    from ND_scan_samplers.benchmarknd.core import SurfaceND, evaluation_set
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.core import SurfaceND, evaluation_set
     parser = argparse.ArgumentParser(description=main.__doc__)
     parser.add_argument("--cases", nargs="+", choices=list(CASES), default=list(CASES))
     parser.add_argument("--seed", type=int, default=0)

@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from ND_scan_samplers.benchmarknd.noisy import NoisyIonutSurface, NoisyObservations
+from ND_scan_samplers.tests.benchmarks.benchmarknd.noisy import NoisyIonutSurface, NoisyObservations
 from ND_scan_samplers.src.strategies import NOISE_AWARE_ARMS, candidate_noise, run_arm
 from ND_scan_samplers.src.resolution import knn_variation
 from ND_scan_samplers.src.resolution.noise import TransitionNoise, competition, denoise_residual
@@ -95,7 +95,7 @@ def test_denoise_residual_is_never_negative_and_checks_its_stencil():
 
 
 def test_noise_aware_arms_refuse_a_clean_oracle():
-    from ND_scan_samplers.benchmarknd.core import Observations, SurfaceND
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations, SurfaceND
     surface = SurfaceND("5d-m2-rotated", 0)
     for arm in NOISE_AWARE_ARMS:
         obs = Observations(surface, 20, 5, 0)

@@ -35,8 +35,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from threadpoolctl import threadpool_limits
 
-from ND_scan_samplers.benchmark2d.core import evaluation_set, reconstruct, rmse
-from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import evaluation_set, reconstruct, rmse
+from ND_scan_samplers.tests.benchmarks.benchmarknd.noisy import NoisyObservations
 from ND_scan_samplers.src.strategies import run_arm
 from ND_scan_samplers.scripts.run_noise_2d import CORNERS, Noisy2DSurface
 

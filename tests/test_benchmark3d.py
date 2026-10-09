@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from ND_scan_samplers.benchmark3d.core import CORNERS, Observations, evaluation_set, reconstruct, score
-from ND_scan_samplers.benchmark3d.strategies import RUNNABLE_ARMS, run_arm
+from ND_scan_samplers.tests.benchmarks.benchmark3d.core import CORNERS, Observations, evaluation_set, reconstruct, score
+from ND_scan_samplers.tests.benchmarks.benchmark3d.strategies import RUNNABLE_ARMS, run_arm
 from ND_scan_samplers.scripts.datasets import surface_for
 
 

@@ -32,8 +32,8 @@ import time
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from ND_scan_samplers.benchmark2d.core import CASES, Surface, evaluation_set, reconstruct, rmse
-from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import CASES, Surface, evaluation_set, reconstruct, rmse
+from ND_scan_samplers.tests.benchmarks.benchmarknd.noisy import NoisyObservations
 from ND_scan_samplers.src.strategies import run_arm
 from ND_scan_samplers.src.resolution import fit_free_scores
 from ND_scan_samplers.src.resolution.noise import ABSOLUTE_FLOOR
@@ -214,7 +214,7 @@ def main():
 
     root = ROOT
     sources = sorted((root/"src"/"resolution").glob("*.py")) + [
-        root/"benchmarknd/noisy.py", root/"src/strategies.py", pathlib.Path(__file__)]
+        root/"tests/benchmarks/benchmarknd/noisy.py", root/"src/strategies.py", pathlib.Path(__file__)]
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root,
                                          stderr=subprocess.DEVNULL, text=True).strip()

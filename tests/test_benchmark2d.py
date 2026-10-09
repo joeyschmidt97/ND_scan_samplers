@@ -2,10 +2,10 @@
 import json
 import numpy as np
 import pytest
-from ND_scan_samplers.benchmark2d.core import (Surface, Observations, BudgetExceeded, HOLISTIC_TARGETS,
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import (Surface, Observations, BudgetExceeded, HOLISTIC_TARGETS,
                               evaluation_set, reconstruct, rmse, score)
-from ND_scan_samplers.benchmark2d.strategies import run_arm
-from ND_scan_samplers.benchmark2d.report import qualifying_cost
+from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import run_arm
+from ND_scan_samplers.tests.benchmarks.benchmark2d.report import qualifying_cost
 
 
 def test_linear_reconstruction_recovers_affine_surface_everywhere():
@@ -126,7 +126,7 @@ def test_budget_does_not_change_earlier_decisions(name):
 
 
 def test_mixture_gate_uses_only_observed_prequential_errors():
-    from ND_scan_samplers.benchmark2d.mixture import gating
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.mixture import gating
     query = np.array([[.2,.2],[.8,.8]])
     assert np.allclose(gating(query, [], []), 1/3)
     weights = gating(query, [[.2,.2],[.8,.8]], [[0,1,2],[2,1,0]])
@@ -137,7 +137,7 @@ def test_mixture_gate_uses_only_observed_prequential_errors():
 
 def test_plot_does_not_average_an_incomplete_paired_seed_set():
     import matplotlib.pyplot as plt
-    from ND_scan_samplers.benchmark2d.report import curve
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.report import curve
     fig, ax = plt.subplots()
     rows = [dict(budget=9,n=9,error=.1,seed=0),
             dict(budget=10,n=10,error=.08,seed=0),
@@ -149,7 +149,7 @@ def test_plot_does_not_average_an_incomplete_paired_seed_set():
 
 
 def test_combined_error_pools_squared_errors_and_requires_matched_field():
-    from ND_scan_samplers.benchmark2d.report import aggregate_errors
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.report import aggregate_errors
     cfg = dict(cases=["a", "b"], seeds=[0, 1], arms=["one", "two"])
     rows = [dict(case=case, seed=seed, arm=arm, n=9, budget=9, status="ok", error=value)
             for arm in cfg["arms"] for case, seed, value in [("a",0,.1),("a",1,.1),("b",0,.3),("b",1,.3)]]
@@ -165,7 +165,7 @@ def test_combined_error_pools_squared_errors_and_requires_matched_field():
 
 
 def test_metric_pooling_uses_declared_reduction_and_keeps_complete_arms():
-    from ND_scan_samplers.benchmark2d.report import aggregate_metric
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.report import aggregate_metric
     cfg = dict(cases=["a", "b"], seeds=[0], arms=["one", "two"])
     rows = [dict(case=case, seed=0, arm="one", n=8, budget=8, status="ok", metric=value)
             for case, value in (("a", .1), ("b", .3))]
@@ -178,7 +178,7 @@ def test_metric_pooling_uses_declared_reduction_and_keeps_complete_arms():
 
 
 def test_acquisition_blend_normalizes_before_weighting():
-    from ND_scan_samplers.benchmark2d.strategies import normalized_blend
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import normalized_blend
     assert np.allclose(normalized_blend([10., 0.], [0., 2.], .5), [.5, .5])
     assert np.allclose(normalized_blend([10., 0.], [0., 2.], .75), [.75, .25])
     assert np.allclose(normalized_blend([0., 0.], [0., 0.], .5), 0)
@@ -187,7 +187,7 @@ def test_acquisition_blend_normalizes_before_weighting():
 
 
 def test_gp_blend_weights_are_declared_and_ordered():
-    from ND_scan_samplers.benchmark2d.strategies import GP_BLENDS, ARMS, DEFAULT_ARMS
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import GP_BLENDS, ARMS, DEFAULT_ARMS
     assert GP_BLENDS["gpr-blend"] == GP_BLENDS["gpr-u50-g50"] == .5
     assert [GP_BLENDS[f"gpr-u{u}-g{100-u}"] for u in (20, 30, 50, 70, 80)] == [.2, .3, .5, .7, .8]
     assert all(name in ARMS for name in GP_BLENDS)
@@ -223,7 +223,7 @@ def _payload(arms, errors, cases=("smooth",), seeds=(0,), budgets=(8,)):
 
 
 def test_merge_keeps_only_the_best_added_arms_and_records_provenance(tmp_path):
-    from ND_scan_samplers.benchmark2d.merge import merge
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.merge import merge
     base, extra = _payload(["grid"], dict(grid=.04)), _payload(["a", "b", "c"], dict(a=.01, b=.03, c=.02))
     base_path, extra_path = tmp_path/"base.json", tmp_path/"extra.json"
     base_path.write_text(json.dumps(base)); extra_path.write_text(json.dumps(extra))
@@ -236,7 +236,7 @@ def test_merge_keeps_only_the_best_added_arms_and_records_provenance(tmp_path):
 
 
 def test_merge_refuses_mismatched_configurations_and_duplicate_arms(tmp_path):
-    from ND_scan_samplers.benchmark2d.merge import merge
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.merge import merge
     base = _payload(["grid"], dict(grid=.04))
     base_path = tmp_path/"base.json"
     base_path.write_text(json.dumps(base))
@@ -253,7 +253,7 @@ def test_merge_refuses_mismatched_configurations_and_duplicate_arms(tmp_path):
 
 @pytest.mark.parametrize("seed", (0, 1, 2))
 def test_isolated_case_keeps_bumps_off_the_fold_and_inside_their_regions(seed):
-    from ND_scan_samplers.benchmark2d.core import Surface, evaluation_set
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Surface, evaluation_set
     surface = Surface("two-plane-isolated", seed)
     centers = surface.centers()
     assert ((centers > .05) & (centers < .95)).all()
@@ -264,8 +264,8 @@ def test_isolated_case_keeps_bumps_off_the_fold_and_inside_their_regions(seed):
 
 
 def test_existing_cases_report_split_peak_scores_without_changing_old_ones():
-    from ND_scan_samplers.benchmark2d.core import Surface, Observations, evaluation_set, score
-    from ND_scan_samplers.benchmark2d.strategies import run_arm
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Surface, Observations, evaluation_set, score
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import run_arm
     surface = Surface("three-plane-three-peaks", 0)
     obs = Observations(surface, 24)
     run_arm("vwrs", obs, 0)
@@ -278,8 +278,8 @@ def test_existing_cases_report_split_peak_scores_without_changing_old_ones():
 
 @pytest.mark.parametrize("arm", ("vwrs-k", "vurs-k", "vwrs-m", "vurs-m"))
 def test_curvature_and_anisotropic_arms_spend_the_exact_budget(arm):
-    from ND_scan_samplers.benchmark2d.core import Surface, Observations
-    from ND_scan_samplers.benchmark2d.strategies import run_arm
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Surface, Observations
+    from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import run_arm
     obs = Observations(Surface("two-plane-isolated", 0), 20)
     predict, metadata = run_arm(arm, obs, 0)
     assert len(obs.x) == 20

@@ -18,9 +18,9 @@ def surface_for(dim, case, seed):
             raise ValueError('Ionut proxies require a known case and surface seed 0')
         return lambda x: values(case, x)['y']
     if dim == 2:
-        from ND_scan_samplers.benchmark2d.core import Surface
+        from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Surface
         return Surface(case, seed)
-    from ND_scan_samplers.benchmarknd.core import SurfaceND
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.core import SurfaceND
     surface = SurfaceND(case, seed)
     if surface.dim != dim:
         raise ValueError("case does not match dimension")

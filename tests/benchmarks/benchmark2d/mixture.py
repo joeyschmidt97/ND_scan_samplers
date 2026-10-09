@@ -6,7 +6,7 @@ Gates learn only errors predicted BEFORE the new observation is paid for.
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator
 from scipy.spatial import Delaunay, cKDTree
-from ND_scan_samplers.benchmark2d.strategies import initialize, fit_gp, normalized_blend
+from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import initialize, fit_gp, normalized_blend
 
 EXPERTS = ("triangles", "grid", "gpr-var")
 

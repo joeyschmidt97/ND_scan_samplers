@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from ND_scan_samplers.benchmarknd.ionut import CASES, IonutSurface
+from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import CASES, IonutSurface
 
 TEM, KBM = "ionut-itg-tem-argmax-gamma", "ionut-itg-kbm-argmax-gamma"
 
@@ -46,7 +46,7 @@ def test_the_mask_does_not_depend_on_the_query_batch():
 @pytest.mark.parametrize("case", CASES)
 def test_isolated_bumps_stay_out_of_the_transition_and_keep_omega_sign(case):
     from scipy.stats import qmc
-    from ND_scan_samplers.benchmarknd.ionut import isolated_bumps
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import isolated_bumps
     plain, bumped = IonutSurface(case), IonutSurface(case + "-bumped")
     x = qmc.Sobol(6, scramble=True, seed=7).random_base2(15)
     y0, y1 = plain(x), bumped(x)
@@ -66,7 +66,7 @@ def test_isolated_bumps_stay_out_of_the_transition_and_keep_omega_sign(case):
 
 
 def test_bumped_pairs_share_one_geometry():
-    from ND_scan_samplers.benchmarknd.ionut import isolated_bumps
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import isolated_bumps
     for kind in ("itg-tem", "itg-kbm"):
         names = [f"ionut-{kind}-{m}-{o}" for m in ("argmax", "softmax") for o in ("gamma", "omega")]
         centers = [np.array([b["center"] for b in isolated_bumps(n)]) for n in names]

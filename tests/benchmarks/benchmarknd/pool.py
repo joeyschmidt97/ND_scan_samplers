@@ -28,7 +28,7 @@ from scipy.stats import qmc
 
 from ND_scan_samplers.src.resolution import knn_variation
 
-from ND_scan_samplers.benchmarknd.core import Observations, reconstruct
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations, reconstruct
 from ND_scan_samplers.src.strategies import ARMS, NOISE_AWARE_ARMS, run_arm
 from ND_scan_samplers import ROOT
 

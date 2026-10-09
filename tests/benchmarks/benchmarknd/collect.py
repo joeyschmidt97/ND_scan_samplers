@@ -10,7 +10,7 @@ import json
 import pathlib
 import numpy as np
 
-from ND_scan_samplers.benchmarknd.cases import CASES
+from ND_scan_samplers.tests.benchmarks.benchmarknd.cases import CASES
 from ND_scan_samplers import ROOT
 
 

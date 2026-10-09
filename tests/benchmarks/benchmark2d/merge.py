@@ -8,7 +8,7 @@ import argparse
 import json
 import pathlib
 import numpy as np
-from ND_scan_samplers.benchmark2d.report import aggregate_errors, render
+from ND_scan_samplers.tests.benchmarks.benchmark2d.report import aggregate_errors, render
 
 SHARED_CONFIG = ("cases", "seeds", "budgets", "test_size", "epsilon", "band_epsilon", "protocol")
 

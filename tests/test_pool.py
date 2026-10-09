@@ -4,8 +4,8 @@ import csv
 import numpy as np
 import pytest
 
-from ND_scan_samplers.benchmarknd.core import Observations
-from ND_scan_samplers.benchmarknd.pool import (DEFAULT_POOL_ARMS, POOL_REFUSED, PoolOracle, initial_pool_design,
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations
+from ND_scan_samplers.tests.benchmarks.benchmarknd.pool import (DEFAULT_POOL_ARMS, POOL_REFUSED, PoolOracle, initial_pool_design,
                               load_pool, replay, score_prefix, transition_band)
 
 
@@ -108,7 +108,7 @@ def test_classify_then_regress_separates_a_small_branch_from_a_large_one():
 
 def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
     import json
-    from ND_scan_samplers.benchmarknd.pool import rescore
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.pool import rescore
     oracle = grid_oracle(side=6)
     names = oracle.label_names
     path = tmp_path/"pool.csv"
@@ -133,7 +133,7 @@ def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
 
 def test_truth_free_scores_need_only_paid_runs():
     """Same answer whatever the unpaid truth is: no reference values are read."""
-    from ND_scan_samplers.benchmarknd.pool import truth_free_scores
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.pool import truth_free_scores
     oracle = grid_oracle()
     paid = np.arange(0, len(oracle.pool), 4)
     a = truth_free_scores(oracle.pool[paid], oracle.y[paid], oracle.labels[paid], oracle.pool)
@@ -146,7 +146,7 @@ def test_truth_free_scores_need_only_paid_runs():
 
 
 def test_region_scores_cover_the_three_jobs():
-    from ND_scan_samplers.benchmarknd.pool import exploration_regions
+    from ND_scan_samplers.tests.benchmarks.benchmarknd.pool import exploration_regions
     oracle = grid_oracle()
     regions = exploration_regions(oracle)
     assert regions["design_band"].any() and regions["peak"].any() and regions["quiet"].any()

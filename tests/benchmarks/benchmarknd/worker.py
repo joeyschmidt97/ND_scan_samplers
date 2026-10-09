@@ -15,9 +15,9 @@ import time
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from ND_scan_samplers.benchmarknd.cases import CASES
-from ND_scan_samplers.benchmarknd.core import Observations, SurfaceND, evaluation_set, score, tolerances_for
-from ND_scan_samplers.benchmarknd.ionut import IonutSurface
+from ND_scan_samplers.tests.benchmarks.benchmarknd.cases import CASES
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations, SurfaceND, evaluation_set, score, tolerances_for
+from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import IonutSurface
 from ND_scan_samplers.src.strategies import run_arm
 
 

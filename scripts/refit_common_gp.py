@@ -24,7 +24,7 @@ import types
 import numpy as np
 from scipy.stats import qmc
 
-from ND_scan_samplers.benchmarknd.ionut import IonutSurface
+from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import IonutSurface
 from ND_scan_samplers.src.strategies import fit_gp
 
 ARMS = ("vurs", "gpr-var", "gpr-m05-var", "vwrs", "space-filling", "gpr-u50-g50")

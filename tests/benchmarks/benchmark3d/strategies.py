@@ -146,7 +146,7 @@ def external_grid(name, obs):
         from ND_scan_samplers.src.arms.sgpp_arm import SGppArm
         arm = SGppArm(basis="modlinear", refine="surplus", refine_batch=1,
                       target_surplus=-1., nan_policy="error")
-    from ND_scan_samplers.benchmark3d.core import BudgetExceeded
+    from ND_scan_samplers.tests.benchmarks.benchmark3d.core import BudgetExceeded
     batches = []
 
     def prescribed(points):

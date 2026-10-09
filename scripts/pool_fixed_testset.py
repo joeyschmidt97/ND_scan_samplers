@@ -23,8 +23,8 @@ import time
 import numpy as np
 from scipy.spatial import cKDTree
 
-from ND_scan_samplers.benchmarknd.core import Observations, reconstruct
-from ND_scan_samplers.benchmarknd.pool import (PoolOracle, checkpoints, classify_then_regress, initial_pool_design,
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations, reconstruct
+from ND_scan_samplers.tests.benchmarks.benchmarknd.pool import (PoolOracle, checkpoints, classify_then_regress, initial_pool_design,
                               load_pool, per_mode_scores)
 from ND_scan_samplers.src.strategies import run_arm
 from ND_scan_samplers import ROOT

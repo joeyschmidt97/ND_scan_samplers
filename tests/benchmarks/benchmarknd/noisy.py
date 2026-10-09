@@ -21,8 +21,8 @@ noisy samples.
 import numpy as np
 
 from ND_scan_samplers.src.resolution.noise import TransitionNoise
-from ND_scan_samplers.benchmarknd.core import BudgetExceeded
-from ND_scan_samplers.benchmarknd.ionut import IonutSurface
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import BudgetExceeded
+from ND_scan_samplers.tests.benchmarks.benchmarknd.ionut import IonutSurface
 
 
 class NoisyIonutSurface:
@@ -98,7 +98,7 @@ class NoisyObservations:
         self._count = {}
         self._single = {}
         self.spent = 0
-        from ND_scan_samplers.benchmarknd.core import Observations
+        from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations
         self(Observations.initial_design(dim, seed) if shared is None else shared)
 
     @staticmethod

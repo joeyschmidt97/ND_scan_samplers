@@ -22,8 +22,8 @@ import subprocess
 
 from threadpoolctl import threadpool_limits
 
-from ND_scan_samplers.benchmarknd.core import Observations, calibrating, score, tolerances_for
-from ND_scan_samplers.benchmarknd.worker import build_surface, case_dim, prepared
+from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations, calibrating, score, tolerances_for
+from ND_scan_samplers.tests.benchmarks.benchmarknd.worker import build_surface, case_dim, prepared
 
 # Fields the transition-mask change is allowed to move. Everything else in a
 # row must come back identical.

@@ -1,8 +1,8 @@
 """Exact-N native refinement prefix contracts (requires installed real backends)."""
 import numpy as np
 import pytest
-from ND_scan_samplers.benchmark2d.core import Observations, Surface
-from ND_scan_samplers.benchmark2d.strategies import run_arm
+from ND_scan_samplers.tests.benchmarks.benchmark2d.core import Observations, Surface
+from ND_scan_samplers.tests.benchmarks.benchmark2d.strategies import run_arm
 
 @pytest.mark.parametrize('name', ['sglib', 'sgpp'])
 def test_real_sparse_prefix_spends_exact_budget_and_is_causal(name):

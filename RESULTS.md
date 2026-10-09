@@ -171,7 +171,7 @@ not establish a universal or production runner.
 Reproduce with the Linux environment in the root README:
 
 ```bash
-python -m ND_scan_samplers.benchmark2d --seeds 0 1 2 --budgets 32 64 128 256 \
+python -m ND_scan_samplers.tests.benchmarks.benchmark2d --seeds 0 1 2 --budgets 32 64 128 256 \
   --native-test-size 1024 --test-size 16384 --output outputs/reproduction
 ```
 

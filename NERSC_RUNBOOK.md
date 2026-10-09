@@ -17,8 +17,8 @@ Push from the workstation first, then on Perlmutter:
 
 ```bash
 cd "$PSCRATCH"
-git clone https://github.com/joeyschmidt97/ND-scan-samplers.git
-cd ND-scan-samplers
+git clone https://github.com/joeyschmidt97/ND_scan_samplers.git
+cd ND_scan_samplers
 git status --short
 git log -1 --oneline
 ```
@@ -38,6 +38,7 @@ module load python
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "$PSCRATCH/conda-envs/uq-discontinuities"
 export SG_LIB_PATH="$PSCRATCH/src/sensitivity-driven-sparse-grid-approx"
+export PYTHONPATH="$PSCRATCH"   # imports are rooted at the parent of ND_scan_samplers/
 ```
 
 The setup installs the pinned `pysgpp==3.3.1` wheel and checks that SG++ imports.
@@ -108,7 +109,7 @@ compressing those formulas:
 Generate all hard/soft gamma/omega slices:
 
 ```bash
-python -m scripts.generate_ionut_slices --output data
+python -m ND_scan_samplers.scripts.generate_ionut_slices --output data
 ```
 
 Run the 50/50 GP uncertainty/gradient policy on the hard gamma transitions:
@@ -129,11 +130,11 @@ for dataset in \
   data/6d/ionut-itg-kbm-argmax-gamma/seed-0
 do
   name=$(basename "$(dirname "$dataset")")
-  python -m scripts.run_gp_experiment \
+  python -m ND_scan_samplers.scripts.run_gp_experiment \
     --dataset "$dataset" --policy blend --uncertainty-weight 0.5 \
     --nu 1.5 --budget 256 \
     --output "results/ionut-proxy-pilot/${name}-gpr-blend-m15.json"
-  python -m scripts.run_gp_experiment \
+  python -m ND_scan_samplers.scripts.run_gp_experiment \
     --dataset "$dataset" --policy blend --uncertainty-weight 0.5 \
     --nu 0.5 --budget 256 \
     --output "results/ionut-proxy-pilot/${name}-gpr-blend-m05.json"

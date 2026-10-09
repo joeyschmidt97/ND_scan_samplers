@@ -57,8 +57,9 @@ from sklearn.manifold import trustworthiness
 from sklearn.metrics import adjusted_rand_score, roc_auc_score
 from sklearn.neighbors import NearestNeighbors
 
-from scripts.generate_ionut_data import values
-from resolution.noise import competition
+from ND_scan_samplers.scripts.generate_ionut_data import values
+from ND_scan_samplers import ROOT
+from ND_scan_samplers.resolution.noise import competition
 
 CASE = "ionut-itg-tem-argmax-gamma"
 INPUTS = ("R/L_Ti", "R/L_Te", "R/L_n", "ν", "β", "k_y scale")
@@ -273,7 +274,7 @@ def main():
     parser.add_argument("--probes", type=int, default=8192)
     parser.add_argument("--weights", type=float, nargs="+", default=[0., .25, .5, 1., 2.])
     parser.add_argument("--run", type=pathlib.Path,
-                        default=pathlib.Path("results/6d-ionut-spine-2026-09-20"))
+                        default=ROOT/"results/6d-ionut-spine-2026-09-20")
     parser.add_argument("--case", default=CASE)
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--summarize", action="store_true",

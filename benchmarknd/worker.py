@@ -15,10 +15,10 @@ import time
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from .cases import CASES
-from .core import Observations, SurfaceND, evaluation_set, score, tolerances_for
-from .ionut import IonutSurface
-from .strategies import run_arm
+from ND_scan_samplers.benchmarknd.cases import CASES
+from ND_scan_samplers.benchmarknd.core import Observations, SurfaceND, evaluation_set, score, tolerances_for
+from ND_scan_samplers.benchmarknd.ionut import IonutSurface
+from ND_scan_samplers.benchmarknd.strategies import run_arm
 
 
 def case_dim(case):

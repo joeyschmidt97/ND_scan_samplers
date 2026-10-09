@@ -19,7 +19,7 @@ mask and stay comparable.
 import numpy as np
 from scipy.stats import qmc
 
-from scripts.generate_ionut_data import CASES as NATIVE_CASES, values
+from ND_scan_samplers.scripts.generate_ionut_data import CASES as NATIVE_CASES, values
 
 # The blend case carries no branch decomposition, so it has no transition mask
 # and no per-branch error; excluded from the matched field rather than scored

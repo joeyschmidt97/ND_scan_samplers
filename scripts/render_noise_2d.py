@@ -35,10 +35,10 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from threadpoolctl import threadpool_limits
 
-from benchmark2d.core import evaluation_set, reconstruct, rmse
-from benchmarknd.noisy import NoisyObservations
-from benchmarknd.strategies import run_arm
-from scripts.run_noise_2d import CORNERS, Noisy2DSurface
+from ND_scan_samplers.benchmark2d.core import evaluation_set, reconstruct, rmse
+from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
+from ND_scan_samplers.benchmarknd.strategies import run_arm
+from ND_scan_samplers.scripts.run_noise_2d import CORNERS, Noisy2DSurface
 
 GRID = 161
 MAP_PEAKS = (0., .20)

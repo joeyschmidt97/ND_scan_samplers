@@ -10,7 +10,8 @@ import pathlib
 
 import numpy as np
 from scipy.spatial import cKDTree
-from .cases import CASES, strengths
+from ND_scan_samplers.benchmarknd.cases import CASES, strengths
+from ND_scan_samplers import ROOT
 
 
 def measured_strength(surface, x, step=2e-3, region=None):
@@ -110,12 +111,12 @@ def main():
     """Render one strength table per case into results/<dim>d/figures."""
     import argparse
     from scipy.stats import qmc
-    from .core import SurfaceND, evaluation_set
+    from ND_scan_samplers.benchmarknd.core import SurfaceND, evaluation_set
     parser = argparse.ArgumentParser(description=main.__doc__)
     parser.add_argument("--cases", nargs="+", choices=list(CASES), default=list(CASES))
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--test-size", type=int, default=16384)
-    parser.add_argument("--output", type=pathlib.Path, default=pathlib.Path("results"))
+    parser.add_argument("--output", type=pathlib.Path, default=ROOT/"results")
     args = parser.parse_args()
     for case in args.cases:
         surface = SurfaceND(case, args.seed)

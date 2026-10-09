@@ -1,8 +1,8 @@
 """Exact-N native refinement prefix contracts (requires installed real backends)."""
 import numpy as np
 import pytest
-from benchmark2d.core import Observations, Surface
-from benchmark2d.strategies import run_arm
+from ND_scan_samplers.benchmark2d.core import Observations, Surface
+from ND_scan_samplers.benchmark2d.strategies import run_arm
 
 @pytest.mark.parametrize('name', ['sglib', 'sgpp'])
 def test_real_sparse_prefix_spends_exact_budget_and_is_causal(name):
@@ -25,7 +25,7 @@ def test_real_sparse_prefix_spends_exact_budget_and_is_causal(name):
     assert np.array_equal(runs[0], runs[1][:12])
 
 def test_uniform_geometry_cache_matches_backend_and_returns_copies():
-    import arms.sglib_arm as backend
+    import ND_scan_samplers.arms.sglib_arm as backend
     if not backend.HAVE_SG_LIB:
         pytest.skip('sg_lib is not installed')
     arm = backend.SgLibArm(max_level=7, nan_policy='error')
@@ -39,7 +39,7 @@ def test_uniform_geometry_cache_matches_backend_and_returns_copies():
     assert np.array_equal(arm.G.get_1D_points(7, 0., 1.)[0], expected[0])
 
 def test_fixed_budget_continues_other_axes_after_level_limit():
-    import arms.sglib_arm as backend
+    import ND_scan_samplers.arms.sglib_arm as backend
     if not backend.HAVE_SG_LIB:
         pytest.skip('sg_lib is not installed')
     oracle = lambda x: 3*x[:, 0]+x[:, 1]

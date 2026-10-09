@@ -1,9 +1,9 @@
 """Surprise-score contracts: the prior is the uniform code, data lowers surprise."""
 import numpy as np
 
-from benchmarknd.pool import PoolOracle
-from benchmarknd.surprise import label_posterior, prequential_label_bits, surprise_scores
-from tests.test_pool import grid_oracle
+from ND_scan_samplers.benchmarknd.pool import PoolOracle
+from ND_scan_samplers.benchmarknd.surprise import label_posterior, prequential_label_bits, surprise_scores
+from ND_scan_samplers.tests.test_pool import grid_oracle
 
 
 def test_label_posterior_is_a_distribution_and_follows_neighbours():

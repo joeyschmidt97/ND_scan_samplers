@@ -1,9 +1,9 @@
 import json
 import numpy as np
 import pytest
-from scripts.generate_data import generate, cases_for
-from scripts.datasets import load_dataset, surface_for
-from scripts.run_gp_experiment import run
+from ND_scan_samplers.scripts.generate_data import generate, cases_for
+from ND_scan_samplers.scripts.datasets import load_dataset, surface_for
+from ND_scan_samplers.scripts.run_gp_experiment import run
 
 
 @pytest.mark.parametrize("dim", [2,5,8])

@@ -29,8 +29,8 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 from scipy.stats import wilcoxon
 
-from benchmarknd.pool import initial_pool_design, load_pool
-from benchmarknd.surprise import prequential_label_bits, surprise_scores
+from ND_scan_samplers.benchmarknd.pool import initial_pool_design, load_pool
+from ND_scan_samplers.benchmarknd.surprise import prequential_label_bits, surprise_scores
 
 POOLS = ("hatch_pscans_global", "hatch_pscans3")
 CHECKPOINTS = (9, 15, 23, 38, 61, 98, 159, 256)

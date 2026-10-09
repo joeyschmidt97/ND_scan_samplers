@@ -7,9 +7,9 @@ property of the case or of the common reconstructor, never of a sampler.
 import time
 import numpy as np
 from scipy.stats import qmc
-from .cases import CASES, weak_axes
-from .core import SurfaceND, Observations, evaluation_set, reconstruct, rmse
-from .tables import measured_strength
+from ND_scan_samplers.benchmarknd.cases import CASES, weak_axes
+from ND_scan_samplers.benchmarknd.core import SurfaceND, Observations, evaluation_set, reconstruct, rmse
+from ND_scan_samplers.benchmarknd.tables import measured_strength
 
 
 def inert_axis_leak(surface, n=4096, seed=5):

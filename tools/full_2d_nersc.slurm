@@ -22,9 +22,10 @@ module load python
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "$ENV_PREFIX"
 cd "$REPO_ROOT"
+export PYTHONPATH="$(dirname "$REPO_ROOT")${PYTHONPATH:+:$PYTHONPATH}"   # imports are rooted at the parent of the repo
 
-python -c "import pysgpp; from arms.sglib_arm import HAVE_SG_LIB; assert HAVE_SG_LIB"
-srun --ntasks=1 --cpus-per-task=2 python -m benchmark2d \
+python -c "import pysgpp; from ND_scan_samplers.arms.sglib_arm import HAVE_SG_LIB; assert HAVE_SG_LIB"
+srun --ntasks=1 --cpus-per-task=2 python -m ND_scan_samplers.benchmark2d \
   --seeds 0 1 2 \
   --budgets 64 128 192 256 \
   --test-size 16384 \

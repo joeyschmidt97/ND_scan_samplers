@@ -10,7 +10,8 @@ import json
 import pathlib
 import numpy as np
 
-from .cases import CASES
+from ND_scan_samplers.benchmarknd.cases import CASES
+from ND_scan_samplers import ROOT
 
 
 def load_workers(run_dir):
@@ -129,7 +130,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=pathlib.Path, required=True)
     parser.add_argument("--dims", type=int, nargs="+", default=[5, 8])
-    parser.add_argument("--output", type=pathlib.Path, default=pathlib.Path("results"),
+    parser.add_argument("--output", type=pathlib.Path, default=ROOT/"results",
                         help="root holding one <dim>d directory per study")
     parser.add_argument("--allow-partial", action="store_true")
     args = parser.parse_args()

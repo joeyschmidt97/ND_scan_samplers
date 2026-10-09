@@ -4,9 +4,9 @@ import time
 
 from threadpoolctl import threadpool_limits
 
-from scripts.datasets import load_dataset, surface_for
-from .core import CORNERS, Observations, evaluation_set, score, normalized_rmse
-from .strategies import run_arm
+from ND_scan_samplers.scripts.datasets import load_dataset, surface_for
+from ND_scan_samplers.benchmark3d.core import CORNERS, Observations, evaluation_set, score, normalized_rmse
+from ND_scan_samplers.benchmark3d.strategies import run_arm
 
 
 def execute(task):

@@ -141,7 +141,7 @@ def metric_resolution(obs, seed, uncertainty=False, anisotropic=False):
     differ only in S, so any gap between them is the anisotropy alone, not the
     change from the Delaunay gradient that plain `vwrs`/`vurs` use here.
     """
-    from resolution import metric_fill
+    from ND_scan_samplers.resolution import metric_fill
     initialize(obs, seed)
     region = getattr(obs._evaluate, "region", None) if anisotropic else None
     if anisotropic and region is None:
@@ -216,7 +216,7 @@ def run_arm(name, obs, seed):
             level += 1
         return None, dict(nested=True, ordering="maximin within dyadic grid level")
     if name in ("moe", "moe-tri75", "moe-tri50"):
-        from .mixture import mixture
+        from ND_scan_samplers.benchmark2d.mixture import mixture
         return mixture(obs, seed, triangle_weight={"moe": 0., "moe-tri75": .25, "moe-tri50": .5}[name])
     if name in ("gpr-var", "gpr-grad") or name in GP_BLENDS:
         return gpr(obs, seed, gradient=name == "gpr-grad", blend=GP_BLENDS.get(name))
@@ -231,16 +231,16 @@ def run_arm(name, obs, seed):
     if name == "triangles":
         return triangles(obs, seed)
     if name == "sglib":
-        from arms.sglib_arm import SgLibArm
+        from ND_scan_samplers.arms.sglib_arm import SgLibArm
         arm = SgLibArm(tol=0., max_level=20, budget_driven=True, nan_policy="error")
     elif name == "sgpp":
-        from arms.sgpp_arm import SGppArm
+        from ND_scan_samplers.arms.sgpp_arm import SGppArm
         arm = SGppArm(basis="modlinear", refine="surplus", refine_batch=1, target_surplus=-1., nan_policy="error")
     else:
         raise ValueError(name)
     # External methods prescribe their own nodes. The common corners count
     # toward reconstruction/cost but do not alter those methods' native grids.
-    from .core import BudgetExceeded
+    from ND_scan_samplers.benchmark2d.core import BudgetExceeded
     batch_sizes = []
     def prescribed(points):
         points = np.atleast_2d(points)

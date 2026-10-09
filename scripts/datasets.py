@@ -3,23 +3,24 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
+from ND_scan_samplers import ROOT
 
 
 def surface_for(dim, case, seed):
     if dim == 3:
-        from scripts.generate_ionut_slices import CASES, values
+        from ND_scan_samplers.scripts.generate_ionut_slices import CASES, values
         if case not in CASES or seed != 0:
             raise ValueError('3D Ionut slices require a known case and surface seed 0')
         return lambda x: values(case, x)['y']
     if dim == 6:
-        from scripts.generate_ionut_data import CASES, values
+        from ND_scan_samplers.scripts.generate_ionut_data import CASES, values
         if case not in CASES or seed != 0:
             raise ValueError('Ionut proxies require a known case and surface seed 0')
         return lambda x: values(case, x)['y']
     if dim == 2:
-        from benchmark2d.core import Surface
+        from ND_scan_samplers.benchmark2d.core import Surface
         return Surface(case, seed)
-    from benchmarknd.core import SurfaceND
+    from ND_scan_samplers.benchmarknd.core import SurfaceND
     surface = SurfaceND(case, seed)
     if surface.dim != dim:
         raise ValueError("case does not match dimension")
@@ -28,6 +29,8 @@ def surface_for(dim, case, seed):
 
 def load_dataset(path):
     path = Path(path)
+    if not path.is_absolute() and not path.exists():
+        path = ROOT / path      # repo-relative paths work from any working directory
     manifest = json.loads((path / "manifest.json").read_text())
     if manifest["schema_version"] != 1:
         raise ValueError("unsupported dataset schema")

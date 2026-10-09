@@ -7,12 +7,12 @@ input dimension, which is what the Delaunay estimator could not promise.
 import numpy as np
 import pytest
 
-from benchmarknd.core import Observations, SurfaceND, evaluation_set, score, truth_variation
-from benchmarknd.strategies import resolution_sampling, run_arm
-from resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
+from ND_scan_samplers.benchmarknd.core import Observations, SurfaceND, evaluation_set, score, truth_variation
+from ND_scan_samplers.benchmarknd.strategies import resolution_sampling, run_arm
+from ND_scan_samplers.resolution import fit_free_scores, knn_variation, metric_fill, region_shapes, spine_targets
 from scipy.spatial import cKDTree
 
-from resolution.variation import FOLD_RATIO, fold_floor, shrinkage, stencil_size
+from ND_scan_samplers.resolution.variation import FOLD_RATIO, fold_floor, shrinkage, stencil_size
 
 DIMS = (2, 5, 8)
 
@@ -267,7 +267,7 @@ def test_the_rbf_evaluator_is_labelled_secondary_in_every_row():
 
 
 def test_declared_tolerances_exist_for_five_and_refuse_eight():
-    from benchmarknd.core import tolerances_for
+    from ND_scan_samplers.benchmarknd.core import tolerances_for
     spine, ported = tolerances_for(5)
     assert set(spine) == {"vwfd_p95", "nonlinear_p95", "fill_p95"}
     assert set(ported) == {"nmae", "band_nmae", "p95_error", "vwfd_p95"}
@@ -278,7 +278,7 @@ def test_declared_tolerances_exist_for_five_and_refuse_eight():
 
 
 def test_spine_holistic_is_primary_and_ported_rides_along_labelled():
-    from benchmarknd.core import tolerances_for
+    from ND_scan_samplers.benchmarknd.core import tolerances_for
     surface = SurfaceND("5d-m2-rotated", 0)
     test = evaluation_set(surface, 4096)
     obs = Observations(surface, 40, 5, 0)

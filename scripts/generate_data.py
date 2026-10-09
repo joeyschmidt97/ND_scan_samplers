@@ -8,16 +8,16 @@ import subprocess
 import numpy as np
 import scipy
 from scipy.stats import qmc
-from scripts.datasets import surface_for
+from ND_scan_samplers.scripts.datasets import surface_for
+from ND_scan_samplers import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 
 
 def cases_for(dim):
     if dim == 2:
-        from benchmark2d.core import CASES
+        from ND_scan_samplers.benchmark2d.core import CASES
         return list(CASES)
-    from benchmarknd.cases import CASES
+    from ND_scan_samplers.benchmarknd.cases import CASES
     return [name for name, spec in CASES.items() if spec["dim"] == dim]
 
 

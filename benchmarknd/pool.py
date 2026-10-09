@@ -26,10 +26,11 @@ import numpy as np
 from scipy.spatial import cKDTree
 from scipy.stats import qmc
 
-from resolution import knn_variation
+from ND_scan_samplers.resolution import knn_variation
 
-from .core import Observations, reconstruct
-from .strategies import ARMS, NOISE_AWARE_ARMS, run_arm
+from ND_scan_samplers.benchmarknd.core import Observations, reconstruct
+from ND_scan_samplers.benchmarknd.strategies import ARMS, NOISE_AWARE_ARMS, run_arm
+from ND_scan_samplers import ROOT
 
 # Coordinates of a pool row, in the order they become unit-box axes. ky is
 # sampled on a log axis because GENE scans space it that way and the response
@@ -497,7 +498,7 @@ def main():
     oracle, meta = load_pool(args.pool, args.target)
     band = transition_band(oracle)
     meta["band_size"] = int(band.sum())
-    root = pathlib.Path(__file__).resolve().parents[1]
+    root = ROOT
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root,
                                          stderr=subprocess.DEVNULL, text=True).strip()

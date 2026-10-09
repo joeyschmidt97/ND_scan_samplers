@@ -32,11 +32,12 @@ import time
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from benchmark2d.core import CASES, Surface, evaluation_set, reconstruct, rmse
-from benchmarknd.noisy import NoisyObservations
-from benchmarknd.strategies import run_arm
-from resolution import fit_free_scores
-from resolution.noise import ABSOLUTE_FLOOR
+from ND_scan_samplers.benchmark2d.core import CASES, Surface, evaluation_set, reconstruct, rmse
+from ND_scan_samplers.benchmarknd.noisy import NoisyObservations
+from ND_scan_samplers.benchmarknd.strategies import run_arm
+from ND_scan_samplers.resolution import fit_free_scores
+from ND_scan_samplers.resolution.noise import ABSOLUTE_FLOOR
+from ND_scan_samplers import ROOT
 
 CORNERS = np.array(list(itertools.product((0., 1.), repeat=2)))
 FOLD_SCALE = .06                 # the fold-band width the 2D scorer already uses
@@ -211,7 +212,7 @@ def main():
     # report draws are available long before the full grid finishes.
     tasks.sort(key=lambda t: (not (t[0] == args.cases[0] and t[1] == args.seeds[0]), -t[3]))
 
-    root = pathlib.Path(__file__).resolve().parents[1]
+    root = ROOT
     sources = sorted((root/"resolution").glob("*.py")) + [
         root/"benchmarknd/noisy.py", root/"benchmarknd/strategies.py", pathlib.Path(__file__)]
     try:

@@ -15,11 +15,12 @@ import platform
 import subprocess
 import time
 from threadpoolctl import threadpool_limits
-from .cases import CASES
-from .ionut import BUMPED_CASES, CASES as IONUT_CASES
-from .core import calibrating
-from .strategies import ARMS
-from .worker import case_dim, execute
+from ND_scan_samplers.benchmarknd.cases import CASES
+from ND_scan_samplers.benchmarknd.ionut import BUMPED_CASES, CASES as IONUT_CASES
+from ND_scan_samplers.benchmarknd.core import calibrating
+from ND_scan_samplers.benchmarknd.strategies import ARMS
+from ND_scan_samplers.benchmarknd.worker import case_dim, execute
+from ND_scan_samplers import ROOT
 
 ALL_CASES = list(CASES) + list(IONUT_CASES) + list(BUMPED_CASES)
 
@@ -82,7 +83,7 @@ def main():
     config = {k: v for k, v in vars(args).items() if k not in ("output", "resume")}
     config["budgets"] = budgets
     config["protocol"] = "one nested trajectory per case/seed/arm; ten log-spaced scored checkpoints"
-    root = pathlib.Path(__file__).resolve().parents[1]
+    root = ROOT
     sources = sorted(list((root/"benchmarknd").glob("*.py")) + list((root/"arms").glob("*.py")))
     source_hash = hashlib.sha256(b"".join(p.read_bytes() for p in sources)).hexdigest()
     try:

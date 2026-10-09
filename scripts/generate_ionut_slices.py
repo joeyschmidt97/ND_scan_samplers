@@ -15,10 +15,10 @@ import numpy as np
 import scipy
 from scipy.stats import qmc
 
-from scripts.generate_data import power_of_two
-from scripts.generate_ionut_data import UPSTREAM, values as native_values
+from ND_scan_samplers.scripts.generate_data import power_of_two
+from ND_scan_samplers.scripts.generate_ionut_data import UPSTREAM, values as native_values
+from ND_scan_samplers import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 
 SLICE_SPECS = {
     "itg-tem": dict(active=(0, 1, 3), columns=("RLTi", "RLTe", "nu"),

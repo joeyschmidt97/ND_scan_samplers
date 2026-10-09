@@ -4,11 +4,10 @@ import sys
 import numpy as np
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 pysgpp = pytest.importorskip("pysgpp")
 if not getattr(pysgpp, "__file__", None):
     pytest.skip("mock backend is not real SG++", allow_module_level=True)
-from arms.sgpp_arm import SGppArm
+from ND_scan_samplers.arms.sgpp_arm import SGppArm
 
 
 @pytest.mark.parametrize("budget", [9, 15, 28, 60, 124])

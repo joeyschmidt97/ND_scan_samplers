@@ -10,8 +10,9 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 import numpy as np
 
-from scripts.datasets import load_dataset
-from scripts.generate_ionut_slices import values
+from ND_scan_samplers.scripts.datasets import load_dataset
+from ND_scan_samplers.scripts.generate_ionut_slices import values
+from ND_scan_samplers import ROOT
 
 
 FAMILIES = ("itg-tem", "itg-kbm")
@@ -139,7 +140,7 @@ def render_final_metrics(rows, figures):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", type=Path, default=Path("data/3d"))
+    parser.add_argument("--data", type=Path, default=ROOT/"data/3d")
     parser.add_argument("--results", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()

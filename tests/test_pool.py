@@ -4,8 +4,8 @@ import csv
 import numpy as np
 import pytest
 
-from benchmarknd.core import Observations
-from benchmarknd.pool import (DEFAULT_POOL_ARMS, POOL_REFUSED, PoolOracle, initial_pool_design,
+from ND_scan_samplers.benchmarknd.core import Observations
+from ND_scan_samplers.benchmarknd.pool import (DEFAULT_POOL_ARMS, POOL_REFUSED, PoolOracle, initial_pool_design,
                               load_pool, replay, score_prefix, transition_band)
 
 
@@ -108,7 +108,7 @@ def test_classify_then_regress_separates_a_small_branch_from_a_large_one():
 
 def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
     import json
-    from benchmarknd.pool import rescore
+    from ND_scan_samplers.benchmarknd.pool import rescore
     oracle = grid_oracle(side=6)
     names = oracle.label_names
     path = tmp_path/"pool.csv"
@@ -133,7 +133,7 @@ def test_rescore_reproduces_pooled_scores_and_adds_per_mode(tmp_path):
 
 def test_truth_free_scores_need_only_paid_runs():
     """Same answer whatever the unpaid truth is: no reference values are read."""
-    from benchmarknd.pool import truth_free_scores
+    from ND_scan_samplers.benchmarknd.pool import truth_free_scores
     oracle = grid_oracle()
     paid = np.arange(0, len(oracle.pool), 4)
     a = truth_free_scores(oracle.pool[paid], oracle.y[paid], oracle.labels[paid], oracle.pool)
@@ -146,7 +146,7 @@ def test_truth_free_scores_need_only_paid_runs():
 
 
 def test_region_scores_cover_the_three_jobs():
-    from benchmarknd.pool import exploration_regions
+    from ND_scan_samplers.benchmarknd.pool import exploration_regions
     oracle = grid_oracle()
     regions = exploration_regions(oracle)
     assert regions["design_band"].any() and regions["peak"].any() and regions["quiet"].any()
@@ -161,7 +161,7 @@ def test_region_scores_cover_the_three_jobs():
 
 
 def test_label_terms_mark_the_switch_and_favour_rare_modes():
-    from benchmarknd.strategies import label_terms
+    from ND_scan_samplers.benchmarknd.strategies import label_terms
     # four mode-0 runs on the left edge, one mode-1 run on the right edge
     x = np.array([[0., 0.], [0., .33], [0., .67], [0., 1.], [1., .5]])
     labels = np.array([0, 0, 0, 0, 1])
@@ -188,6 +188,6 @@ def test_exploration_profiles_run_and_report_sensitivity(arm):
 
 def test_continuous_oracles_are_unchanged():
     """A non-pool oracle still gets Sobol candidates; Observations still works."""
-    from benchmarknd.strategies import candidates_for, candidate_count
+    from ND_scan_samplers.benchmarknd.strategies import candidates_for, candidate_count
     obs = Observations(lambda x: x.sum(axis=1), 40, 3, seed=0)
     assert len(candidates_for(obs, np.random.default_rng(0))) == candidate_count(3)

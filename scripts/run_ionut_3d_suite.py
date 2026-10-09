@@ -4,8 +4,9 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import json
 from pathlib import Path
 
-from scripts.generate_ionut_slices import CASES
-from scripts.run_gp_experiment import run
+from ND_scan_samplers.scripts.generate_ionut_slices import CASES
+from ND_scan_samplers.scripts.run_gp_experiment import run
+from ND_scan_samplers import ROOT
 
 
 CONFIGS = ((1.5, "m15"), (.5, "m05"))
@@ -23,7 +24,7 @@ def execute(task):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", type=Path, default=Path("data/3d"))
+    parser.add_argument("--data", type=Path, default=ROOT/"data/3d")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--budget", type=int, default=256)
     parser.add_argument("--workers", type=int, default=2)

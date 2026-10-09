@@ -27,10 +27,11 @@ git -C "$SGLIB_ROOT" checkout d13bc4661cbd3901a70190b52c477e7606576fa3
 export SG_LIB_PATH="$SGLIB_ROOT"
 
 cd "$REPO_ROOT"
+export PYTHONPATH="$(dirname "$REPO_ROOT")${PYTHONPATH:+:$PYTHONPATH}"   # imports are rooted at the parent of the repo
 python - <<'PY'
 import pysgpp
-from arms.sgpp_arm import HAVE_PYSGPP
-from arms.sglib_arm import HAVE_SG_LIB
+from ND_scan_samplers.arms.sgpp_arm import HAVE_PYSGPP
+from ND_scan_samplers.arms.sglib_arm import HAVE_SG_LIB
 assert HAVE_PYSGPP and HAVE_SG_LIB
 print("SG++ and sg_lib imports passed")
 PY

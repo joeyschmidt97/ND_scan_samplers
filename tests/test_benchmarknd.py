@@ -2,9 +2,9 @@
 import numpy as np
 import pytest
 from scipy.stats import qmc
-from benchmarknd.cases import CASES, strengths, weak_axes
-from benchmarknd.core import SurfaceND, Observations, BudgetExceeded, evaluation_set, reconstruct, rmse
-from benchmarknd.tables import measured_strength, design_profile
+from ND_scan_samplers.benchmarknd.cases import CASES, strengths, weak_axes
+from ND_scan_samplers.benchmarknd.core import SurfaceND, Observations, BudgetExceeded, evaluation_set, reconstruct, rmse
+from ND_scan_samplers.benchmarknd.tables import measured_strength, design_profile
 
 
 @pytest.mark.parametrize("case", list(CASES))

@@ -7,10 +7,10 @@ from pathlib import Path
 import numpy as np
 import scipy
 from scipy.stats import qmc
-from scripts import ionut_proxies as proxy
-from scripts.generate_data import power_of_two
+from ND_scan_samplers.scripts import ionut_proxies as proxy
+from ND_scan_samplers.scripts.generate_data import power_of_two
+from ND_scan_samplers import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM = '13f87b95f90be9dbb5942e317739bb15a1918e0e'
 CASES = [f'ionut-{kind}-{mode}-{out}' for kind in ('itg-tem','itg-kbm')
          for mode in ('argmax','softmax') for out in ('gamma','omega')] + ['ionut-stellarator-itg-kbm']

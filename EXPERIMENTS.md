@@ -5,9 +5,9 @@ NERSC environment, SG++ setup and full-run commands: [NERSC_RUNBOOK.md](NERSC_RU
 
 
 ```sh
-python -m scripts.run_gp_experiment --dataset data/2d/smooth/seed-0 --policy uncertainty --nu 0.5 --budget 64 --output outputs/gp/smooth-uncertainty-nu05.json
-python -m scripts.run_gp_experiment --dataset data/2d/smooth/seed-0 --policy ucb --beta 2 --nu 0.5 --budget 64 --output outputs/gp/smooth-ucb-nu05.json
-python -m scripts.run_gp_experiment --dataset data/6d/ionut-itg-tem-argmax-gamma/seed-0 --policy blend --uncertainty-weight 0.5 --nu 1.5 --budget 256 --output outputs/gp/itg-tem-blend-m15.json
+python -m ND_scan_samplers.scripts.run_gp_experiment --dataset data/2d/smooth/seed-0 --policy uncertainty --nu 0.5 --budget 64 --output outputs/gp/smooth-uncertainty-nu05.json
+python -m ND_scan_samplers.scripts.run_gp_experiment --dataset data/2d/smooth/seed-0 --policy ucb --beta 2 --nu 0.5 --budget 64 --output outputs/gp/smooth-ucb-nu05.json
+python -m ND_scan_samplers.scripts.run_gp_experiment --dataset data/6d/ionut-itg-tem-argmax-gamma/seed-0 --policy blend --uncertainty-weight 0.5 --nu 1.5 --budget 256 --output outputs/gp/itg-tem-blend-m15.json
 # Repeat with --nu 1.5 and 2.5, keeping dataset, seed and budget identical.
 ```
 
@@ -30,8 +30,8 @@ ITG–TEM/ITG–KBM hard/soft gamma/omega slices, then render the reference plan
 and scores:
 
 ```sh
-python -m scripts.run_ionut_3d_suite --output results/ionut-3d/runs --budget 256 --workers 4
-python -m scripts.render_ionut_3d_report --data data/3d --results results/ionut-3d/runs --output results/ionut-3d
+python -m ND_scan_samplers.scripts.run_ionut_3d_suite --output results/ionut-3d/runs --budget 256 --workers 4
+python -m ND_scan_samplers.scripts.render_ionut_3d_report --data data/3d --results results/ionut-3d/runs --output results/ionut-3d
 ```
 
 The result reports NRMSE, NMAE, normalized P95 error, branch-transition NRMSE,

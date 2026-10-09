@@ -9,8 +9,8 @@ from dataclasses import dataclass, field
 import numpy as np
 from scipy.interpolate import RBFInterpolator
 from scipy.stats import qmc
-from resolution import fit_free_scores, knn_variation
-from .cases import CASES, strengths
+from ND_scan_samplers.resolution import fit_free_scores, knn_variation
+from ND_scan_samplers.benchmarknd.cases import CASES, strengths
 
 # Holistic tolerances, per input dimension, measured against the `space-filling`
 # reference arm at the declared budget (results/nd-calibration-2026-09-20).

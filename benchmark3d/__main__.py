@@ -8,9 +8,10 @@ import pathlib
 import platform
 import subprocess
 
-from scripts.generate_ionut_slices import CASES
-from .strategies import ARMS
-from .worker import execute
+from ND_scan_samplers.scripts.generate_ionut_slices import CASES
+from ND_scan_samplers.benchmark3d.strategies import ARMS
+from ND_scan_samplers.benchmark3d.worker import execute
+from ND_scan_samplers import ROOT
 
 
 def save(path, payload):
@@ -21,7 +22,7 @@ def save(path, payload):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", type=pathlib.Path, default=pathlib.Path("data/3d"))
+    parser.add_argument("--data", type=pathlib.Path, default=ROOT/"data/3d")
     parser.add_argument("--cases", nargs="+", choices=CASES, default=list(CASES))
     parser.add_argument("--arms", nargs="+", choices=ARMS, default=list(ARMS))
     parser.add_argument("--seeds", nargs="+", type=int, default=[0, 1, 2])
@@ -33,14 +34,14 @@ def main():
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--plots-only", action="store_true")
     args = parser.parse_args()
-    from .report import render
+    from ND_scan_samplers.benchmark3d.report import render
     if args.plots_only:
         render(json.loads((args.output/"results.json").read_text()), args.data, args.output)
         return
     if args.budget < 16 or args.test_size < 1024 or args.test_size & (args.test_size-1):
         parser.error("budget >= 16 and a power-of-two test size >= 1024 required")
     args.output.mkdir(parents=True, exist_ok=True)
-    root = pathlib.Path(__file__).resolve().parents[1]
+    root = ROOT
     sources = sorted(list((root/"benchmark3d").glob("*.py")) + list((root/"arms").glob("*.py")))
     source_hash = hashlib.sha256(b"".join(path.read_bytes() for path in sources)).hexdigest()
     config = dict(cases=args.cases, arms=args.arms, seeds=args.seeds, budget=args.budget,

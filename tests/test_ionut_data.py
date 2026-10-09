@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
-from scripts.generate_ionut_data import CASES,generate,values
-from scripts.datasets import load_dataset,surface_for
-from scripts import ionut_proxies as proxy
-from scripts.generate_ionut_slices import CASES as SLICE_CASES, expand, generate as generate_slice
-from scripts.run_gp_experiment import run
+from ND_scan_samplers.scripts.generate_ionut_data import CASES,generate,values
+from ND_scan_samplers.scripts.datasets import load_dataset,surface_for
+from ND_scan_samplers.scripts import ionut_proxies as proxy
+from ND_scan_samplers.scripts.generate_ionut_slices import CASES as SLICE_CASES, expand, generate as generate_slice
+from ND_scan_samplers.scripts.run_gp_experiment import run
 
 @pytest.mark.parametrize('case',CASES)
 def test_proxy_archives_match_continuous_values(tmp_path,case):

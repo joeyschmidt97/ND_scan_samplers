@@ -19,7 +19,6 @@ import types
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 
 # ===========================================================================
@@ -132,8 +131,8 @@ def _make_mock():
 
 sys.modules["pysgpp"] = _make_mock()
 
-from manifold import Manifold                                        # noqa: E402
-from arms.sgpp_arm import SGppArm, SGppRegularArm                    # noqa: E402
+from ND_scan_samplers.tests.manifold import Manifold                                        # noqa: E402
+from ND_scan_samplers.arms.sgpp_arm import SGppArm, SGppRegularArm                    # noqa: E402
 
 
 # ===========================================================================
@@ -185,7 +184,7 @@ def test_regular_arm_picks_largest_level_within_budget():
 
 
 def test_scoring_path_runs():
-    from arms import score_arm
+    from ND_scan_samplers.arms import score_arm
     m = Manifold(mode="argmax", align="gap", noise_rel=0.05, fail_rate=0.05, seed=1)
     test = m.test_set(n=800)
     s = score_arm(SGppArm(refine_batch=8), m, out="omega", budget=200, test=test)

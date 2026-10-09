@@ -22,6 +22,7 @@ module load python
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "$ENV_PREFIX"
 cd "$REPO_ROOT"
+export PYTHONPATH="$(dirname "$REPO_ROOT")${PYTHONPATH:+:$PYTHONPATH}"   # imports are rooted at the parent of the repo
 
 for case in \
   ionut-itg-tem-3d-argmax-gamma ionut-itg-tem-3d-argmax-omega \
@@ -30,7 +31,7 @@ for case in \
   ionut-itg-kbm-3d-softmax-gamma ionut-itg-kbm-3d-softmax-omega
 do
   if [[ ! -d "data/3d/$case/seed-0" ]]; then
-    python -m scripts.generate_ionut_slices --cases "$case" --output data
+    python -m ND_scan_samplers.scripts.generate_ionut_slices --cases "$case" --output data
   fi
 done
 mkdir -p results/ionut-proxy-pilot
@@ -46,7 +47,7 @@ do
     tag=${nu/./}
     output="results/ionut-proxy-pilot/${name}-gpr-blend-m${tag}.json"
     if [[ ! -f "$output" ]]; then
-      srun --ntasks=1 --cpus-per-task=2 python -m scripts.run_gp_experiment \
+      srun --ntasks=1 --cpus-per-task=2 python -m ND_scan_samplers.scripts.run_gp_experiment \
         --dataset "$dataset" --policy blend --uncertainty-weight 0.5 \
         --nu "$nu" --budget 256 --output "$output"
     fi

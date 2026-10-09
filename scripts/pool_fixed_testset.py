@@ -23,10 +23,11 @@ import time
 import numpy as np
 from scipy.spatial import cKDTree
 
-from benchmarknd.core import Observations, reconstruct
-from benchmarknd.pool import (PoolOracle, checkpoints, classify_then_regress, initial_pool_design,
+from ND_scan_samplers.benchmarknd.core import Observations, reconstruct
+from ND_scan_samplers.benchmarknd.pool import (PoolOracle, checkpoints, classify_then_regress, initial_pool_design,
                               load_pool, per_mode_scores)
-from benchmarknd.strategies import run_arm
+from ND_scan_samplers.benchmarknd.strategies import run_arm
+from ND_scan_samplers import ROOT
 
 
 def split(oracle, share, seed):
@@ -72,7 +73,7 @@ def main():
 
     full, meta = load_pool(args.pool, "gamma")
     train, test = split(full, args.test_share, args.split_seed)
-    root = pathlib.Path(__file__).resolve().parents[1]
+    root = ROOT
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
     args.output.mkdir(parents=True, exist_ok=True)
     path = args.output/"results.json"

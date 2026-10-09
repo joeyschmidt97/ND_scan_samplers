@@ -3,7 +3,7 @@ set -euo pipefail
 
 : "${PSCRATCH:?PSCRATCH is not set; run this on NERSC}"
 
-REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 ENV_PREFIX="${UQ_ENV:-$PSCRATCH/conda-envs/uq-discontinuities}"
 SGLIB_ROOT="${SG_LIB_PATH:-$PSCRATCH/src/sensitivity-driven-sparse-grid-approx}"
 

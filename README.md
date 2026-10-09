@@ -9,7 +9,7 @@ Compare simulation-placement strategies with complementary error and resolution
 metrics applied to the same low-poly reconstruction at **every integer number
 of paid evaluations**. Start with the
 [plot guide](results/2d/README.md), [comparison report](results/2d/index.html)
-or [results and interpretation](RESULTS.md).
+or [results and interpretation](docs/RESULTS.md).
 
 The performance scorecard combines all four surfaces and three seeds into one
 log-log error-versus-points chart for every method, with equal weight per test.
@@ -205,7 +205,7 @@ and the trajectory is identical either way.
 python -m ND_scan_samplers.tests.benchmarks.benchmarknd --cases 5d-m2-rotated --seeds 0 --output outputs/nd-run/5d-m2-rotated-s0
 python -m ND_scan_samplers.tests.benchmarks.benchmarknd.collect --run outputs/nd-run --dims 5 8 --output results
 python -m ND_scan_samplers.tests.benchmarks.benchmarknd.checks          # geometry and scorer validation
-python tools/nd_progress.py --logs $TEMP/ndlogs --results outputs/nd-run --watch
+python src/nersc/nd_progress.py --logs $TEMP/ndlogs --results outputs/nd-run --watch
 python -m ND_scan_samplers.tests.benchmarks.benchmarknd.tables      # strength tables into results/<dim>d/figures
 ```
 
@@ -343,4 +343,4 @@ merging the independently executed methods into the final comparison.
 
 ## Shared data and GP experiments
 
-See [data/README.md](data/README.md) for frozen datasets and generators, including native 6D ITG/TEM/KBM proxies from Ionut. GP configurations and comparison commands are documented separately in [EXPERIMENTS.md](EXPERIMENTS.md). Existing benchmark commands and saved results retain their original protocol.
+See [data/README.md](data/README.md) for frozen datasets and generators, including native 6D ITG/TEM/KBM proxies from Ionut. GP configurations and comparison commands are documented separately in [EXPERIMENTS.md](docs/EXPERIMENTS.md). Existing benchmark commands and saved results retain their original protocol.

@@ -12,7 +12,7 @@
 set -euo pipefail
 : "${PSCRATCH:?PSCRATCH is not set}"
 
-REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 ENV_PREFIX="${UQ_ENV:-$PSCRATCH/conda-envs/uq-discontinuities}"
 export OMP_NUM_THREADS=2
 export OPENBLAS_NUM_THREADS=2

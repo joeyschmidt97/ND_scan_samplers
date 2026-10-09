@@ -28,7 +28,7 @@ git log -1 --oneline
 From the repository root:
 
 ```bash
-bash tools/nersc_setup.sh
+bash src/nersc/nersc_setup.sh
 ```
 
 For later sessions, restore the environment variables with:
@@ -65,7 +65,7 @@ fail.
 ## 4. Submit the frozen full 2D protocol
 
 ```bash
-sbatch --account <account> tools/full_2d_nersc.slurm
+sbatch --account <account> src/nersc/full_2d_nersc.slurm
 ```
 
 The job runs all four surfaces, all twelve default arms, seeds 0/1/2, every
@@ -115,7 +115,7 @@ python -m ND_scan_samplers.scripts.data.generate_ionut_slices --output data
 Run the 50/50 GP uncertainty/gradient policy on the hard gamma transitions:
 
 ```bash
-sbatch --account <account> tools/ionut_proxy_pilot_nersc.slurm
+sbatch --account <account> src/nersc/ionut_proxy_pilot_nersc.slurm
 ```
 
 The submitted job executes the following reproducible loop on a CPU compute

@@ -505,7 +505,7 @@ No jump or on-fold Gaussian case is included.
 Methods qualifying on every seed of every case: **{qualified_names}**.
 Read the HTML qualification table for per-case costs; qualifying everywhere does not mean
 winning every case. These results select finalists for harder tests, not a
-production GENE runner. See [the detailed results](../../RESULTS.md).
+production GENE runner. See [the detailed results](../../docs/RESULTS.md).
 
 ## Regenerate without new experiments
 
@@ -524,7 +524,7 @@ integer point counts. RBF checks are saved only at configured checkpoints; coord
     pieces = [f"<h1>2-D benchmark â€” {overview_count} comparison sheets</h1>",
               "<p>Start with the reference surfaces, compare the point placement, then judge error per evaluation. "
               "The placement maps show one seed; the error curves summarize all paired seeds.</p>",
-              '<p><a href="README.md">Plot-reading guide</a> Â· <a href="../../RESULTS.md">Detailed results</a> Â· <a href="results.json">Saved data</a></p>',
+              '<p><a href="README.md">Plot-reading guide</a> Â· <a href="../../docs/RESULTS.md">Detailed results</a> Â· <a href="results.json">Saved data</a></p>',
               "<nav>"+" Â· ".join(f'<a href="#sheet-{i}">{html.escape(title)}</a>' for i, (_, title, _) in enumerate(sheets, 1))+"</nav>"]
     for i, (filename, title, caption) in enumerate(sheets, 1):
         pieces.append(f'<section id="sheet-{i}"><h2>{html.escape(title)}</h2><p>{html.escape(caption)}</p>'

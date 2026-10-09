@@ -1,7 +1,7 @@
 # GP experiments
 
-Run from the repository root. Data format and generation: [data/README.md](data/README.md).
-NERSC environment, SG++ setup and full-run commands: [NERSC_RUNBOOK.md](NERSC_RUNBOOK.md).
+Run from the repository root. Data format and generation: [data/README.md](../data/README.md).
+NERSC environment, SG++ setup and full-run commands: [NERSC_RUNBOOK.md](../src/nersc/NERSC_RUNBOOK.md).
 
 
 ```sh

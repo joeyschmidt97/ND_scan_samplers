@@ -54,10 +54,17 @@ EXPLORATION_PROFILES = {
     "vurs-avoid": dict(coverage=1/3, variation=1/3, uncertainty=1/3, boundary=-.3),
 }
 
+# Batched VWRS/VURS: k points per acquisition, placed before any of their
+# values return. Suffix r ranks the top k of one acquisition; no suffix
+# re-ranks greedily with the fill distance updated per placed point.
+BATCH_SIZES = (5, 10, 15, 20)
+BATCH_ARMS = tuple(f"{base}-b{k}{suffix}" for base in ("vwrs", "vurs")
+                   for k in BATCH_SIZES for suffix in ("", "r"))
+
 ARMS = (("space-filling", "gpr-var", "gpr-grad", "moe", "sglib", "sgpp",
          "gpr-m05-var", "gpr-m05-grad", "gpr-m05-blend", "vwrs", "vurs",
          "vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r", "vwrs-m", "vurs-m")
-        + tuple(GP_BLENDS) + tuple(VURS_VARIANTS) + tuple(EXPLORATION_PROFILES))
+        + tuple(GP_BLENDS) + tuple(VURS_VARIANTS) + tuple(EXPLORATION_PROFILES) + BATCH_ARMS)
 
 # Arms that require an oracle reporting a spread per evaluation.
 NOISE_AWARE_ARMS = ("vwrs-n", "vurs-n", "vurs-a", "gpr-n", "vurs-r")
@@ -104,12 +111,17 @@ def fit_gp(obs, seed, nu=1.5, noise_aware=False):
         if sigma is None:
             raise ValueError("a noise-aware GP needs an oracle that reports a spread")
         alpha = np.maximum(sigma**2, 1e-12)
+    return fit_gp_xy(obs.x, obs.y, seed, nu, alpha)
+
+
+def fit_gp_xy(x, y, seed, nu=1.5, alpha=1e-8):
+    """The shared GP fit on plain arrays; `alpha` may be one value per point."""
     gp = GaussianProcessRegressor(
-        kernel=ConstantKernel(1., (1e-3, 1e3))*Matern([.3]*obs.dim, (1e-2, 1e2), nu=nu),
+        kernel=ConstantKernel(1., (1e-3, 1e3))*Matern([.3]*np.shape(x)[1], (1e-2, 1e2), nu=nu),
         alpha=alpha, normalize_y=True, random_state=seed, n_restarts_optimizer=1)
     with warnings.catch_warnings(record=True) as messages:
         warnings.simplefilter("always", ConvergenceWarning)
-        gp.fit(obs.x, obs.y)
+        gp.fit(x, y)
     return gp, len(messages)
 
 
@@ -298,9 +310,109 @@ def label_terms(x, labels, candidates):
     return mode_term, boundary_term
 
 
+BATCH_MODES = ("greedy", "rank")
+
+
+def resolution_weights(uncertainty=False, allocation=False, weights=None):
+    """The acquisition weights a VWRS/VURS variant uses, validated."""
+    if weights is None:
+        return VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
+    if not uncertainty or abs(sum(v for v in weights.values() if v > 0)-1) > 1e-9:
+        raise ValueError("custom weights apply to VURS and their positive part must sum to one")
+    if set(weights) - {"coverage", "variation", "uncertainty", "mode", "boundary", "aleatoric"}:
+        raise ValueError(f"unknown acquisition terms: {sorted(weights)}")
+    return weights
+
+
+class Acquisition:
+    """One VWRS/VURS acquisition evaluated over a candidate set.
+
+        A(x) = lc*h~(x) + lv*q~(x) [+ lu*sigma~(x)] [+ label and aleatoric terms]
+
+    Kept in parts so a batch can be ranked out of it: placing a point changes
+    the fill distance h of its neighbours (and with it the isotropic variation
+    term h**2 * curvature) but not the GP uncertainty, which only moves once
+    values come back. `merit(spacing)` re-evaluates the acquisition with the
+    fill distance as if extra points were already placed, under the same
+    normalization, so the weights keep their meaning inside a batch.
+    """
+
+    def __init__(self, x, y, candidates, seed, weights, uncertainty=False, mode="curvature",
+                 anisotropic=False, nu=.5, labels=None, noise=None, gp_alpha=None,
+                 aleatoric=None):
+        self.candidates = candidates
+        self.weights, self.mode = weights, mode
+        self.spacing = cKDTree(x).query(candidates)[0]
+        self.fit_warnings = 0
+        if anisotropic:
+            self.local = None
+            self.variation = metric_fill(x, y, candidates, labels=labels)
+        else:
+            self.local = knn_variation(x, y, candidates, noise=noise)
+            self.variation = self.spacing*self.local.indicator(self.spacing, mode)
+        self.coverage_scale = max(float(self.spacing.max()), 1e-12)
+        self.variation_scale = max(float(self.variation.max()), 1e-12)
+        # Added one at a time, in this order, so a batch of one reproduces the
+        # sequential arms' floating-point sums exactly.
+        self.terms = []
+        if uncertainty:
+            gp, self.fit_warnings = fit_gp_xy(x, y, seed, nu=nu,
+                                              alpha=1e-8 if gp_alpha is None else gp_alpha)
+            sd = gp.predict(candidates, return_std=True)[1]
+            self.terms.append(weights["uncertainty"]*sd/max(float(sd.max()), 1e-12))
+        if weights.get("mode") or weights.get("boundary"):
+            mode_term, boundary_term = label_terms(x, labels, candidates)
+            self.terms.append(weights.get("mode", 0.)*mode_term/max(float(mode_term.max()), 1e-12))
+            self.terms.append(weights.get("boundary", 0.)*boundary_term)
+        if aleatoric is not None:
+            self.terms.append(weights["aleatoric"]*aleatoric/max(float(aleatoric.max()), 1e-12))
+
+    def merit(self, spacing=None):
+        if spacing is None:
+            spacing, variation = self.spacing, self.variation
+        elif self.local is None:
+            variation = self.variation        # the metric fill is not re-estimated inside a batch
+        else:
+            variation = spacing*self.local.indicator(spacing, self.mode)
+        merit = (self.weights["coverage"]*spacing/self.coverage_scale
+                 + self.weights["variation"]*variation/self.variation_scale)
+        for term in self.terms:
+            merit = merit + term
+        return merit
+
+    def select(self, count, batch_mode="greedy", duplicate_radius=None, merit=None):
+        """Indices of `count` candidates to place together, best first.
+
+        "rank" takes the top `count` of one acquisition evaluation. "greedy"
+        takes the best, then re-ranks with the fill distance updated as if it
+        were already placed, so a batch spreads instead of piling onto one
+        high-merit neighbourhood. Neither waits for values; inside a batch
+        only the placement-dependent terms can move.
+        """
+        if batch_mode not in BATCH_MODES:
+            raise ValueError(f"batch_mode must be one of {BATCH_MODES}")
+        merit = self.merit() if merit is None else merit.copy()
+        count = min(int(count), int(np.isfinite(merit).sum()))
+        if batch_mode == "rank":
+            return [int(i) for i in np.argsort(-merit, kind="stable")[:count]]
+        blocked = ~np.isfinite(merit)
+        spacing = self.spacing.copy()
+        chosen = []
+        while len(chosen) < count:
+            index = int(np.argmax(merit))
+            chosen.append(index)
+            blocked[index] = True
+            spacing = np.minimum(spacing, np.linalg.norm(self.candidates-self.candidates[index], axis=1))
+            merit = self.merit(spacing)
+            if duplicate_radius is not None:
+                merit[spacing < duplicate_radius] = -np.inf
+            merit[blocked] = -np.inf
+        return chosen
+
+
 def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                         noise_aware=False, allocation=False, replicate=False,
-                        anisotropic=False, nu=.5, weights=None):
+                        anisotropic=False, nu=.5, weights=None, batch=1, batch_mode="greedy"):
     """VWRS and VURS with a dimension-free variation estimator.
 
     The 2D and 3D implementations weight fill distance by an observed Delaunay
@@ -318,48 +430,44 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
     (anisotropic VWRS/VURS, arms vwrs-m and vurs-m). Regions come from the
     branch labels the oracle reports at paid points. The coverage term stays
     isotropic: it is the protection against features the metric has not seen.
+
+    `batch` > 1 places that many points per acquisition before any of their
+    values are seen, chosen by `Acquisition.select` (arms vurs-b<k>, vwrs-b<k>
+    for "greedy", suffix r for "rank"). A campaign whose runs sit in a queue
+    for hours places batches; batch=1 is the sequential arm.
     """
     if anisotropic and (noise_aware or allocation or replicate):
         raise ValueError("the anisotropic metric has no noise-aware variant yet")
-    if weights is None:
-        weights = VURS_A_WEIGHTS if allocation else (VURS_WEIGHTS if uncertainty else VWRS_WEIGHTS)
-    elif not uncertainty or abs(sum(v for v in weights.values() if v > 0)-1) > 1e-9:
-        raise ValueError("custom weights apply to VURS and their positive part must sum to one")
-    if set(weights) - {"coverage", "variation", "uncertainty", "mode", "boundary", "aleatoric"}:
-        raise ValueError(f"unknown acquisition terms: {sorted(weights)}")
+    if batch > 1 and replicate:
+        raise ValueError("replication is decided one point at a time")
+    weights = resolution_weights(uncertainty, allocation, weights)
     if (noise_aware or allocation) and reported_noise(obs) is None:
         raise ValueError("noise-aware placement needs an oracle that reports a spread")
+    needs_labels = anisotropic or bool(weights.get("mode") or weights.get("boundary"))
     rng = np.random.default_rng(seed)
     warning_count = 0
     replicated = 0
+    batch_sizes = []
     while obs.remaining:
         candidates = candidates_for(obs, rng)
-        spacing = cKDTree(obs.x).query(candidates)[0]
-        observed_noise = reported_noise(obs) if (noise_aware or allocation) else None
-        if anisotropic:
-            variation = metric_fill(obs.x, obs.y, candidates, labels=observed_labels(obs))
-        else:
-            local = knn_variation(obs.x, obs.y, candidates, noise=observed_noise)
-            variation = spacing*local.indicator(spacing, mode)
-        merit = (weights["coverage"]*spacing/max(float(spacing.max()), 1e-12)
-                 + weights["variation"]*variation/max(float(variation.max()), 1e-12))
-        if uncertainty:
-            gp, count = fit_gp(obs, seed, nu=nu)
-            warning_count += count
-            sd = gp.predict(candidates, return_std=True)[1]
-            merit = merit + weights["uncertainty"]*sd/max(float(sd.max()), 1e-12)
-        if weights.get("mode") or weights.get("boundary"):
-            mode_term, boundary_term = label_terms(obs.x, observed_labels(obs), candidates)
-            merit = (merit + weights.get("mode", 0.)*mode_term/max(float(mode_term.max()), 1e-12)
-                     + weights.get("boundary", 0.)*boundary_term)
-        if allocation:
-            aleatoric = candidate_noise(obs, candidates)
-            merit = merit + weights["aleatoric"]*aleatoric/max(float(aleatoric.max()), 1e-12)
-        merit = mask_duplicates(merit, spacing, obs)
+        acquisition = Acquisition(
+            obs.x, obs.y, candidates, seed, weights, uncertainty=uncertainty, mode=mode,
+            anisotropic=anisotropic, nu=nu,
+            labels=observed_labels(obs) if needs_labels else None,
+            noise=reported_noise(obs) if (noise_aware or allocation) else None,
+            aleatoric=candidate_noise(obs, candidates) if allocation else None)
+        warning_count += acquisition.fit_warnings
+        merit = mask_duplicates(acquisition.merit(), acquisition.spacing, obs)
+        if batch > 1:
+            radius = None if oracle_pool(obs) is not None else duplicate_radius(obs.dim, len(obs.x))
+            picks = acquisition.select(min(batch, obs.remaining), batch_mode, radius, merit)
+            batch_sizes.append(len(picks))
+            obs(candidates[picks])
+            continue
         index = int(np.argmax(merit))
         if replicate:
             # The deficit the best new point would remove, in response units.
-            chosen = replicate_choice(obs, float(variation[index]))
+            chosen = replicate_choice(obs, float(acquisition.variation[index]))
             if chosen is not None:
                 obs(obs.x[chosen][None, :])
                 replicated += 1
@@ -374,6 +482,8 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                                "local-linear residual curvature"),
                     anisotropic=bool(anisotropic),
                     stencil=stencil_size(obs.dim), candidates=candidate_count(obs.dim))
+    if batch > 1:
+        metadata.update(batch=batch, batch_mode=batch_mode, batch_sizes=batch_sizes)
     if uncertainty:
         gp, count = fit_gp(obs, seed, nu=nu)
         metadata.update(fit_warnings=warning_count+count, kernel=str(gp.kernel_), matern_nu=nu)
@@ -461,6 +571,11 @@ def run_arm(name, obs, seed):
                    blend=.5 if name == "gpr-m05-blend" else None, nu=.5)
     if name in ("vwrs", "vurs"):
         return resolution_sampling(obs, seed, uncertainty=name == "vurs")
+    if name in BATCH_ARMS:
+        base, size = name.split("-b")
+        return resolution_sampling(obs, seed, uncertainty=base == "vurs",
+                                   batch=int(size.rstrip("r")),
+                                   batch_mode="rank" if size.endswith("r") else "greedy")
     if name in EXPLORATION_PROFILES:
         return resolution_sampling(obs, seed, uncertainty=True,
                                    weights=dict(EXPLORATION_PROFILES[name]))

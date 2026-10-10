@@ -1,0 +1,287 @@
+{
+  "commit": "3dc8357e488696c34ccee177954b4c56094b3fb6",
+  "src_dirty": false,
+  "workers": 12,
+  "rows": [
+    {
+      "arm": "vwrs",
+      "seed": 0,
+      "placement_seconds": 4.834008800000447,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 1,
+      "placement_seconds": 4.934864399998332,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 2,
+      "placement_seconds": 4.771773800002848,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 3,
+      "placement_seconds": 5.605210400000942,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 4,
+      "placement_seconds": 5.3581894999988435,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 0,
+      "placement_seconds": 113.50968710000234,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 5,
+      "placement_seconds": 5.280217799998354,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 6,
+      "placement_seconds": 5.336733000000095,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 7,
+      "placement_seconds": 5.0072392000001855,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 8,
+      "placement_seconds": 4.864375500001188,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 2,
+      "placement_seconds": 143.62284570000338,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 9,
+      "placement_seconds": 5.2166083000010985,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 10,
+      "placement_seconds": 5.3591684000020905,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 11,
+      "placement_seconds": 5.150601800000004,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 12,
+      "placement_seconds": 5.456061000000773,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 1,
+      "placement_seconds": 229.49334939999972,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 4,
+      "placement_seconds": 145.48905349999768,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 13,
+      "placement_seconds": 5.52127069999915,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 14,
+      "placement_seconds": 5.367798400002357,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 3,
+      "placement_seconds": 251.81022490000032,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 15,
+      "placement_seconds": 5.668891500001337,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 8,
+      "placement_seconds": 166.91872339999827,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 6,
+      "placement_seconds": 185.5208425000019,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 16,
+      "placement_seconds": 5.359632199997577,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 17,
+      "placement_seconds": 5.524152199999662,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 10,
+      "placement_seconds": 170.18485489999875,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 5,
+      "placement_seconds": 229.91807120000158,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 18,
+      "placement_seconds": 5.6595899000021745,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vwrs",
+      "seed": 19,
+      "placement_seconds": 5.254211399998894,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 11,
+      "placement_seconds": 221.62542799999937,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 13,
+      "placement_seconds": 168.76917429999958,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 7,
+      "placement_seconds": 273.5574056000005,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 12,
+      "placement_seconds": 230.43911429999935,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 9,
+      "placement_seconds": 282.11889000000156,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 15,
+      "placement_seconds": 182.8967268000015,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 14,
+      "placement_seconds": 215.18817069999932,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 18,
+      "placement_seconds": 176.05442439999752,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 16,
+      "placement_seconds": 270.12156250000044,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 17,
+      "placement_seconds": 322.1633582999966,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    },
+    {
+      "arm": "vurs",
+      "seed": 19,
+      "placement_seconds": 321.30160100000285,
+      "acquisitions": 247,
+      "order_matches_stored": true
+    }
+  ]
+}

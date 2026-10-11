@@ -113,3 +113,21 @@ def test_physical_axes_and_log_axes_round_trip():
     for p in sampler.ask():
         assert 1. <= p["omt"] <= 4. and .05 <= p["ky"] <= 2.
     assert np.allclose(sampler._to_unit(sampler._to_physical(sampler.x)), sampler.x)
+
+
+def test_rebuilding_from_records_matches_ask_tell(pool):
+    live = ResolutionSampler(UNIT_AXES, batch=5, candidates=pool.pool, seed=2)
+    done, values = [], []
+    for _ in range(3):
+        batch = live.ask()
+        told = list(pool(np.array([[p[n] for n in live.names] for p in batch])))
+        told[0] = None                                 # one failure per batch
+        live.tell(told)
+        done += batch
+        values += told
+    held = live.ask()
+    rebuilt = ResolutionSampler(UNIT_AXES, batch=5, candidates=pool.pool, seed=2)
+    rebuilt.observe(done, values)
+    rebuilt.hold(held)
+    assert rebuilt.failed_points == live.failed_points
+    assert rebuilt.ask() == live.ask()

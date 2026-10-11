@@ -228,7 +228,23 @@ class ResolutionSampler:
         if n > len(self.pending):
             raise ValueError(f"{n} values for {len(self.pending)} pending points")
         asked, self.pending = self.pending[:n], self.pending[n:]
-        where = asked if points is None else self._to_unit(points)
+        self._record(asked if points is None else self._to_unit(points), values, converged)
+
+    def observe(self, points, values, converged=None):
+        """Record outcomes at points this sampler did not ask for.
+
+        For a caller that keeps its own record of every run (e.g. a campaign
+        ledger) and rebuilds the sampler from it instead of saving `state()`.
+        Same outcome rules as `tell()`; pending points are left alone.
+        """
+        self._record(self._to_unit(points), list(values), converged)
+
+    def hold(self, points):
+        """Mark points as placed but not yet run, as if ask() had proposed them."""
+        self.pending = np.vstack([self.pending, self._to_unit(points)])
+
+    def _record(self, where, values, converged):
+        n = len(values)
         if len(where) != n:
             raise ValueError("one point per value required")
         flags = [True]*n if converged is None else [bool(c) for c in converged]

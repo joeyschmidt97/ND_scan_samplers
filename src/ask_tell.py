@@ -19,6 +19,11 @@ Outcomes a run can have, and what each does here:
                     `unconverged_noise` as that point's variance (in units of
                     the response variance) and the variation estimate treats
                     the matching spread as noise, not structure
+    measured noise  a per-point std in response units (`noise=` in tell/observe,
+                    e.g. a growth rate fitted from the field time trace): the GP
+                    gets (std / std(y))^2 as that point's variance and the
+                    variation estimate that std as its spread. It replaces the
+                    `unconverged_noise` default whatever the convergence flag
     failed          the simulation did not execute: no value exists. The point
                     is left out of the fit and of every later candidate set,
                     and is listed in `failed` for the caller to raise as an
@@ -86,6 +91,7 @@ class ResolutionSampler:
         self.x = np.empty((0, self.dim))
         self.y = np.empty(0)
         self.status = []          # CONVERGED or UNCONVERGED, one per told point
+        self.sigma = np.empty(0)  # measured std per told point, NaN where none given
         self.failed = []          # unit coordinates of runs that did not execute
         self.pending = np.empty((0, self.dim))
         self.fit_warnings = 0
@@ -170,17 +176,29 @@ class ResolutionSampler:
         self.pending = np.vstack([self.pending, chosen])
         return self._to_physical(chosen) if len(chosen) else []
 
+    def _noise(self):
+        """(GP alpha per point, variation spread per point), or (None, None) when
+        every point is converged with no measured std: the plain VURS fit."""
+        unconverged = np.array([s == UNCONVERGED for s in self.status], bool)
+        measured = np.isfinite(self.sigma)
+        if not (unconverged.any() or measured.any()):
+            return None, None
+        spread_y = float(np.std(self.y))
+        sigma = np.where(measured, self.sigma, 0.)
+        # normalize_y=True: alpha is in units of the response variance
+        alpha = np.where(measured, np.maximum((sigma/(spread_y or 1.0))**2, 1e-8),
+                         np.where(unconverged, self.unconverged_noise, 1e-8))
+        spread = np.where(measured, sigma,
+                          np.where(unconverged, np.sqrt(self.unconverged_noise)*spread_y, 0.))
+        return alpha, spread
+
     def _propose(self, n):
         rng = np.random.default_rng([self.seed, len(self.x), len(self.failed)])
         if self.pool is None:
             candidates = sobol_candidates(rng, self.dim, candidate_count(self.dim))
         else:
             candidates = self._open_pool()
-        unconverged = np.array([s == UNCONVERGED for s in self.status])
-        spread = None
-        if unconverged.any():
-            spread = np.where(unconverged, np.sqrt(self.unconverged_noise)*float(np.std(self.y)), 0.)
-        alpha = np.where(unconverged, self.unconverged_noise, 1e-8) if unconverged.any() else None
+        alpha, spread = self._noise()
         acquisition = Acquisition(self.x, self.y, candidates, self.seed, self.weights,
                                   uncertainty=self.uncertainty, nu=self.nu, noise=spread,
                                   gp_alpha=alpha)
@@ -214,7 +232,7 @@ class ResolutionSampler:
             chosen.append(candidates[int(np.argmax(spacing))][None, :])
         return np.vstack(chosen) if chosen else np.empty((0, self.dim))
 
-    def tell(self, values, points=None, converged=None):
+    def tell(self, values, points=None, converged=None, noise=None):
         """Report the oldest pending points' outcomes, in ask() order.
 
         values     one per point; None or NaN marks a run that failed to execute
@@ -222,36 +240,42 @@ class ResolutionSampler:
                    (e.g. the library equilibrium it was snapped to)
         converged  one bool per point; False keeps the value but marks it
                    uncertain. Default: all converged.
+        noise      one std per point in response units, None/NaN where not
+                   measured; a measured std sets that point's noise.
         """
         values = list(values)
         n = len(values)
         if n > len(self.pending):
             raise ValueError(f"{n} values for {len(self.pending)} pending points")
         asked, self.pending = self.pending[:n], self.pending[n:]
-        self._record(asked if points is None else self._to_unit(points), values, converged)
+        self._record(asked if points is None else self._to_unit(points), values, converged,
+                     noise)
 
-    def observe(self, points, values, converged=None):
+    def observe(self, points, values, converged=None, noise=None):
         """Record outcomes at points this sampler did not ask for.
 
         For a caller that keeps its own record of every run (e.g. a campaign
         ledger) and rebuilds the sampler from it instead of saving `state()`.
         Same outcome rules as `tell()`; pending points are left alone.
         """
-        self._record(self._to_unit(points), list(values), converged)
+        self._record(self._to_unit(points), list(values), converged, noise)
 
     def hold(self, points):
         """Mark points as placed but not yet run, as if ask() had proposed them."""
         self.pending = np.vstack([self.pending, self._to_unit(points)])
 
-    def _record(self, where, values, converged):
+    def _record(self, where, values, converged, noise=None):
         n = len(values)
         if len(where) != n:
             raise ValueError("one point per value required")
         flags = [True]*n if converged is None else [bool(c) for c in converged]
         if len(flags) != n:
             raise ValueError("one convergence flag per value required")
+        sigmas = [None]*n if noise is None else list(noise)
+        if len(sigmas) != n:
+            raise ValueError("one noise value per value required")
         known = {key(p) for p in self.x}
-        for u, value, ok in zip(where, values, flags):
+        for u, value, ok, sd in zip(where, values, flags, sigmas):
             if value is None or not np.isfinite(value):
                 self.failed.append(u)
                 continue
@@ -261,14 +285,17 @@ class ResolutionSampler:
             self.x = np.vstack([self.x, u])
             self.y = np.append(self.y, float(value))
             self.status.append(CONVERGED if ok else UNCONVERGED)
+            sd = np.nan if sd is None else float(sd)
+            if np.isfinite(sd) and sd < 0:
+                raise ValueError("noise must be a non-negative std")
+            self.sigma = np.append(self.sigma, sd)
 
     def surrogate(self):
         """GP mean over physical points (dict or row per point); VURS's own model."""
         if len(self.x) < 2:
             raise RuntimeError("nothing to fit yet")
-        unconverged = np.array([s == UNCONVERGED for s in self.status])
-        alpha = np.where(unconverged, self.unconverged_noise, 1e-8)
-        gp, _ = fit_gp_xy(self.x, self.y, self.seed, self.nu, alpha)
+        alpha, _ = self._noise()
+        gp, _ = fit_gp_xy(self.x, self.y, self.seed, self.nu, 1e-8 if alpha is None else alpha)
         return lambda points: gp.predict(self._to_unit([points] if isinstance(points, dict) else points))
 
     @property
@@ -286,6 +313,7 @@ class ResolutionSampler:
                     pool=None if self.pool is None else self.pool.tolist(),
                     initial=None if self.initial is None else self.initial.tolist(),
                     x=self.x.tolist(), y=self.y.tolist(), status=list(self.status),
+                    sigma=[None if not np.isfinite(v) else float(v) for v in self.sigma],
                     failed=np.reshape(self.failed, (-1, self.dim)).tolist(),
                     pending=self.pending.tolist(), fit_warnings=self.fit_warnings)
 
@@ -301,6 +329,8 @@ class ResolutionSampler:
         sampler.initial = None if state["initial"] is None else unit(state["initial"])
         sampler.x, sampler.y = unit(state["x"]), np.array(state["y"], float)
         sampler.status = list(state["status"])
+        sigma = state.get("sigma") or [None]*len(sampler.y)      # states saved before noise=
+        sampler.sigma = np.array([np.nan if v is None else v for v in sigma], float)
         sampler.failed = list(unit(state["failed"]))
         sampler.pending = unit(state["pending"])
         sampler.fit_warnings = state["fit_warnings"]

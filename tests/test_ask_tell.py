@@ -131,3 +131,45 @@ def test_rebuilding_from_records_matches_ask_tell(pool):
     rebuilt.hold(held)
     assert rebuilt.failed_points == live.failed_points
     assert rebuilt.ask() == live.ask()
+
+
+def test_measured_noise_sets_each_points_weight(pool):
+    fits = {}
+    for sd in (None, .001, 10.):
+        sampler = ResolutionSampler(UNIT_AXES, batch=4, candidates=pool.pool, seed=0)
+        initial = sampler.ask()
+        x = np.array([[p[n] for n in sampler.names] for p in initial])
+        y = pool(x)
+        sampler.tell(y, noise=[sd] + [None]*(len(x)-1))
+        fits[sd] = (sampler, x, y)
+    exact = fits[None][0].surrogate()(fits[None][1][:1])[0]
+    tight = fits[.001][0].surrogate()(fits[.001][1][:1])[0]
+    loose = fits[10.][0].surrogate()(fits[10.][1][:1])[0]
+    y0 = fits[None][2][0]
+    assert abs(tight-y0) < abs(loose-y0)                 # a large std lets the fit ignore it
+    assert np.isclose(exact, y0, rtol=1e-4)
+    assert len(fits[10.][0].ask()) == 4
+
+
+def test_measured_noise_overrides_the_unconverged_default(pool):
+    sampler = ResolutionSampler(UNIT_AXES, batch=4, candidates=pool.pool, seed=0)
+    initial = sampler.ask()
+    x = np.array([[p[n] for n in sampler.names] for p in initial])
+    converged = [False] + [True]*(len(x)-1)
+    sampler.tell(pool(x), converged=converged, noise=[.002] + [None]*(len(x)-1))
+    alpha, spread = sampler._noise()
+    assert np.isclose(spread[0], .002) and np.isclose(alpha[0], (.002/np.std(sampler.y))**2)
+    assert alpha[1] == 1e-8 and spread[1] == 0.
+
+
+def test_noise_survives_state_round_trip(pool):
+    sampler = ResolutionSampler(UNIT_AXES, batch=5, candidates=pool.pool, seed=3)
+    batch = sampler.ask()
+    sampler.tell(pool(np.array([[p[n] for n in sampler.names] for p in batch])),
+                 noise=[.01, None, None, .2] + [None]*(len(batch)-4))
+    clone = ResolutionSampler.from_state(sampler.state())
+    assert np.array_equal(np.isnan(clone.sigma), np.isnan(sampler.sigma))
+    assert clone.ask() == sampler.ask()
+    old = sampler.state()
+    old.pop("sigma")                                      # a state saved before noise=
+    assert np.isnan(ResolutionSampler.from_state(old).sigma).all()

@@ -54,6 +54,16 @@ EXPLORATION_PROFILES = {
     "vurs-avoid": dict(coverage=1/3, variation=1/3, uncertainty=1/3, boundary=-.3),
 }
 
+# TabPFN label arms (`label_model`): kept out of ARMS so the harness tests do
+# not need TabPFN installed. vurs-boundary-pfn is vurs-boundary with the kNN
+# boundary term replaced by TabPFN's normalized posterior entropy; pfn-entropy
+# is pure entropy (uncertainty) sampling, the classic active-learning arm.
+PFN_ARMS = {
+    "vurs-boundary-pfn": dict(coverage=.2, variation=.2, uncertainty=.2, boundary=.4),
+    "pfn-entropy": None,
+}
+LABEL_FLOOR = 1e-4      # probability floor for a realized label surprise
+
 # Batched VWRS/VURS: k points per acquisition, placed before any of their
 # values return. Suffix r ranks the top k of one acquisition; no suffix
 # re-ranks greedily with the fill distance updated per placed point.
@@ -339,7 +349,7 @@ class Acquisition:
 
     def __init__(self, x, y, candidates, seed, weights, uncertainty=False, mode="curvature",
                  anisotropic=False, nu=.5, labels=None, noise=None, gp_alpha=None,
-                 aleatoric=None):
+                 aleatoric=None, boundary_model="knn"):
         self.candidates = candidates
         self.weights, self.mode = weights, mode
         self.spacing = cKDTree(x).query(candidates)[0]
@@ -360,8 +370,15 @@ class Acquisition:
                                               alpha=1e-8 if gp_alpha is None else gp_alpha)
             sd = gp.predict(candidates, return_std=True)[1]
             self.terms.append(weights["uncertainty"]*sd/max(float(sd.max()), 1e-12))
+        self.label_posterior = None
         if weights.get("mode") or weights.get("boundary"):
             mode_term, boundary_term = label_terms(x, labels, candidates)
+            if boundary_model == "pfn":
+                from ND_scan_samplers.src.label_model import normalized_entropy, pfn_posterior
+                self.label_posterior = pfn_posterior(x, labels, candidates, int(np.max(labels))+1, seed)
+                boundary_term = normalized_entropy(self.label_posterior)
+            elif boundary_model != "knn":
+                raise ValueError(f"unknown boundary model {boundary_model!r}")
             self.terms.append(weights.get("mode", 0.)*mode_term/max(float(mode_term.max()), 1e-12))
             self.terms.append(weights.get("boundary", 0.)*boundary_term)
         if aleatoric is not None:
@@ -412,7 +429,8 @@ class Acquisition:
 
 def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                         noise_aware=False, allocation=False, replicate=False,
-                        anisotropic=False, nu=.5, weights=None, batch=1, batch_mode="greedy"):
+                        anisotropic=False, nu=.5, weights=None, batch=1, batch_mode="greedy",
+                        boundary_model="knn"):
     """VWRS and VURS with a dimension-free variation estimator.
 
     The 2D and 3D implementations weight fill distance by an observed Delaunay
@@ -448,6 +466,7 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
     warning_count = 0
     replicated = 0
     batch_sizes = []
+    realized = []
     while obs.remaining:
         candidates = candidates_for(obs, rng)
         acquisition = Acquisition(
@@ -455,7 +474,8 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
             anisotropic=anisotropic, nu=nu,
             labels=observed_labels(obs) if needs_labels else None,
             noise=reported_noise(obs) if (noise_aware or allocation) else None,
-            aleatoric=candidate_noise(obs, candidates) if allocation else None)
+            aleatoric=candidate_noise(obs, candidates) if allocation else None,
+            boundary_model=boundary_model)
         warning_count += acquisition.fit_warnings
         merit = mask_duplicates(acquisition.merit(), acquisition.spacing, obs)
         if batch > 1:
@@ -473,6 +493,8 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                 replicated += 1
                 continue
         obs(candidates[index])
+        if acquisition.label_posterior is not None:
+            realized.append(realized_bits(acquisition.label_posterior[index], observed_labels(obs)[-1]))
     metadata = dict(acquisition_weights=dict(weights), variation_mode=mode,
                     replicates_bought=replicated, max_replicates=MAX_REPLICATES,
                     noise_aware=bool(noise_aware or allocation),
@@ -484,6 +506,8 @@ def resolution_sampling(obs, seed, uncertainty=False, mode="curvature",
                     stencil=stencil_size(obs.dim), candidates=candidate_count(obs.dim))
     if batch > 1:
         metadata.update(batch=batch, batch_mode=batch_mode, batch_sizes=batch_sizes)
+    if boundary_model != "knn":
+        metadata.update(boundary_model=boundary_model, realized_label_bits=realized)
     if uncertainty:
         gp, count = fit_gp(obs, seed, nu=nu)
         metadata.update(fit_warnings=warning_count+count, kernel=str(gp.kernel_), matern_nu=nu)
@@ -559,6 +583,40 @@ def gating(query, history_x, history_errors, dim):
     return .9*inverse/inverse.sum(axis=1, keepdims=True)+.1/3
 
 
+def realized_bits(posterior, label):
+    """-log2 p(label) the label model gave a run just before it was paid for."""
+    p = float(posterior[label]) if label < len(posterior) else 0.
+    return float(-np.log2(max(p, LABEL_FLOOR)))
+
+
+def pfn_entropy_sampling(obs, seed):
+    """Pure TabPFN entropy sampling over the unpaid candidates.
+
+    A(c) = H~(c), the normalized posterior entropy of TabPFN conditioned on
+    the paid labels, with fill distance as a 1e-6 tie-break. Until two modes
+    have been paid the entropy is zero everywhere, so the arm space-fills.
+    """
+    from ND_scan_samplers.src.label_model import normalized_entropy, pfn_posterior
+    rng = np.random.default_rng(seed)
+    realized = []
+    while obs.remaining:
+        candidates = candidates_for(obs, rng)
+        labels = observed_labels(obs)
+        spacing = cKDTree(obs.x).query(candidates)[0]
+        tie = spacing/max(float(spacing.max()), 1e-12)
+        if len(np.unique(labels)) < 2:
+            posterior, merit = None, tie
+        else:
+            posterior = pfn_posterior(obs.x, labels, candidates, int(np.max(labels))+1, seed)
+            merit = normalized_entropy(posterior) + 1e-6*tie
+        index = int(np.argmax(mask_duplicates(merit, spacing, obs)))
+        obs(candidates[index])
+        if posterior is not None:
+            realized.append(realized_bits(posterior[index], observed_labels(obs)[-1]))
+    return None, dict(boundary_model="pfn", acquisition="normalized TabPFN entropy",
+                      realized_label_bits=realized)
+
+
 def run_arm(name, obs, seed):
     if name == "space-filling":
         return space_filling(obs, seed)
@@ -579,6 +637,11 @@ def run_arm(name, obs, seed):
     if name in EXPLORATION_PROFILES:
         return resolution_sampling(obs, seed, uncertainty=True,
                                    weights=dict(EXPLORATION_PROFILES[name]))
+    if name == "pfn-entropy":
+        return pfn_entropy_sampling(obs, seed)
+    if name in PFN_ARMS:
+        return resolution_sampling(obs, seed, uncertainty=True, weights=dict(PFN_ARMS[name]),
+                                   boundary_model="pfn")
     if name in VURS_VARIANTS:
         return resolution_sampling(obs, seed, uncertainty=True, **VURS_VARIANTS[name])
     if name in ("vwrs-m", "vurs-m"):

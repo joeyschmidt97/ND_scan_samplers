@@ -1,0 +1,380 @@
+80 runs, 4 workers x 4 threads
+[10:49:02] 1/80 hatch_pscans_global seed=0 pfn-entropy: placement 1505s N=256 label_acc 0.731
+[10:49:06] 2/80 hatch_pscans_global seed=1 pfn-entropy: placement 1509s N=256 label_acc 0.747
+[10:51:09] 3/80 hatch_pscans_global seed=0 vurs-boundary-pfn: placement 1632s N=256 label_acc 0.724
+[10:51:35] 4/80 hatch_pscans_global seed=1 vurs-boundary-pfn: placement 1658s N=256 label_acc 0.736
+[11:14:38] 5/80 hatch_pscans_global seed=2 pfn-entropy: placement 1532s N=256 label_acc 0.736
+[11:17:21] 6/80 hatch_pscans_global seed=2 vurs-boundary-pfn: placement 1699s N=256 label_acc 0.718
+[11:17:27] 7/80 hatch_pscans_global seed=3 pfn-entropy: placement 1552s N=256 label_acc 0.727
+[11:19:33] 8/80 hatch_pscans_global seed=3 vurs-boundary-pfn: placement 1704s N=256 label_acc 0.745
+[11:41:52] 9/80 hatch_pscans_global seed=4 vurs-boundary-pfn: placement 1633s N=256 label_acc 0.695
+[11:42:31] 10/80 hatch_pscans_global seed=4 pfn-entropy: placement 1510s N=256 label_acc 0.695
+[11:44:34] 11/80 hatch_pscans_global seed=5 vurs-boundary-pfn: placement 1627s N=256 label_acc 0.711
+[11:44:48] 12/80 hatch_pscans_global seed=5 pfn-entropy: placement 1514s N=256 label_acc 0.731
+[12:08:26] 13/80 hatch_pscans_global seed=6 pfn-entropy: placement 1555s N=256 label_acc 0.744
+[12:09:52] 14/80 hatch_pscans_global seed=6 vurs-boundary-pfn: placement 1680s N=256 label_acc 0.765
+[12:11:11] 15/80 hatch_pscans_global seed=7 pfn-entropy: placement 1583s N=256 label_acc 0.715
+[12:14:08] 16/80 hatch_pscans_global seed=7 vurs-boundary-pfn: placement 1773s N=256 label_acc 0.741
+[12:37:14] 17/80 hatch_pscans_global seed=8 pfn-entropy: placement 1642s N=256 label_acc 0.693
+[12:38:08] 18/80 hatch_pscans_global seed=8 vurs-boundary-pfn: placement 1781s N=256 label_acc 0.728
+[12:40:54] 19/80 hatch_pscans_global seed=9 vurs-boundary-pfn: placement 1783s N=256 label_acc 0.744
+[12:41:42] 20/80 hatch_pscans_global seed=9 pfn-entropy: placement 1654s N=256 label_acc 0.731
+[13:03:05] 21/80 hatch_pscans_global seed=10 pfn-entropy: placement 1497s N=256 label_acc 0.731
+[13:05:01] 22/80 hatch_pscans_global seed=10 vurs-boundary-pfn: placement 1666s N=256 label_acc 0.755
+[13:06:35] 23/80 hatch_pscans_global seed=11 pfn-entropy: placement 1493s N=256 label_acc 0.694
+[13:07:49] 24/80 hatch_pscans_global seed=11 vurs-boundary-pfn: placement 1614s N=256 label_acc 0.721
+[13:31:52] 25/80 hatch_pscans_global seed=12 vurs-boundary-pfn: placement 1726s N=256 label_acc 0.758
+[13:32:11] 26/80 hatch_pscans_global seed=12 pfn-entropy: placement 1630s N=256 label_acc 0.770
+[13:35:50] 27/80 hatch_pscans_global seed=13 pfn-entropy: placement 1681s N=256 label_acc 0.710
+[13:36:49] 28/80 hatch_pscans_global seed=13 vurs-boundary-pfn: placement 1813s N=256 label_acc 0.768
+[14:00:21] 29/80 hatch_pscans_global seed=14 pfn-entropy: placement 1690s N=256 label_acc 0.740
+[14:02:39] 30/80 hatch_pscans_global seed=14 vurs-boundary-pfn: placement 1846s N=256 label_acc 0.748
+[14:06:19] 31/80 hatch_pscans_global seed=15 pfn-entropy: placement 1769s N=256 label_acc 0.681
+[14:07:53] 32/80 hatch_pscans_global seed=15 vurs-boundary-pfn: placement 1922s N=256 label_acc 0.728
+[14:34:12] 33/80 hatch_pscans_global seed=16 pfn-entropy: placement 1893s N=256 label_acc 0.679
+[14:34:34] 34/80 hatch_pscans_global seed=16 vurs-boundary-pfn: placement 2053s N=256 label_acc 0.753
+[14:39:30] 35/80 hatch_pscans_global seed=17 pfn-entropy: placement 1896s N=256 label_acc 0.736
+[14:41:28] 36/80 hatch_pscans_global seed=17 vurs-boundary-pfn: placement 2109s N=256 label_acc 0.745
+[15:02:18] 37/80 hatch_pscans_global seed=18 pfn-entropy: placement 1664s N=256 label_acc 0.698
+[15:04:32] 38/80 hatch_pscans_global seed=18 vurs-boundary-pfn: placement 1820s N=256 label_acc 0.725
+[15:08:51] 39/80 hatch_pscans_global seed=19 pfn-entropy: placement 1642s N=256 label_acc 0.734
+[15:09:46] 40/80 hatch_pscans_global seed=19 vurs-boundary-pfn: placement 1816s N=256 label_acc 0.741
+[15:21:02] 41/80 hatch_pscans3 seed=0 vurs-boundary-pfn: placement 1124s N=256 label_acc 0.864
+[15:21:38] 42/80 hatch_pscans3 seed=0 pfn-entropy: placement 1026s N=256 label_acc 0.853
+[15:26:47] 43/80 hatch_pscans3 seed=1 pfn-entropy: placement 1020s N=256 label_acc 0.833
+[15:27:58] 44/80 hatch_pscans3 seed=1 vurs-boundary-pfn: placement 1147s N=256 label_acc 0.888
+[15:38:34] 45/80 hatch_pscans3 seed=2 pfn-entropy: placement 1015s N=256 label_acc 0.838
+[15:39:31] 46/80 hatch_pscans3 seed=2 vurs-boundary-pfn: placement 1109s N=256 label_acc 0.875
+[15:45:24] 47/80 hatch_pscans3 seed=3 pfn-entropy: placement 1047s N=256 label_acc 0.856
+[15:46:35] 48/80 hatch_pscans3 seed=3 vurs-boundary-pfn: placement 1188s N=256 label_acc 0.880
+[15:56:33] 49/80 hatch_pscans3 seed=4 pfn-entropy: placement 1021s N=256 label_acc 0.861
+[15:57:24] 50/80 hatch_pscans3 seed=4 vurs-boundary-pfn: placement 1130s N=256 label_acc 0.867
+[16:03:57] 51/80 hatch_pscans3 seed=5 pfn-entropy: placement 1041s N=256 label_acc 0.820
+[16:05:32] 52/80 hatch_pscans3 seed=5 vurs-boundary-pfn: placement 1207s N=256 label_acc 0.862
+[16:13:45] 53/80 hatch_pscans3 seed=6 pfn-entropy: placement 980s N=256 label_acc 0.862
+[16:14:36] 54/80 hatch_pscans3 seed=6 vurs-boundary-pfn: placement 1083s N=256 label_acc 0.869
+[16:21:15] 55/80 hatch_pscans3 seed=7 pfn-entropy: placement 944s N=256 label_acc 0.828
+[16:22:01] 56/80 hatch_pscans3 seed=7 vurs-boundary-pfn: placement 1084s N=256 label_acc 0.865
+[16:30:15] 57/80 hatch_pscans3 seed=8 pfn-entropy: placement 939s N=256 label_acc 0.857
+[16:31:09] 58/80 hatch_pscans3 seed=8 vurs-boundary-pfn: placement 1043s N=256 label_acc 0.867
+[16:37:53] 59/80 hatch_pscans3 seed=9 pfn-entropy: placement 951s N=256 label_acc 0.825
+[16:39:09] 60/80 hatch_pscans3 seed=9 vurs-boundary-pfn: placement 1073s N=256 label_acc 0.865
+[16:47:03] 61/80 hatch_pscans3 seed=10 pfn-entropy: placement 954s N=256 label_acc 0.851
+[16:47:36] 62/80 hatch_pscans3 seed=10 vurs-boundary-pfn: placement 1040s N=256 label_acc 0.875
+[16:55:12] 63/80 hatch_pscans3 seed=11 pfn-entropy: placement 963s N=256 label_acc 0.857
+[16:55:40] 64/80 hatch_pscans3 seed=11 vurs-boundary-pfn: placement 1067s N=256 label_acc 0.862
+[17:03:25] 65/80 hatch_pscans3 seed=12 pfn-entropy: placement 949s N=256 label_acc 0.812
+[17:05:12] 66/80 hatch_pscans3 seed=12 vurs-boundary-pfn: placement 1089s N=256 label_acc 0.887
+[17:11:48] 67/80 hatch_pscans3 seed=13 pfn-entropy: placement 968s N=256 label_acc 0.862
+[17:13:03] 68/80 hatch_pscans3 seed=13 vurs-boundary-pfn: placement 1070s N=256 label_acc 0.869
+[17:22:17] 69/80 hatch_pscans3 seed=14 pfn-entropy: placement 1025s N=256 label_acc 0.865
+[17:22:29] 70/80 hatch_pscans3 seed=14 vurs-boundary-pfn: placement 1144s N=256 label_acc 0.885
+[17:32:15] 71/80 hatch_pscans3 seed=15 pfn-entropy: placement 1152s N=256 label_acc 0.864
+[17:32:38] 72/80 hatch_pscans3 seed=15 vurs-boundary-pfn: placement 1250s N=256 label_acc 0.888
+[17:41:31] 73/80 hatch_pscans3 seed=16 pfn-entropy: placement 1141s N=256 label_acc 0.870
+[17:44:01] 74/80 hatch_pscans3 seed=16 vurs-boundary-pfn: placement 1303s N=256 label_acc 0.870
+[17:51:30] 75/80 hatch_pscans3 seed=17 pfn-entropy: placement 1132s N=256 label_acc 0.841
+[17:52:53] 76/80 hatch_pscans3 seed=17 vurs-boundary-pfn: placement 1238s N=256 label_acc 0.870
+[18:00:53] 77/80 hatch_pscans3 seed=18 vurs-boundary-pfn: placement 1162s N=256 label_acc 0.870
+[18:01:27] 78/80 hatch_pscans3 seed=18 pfn-entropy: placement 1046s N=256 label_acc 0.844
+[18:07:51] 79/80 hatch_pscans3 seed=19 pfn-entropy: placement 897s N=256 label_acc 0.831
+[18:08:22] 80/80 hatch_pscans3 seed=19 vurs-boundary-pfn: placement 1012s N=256 label_acc 0.874
+done in 27869s
+hatch_pscans_global: 100 trajectories to score
+hatch_pscans_global pfn-entropy seed 0: S1-band 1.676 S1-pfn 1.143 at N=61
+hatch_pscans_global pfn-entropy seed 1: S1-band 1.635 S1-pfn 1.157 at N=61
+hatch_pscans_global pfn-entropy seed 2: S1-band 1.656 S1-pfn 0.904 at N=61
+hatch_pscans_global pfn-entropy seed 3: S1-band 2.282 S1-pfn 1.818 at N=61
+hatch_pscans_global pfn-entropy seed 4: S1-band 1.663 S1-pfn 1.215 at N=61
+hatch_pscans_global pfn-entropy seed 5: S1-band 1.589 S1-pfn 1.183 at N=61
+hatch_pscans_global pfn-entropy seed 6: S1-band 2.148 S1-pfn 2.593 at N=61
+hatch_pscans_global pfn-entropy seed 7: S1-band 1.611 S1-pfn 0.940 at N=61
+hatch_pscans_global pfn-entropy seed 8: S1-band 1.575 S1-pfn 1.030 at N=61
+hatch_pscans_global pfn-entropy seed 9: S1-band 1.617 S1-pfn 0.865 at N=61
+hatch_pscans_global pfn-entropy seed 10: S1-band 1.636 S1-pfn 1.118 at N=61
+hatch_pscans_global pfn-entropy seed 11: S1-band 1.531 S1-pfn 0.998 at N=61
+hatch_pscans_global pfn-entropy seed 12: S1-band 1.640 S1-pfn 1.162 at N=61
+hatch_pscans_global pfn-entropy seed 13: S1-band 1.655 S1-pfn 0.998 at N=61
+hatch_pscans_global pfn-entropy seed 14: S1-band 1.661 S1-pfn 1.190 at N=61
+hatch_pscans_global pfn-entropy seed 15: S1-band 1.636 S1-pfn 1.172 at N=61
+hatch_pscans_global pfn-entropy seed 16: S1-band 1.961 S1-pfn 1.545 at N=61
+hatch_pscans_global pfn-entropy seed 17: S1-band 2.149 S1-pfn 1.829 at N=61
+hatch_pscans_global pfn-entropy seed 18: S1-band 2.155 S1-pfn 2.368 at N=61
+hatch_pscans_global pfn-entropy seed 19: S1-band 1.620 S1-pfn 1.167 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 0: S1-band 1.522 S1-pfn 1.022 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 1: S1-band 1.502 S1-pfn 0.928 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 2: S1-band 1.481 S1-pfn 0.859 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 3: S1-band 1.518 S1-pfn 1.014 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 4: S1-band 1.559 S1-pfn 0.995 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 5: S1-band 1.548 S1-pfn 1.035 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 6: S1-band 1.482 S1-pfn 1.101 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 7: S1-band 1.495 S1-pfn 0.923 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 8: S1-band 1.465 S1-pfn 0.921 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 9: S1-band 1.507 S1-pfn 0.927 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 10: S1-band 1.505 S1-pfn 0.870 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 11: S1-band 1.514 S1-pfn 1.001 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 12: S1-band 1.466 S1-pfn 0.954 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 13: S1-band 1.498 S1-pfn 0.865 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 14: S1-band 1.550 S1-pfn 1.027 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 15: S1-band 1.450 S1-pfn 0.962 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 16: S1-band 1.549 S1-pfn 0.934 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 17: S1-band 1.487 S1-pfn 0.942 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 18: S1-band 1.634 S1-pfn 1.132 at N=61
+hatch_pscans_global vurs-boundary-pfn seed 19: S1-band 1.522 S1-pfn 0.955 at N=61
+hatch_pscans_global space-filling seed 0: S1-band 1.471 S1-pfn 1.028 at N=61
+hatch_pscans_global space-filling seed 1: S1-band 1.388 S1-pfn 0.995 at N=61
+hatch_pscans_global space-filling seed 2: S1-band 1.437 S1-pfn 0.972 at N=61
+hatch_pscans_global space-filling seed 3: S1-band 1.527 S1-pfn 1.046 at N=61
+hatch_pscans_global space-filling seed 4: S1-band 1.440 S1-pfn 0.910 at N=61
+hatch_pscans_global space-filling seed 5: S1-band 1.456 S1-pfn 1.000 at N=61
+hatch_pscans_global space-filling seed 6: S1-band 1.503 S1-pfn 1.037 at N=61
+hatch_pscans_global space-filling seed 7: S1-band 1.480 S1-pfn 0.994 at N=61
+hatch_pscans_global space-filling seed 8: S1-band 1.431 S1-pfn 1.107 at N=61
+hatch_pscans_global space-filling seed 9: S1-band 1.417 S1-pfn 0.989 at N=61
+hatch_pscans_global space-filling seed 10: S1-band 1.463 S1-pfn 0.923 at N=61
+hatch_pscans_global space-filling seed 11: S1-band 1.445 S1-pfn 0.850 at N=61
+hatch_pscans_global space-filling seed 12: S1-band 1.435 S1-pfn 0.838 at N=61
+hatch_pscans_global space-filling seed 13: S1-band 1.446 S1-pfn 0.956 at N=61
+hatch_pscans_global space-filling seed 14: S1-band 1.538 S1-pfn 0.995 at N=61
+hatch_pscans_global space-filling seed 15: S1-band 1.576 S1-pfn 1.091 at N=61
+hatch_pscans_global space-filling seed 16: S1-band 1.500 S1-pfn 1.076 at N=61
+hatch_pscans_global space-filling seed 17: S1-band 1.425 S1-pfn 1.064 at N=61
+hatch_pscans_global space-filling seed 18: S1-band 1.471 S1-pfn 0.850 at N=61
+hatch_pscans_global space-filling seed 19: S1-band 1.442 S1-pfn 0.964 at N=61
+hatch_pscans_global vurs seed 0: S1-band 1.417 S1-pfn 0.989 at N=61
+hatch_pscans_global vurs seed 1: S1-band 1.514 S1-pfn 1.018 at N=61
+hatch_pscans_global vurs seed 2: S1-band 1.557 S1-pfn 0.924 at N=61
+hatch_pscans_global vurs seed 3: S1-band 1.521 S1-pfn 1.022 at N=61
+hatch_pscans_global vurs seed 4: S1-band 1.445 S1-pfn 0.873 at N=61
+hatch_pscans_global vurs seed 5: S1-band 1.556 S1-pfn 1.173 at N=61
+hatch_pscans_global vurs seed 6: S1-band 1.529 S1-pfn 1.153 at N=61
+hatch_pscans_global vurs seed 7: S1-band 1.598 S1-pfn 1.130 at N=61
+hatch_pscans_global vurs seed 8: S1-band 1.494 S1-pfn 0.972 at N=61
+hatch_pscans_global vurs seed 9: S1-band 1.402 S1-pfn 0.846 at N=61
+hatch_pscans_global vurs seed 10: S1-band 1.429 S1-pfn 0.881 at N=61
+hatch_pscans_global vurs seed 11: S1-band 1.522 S1-pfn 1.107 at N=61
+hatch_pscans_global vurs seed 12: S1-band 1.405 S1-pfn 0.874 at N=61
+hatch_pscans_global vurs seed 13: S1-band 1.434 S1-pfn 0.906 at N=61
+hatch_pscans_global vurs seed 14: S1-band 1.514 S1-pfn 1.041 at N=61
+hatch_pscans_global vurs seed 15: S1-band 1.424 S1-pfn 0.942 at N=61
+hatch_pscans_global vurs seed 16: S1-band 1.590 S1-pfn 1.164 at N=61
+hatch_pscans_global vurs seed 17: S1-band 1.467 S1-pfn 1.088 at N=61
+hatch_pscans_global vurs seed 18: S1-band 1.554 S1-pfn 1.003 at N=61
+hatch_pscans_global vurs seed 19: S1-band 1.433 S1-pfn 0.987 at N=61
+hatch_pscans_global vurs-boundary seed 0: S1-band 1.526 S1-pfn 1.003 at N=61
+hatch_pscans_global vurs-boundary seed 1: S1-band 1.460 S1-pfn 1.040 at N=61
+hatch_pscans_global vurs-boundary seed 2: S1-band 1.439 S1-pfn 0.899 at N=61
+hatch_pscans_global vurs-boundary seed 3: S1-band 1.540 S1-pfn 1.054 at N=61
+hatch_pscans_global vurs-boundary seed 4: S1-band 1.523 S1-pfn 0.912 at N=61
+hatch_pscans_global vurs-boundary seed 5: S1-band 1.617 S1-pfn 1.161 at N=61
+hatch_pscans_global vurs-boundary seed 6: S1-band 1.508 S1-pfn 1.006 at N=61
+hatch_pscans_global vurs-boundary seed 7: S1-band 1.502 S1-pfn 1.060 at N=61
+hatch_pscans_global vurs-boundary seed 8: S1-band 1.480 S1-pfn 0.930 at N=61
+hatch_pscans_global vurs-boundary seed 9: S1-band 1.459 S1-pfn 0.937 at N=61
+hatch_pscans_global vurs-boundary seed 10: S1-band 1.539 S1-pfn 1.011 at N=61
+hatch_pscans_global vurs-boundary seed 11: S1-band 1.529 S1-pfn 1.070 at N=61
+hatch_pscans_global vurs-boundary seed 12: S1-band 1.544 S1-pfn 1.033 at N=61
+hatch_pscans_global vurs-boundary seed 13: S1-band 1.492 S1-pfn 0.946 at N=61
+hatch_pscans_global vurs-boundary seed 14: S1-band 1.522 S1-pfn 1.116 at N=61
+hatch_pscans_global vurs-boundary seed 15: S1-band 1.508 S1-pfn 0.935 at N=61
+hatch_pscans_global vurs-boundary seed 16: S1-band 1.503 S1-pfn 0.965 at N=61
+hatch_pscans_global vurs-boundary seed 17: S1-band 1.575 S1-pfn 1.029 at N=61
+hatch_pscans_global vurs-boundary seed 18: S1-band 1.489 S1-pfn 0.994 at N=61
+hatch_pscans_global vurs-boundary seed 19: S1-band 1.472 S1-pfn 1.004 at N=61
+hatch_pscans3: 100 trajectories to score
+hatch_pscans3 pfn-entropy seed 0: S1-band 1.500 S1-pfn 0.829 at N=61
+hatch_pscans3 pfn-entropy seed 1: S1-band 1.430 S1-pfn 0.962 at N=61
+hatch_pscans3 pfn-entropy seed 2: S1-band 1.572 S1-pfn 1.000 at N=61
+hatch_pscans3 pfn-entropy seed 3: S1-band 1.458 S1-pfn 0.763 at N=61
+hatch_pscans3 pfn-entropy seed 4: S1-band 1.459 S1-pfn 0.769 at N=61
+hatch_pscans3 pfn-entropy seed 5: S1-band 1.411 S1-pfn 0.842 at N=61
+hatch_pscans3 pfn-entropy seed 6: S1-band 1.457 S1-pfn 1.018 at N=61
+hatch_pscans3 pfn-entropy seed 7: S1-band 1.638 S1-pfn 1.021 at N=61
+hatch_pscans3 pfn-entropy seed 8: S1-band 1.551 S1-pfn 0.919 at N=61
+hatch_pscans3 pfn-entropy seed 9: S1-band 1.427 S1-pfn 0.787 at N=61
+hatch_pscans3 pfn-entropy seed 10: S1-band 1.440 S1-pfn 0.960 at N=61
+hatch_pscans3 pfn-entropy seed 11: S1-band 1.419 S1-pfn 0.961 at N=61
+hatch_pscans3 pfn-entropy seed 12: S1-band 1.364 S1-pfn 0.786 at N=61
+hatch_pscans3 pfn-entropy seed 13: S1-band 1.454 S1-pfn 0.744 at N=61
+hatch_pscans3 pfn-entropy seed 14: S1-band 1.432 S1-pfn 0.786 at N=61
+hatch_pscans3 pfn-entropy seed 15: S1-band 1.474 S1-pfn 0.955 at N=61
+hatch_pscans3 pfn-entropy seed 16: S1-band 1.370 S1-pfn 0.820 at N=61
+hatch_pscans3 pfn-entropy seed 17: S1-band 1.468 S1-pfn 0.818 at N=61
+hatch_pscans3 pfn-entropy seed 18: S1-band 1.540 S1-pfn 0.893 at N=61
+hatch_pscans3 pfn-entropy seed 19: S1-band 1.382 S1-pfn 0.980 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 0: S1-band 1.358 S1-pfn 0.684 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 1: S1-band 1.337 S1-pfn 0.788 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 2: S1-band 1.343 S1-pfn 0.874 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 3: S1-band 1.311 S1-pfn 0.714 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 4: S1-band 1.303 S1-pfn 0.823 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 5: S1-band 1.320 S1-pfn 0.852 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 6: S1-band 1.311 S1-pfn 0.750 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 7: S1-band 1.326 S1-pfn 0.792 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 8: S1-band 1.316 S1-pfn 0.743 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 9: S1-band 1.280 S1-pfn 0.746 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 10: S1-band 1.321 S1-pfn 0.896 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 11: S1-band 1.364 S1-pfn 0.632 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 12: S1-band 1.327 S1-pfn 0.801 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 13: S1-band 1.367 S1-pfn 0.714 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 14: S1-band 1.307 S1-pfn 0.713 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 15: S1-band 1.284 S1-pfn 0.766 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 16: S1-band 1.363 S1-pfn 0.816 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 17: S1-band 1.341 S1-pfn 0.932 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 18: S1-band 1.276 S1-pfn 0.637 at N=61
+hatch_pscans3 vurs-boundary-pfn seed 19: S1-band 1.429 S1-pfn 0.876 at N=61
+hatch_pscans3 space-filling seed 0: S1-band 1.360 S1-pfn 0.912 at N=61
+hatch_pscans3 space-filling seed 1: S1-band 1.371 S1-pfn 0.889 at N=61
+hatch_pscans3 space-filling seed 2: S1-band 1.497 S1-pfn 1.332 at N=61
+hatch_pscans3 space-filling seed 3: S1-band 1.384 S1-pfn 1.073 at N=61
+hatch_pscans3 space-filling seed 4: S1-band 1.390 S1-pfn 0.997 at N=61
+hatch_pscans3 space-filling seed 5: S1-band 1.425 S1-pfn 1.215 at N=61
+hatch_pscans3 space-filling seed 6: S1-band 1.387 S1-pfn 0.931 at N=61
+hatch_pscans3 space-filling seed 7: S1-band 1.420 S1-pfn 0.932 at N=61
+hatch_pscans3 space-filling seed 8: S1-band 1.505 S1-pfn 1.092 at N=61
+hatch_pscans3 space-filling seed 9: S1-band 1.431 S1-pfn 1.267 at N=61
+hatch_pscans3 space-filling seed 10: S1-band 1.393 S1-pfn 0.856 at N=61
+hatch_pscans3 space-filling seed 11: S1-band 1.353 S1-pfn 0.860 at N=61
+hatch_pscans3 space-filling seed 12: S1-band 1.422 S1-pfn 0.925 at N=61
+hatch_pscans3 space-filling seed 13: S1-band 1.321 S1-pfn 0.768 at N=61
+hatch_pscans3 space-filling seed 14: S1-band 1.368 S1-pfn 1.049 at N=61
+hatch_pscans3 space-filling seed 15: S1-band 1.406 S1-pfn 0.948 at N=61
+hatch_pscans3 space-filling seed 16: S1-band 1.417 S1-pfn 1.168 at N=61
+hatch_pscans3 space-filling seed 17: S1-band 1.441 S1-pfn 1.006 at N=61
+hatch_pscans3 space-filling seed 18: S1-band 1.500 S1-pfn 1.310 at N=61
+hatch_pscans3 space-filling seed 19: S1-band 1.426 S1-pfn 1.096 at N=61
+hatch_pscans3 vurs seed 0: S1-band 1.282 S1-pfn 0.854 at N=61
+hatch_pscans3 vurs seed 1: S1-band 1.411 S1-pfn 1.001 at N=61
+hatch_pscans3 vurs seed 2: S1-band 1.303 S1-pfn 1.116 at N=61
+hatch_pscans3 vurs seed 3: S1-band 1.294 S1-pfn 0.770 at N=61
+hatch_pscans3 vurs seed 4: S1-band 1.326 S1-pfn 0.920 at N=61
+hatch_pscans3 vurs seed 5: S1-band 1.360 S1-pfn 0.886 at N=61
+hatch_pscans3 vurs seed 6: S1-band 1.418 S1-pfn 1.096 at N=61
+hatch_pscans3 vurs seed 7: S1-band 1.420 S1-pfn 0.851 at N=61
+hatch_pscans3 vurs seed 8: S1-band 1.399 S1-pfn 1.132 at N=61
+hatch_pscans3 vurs seed 9: S1-band 1.302 S1-pfn 0.886 at N=61
+hatch_pscans3 vurs seed 10: S1-band 1.293 S1-pfn 0.694 at N=61
+hatch_pscans3 vurs seed 11: S1-band 1.378 S1-pfn 1.200 at N=61
+hatch_pscans3 vurs seed 12: S1-band 1.326 S1-pfn 0.725 at N=61
+hatch_pscans3 vurs seed 13: S1-band 1.341 S1-pfn 0.663 at N=61
+hatch_pscans3 vurs seed 14: S1-band 1.379 S1-pfn 0.954 at N=61
+hatch_pscans3 vurs seed 15: S1-band 1.219 S1-pfn 0.785 at N=61
+hatch_pscans3 vurs seed 16: S1-band 1.340 S1-pfn 0.849 at N=61
+hatch_pscans3 vurs seed 17: S1-band 1.292 S1-pfn 0.685 at N=61
+hatch_pscans3 vurs seed 18: S1-band 1.293 S1-pfn 0.669 at N=61
+hatch_pscans3 vurs seed 19: S1-band 1.305 S1-pfn 0.810 at N=61
+hatch_pscans3 vurs-boundary seed 0: S1-band 1.278 S1-pfn 0.730 at N=61
+hatch_pscans3 vurs-boundary seed 1: S1-band 1.261 S1-pfn 0.642 at N=61
+hatch_pscans3 vurs-boundary seed 2: S1-band 1.336 S1-pfn 0.945 at N=61
+hatch_pscans3 vurs-boundary seed 3: S1-band 1.288 S1-pfn 0.877 at N=61
+hatch_pscans3 vurs-boundary seed 4: S1-band 1.321 S1-pfn 0.933 at N=61
+hatch_pscans3 vurs-boundary seed 5: S1-band 1.249 S1-pfn 0.788 at N=61
+hatch_pscans3 vurs-boundary seed 6: S1-band 1.371 S1-pfn 0.904 at N=61
+hatch_pscans3 vurs-boundary seed 7: S1-band 1.499 S1-pfn 1.084 at N=61
+hatch_pscans3 vurs-boundary seed 8: S1-band 1.389 S1-pfn 0.934 at N=61
+hatch_pscans3 vurs-boundary seed 9: S1-band 1.314 S1-pfn 0.929 at N=61
+hatch_pscans3 vurs-boundary seed 10: S1-band 1.267 S1-pfn 0.771 at N=61
+hatch_pscans3 vurs-boundary seed 11: S1-band 1.313 S1-pfn 0.785 at N=61
+hatch_pscans3 vurs-boundary seed 12: S1-band 1.279 S1-pfn 0.749 at N=61
+hatch_pscans3 vurs-boundary seed 13: S1-band 1.363 S1-pfn 0.718 at N=61
+hatch_pscans3 vurs-boundary seed 14: S1-band 1.381 S1-pfn 0.924 at N=61
+hatch_pscans3 vurs-boundary seed 15: S1-band 1.208 S1-pfn 0.656 at N=61
+hatch_pscans3 vurs-boundary seed 16: S1-band 1.433 S1-pfn 1.134 at N=61
+hatch_pscans3 vurs-boundary seed 17: S1-band 1.258 S1-pfn 0.655 at N=61
+hatch_pscans3 vurs-boundary seed 18: S1-band 1.332 S1-pfn 1.054 at N=61
+hatch_pscans3 vurs-boundary seed 19: S1-band 1.261 S1-pfn 0.846 at N=61
+# TabPFN label arms vs VURS on the MGKDB pools
+
+## hatch_pscans_global
+
+| endpoint | comparison | arm | other | d (CI) | wins | Holm p | verdict |
+|---|---|---|---|---|---|---|---|
+| S1 | A vurs-boundary-pfn - vurs-boundary | 1.490 | 1.474 | +0.017 [-0.012, +0.044] | 7/20 | 0.81 | same speed |
+| S1 | B vurs-boundary-pfn - vurs | 1.490 | 1.464 | +0.027 [+0.000, +0.052] | 6/20 | 0.379 | inconclusive |
+| S1 | C pfn-entropy - vurs | 1.700 | 1.464 | +0.236 [+0.163, +0.318] | 0/20 | 1.14e-05 | slower |
+| S2 | A vurs-boundary-pfn - vurs-boundary | 1.492 | 1.434 | +0.057 [-0.422, +0.525] | 9/20 | 1 | inconclusive |
+| S2 | B vurs-boundary-pfn - vurs | 1.492 | 1.358 | +0.133 [-0.221, +0.459] | 7/20 | 1 | inconclusive |
+| S2 | C pfn-entropy - vurs | 3.241 | 1.358 | +1.883 [-0.067, +4.907] | 6/20 | 1 | inconclusive |
+
+| secondary | comparison | d (CI) | wins | p |
+|---|---|---|---|---|
+| S1 band | A | +0.008 [-0.021, +0.038] | 7/20 | 0.498 |
+| S1 band | B | +0.017 [-0.008, +0.040] | 7/20 | 0.202 |
+| S1 band | C | +0.208 [+0.135, +0.290] | 0/20 | 1.91e-06 |
+| S1 band | space-filling vs vurs | +0.004 [-0.023, +0.032] | 10/20 | 0.985 |
+| S1 TabPFN scorer | A | -0.010 [-0.043, +0.025] | 11/20 | 0.498 |
+| S1 TabPFN scorer | B | -0.030 [-0.080, +0.020] | 10/20 | 0.452 |
+| S1 TabPFN scorer | C | +0.256 [+0.100, +0.436] | 3/20 | 0.00271 |
+| S1 TabPFN scorer | space-filling vs vurs | +0.028 [-0.013, +0.069] | 8/20 | 0.312 |
+| S1 TabPFN scorer, band | A | +0.001 [-0.031, +0.034] | 11/20 | 0.869 |
+| S1 TabPFN scorer, band | B | -0.024 [-0.070, +0.022] | 9/20 | 0.622 |
+| S1 TabPFN scorer, band | C | +0.239 [+0.090, +0.412] | 4/20 | 0.00271 |
+| S1 TabPFN scorer, band | space-filling vs vurs | +0.050 [+0.008, +0.093] | 8/20 | 0.0484 |
+| label accuracy | A | +0.001 [-0.009, +0.012] | 10/20 | 0.985 |
+| label accuracy | B | -0.005 [-0.013, +0.003] | 8/20 | 0.368 |
+| label accuracy | C | -0.039 [-0.065, -0.016] | 4/20 | 0.00558 |
+| label accuracy | space-filling vs vurs | +0.014 [+0.006, +0.021] | 16/20 | 0.00315 |
+| ctr_macro_nrmse | A | -0.070 [-0.169, +0.030] | 11/20 | 0.261 |
+| ctr_macro_nrmse | B | -0.089 [-0.195, +0.005] | 12/20 | 0.143 |
+| ctr_macro_nrmse | C | +0.035 [-0.172, +0.249] | 11/20 | 1 |
+| ctr_macro_nrmse | space-filling vs vurs | +0.007 [-0.138, +0.142] | 9/20 | 0.784 |
+| S1 at N=256 | A | +0.023 [+0.001, +0.045] | 8/20 | 0.0583 |
+| S1 at N=256 | B | -0.011 [-0.028, +0.007] | 14/20 | 0.245 |
+| S1 at N=256 | C | +0.081 [+0.058, +0.103] | 2/20 | 3.62e-05 |
+| S1 at N=256 | space-filling vs vurs | -0.037 [-0.058, -0.016] | 14/20 | 0.00558 |
+| S2 at N=256 | A | +0.163 [+0.111, +0.212] | 3/20 | 6.29e-05 |
+| S2 at N=256 | B | +0.150 [+0.106, +0.193] | 1/20 | 1.91e-05 |
+| S2 at N=256 | C | +0.707 [+0.582, +0.843] | 0/20 | 1.91e-06 |
+| S2 at N=256 | space-filling vs vurs | +0.011 [-0.030, +0.050] | 8/20 | 0.571 |
+
+vurs-boundary-pfn: mean realized label surprise 1.324 bits per paid run, median placement 1750 s
+
+pfn-entropy: mean realized label surprise 1.471 bits per paid run, median placement 1606 s
+
+## hatch_pscans3
+
+| endpoint | comparison | arm | other | d (CI) | wins | Holm p | verdict |
+|---|---|---|---|---|---|---|---|
+| S1 | A vurs-boundary-pfn - vurs-boundary | 1.260 | 1.244 | +0.016 [-0.014, +0.047] | 8/20 | 0.649 | same speed |
+| S1 | B vurs-boundary-pfn - vurs | 1.260 | 1.252 | +0.009 [-0.029, +0.042] | 7/20 | 0.649 | same speed |
+| S1 | C pfn-entropy - vurs | 1.403 | 1.252 | +0.152 [+0.105, +0.197] | 3/20 | 0.000286 | slower |
+| S2 | A vurs-boundary-pfn - vurs-boundary | 2.036 | 1.820 | +0.216 [-0.113, +0.512] | 7/20 | 0.319 | inconclusive |
+| S2 | B vurs-boundary-pfn - vurs | 2.036 | 2.057 | -0.021 [-0.421, +0.317] | 7/20 | 0.649 | inconclusive |
+| S2 | C pfn-entropy - vurs | 2.257 | 2.057 | +0.200 [-0.384, +0.679] | 4/20 | 0.456 | inconclusive |
+
+| secondary | comparison | d (CI) | wins | p |
+|---|---|---|---|---|
+| S1 band | A | -0.005 [-0.027, +0.018] | 10/20 | 0.571 |
+| S1 band | B | -0.019 [-0.049, +0.008] | 8/20 | 0.756 |
+| S1 band | C | +0.103 [+0.063, +0.140] | 3/20 | 8.2e-05 |
+| S1 band | space-filling vs vurs | +0.053 [+0.023, +0.084] | 4/20 | 0.00315 |
+| S1 TabPFN scorer | A | -0.067 [-0.131, +0.003] | 15/20 | 0.0484 |
+| S1 TabPFN scorer | B | -0.072 [-0.145, +0.000] | 11/20 | 0.165 |
+| S1 TabPFN scorer | C | -0.005 [-0.082, +0.075] | 8/20 | 1 |
+| S1 TabPFN scorer | space-filling vs vurs | +0.077 [+0.010, +0.144] | 7/20 | 0.0441 |
+| S1 TabPFN scorer, band | A | -0.093 [-0.144, -0.036] | 15/20 | 0.00639 |
+| S1 TabPFN scorer, band | B | -0.113 [-0.176, -0.051] | 17/20 | 0.00199 |
+| S1 TabPFN scorer, band | C | -0.058 [-0.126, +0.017] | 15/20 | 0.04 |
+| S1 TabPFN scorer, band | space-filling vs vurs | +0.095 [+0.039, +0.151] | 6/20 | 0.00486 |
+| label accuracy | A | -0.024 [-0.035, -0.015] | 2/20 | 0.000168 |
+| label accuracy | B | -0.023 [-0.033, -0.013] | 3/20 | 8.2e-05 |
+| label accuracy | C | -0.025 [-0.040, -0.010] | 5/20 | 0.00486 |
+| label accuracy | space-filling vs vurs | +0.003 [-0.004, +0.011] | 11/20 | 0.498 |
+| ctr_macro_nrmse | A | -0.002 [-0.049, +0.033] | 9/20 | 0.216 |
+| ctr_macro_nrmse | B | +0.024 [+0.010, +0.041] | 4/20 | 0.00315 |
+| ctr_macro_nrmse | C | +0.076 [+0.027, +0.155] | 1/20 | 5.72e-06 |
+| ctr_macro_nrmse | space-filling vs vurs | +1.408 [+0.008, +4.194] | 5/20 | 0.00831 |
+| S1 at N=256 | A | -0.030 [-0.057, -0.004] | 14/20 | 0.0637 |
+| S1 at N=256 | B | -0.079 [-0.100, -0.060] | 19/20 | 3.81e-06 |
+| S1 at N=256 | C | +0.067 [+0.049, +0.086] | 0/20 | 1.91e-06 |
+| S1 at N=256 | space-filling vs vurs | +0.013 [-0.012, +0.037] | 10/20 | 0.368 |
+| S2 at N=256 | A | +0.095 [+0.022, +0.162] | 6/20 | 0.0172 |
+| S2 at N=256 | B | +0.118 [+0.022, +0.215] | 5/20 | 0.0532 |
+| S2 at N=256 | C | +0.592 [+0.454, +0.735] | 0/20 | 1.91e-06 |
+| S2 at N=256 | space-filling vs vurs | -0.032 [-0.129, +0.076] | 12/20 | 0.33 |
+
+vurs-boundary-pfn: mean realized label surprise 0.866 bits per paid run, median placement 1116 s
+
+pfn-entropy: mean realized label surprise 0.978 bits per paid run, median placement 1018 s
+
+Claim (TabPFN boundary term helps): False
+

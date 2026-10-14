@@ -1,0 +1,1418 @@
+{
+  "protocol": "TabPFN label arms on the MGKDB pools against VURS (registered 2026-10-13).\n\nProtocol, registered before any TabPFN-arm run on the pools:\n\nQuestion. Does replacing VURS's nearest-paid (kNN) boundary term with\nTabPFN's posterior entropy make a campaign learn the mode map faster, without\nslowing how fast it learns the growth rate? Context: the FMC matched-budget\nlearning curves (Fusion_Microinstability_Classifier `1437fb8`) showed TabPFN\nbeats tuned XGBoost on held-out label surprise at every n from 50 to 1,000\nwith random training sets. This study asks whether that label model also\nplaces runs better. It is a measurement; it does not choose a default.\n\nArms.\n- vurs-boundary-pfn: the vurs-boundary profile (coverage .2, variation .2,\n  GP uncertainty .2, boundary .4) with the boundary term replaced by TabPFN's\n  normalized entropy over the unpaid candidates (`label_model`).\n- pfn-entropy: pure TabPFN entropy sampling (the classic active-learning arm;\n  no coverage, variation or GP term; space-fills until two modes are paid).\n- References, reused from the stored board (they reproduce exactly in this\n  environment, checked 2026-10-13): vurs (REFERENCE), vurs-boundary (the\n  kNN-boundary twin), space-filling (value-blind context).\nTabPFN: keyless v2 weights, CPU, 4 ensemble members inside the acquisition\nloop. Pools, seeds, budget, design, checkpoints: as `pool_batch_board`\n(hatch_pscans_global and hatch_pscans3, seeds 0-19, budget 256, shared\n9-point start, checkpoints 9 ... 256).\n\nPrimary endpoints (as the board): per seed, the mean over CAMPAIGN\ncheckpoints N = 23, 38, 61, 98 of\n- S1 label surprise, bits (`s_label_bits`, Dirichlet-kNN scorer), margin 0.05;\n- S2 growth-rate surprise, nats (`s_gamma_nats`), margin 0.10;\nlower is better. The scorers are the board's: neither is TabPFN, so no arm\ngrades itself.\n\nComparisons, d = arm - other paired by seed (negative: the arm is less\nsurprised, i.e. better), mean, 95% bootstrap CI (10,000 seed resamples),\nWilcoxon signed-rank p, Holm within each pool over 3 comparisons x 2\nendpoints = 6 tests:\n  A  vurs-boundary-pfn - vurs-boundary   (the registered question)\n  B  vurs-boundary-pfn - vurs\n  C  pfn-entropy - vurs\nVerdicts: `surprise_board.verdict` (\"faster\", \"slower\", \"same speed\",\n\"not slower\", \"inconclusive\").\n\nClaim. \"The TabPFN boundary term helps\" only if comparison A is \"faster\" on\nS1 in both pools and its S2 verdict is \"faster\", \"same speed\" or \"not\nslower\" in both pools. Anything else is reported as found.\n\nSecondary (paired, bootstrap CI and uncorrected Wilcoxon, no verdicts): S1\non held transition-band runs (`pool.transition_band`); S1 under a TabPFN\nscorer (8 members, shrunk toward uniform with the board's Jeffreys\npseudo-counts) on all held runs and on band runs, read with the caveat that\nit favours the TabPFN arms; `label_accuracy`, `ctr_macro_nrmse`; S1 and S2 at\nN = 256; seeds won out of 20 for every comparison. Descriptive: realized\nlabel surprise of each run the TabPFN arms paid for, -log2 p_before(label),\nand placement wall time.\n\n    python -m ND_scan_samplers.scripts.experiments.pool_pfn --output results/pool-pfn-2026-10-13\n    python -m ND_scan_samplers.scripts.analysis.pool_pfn_board score --root results/pool-pfn-2026-10-13\n    python -m ND_scan_samplers.scripts.analysis.pool_pfn_board analyse --root results/pool-pfn-2026-10-13\n",
+  "pools": {
+    "hatch_pscans_global": {
+      "primary": {
+        "S1": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.016591774210555375,
+            "ci": [
+              -0.011649509080569269,
+              0.04449156860249631
+            ],
+            "p": 0.20244979858398438,
+            "arm_mean": 1.4904478327958546,
+            "other_mean": 1.4738560585852993,
+            "wins": "7/20",
+            "p_holm": 0.8097991943359375,
+            "verdict": "same speed"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.02658832560413956,
+            "ci": [
+              0.0003654415479820592,
+              0.051945271450324224
+            ],
+            "p": 0.0758514404296875,
+            "arm_mean": 1.4904478327958546,
+            "other_mean": 1.463859507191715,
+            "wins": "6/20",
+            "p_holm": 0.3792572021484375,
+            "verdict": "inconclusive"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.23610226549979457,
+            "ci": [
+              0.1625837023403931,
+              0.31793805923692425
+            ],
+            "p": 1.9073486328125e-06,
+            "arm_mean": 1.6999617726915097,
+            "other_mean": 1.463859507191715,
+            "wins": "0/20",
+            "p_holm": 1.1444091796875e-05,
+            "verdict": "slower"
+          }
+        },
+        "S2": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.057209455839383125,
+            "ci": [
+              -0.42186761033718073,
+              0.5245032793714217
+            ],
+            "p": 0.7841262817382812,
+            "arm_mean": 1.4915341084549034,
+            "other_mean": 1.4343246526155204,
+            "wins": "9/20",
+            "p_holm": 1.0,
+            "verdict": "inconclusive"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.13323725304675887,
+            "ci": [
+              -0.22129976216351843,
+              0.4589116585073937
+            ],
+            "p": 0.34881019592285156,
+            "arm_mean": 1.4915341084549034,
+            "other_mean": 1.358296855408145,
+            "wins": "7/20",
+            "p_holm": 1.0,
+            "verdict": "inconclusive"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 1.8825702610128137,
+            "ci": [
+              -0.06673434730145858,
+              4.907331956390566
+            ],
+            "p": 0.34881019592285156,
+            "arm_mean": 3.240867116420958,
+            "other_mean": 1.358296855408145,
+            "wins": "6/20",
+            "p_holm": 1.0,
+            "verdict": "inconclusive"
+          }
+        }
+      },
+      "secondary": {
+        "S1 band": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.007558290112440325,
+            "ci": [
+              -0.020999904297286466,
+              0.037697989239496105
+            ],
+            "p": 0.49800872802734375,
+            "arm_mean": 1.5858012330993172,
+            "other_mean": 1.5782429429868765,
+            "wins": "7/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.016597893387179763,
+            "ci": [
+              -0.00784814314208358,
+              0.04015063837474818
+            ],
+            "p": 0.20244979858398438,
+            "arm_mean": 1.5858012330993172,
+            "other_mean": 1.5692033397121372,
+            "wins": "7/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.20840618563177618,
+            "ci": [
+              0.13521811344064644,
+              0.28961213775203676
+            ],
+            "p": 1.9073486328125e-06,
+            "arm_mean": 1.7776095253439137,
+            "other_mean": 1.5692033397121372,
+            "wins": "0/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.0039536902456427155,
+            "ci": [
+              -0.02280205207555385,
+              0.03199790235882272
+            ],
+            "p": 0.9854354858398438,
+            "arm_mean": 1.5731570299577802,
+            "other_mean": 1.5692033397121372,
+            "wins": "10/20"
+          }
+        },
+        "S1 TabPFN scorer": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.009778373690897069,
+            "ci": [
+              -0.04265386462509766,
+              0.02451654589486134
+            ],
+            "p": 0.49800872802734375,
+            "arm_mean": 1.0991820318655994,
+            "other_mean": 1.1089604055564966,
+            "wins": "11/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.03004040724552141,
+            "ci": [
+              -0.08024406788063329,
+              0.020429909490531858
+            ],
+            "p": 0.4523754119873047,
+            "arm_mean": 1.0991820318655994,
+            "other_mean": 1.1292224391111207,
+            "wins": "10/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.2564828324497893,
+            "ci": [
+              0.09964958149168643,
+              0.43638152068408664
+            ],
+            "p": 0.002712249755859375,
+            "arm_mean": 1.38570527156091,
+            "other_mean": 1.1292224391111207,
+            "wins": "3/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.027579205177564837,
+            "ci": [
+              -0.013364929664676738,
+              0.06867552671007704
+            ],
+            "p": 0.3117942810058594,
+            "arm_mean": 1.1568016442886857,
+            "other_mean": 1.1292224391111207,
+            "wins": "8/20"
+          }
+        },
+        "S1 TabPFN scorer, band": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.0012332779791313752,
+            "ci": [
+              -0.031043155558470578,
+              0.034462260373376116
+            ],
+            "p": 0.8694877624511719,
+            "arm_mean": 1.2529507222719425,
+            "other_mean": 1.2517174442928107,
+            "wins": "11/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.023783368726884867,
+            "ci": [
+              -0.07031683698615791,
+              0.0221715108823317
+            ],
+            "p": 0.6215133666992188,
+            "arm_mean": 1.2529507222719425,
+            "other_mean": 1.276734090998827,
+            "wins": "9/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.23939667088398728,
+            "ci": [
+              0.08985399862301464,
+              0.4115698473690277
+            ],
+            "p": 0.002712249755859375,
+            "arm_mean": 1.5161307618828146,
+            "other_mean": 1.276734090998827,
+            "wins": "4/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.05028462211178508,
+            "ci": [
+              0.008349641247445841,
+              0.09292984413432215
+            ],
+            "p": 0.04844093322753906,
+            "arm_mean": 1.3270187131106121,
+            "other_mean": 1.276734090998827,
+            "wins": "8/20"
+          }
+        },
+        "label accuracy": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.0012636837360081755,
+            "ci": [
+              -0.008682875687980764,
+              0.011918096781347214
+            ],
+            "p": 0.9854354858398438,
+            "arm_mean": 0.6625157366098634,
+            "other_mean": 0.6612520528738552,
+            "wins": "10/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.0049335115223891664,
+            "ci": [
+              -0.013465955026791501,
+              0.003416020918189854
+            ],
+            "p": 0.36827659606933594,
+            "arm_mean": 0.6625157366098634,
+            "other_mean": 0.6674492481322527,
+            "wins": "8/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": -0.0386063234331419,
+            "ci": [
+              -0.06461588349189924,
+              -0.016123117825039272
+            ],
+            "p": 0.005580902099609375,
+            "arm_mean": 0.6288429246991106,
+            "other_mean": 0.6674492481322527,
+            "wins": "4/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.013628067771695358,
+            "ci": [
+              0.006145464132624571,
+              0.021123475471489867
+            ],
+            "p": 0.0031528472900390625,
+            "arm_mean": 0.681077315903948,
+            "other_mean": 0.6674492481322527,
+            "wins": "16/20"
+          }
+        },
+        "ctr_macro_nrmse": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.06950633319270982,
+            "ci": [
+              -0.16940003259867392,
+              0.02959887609635382
+            ],
+            "p": 0.26109886169433594,
+            "arm_mean": 0.7120838794063398,
+            "other_mean": 0.7815902125990496,
+            "wins": "11/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.08862347057161897,
+            "ci": [
+              -0.19453157861548742,
+              0.00478381543155579
+            ],
+            "p": 0.14290618896484375,
+            "arm_mean": 0.7120838794063398,
+            "other_mean": 0.8007073499779587,
+            "wins": "12/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.034972087259447504,
+            "ci": [
+              -0.17165642382173943,
+              0.24873941473570496
+            ],
+            "p": 1.0,
+            "arm_mean": 0.8356794372374061,
+            "other_mean": 0.8007073499779587,
+            "wins": "11/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.006543786959217779,
+            "ci": [
+              -0.13773702113896036,
+              0.14227179797835346
+            ],
+            "p": 0.7841262817382812,
+            "arm_mean": 0.8072511369371765,
+            "other_mean": 0.8007073499779587,
+            "wins": "9/20"
+          }
+        },
+        "S1 at N=256": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.023139896609780698,
+            "ci": [
+              0.00091105039178017,
+              0.04549400440220056
+            ],
+            "p": 0.058258056640625,
+            "arm_mean": 1.0099108802057608,
+            "other_mean": 0.9867709835959803,
+            "wins": "8/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.010864610177855005,
+            "ci": [
+              -0.02787012371550502,
+              0.006934823089279147
+            ],
+            "p": 0.24548721313476562,
+            "arm_mean": 1.0099108802057608,
+            "other_mean": 1.020775490383616,
+            "wins": "14/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.08125227382608351,
+            "ci": [
+              0.058047936298844645,
+              0.1026458049369184
+            ],
+            "p": 3.62396240234375e-05,
+            "arm_mean": 1.1020277642096994,
+            "other_mean": 1.020775490383616,
+            "wins": "2/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": -0.036646948210406476,
+            "ci": [
+              -0.058179485574195354,
+              -0.016165928861112424
+            ],
+            "p": 0.005580902099609375,
+            "arm_mean": 0.9841285421732098,
+            "other_mean": 1.020775490383616,
+            "wins": "14/20"
+          }
+        },
+        "S2 at N=256": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.1633812435763165,
+            "ci": [
+              0.11134618407233457,
+              0.21175593044130617
+            ],
+            "p": 6.29425048828125e-05,
+            "arm_mean": -0.07538486704468453,
+            "other_mean": -0.23876611062100098,
+            "wins": "3/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.14978416095657648,
+            "ci": [
+              0.10572456548715338,
+              0.1929499009723833
+            ],
+            "p": 1.9073486328125e-05,
+            "arm_mean": -0.07538486704468453,
+            "other_mean": -0.22516902800126104,
+            "wins": "1/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.7068262546193786,
+            "ci": [
+              0.5816086010541385,
+              0.8431175355155206
+            ],
+            "p": 1.9073486328125e-06,
+            "arm_mean": 0.4816572266181177,
+            "other_mean": -0.22516902800126104,
+            "wins": "0/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.01129952679258456,
+            "ci": [
+              -0.029777836175072965,
+              0.04984286833424485
+            ],
+            "p": 0.5705966949462891,
+            "arm_mean": -0.21386950120867643,
+            "other_mean": -0.22516902800126104,
+            "wins": "8/20"
+          }
+        }
+      },
+      "curves": {
+        "vurs": {
+          "9": {
+            "s_label_bits": 2.109745695652749,
+            "s_gamma_nats": 41.266307067902844,
+            "s_label_bits_band": 2.109745695652749,
+            "s_label_bits_pfn": 1.9378787298243672
+          },
+          "15": {
+            "s_label_bits": 1.9415405468332652,
+            "s_gamma_nats": 10.992957689359692,
+            "s_label_bits_band": 1.949737523091887,
+            "s_label_bits_pfn": 1.7265578074980246
+          },
+          "23": {
+            "s_label_bits": 1.7229833177208564,
+            "s_gamma_nats": 2.3602372440170427,
+            "s_label_bits_band": 1.7703841469615216,
+            "s_label_bits_pfn": 1.475893862180958
+          },
+          "38": {
+            "s_label_bits": 1.518076370746647,
+            "s_gamma_nats": 0.8818933057290395,
+            "s_label_bits_band": 1.6112977727056914,
+            "s_label_bits_pfn": 1.192349084025285
+          },
+          "61": {
+            "s_label_bits": 1.3769224470417916,
+            "s_gamma_nats": 0.5184999485175765,
+            "s_label_bits_band": 1.5039081032452262,
+            "s_label_bits_pfn": 0.9962209289661211
+          },
+          "98": {
+            "s_label_bits": 1.23943476290688,
+            "s_gamma_nats": 0.267976446052692,
+            "s_label_bits_band": 1.3978526362007595,
+            "s_label_bits_pfn": 0.8434610101506335
+          },
+          "159": {
+            "s_label_bits": 1.1139008434480573,
+            "s_gamma_nats": -0.012517549763643068,
+            "s_label_bits_band": 1.2852488083919922,
+            "s_label_bits_pfn": 0.7250605309861744
+          },
+          "256": {
+            "s_label_bits": 1.0150529851777583,
+            "s_gamma_nats": -0.22763639322898677,
+            "s_label_bits_band": 1.2026259428142725,
+            "s_label_bits_pfn": 0.5950057273519151
+          }
+        },
+        "vurs-boundary": {
+          "9": {
+            "s_label_bits": 2.109745695652749,
+            "s_gamma_nats": 41.266307067902844,
+            "s_label_bits_band": 2.109745695652749,
+            "s_label_bits_pfn": 1.9378787298243672
+          },
+          "15": {
+            "s_label_bits": 1.9379301869317254,
+            "s_gamma_nats": 9.065536119789629,
+            "s_label_bits_band": 1.9372511940878414,
+            "s_label_bits_pfn": 1.7230354230044431
+          },
+          "23": {
+            "s_label_bits": 1.7201675027022585,
+            "s_gamma_nats": 1.9883300517902835,
+            "s_label_bits_band": 1.782757785293688,
+            "s_label_bits_pfn": 1.4327849782865256
+          },
+          "38": {
+            "s_label_bits": 1.534244686194724,
+            "s_gamma_nats": 1.0399630185419282,
+            "s_label_bits_band": 1.6148988584266362,
+            "s_label_bits_pfn": 1.1877562855324388
+          },
+          "61": {
+            "s_label_bits": 1.3800054864982676,
+            "s_gamma_nats": 0.6367186138923071,
+            "s_label_bits_band": 1.5078272283857364,
+            "s_label_bits_pfn": 1.0047044000959946
+          },
+          "98": {
+            "s_label_bits": 1.2244821397985186,
+            "s_gamma_nats": 0.23248051822707105,
+            "s_label_bits_band": 1.3853464941361402,
+            "s_label_bits_pfn": 0.8197267164033966
+          },
+          "159": {
+            "s_label_bits": 1.093431314344564,
+            "s_gamma_nats": -0.0466485503687316,
+            "s_label_bits_band": 1.2691788460129843,
+            "s_label_bits_pfn": 0.6729361797736928
+          },
+          "256": {
+            "s_label_bits": 0.9814314441023313,
+            "s_gamma_nats": -0.24021035866495177,
+            "s_label_bits_band": 1.1688930103522566,
+            "s_label_bits_pfn": 0.5315824817968737
+          }
+        },
+        "space-filling": {
+          "9": {
+            "s_label_bits": 2.109745695652749,
+            "s_gamma_nats": 41.266307067902844,
+            "s_label_bits_band": 2.109745695652749,
+            "s_label_bits_pfn": 1.9378787298243672
+          },
+          "15": {
+            "s_label_bits": 1.9031135481400885,
+            "s_gamma_nats": 5.016585606798623,
+            "s_label_bits_band": 1.918141207539962,
+            "s_label_bits_pfn": 1.7075964677762046
+          },
+          "23": {
+            "s_label_bits": 1.7382539429800654,
+            "s_gamma_nats": 1.2712442767329466,
+            "s_label_bits_band": 1.7939112404347608,
+            "s_label_bits_pfn": 1.5400475620042222
+          },
+          "38": {
+            "s_label_bits": 1.5060813936820607,
+            "s_gamma_nats": 0.792550519859957,
+            "s_label_bits_band": 1.5984716944495372,
+            "s_label_bits_pfn": 1.182184975591673
+          },
+          "61": {
+            "s_label_bits": 1.315515198652559,
+            "s_gamma_nats": 0.47753384514053765,
+            "s_label_bits_band": 1.4509398632381822,
+            "s_label_bits_pfn": 0.9948665124221293
+          },
+          "98": {
+            "s_label_bits": 1.2151036288762367,
+            "s_gamma_nats": 0.1085423405616351,
+            "s_label_bits_band": 1.3871263703449221,
+            "s_label_bits_pfn": 0.8595414209459309
+          },
+          "159": {
+            "s_label_bits": 1.0525838333041255,
+            "s_gamma_nats": -0.05472632071908165,
+            "s_label_bits_band": 1.2415181363396597,
+            "s_label_bits_pfn": 0.6768779445329549
+          },
+          "256": {
+            "s_label_bits": 0.9860043761432298,
+            "s_gamma_nats": -0.2219478595300019,
+            "s_label_bits_band": 1.18591543055358,
+            "s_label_bits_pfn": 0.5889617701891663
+          }
+        },
+        "vurs-boundary-pfn": {
+          "9": {
+            "s_label_bits": 2.109745695652749,
+            "s_gamma_nats": 41.266307067902844,
+            "s_label_bits_band": 2.109745695652749,
+            "s_label_bits_pfn": 1.9378787298243672
+          },
+          "15": {
+            "s_label_bits": 1.9337134285584514,
+            "s_gamma_nats": 7.54674695328609,
+            "s_label_bits_band": 1.9577024544462223,
+            "s_label_bits_pfn": 1.6528248113875441
+          },
+          "23": {
+            "s_label_bits": 1.7238019236744713,
+            "s_gamma_nats": 2.311357999041975,
+            "s_label_bits_band": 1.7559850276323852,
+            "s_label_bits_pfn": 1.4322643750661093
+          },
+          "38": {
+            "s_label_bits": 1.5366646575910852,
+            "s_gamma_nats": 1.093238158415105,
+            "s_label_bits_band": 1.6164443068628556,
+            "s_label_bits_pfn": 1.1068523914072705
+          },
+          "61": {
+            "s_label_bits": 1.393228752363699,
+            "s_gamma_nats": 0.6211902814522832,
+            "s_label_bits_band": 1.506216519359155,
+            "s_label_bits_pfn": 0.9544829641313797
+          },
+          "98": {
+            "s_label_bits": 1.3000584928284864,
+            "s_gamma_nats": 0.43323849942981757,
+            "s_label_bits_band": 1.4331237579114655,
+            "s_label_bits_pfn": 0.864620202788344
+          },
+          "159": {
+            "s_label_bits": 1.1557538046564169,
+            "s_gamma_nats": 0.11806352886128821,
+            "s_label_bits_band": 1.3135902449472336,
+            "s_label_bits_pfn": 0.6612083026308491
+          },
+          "256": {
+            "s_label_bits": 1.0142180861266104,
+            "s_gamma_nats": -0.06009901620340928,
+            "s_label_bits_band": 1.17070883316179,
+            "s_label_bits_pfn": 0.4489977463851443
+          }
+        },
+        "pfn-entropy": {
+          "9": {
+            "s_label_bits": 2.109745695652749,
+            "s_gamma_nats": 41.266307067902844,
+            "s_label_bits_band": 2.109745695652749,
+            "s_label_bits_pfn": 1.9378787298243672
+          },
+          "15": {
+            "s_label_bits": 1.9003451324360259,
+            "s_gamma_nats": 14.333028201701314,
+            "s_label_bits_band": 1.9405244581103858,
+            "s_label_bits_pfn": 1.6533139700592567
+          },
+          "23": {
+            "s_label_bits": 1.782903112123369,
+            "s_gamma_nats": 2.450951834114133,
+            "s_label_bits_band": 1.8392190276435691,
+            "s_label_bits_pfn": 1.4301465650151157
+          },
+          "38": {
+            "s_label_bits": 1.6592658137906962,
+            "s_gamma_nats": 1.1794415395850921,
+            "s_label_bits_band": 1.7515642296539151,
+            "s_label_bits_pfn": 1.2392748777937803
+          },
+          "61": {
+            "s_label_bits": 1.556766466380207,
+            "s_gamma_nats": 1.2206330678725488,
+            "s_label_bits_band": 1.6477146689252615,
+            "s_label_bits_pfn": 1.1644978129598171
+          },
+          "98": {
+            "s_label_bits": 1.4373822245444339,
+            "s_gamma_nats": 0.8978170956039643,
+            "s_label_bits_band": 1.5228344532796827,
+            "s_label_bits_pfn": 1.0069839446561932
+          },
+          "159": {
+            "s_label_bits": 1.295106462084553,
+            "s_gamma_nats": 0.6554571926487462,
+            "s_label_bits_band": 1.4197434918968037,
+            "s_label_bits_pfn": 0.8066746792761317
+          },
+          "256": {
+            "s_label_bits": 1.10122986589884,
+            "s_gamma_nats": 0.4160636005035062,
+            "s_label_bits_band": 1.2430065332308309,
+            "s_label_bits_pfn": 0.48637134349368305
+          }
+        }
+      },
+      "realized": {
+        "vurs-boundary-pfn": {
+          "mean_realized_bits": 1.3240596962390228,
+          "median_placement_seconds": 1749.9333238500112
+        },
+        "pfn-entropy": {
+          "mean_realized_bits": 1.4713430058967372,
+          "median_placement_seconds": 1606.1611282000085
+        }
+      }
+    },
+    "hatch_pscans3": {
+      "primary": {
+        "S1": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.016095695361753516,
+            "ci": [
+              -0.01357179243526273,
+              0.047128829580385966
+            ],
+            "p": 0.2942523956298828,
+            "arm_mean": 1.2602576543015285,
+            "other_mean": 1.244161958939775,
+            "wins": "8/20",
+            "p_holm": 0.6485023498535156,
+            "verdict": "same speed"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.008673165605686017,
+            "ci": [
+              -0.029286399231028833,
+              0.04160048108266056
+            ],
+            "p": 0.40909767150878906,
+            "arm_mean": 1.2602576543015285,
+            "other_mean": 1.2515844886958427,
+            "wins": "7/20",
+            "p_holm": 0.6485023498535156,
+            "verdict": "same speed"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.1515140036922768,
+            "ci": [
+              0.10501738038260713,
+              0.19676027499687468
+            ],
+            "p": 4.76837158203125e-05,
+            "arm_mean": 1.4030984923881196,
+            "other_mean": 1.2515844886958427,
+            "wins": "3/20",
+            "p_holm": 0.000286102294921875,
+            "verdict": "slower"
+          }
+        },
+        "S2": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.2160962210585363,
+            "ci": [
+              -0.11253933745543315,
+              0.5117258100687958
+            ],
+            "p": 0.06372261047363281,
+            "arm_mean": 2.036435811445881,
+            "other_mean": 1.8203395903873443,
+            "wins": "7/20",
+            "p_holm": 0.31861305236816406,
+            "verdict": "inconclusive"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.020649554336570074,
+            "ci": [
+              -0.4213917145397786,
+              0.3173933844760133
+            ],
+            "p": 0.21616744995117188,
+            "arm_mean": 2.036435811445881,
+            "other_mean": 2.057085365782451,
+            "wins": "7/20",
+            "p_holm": 0.6485023498535156,
+            "verdict": "inconclusive"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.20039912847287428,
+            "ci": [
+              -0.384372340100713,
+              0.6786325097341452
+            ],
+            "p": 0.11398696899414062,
+            "arm_mean": 2.257484494255325,
+            "other_mean": 2.057085365782451,
+            "wins": "4/20",
+            "p_holm": 0.4559478759765625,
+            "verdict": "inconclusive"
+          }
+        }
+      },
+      "secondary": {
+        "S1 band": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.004971029772391888,
+            "ci": [
+              -0.02721373360993641,
+              0.01752680325432588
+            ],
+            "p": 0.5705966949462891,
+            "arm_mean": 1.3867169464630185,
+            "other_mean": 1.3916879762354104,
+            "wins": "10/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.018861557000727436,
+            "ci": [
+              -0.0487164260790761,
+              0.008242716252364824
+            ],
+            "p": 0.7561664581298828,
+            "arm_mean": 1.3867169464630185,
+            "other_mean": 1.4055785034637458,
+            "wins": "8/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.10289948275974423,
+            "ci": [
+              0.06340540329495763,
+              0.14030377130853747
+            ],
+            "p": 8.20159912109375e-05,
+            "arm_mean": 1.5084779862234903,
+            "other_mean": 1.4055785034637458,
+            "wins": "3/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.05294094027652163,
+            "ci": [
+              0.02318252391042137,
+              0.08402849761775064
+            ],
+            "p": 0.0031528472900390625,
+            "arm_mean": 1.4585194437402675,
+            "other_mean": 1.4055785034637458,
+            "wins": "4/20"
+          }
+        },
+        "S1 TabPFN scorer": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.06735800147384435,
+            "ci": [
+              -0.1313320518990022,
+              0.003328752394707735
+            ],
+            "p": 0.04844093322753906,
+            "arm_mean": 0.9383368767785394,
+            "other_mean": 1.0056948782523836,
+            "wins": "15/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.07150480328795167,
+            "ci": [
+              -0.14513439205445933,
+              0.00045469607042700194
+            ],
+            "p": 0.16495704650878906,
+            "arm_mean": 0.9383368767785394,
+            "other_mean": 1.009841680066491,
+            "wins": "11/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": -0.005379939362859976,
+            "ci": [
+              -0.08158961492304181,
+              0.07453297892712875
+            ],
+            "p": 1.0,
+            "arm_mean": 1.0044617407036311,
+            "other_mean": 1.009841680066491,
+            "wins": "8/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.07730750876219201,
+            "ci": [
+              0.01032514590149192,
+              0.14387762118720857
+            ],
+            "p": 0.04405403137207031,
+            "arm_mean": 1.087149188828683,
+            "other_mean": 1.009841680066491,
+            "wins": "7/20"
+          }
+        },
+        "S1 TabPFN scorer, band": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.09278419565659558,
+            "ci": [
+              -0.1443845186192633,
+              -0.035825682214308825
+            ],
+            "p": 0.006389617919921875,
+            "arm_mean": 1.0665346102916105,
+            "other_mean": 1.159318805948206,
+            "wins": "15/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.1129620379937772,
+            "ci": [
+              -0.1757304047969844,
+              -0.05142930936750717
+            ],
+            "p": 0.0019855499267578125,
+            "arm_mean": 1.0665346102916105,
+            "other_mean": 1.1794966482853875,
+            "wins": "17/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": -0.05797005978273985,
+            "ci": [
+              -0.1260722244577745,
+              0.017410082112647735
+            ],
+            "p": 0.039989471435546875,
+            "arm_mean": 1.1215265885026477,
+            "other_mean": 1.1794966482853875,
+            "wins": "15/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.09477995703318043,
+            "ci": [
+              0.03854272494875949,
+              0.15059631844886606
+            ],
+            "p": 0.00485992431640625,
+            "arm_mean": 1.274276605318568,
+            "other_mean": 1.1794966482853875,
+            "wins": "6/20"
+          }
+        },
+        "label accuracy": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.024487125092222183,
+            "ci": [
+              -0.03495379228334216,
+              -0.01452303607940315
+            ],
+            "p": 0.0001678466796875,
+            "arm_mean": 0.7687219819994898,
+            "other_mean": 0.7932091070917121,
+            "wins": "2/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.022527125598495946,
+            "ci": [
+              -0.03327600558124875,
+              -0.012985371894798134
+            ],
+            "p": 8.20159912109375e-05,
+            "arm_mean": 0.7687219819994898,
+            "other_mean": 0.7912491075979858,
+            "wins": "3/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": -0.025322220075510604,
+            "ci": [
+              -0.04038660836621218,
+              -0.010348456560568086
+            ],
+            "p": 0.00485992431640625,
+            "arm_mean": 0.7659268875224752,
+            "other_mean": 0.7912491075979858,
+            "wins": "5/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.00306144330038573,
+            "ci": [
+              -0.004497731685258684,
+              0.010749931190737787
+            ],
+            "p": 0.49800872802734375,
+            "arm_mean": 0.7943105508983715,
+            "other_mean": 0.7912491075979858,
+            "wins": "11/20"
+          }
+        },
+        "ctr_macro_nrmse": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.0018931410319802764,
+            "ci": [
+              -0.04890993802872284,
+              0.03304291529755029
+            ],
+            "p": 0.21616744995117188,
+            "arm_mean": 0.21363267490653065,
+            "other_mean": 0.2155258159385109,
+            "wins": "9/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.02414509439357699,
+            "ci": [
+              0.009806890494434145,
+              0.041192937409541594
+            ],
+            "p": 0.0031528472900390625,
+            "arm_mean": 0.21363267490653065,
+            "other_mean": 0.1894875805129536,
+            "wins": "4/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.07630502707156858,
+            "ci": [
+              0.026691635551610013,
+              0.15474598809609785
+            ],
+            "p": 5.7220458984375e-06,
+            "arm_mean": 0.2657926075845222,
+            "other_mean": 0.1894875805129536,
+            "wins": "1/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 1.407958893335177,
+            "ci": [
+              0.0075551984010324945,
+              4.194340448530379
+            ],
+            "p": 0.00830841064453125,
+            "arm_mean": 1.5974464738481307,
+            "other_mean": 0.1894875805129536,
+            "wins": "5/20"
+          }
+        },
+        "S1 at N=256": {
+          "A": {
+            "n_seeds": 20,
+            "mean": -0.03030869121063969,
+            "ci": [
+              -0.05676277005768548,
+              -0.003557957781783013
+            ],
+            "p": 0.06372261047363281,
+            "arm_mean": 0.7495865420778761,
+            "other_mean": 0.7798952332885156,
+            "wins": "14/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": -0.07928855567925167,
+            "ci": [
+              -0.0999615083749774,
+              -0.05988443026962807
+            ],
+            "p": 3.814697265625e-06,
+            "arm_mean": 0.7495865420778761,
+            "other_mean": 0.8288750977571278,
+            "wins": "19/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.06673525649474933,
+            "ci": [
+              0.048619177803184525,
+              0.0859934560093858
+            ],
+            "p": 1.9073486328125e-06,
+            "arm_mean": 0.895610354251877,
+            "other_mean": 0.8288750977571278,
+            "wins": "0/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": 0.0127732010002647,
+            "ci": [
+              -0.01177277410111799,
+              0.036518716421173394
+            ],
+            "p": 0.36827659606933594,
+            "arm_mean": 0.8416482987573926,
+            "other_mean": 0.8288750977571278,
+            "wins": "10/20"
+          }
+        },
+        "S2 at N=256": {
+          "A": {
+            "n_seeds": 20,
+            "mean": 0.09491339077011844,
+            "ci": [
+              0.022418434369403713,
+              0.16217974614383335
+            ],
+            "p": 0.017181396484375,
+            "arm_mean": 0.7008832122657196,
+            "other_mean": 0.6059698214956011,
+            "wins": "6/20"
+          },
+          "B": {
+            "n_seeds": 20,
+            "mean": 0.11822772092404532,
+            "ci": [
+              0.0219860820774068,
+              0.21541498326651146
+            ],
+            "p": 0.05316925048828125,
+            "arm_mean": 0.7008832122657196,
+            "other_mean": 0.5826554913416745,
+            "wins": "5/20"
+          },
+          "C": {
+            "n_seeds": 20,
+            "mean": 0.5917993030373312,
+            "ci": [
+              0.4536832654145534,
+              0.7353195422178129
+            ],
+            "p": 1.9073486328125e-06,
+            "arm_mean": 1.1744547943790056,
+            "other_mean": 0.5826554913416745,
+            "wins": "0/20"
+          },
+          "space-filling vs vurs": {
+            "n_seeds": 20,
+            "mean": -0.03206026703078876,
+            "ci": [
+              -0.129444769191362,
+              0.07579787235794266
+            ],
+            "p": 0.3299827575683594,
+            "arm_mean": 0.5505952243108856,
+            "other_mean": 0.5826554913416745,
+            "wins": "12/20"
+          }
+        }
+      },
+      "curves": {
+        "vurs": {
+          "9": {
+            "s_label_bits": 1.8565406515288905,
+            "s_gamma_nats": 12.192218059381787,
+            "s_label_bits_band": 1.8565406515288905,
+            "s_label_bits_pfn": 1.528533504916538
+          },
+          "15": {
+            "s_label_bits": 1.6556189858796562,
+            "s_gamma_nats": 4.8382192923451495,
+            "s_label_bits_band": 1.7094862919748195,
+            "s_label_bits_pfn": 1.328291161838896
+          },
+          "23": {
+            "s_label_bits": 1.4589866201566282,
+            "s_gamma_nats": 2.05251488298538,
+            "s_label_bits_band": 1.589129389642689,
+            "s_label_bits_pfn": 1.297681420207358
+          },
+          "38": {
+            "s_label_bits": 1.3047068263742247,
+            "s_gamma_nats": 1.7217081683245201,
+            "s_label_bits_band": 1.4635499775582361,
+            "s_label_bits_pfn": 1.0997448748289953
+          },
+          "61": {
+            "s_label_bits": 1.1366537063075859,
+            "s_gamma_nats": 1.6077706484891303,
+            "s_label_bits_band": 1.3259943576004696,
+            "s_label_bits_pfn": 0.8528071316289725
+          },
+          "98": {
+            "s_label_bits": 1.0135928778823537,
+            "s_gamma_nats": 1.0609575289257713,
+            "s_label_bits_band": 1.1806812291720084,
+            "s_label_bits_pfn": 0.6873828927622487
+          },
+          "159": {
+            "s_label_bits": 0.9016477181435167,
+            "s_gamma_nats": 0.672988878381523,
+            "s_label_bits_band": 1.071138611801845,
+            "s_label_bits_pfn": 0.61364691500607
+          },
+          "256": {
+            "s_label_bits": 0.8297792931872807,
+            "s_gamma_nats": 0.5232716009802296,
+            "s_label_bits_band": 1.0022843854842445,
+            "s_label_bits_pfn": 0.558409132459563
+          }
+        },
+        "vurs-boundary": {
+          "9": {
+            "s_label_bits": 1.8565406515288905,
+            "s_gamma_nats": 12.192218059381787,
+            "s_label_bits_band": 1.8565406515288905,
+            "s_label_bits_pfn": 1.528533504916538
+          },
+          "15": {
+            "s_label_bits": 1.618142426761568,
+            "s_gamma_nats": 3.9936965540546416,
+            "s_label_bits_band": 1.6811760409671233,
+            "s_label_bits_pfn": 1.345276184814031
+          },
+          "23": {
+            "s_label_bits": 1.4895822835093888,
+            "s_gamma_nats": 2.171811835697042,
+            "s_label_bits_band": 1.6098244144695821,
+            "s_label_bits_pfn": 1.2726100258189206
+          },
+          "38": {
+            "s_label_bits": 1.3023814630168364,
+            "s_gamma_nats": 1.787847710241119,
+            "s_label_bits_band": 1.435181260727152,
+            "s_label_bits_pfn": 1.0711312422757449
+          },
+          "61": {
+            "s_label_bits": 1.135479361326643,
+            "s_gamma_nats": 1.2608576306097743,
+            "s_label_bits_band": 1.3135134075085817,
+            "s_label_bits_pfn": 0.8616680264198953
+          },
+          "98": {
+            "s_label_bits": 1.0240519461137314,
+            "s_gamma_nats": 1.0562384254878934,
+            "s_label_bits_band": 1.1802233123412385,
+            "s_label_bits_pfn": 0.6943806616037667
+          },
+          "159": {
+            "s_label_bits": 0.8935744179535507,
+            "s_gamma_nats": 0.7261019574539204,
+            "s_label_bits_band": 1.0622782261299202,
+            "s_label_bits_pfn": 0.6214490250144176
+          },
+          "256": {
+            "s_label_bits": 0.7915092404711933,
+            "s_gamma_nats": 0.609610189744551,
+            "s_label_bits_band": 0.9658727240856951,
+            "s_label_bits_pfn": 0.520345479990881
+          }
+        },
+        "space-filling": {
+          "9": {
+            "s_label_bits": 1.8565406515288905,
+            "s_gamma_nats": 12.192218059381787,
+            "s_label_bits_band": 1.8565406515288905,
+            "s_label_bits_pfn": 1.528533504916538
+          },
+          "15": {
+            "s_label_bits": 1.759332899818567,
+            "s_gamma_nats": 6.15490500287656,
+            "s_label_bits_band": 1.8147564399046703,
+            "s_label_bits_pfn": 1.4861286640213922
+          },
+          "23": {
+            "s_label_bits": 1.524603349410101,
+            "s_gamma_nats": 2.8548528377850175,
+            "s_label_bits_band": 1.6393997884270302,
+            "s_label_bits_pfn": 1.3089275256634743
+          },
+          "38": {
+            "s_label_bits": 1.3562284228963617,
+            "s_gamma_nats": 2.0344378117613666,
+            "s_label_bits_band": 1.5178267631555955,
+            "s_label_bits_pfn": 1.184786553067764
+          },
+          "61": {
+            "s_label_bits": 1.2619700996789744,
+            "s_gamma_nats": 1.499935145516186,
+            "s_label_bits_band": 1.4114597630060302,
+            "s_label_bits_pfn": 1.0014414917273844
+          },
+          "98": {
+            "s_label_bits": 1.0674231659969542,
+            "s_gamma_nats": 1.398322968031397,
+            "s_label_bits_band": 1.2286808702059702,
+            "s_label_bits_pfn": 0.7534003673101803
+          },
+          "159": {
+            "s_label_bits": 0.9181912042015536,
+            "s_gamma_nats": 0.7825314745920479,
+            "s_label_bits_band": 1.0911467279987717,
+            "s_label_bits_pfn": 0.6058844294780028
+          },
+          "256": {
+            "s_label_bits": 0.8348203292582146,
+            "s_gamma_nats": 0.5029624370096526,
+            "s_label_bits_band": 0.9965144065196319,
+            "s_label_bits_pfn": 0.5400038163484029
+          }
+        },
+        "vurs-boundary-pfn": {
+          "9": {
+            "s_label_bits": 1.8565406515288905,
+            "s_gamma_nats": 12.192218059381787,
+            "s_label_bits_band": 1.8565406515288905,
+            "s_label_bits_pfn": 1.528533504916538
+          },
+          "15": {
+            "s_label_bits": 1.599061837221364,
+            "s_gamma_nats": 4.511335339009734,
+            "s_label_bits_band": 1.6685068000727488,
+            "s_label_bits_pfn": 1.332933848458713
+          },
+          "23": {
+            "s_label_bits": 1.4500313814512649,
+            "s_gamma_nats": 2.4191504664828316,
+            "s_label_bits_band": 1.553442409258226,
+            "s_label_bits_pfn": 1.319148577293078
+          },
+          "38": {
+            "s_label_bits": 1.3136421850794489,
+            "s_gamma_nats": 1.9606498581646943,
+            "s_label_bits_band": 1.4380653753719788,
+            "s_label_bits_pfn": 0.9726680434391686
+          },
+          "61": {
+            "s_label_bits": 1.198942151443612,
+            "s_gamma_nats": 1.6553952211657998,
+            "s_label_bits_band": 1.3234715529466965,
+            "s_label_bits_pfn": 0.7771281077211438
+          },
+          "98": {
+            "s_label_bits": 1.0695517361350027,
+            "s_gamma_nats": 1.4503047281840065,
+            "s_label_bits_band": 1.2030191970275075,
+            "s_label_bits_pfn": 0.5844710476116273
+          },
+          "159": {
+            "s_label_bits": 0.923067483495134,
+            "s_gamma_nats": 1.0794634917774655,
+            "s_label_bits_band": 1.0733030593102697,
+            "s_label_bits_pfn": 0.42353904715392177
+          },
+          "256": {
+            "s_label_bits": 0.7449190023091672,
+            "s_gamma_nats": 0.6567743704742715,
+            "s_label_bits_band": 0.9160949410914069,
+            "s_label_bits_pfn": 0.38392708455484925
+          }
+        },
+        "pfn-entropy": {
+          "9": {
+            "s_label_bits": 1.8565406515288905,
+            "s_gamma_nats": 12.192218059381787,
+            "s_label_bits_band": 1.8565406515288905,
+            "s_label_bits_pfn": 1.528533504916538
+          },
+          "15": {
+            "s_label_bits": 1.6144630095318961,
+            "s_gamma_nats": 4.610725110445657,
+            "s_label_bits_band": 1.6812753063288879,
+            "s_label_bits_pfn": 1.3787971050539687
+          },
+          "23": {
+            "s_label_bits": 1.5545177292309211,
+            "s_gamma_nats": 2.5318282719166554,
+            "s_label_bits_band": 1.6343502036635547,
+            "s_label_bits_pfn": 1.3386038277338335
+          },
+          "38": {
+            "s_label_bits": 1.452488414814843,
+            "s_gamma_nats": 2.036914455762111,
+            "s_label_bits_band": 1.5590680229434923,
+            "s_label_bits_pfn": 1.1016959742585701
+          },
+          "61": {
+            "s_label_bits": 1.3389308663956756,
+            "s_gamma_nats": 1.776839463440501,
+            "s_label_bits_band": 1.455591766981012,
+            "s_label_bits_pfn": 0.8676880335355552
+          },
+          "98": {
+            "s_label_bits": 1.2153034786643806,
+            "s_gamma_nats": 1.5831972257458364,
+            "s_label_bits_band": 1.3190889425425885,
+            "s_label_bits_pfn": 0.6044796348065187
+          },
+          "159": {
+            "s_label_bits": 1.0851235268342443,
+            "s_gamma_nats": 1.3962037269638814,
+            "s_label_bits_band": 1.1863678778829232,
+            "s_label_bits_pfn": 0.35822183543169284
+          },
+          "256": {
+            "s_label_bits": 0.9026019238135923,
+            "s_gamma_nats": 1.098305827524156,
+            "s_label_bits_band": 1.0419841990561418,
+            "s_label_bits_pfn": 0.2152188003952511
+          }
+        }
+      },
+      "realized": {
+        "vurs-boundary-pfn": {
+          "mean_realized_bits": 0.8661184093726755,
+          "median_placement_seconds": 1116.2184580499888
+        },
+        "pfn-entropy": {
+          "mean_realized_bits": 0.977711222225673,
+          "median_placement_seconds": 1017.8711533999885
+        }
+      }
+    }
+  },
+  "claim_tabpfn_boundary_helps": false
+}

@@ -173,3 +173,39 @@ def test_noise_survives_state_round_trip(pool):
     old = sampler.state()
     old.pop("sigma")                                      # a state saved before noise=
     assert np.isnan(ResolutionSampler.from_state(old).sigma).all()
+
+
+GROUP_AXES = {"a": (0., 1.), "b": (0., 1.), "ky": (0.05, 2.0)}
+
+
+def _told(sampler, n, seed=0):
+    rng = np.random.default_rng(seed)
+    pts = [{"a": a, "b": b, "ky": k} for a, b, k in
+           zip(rng.random(n), rng.random(n), np.exp(rng.uniform(np.log(.05), np.log(2.), n)))]
+    sampler.observe(pts, [np.tanh(8*(p["a"]-.5)) + .3*np.log(p["ky"]) for p in pts])
+
+
+@pytest.mark.parametrize("n_told", [0, 12])
+def test_ask_grouped_jobs_share_outer_axes(n_told):
+    sampler = ResolutionSampler(GROUP_AXES, log_axes=("ky",), seed=0)
+    _told(sampler, n_told)
+    jobs = sampler.ask_grouped(3, 4, "ky", grid=16)
+    assert len(jobs) == 3 and all(len(job["ky"]) == 4 for job in jobs)
+    assert len({(job["a"], job["b"]) for job in jobs}) == 3          # one outer point per job
+    grid = np.exp(np.linspace(np.log(.05), np.log(2.), 16))
+    for job in jobs:
+        assert len(set(job["ky"])) == 4
+        assert all(np.isclose(grid, k).any() for k in job["ky"])     # on the grid, not moved
+    assert len(sampler.pending) == 12
+
+
+def test_ask_grouped_outer_library_and_spread():
+    library = [{"a": a, "b": b} for a in (0., .5, 1.) for b in (0., .5, 1.)]
+    sampler = ResolutionSampler(GROUP_AXES, log_axes=("ky",), seed=0)
+    _told(sampler, 12)
+    first = sampler.ask_grouped(2, 3, "ky", grid=8, outer=library)
+    assert all({"a": job["a"], "b": job["b"]} in library for job in first)
+    second = sampler.ask_grouped(2, 3, "ky", grid=8, outer=library)
+    # Held points block exact repeats: no (outer, ky) pair is proposed twice.
+    pairs = [(j["a"], j["b"], k) for j in first + second for k in j["ky"]]
+    assert len(pairs) == len(set(pairs)) == 12

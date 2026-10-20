@@ -192,17 +192,21 @@ class ResolutionSampler:
                           np.where(unconverged, np.sqrt(self.unconverged_noise)*spread_y, 0.))
         return alpha, spread
 
+    def _acquisition(self, candidates):
+        alpha, spread = self._noise()
+        acquisition = Acquisition(self.x, self.y, candidates, self.seed, self.weights,
+                                  uncertainty=self.uncertainty, nu=self.nu, noise=spread,
+                                  gp_alpha=alpha)
+        self.fit_warnings += acquisition.fit_warnings
+        return acquisition
+
     def _propose(self, n):
         rng = np.random.default_rng([self.seed, len(self.x), len(self.failed)])
         if self.pool is None:
             candidates = sobol_candidates(rng, self.dim, candidate_count(self.dim))
         else:
             candidates = self._open_pool()
-        alpha, spread = self._noise()
-        acquisition = Acquisition(self.x, self.y, candidates, self.seed, self.weights,
-                                  uncertainty=self.uncertainty, nu=self.nu, noise=spread,
-                                  gp_alpha=alpha)
-        self.fit_warnings += acquisition.fit_warnings
+        acquisition = self._acquisition(candidates)
         merit = acquisition.merit()
         radius = None
         if self.pool is None:
@@ -218,6 +222,94 @@ class ResolutionSampler:
             acquisition.spacing = spacing
         picks = acquisition.select(n, self.batch_mode, radius, merit)
         return candidates[picks]
+
+    def ask_grouped(self, n_groups, per_group, inner, grid=32, outer=None):
+        """Propose `n_groups` jobs of `per_group` points that share every axis but `inner`.
+
+        For codes that can scan one axis inside a job but not the others: GENE
+        runs a kymin scanlist on one equilibrium, so a job is one point in the
+        profile axes and several kymin. The constraint is in the candidate set,
+        not applied afterwards -- every returned point is a candidate the
+        acquisition scored, at the place it scored it:
+
+            candidates  every outer point (a Sobol cloud over the other axes, or
+                        `outer`, e.g. the equilibria already built) paired with
+                        `grid` inner values evenly spaced in the unit box (log-
+                        spaced in physical units for a log axis)
+            job         the outer point whose best candidate has the highest
+                        merit; then its `per_group` inner values by the greedy
+                        batch rule restricted to that line, each pick updating
+                        the fill distance before the next
+            next job    merit re-evaluated with the job's points placed, so jobs
+                        spread apart; an outer point is used once
+
+        Before the variation fit is possible (fewer than d+2 values) the merit
+        is fill distance alone, as ask() does. Returns one dict per job: the
+        outer axis values plus `inner` as a list, sorted. Every point is
+        pending afterwards, as with ask().
+        """
+        if inner not in self.names:
+            raise ValueError(f"inner axis {inner!r} is not one of {self.names}")
+        if int(per_group) > int(grid):
+            raise ValueError("per_group cannot exceed the inner grid size")
+        j = self.names.index(inner)
+        rest = [k for k in range(self.dim) if k != j]
+        if outer is None:
+            rng = np.random.default_rng([self.seed, len(self.x), len(self.failed), 1])
+            outer_unit = sobol_candidates(rng, self.dim-1, candidate_count(self.dim-1))
+        else:
+            lo_hi = {n: self.axes[n] for n in self.names if n != inner}
+            probe = [{**{n: p[n] for n in lo_hi}, inner: self.axes[inner][0]} for p in outer]
+            outer_unit = self._to_unit(probe)[:, rest]
+        line = np.linspace(0., 1., int(grid))
+        candidates = np.empty((len(outer_unit)*len(line), self.dim))
+        candidates[:, rest] = np.repeat(outer_unit, len(line), axis=0)
+        candidates[:, j] = np.tile(line, len(outer_unit))
+        group = np.repeat(np.arange(len(outer_unit)), len(line))
+
+        placed = np.vstack([self.x, self.pending, np.reshape(self.failed, (-1, self.dim))])
+        radius = duplicate_radius(self.dim, max(len(self.x), 1))
+        if len(self.x) >= self.dim+2:
+            acquisition = self._acquisition(candidates)
+            spacing = acquisition.spacing
+            merit_at = acquisition.merit
+        else:
+            spacing = np.full(len(candidates), np.sqrt(self.dim))
+            merit_at = lambda s: s.copy()
+        if len(placed):
+            spacing = np.minimum(spacing, cKDTree(placed).query(candidates)[0])
+        merit = merit_at(spacing)
+        merit[spacing < radius] = -np.inf
+
+        jobs, chosen = [], []
+        used = np.zeros(len(outer_unit), bool)
+        for _ in range(int(n_groups)):
+            best = np.full(len(outer_unit), -np.inf)
+            np.maximum.at(best, group, merit)
+            best[used] = -np.inf
+            if not np.isfinite(best).any():
+                break
+            g = int(np.argmax(best))
+            used[g] = True
+            members = np.flatnonzero(group == g)
+            picks = []
+            for _ in range(int(per_group)):
+                local = merit[members]
+                if not np.isfinite(local).any():
+                    break
+                index = int(members[np.argmax(local)])
+                picks.append(index)
+                spacing = np.minimum(spacing, np.linalg.norm(candidates-candidates[index], axis=1))
+                merit = merit_at(spacing)
+                merit[spacing < radius] = -np.inf
+            chosen += picks
+            physical = self._to_physical(candidates[picks])
+            job = {n: physical[0][n] for n in self.names if n != inner}
+            job[inner] = sorted(p[inner] for p in physical)
+            jobs.append(job)
+        if chosen:
+            self.pending = np.vstack([self.pending, candidates[chosen]])
+        return jobs
 
     def _fill(self, n):
         if n <= 0:

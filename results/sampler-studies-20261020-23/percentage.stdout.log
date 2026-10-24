@@ -1,0 +1,186 @@
+checkpoint random-0 n=72/1436 elapsed=0.6s
+checkpoint random-0 n=144/1436 elapsed=1.4s
+checkpoint random-0 n=288/1436 elapsed=2.7s
+checkpoint random-0 n=575/1436 elapsed=5.5s
+checkpoint random-0 n=862/1436 elapsed=9.0s
+checkpoint random-0 n=1149/1436 elapsed=13.1s
+checkpoint random-0 n=1436/1436 elapsed=16.8s
+PILOT COMPLETE 18.5s; launching remaining trajectories
+checkpoint space-filling-0 n=72/1436 elapsed=1.0s
+checkpoint space-filling-0 n=144/1436 elapsed=2.1s
+checkpoint vurs-0 n=72/1436 elapsed=3.1s
+checkpoint space-filling-0 n=288/1436 elapsed=4.1s
+checkpoint space-filling-0 n=575/1436 elapsed=8.6s
+checkpoint vurs-0 n=144/1436 elapsed=9.5s
+checkpoint space-filling-0 n=862/1436 elapsed=14.4s
+checkpoint space-filling-0 n=1149/1436 elapsed=21.1s
+checkpoint space-filling-0 n=1436/1436 elapsed=25.1s
+COMPLETE space-filling-0
+checkpoint vwrs-0 n=72/1436 elapsed=1.3s
+checkpoint vwrs-0 n=144/1436 elapsed=2.7s
+checkpoint vwrs-0 n=288/1436 elapsed=5.5s
+checkpoint vwrs-0 n=575/1436 elapsed=11.6s
+checkpoint vwrs-0 n=862/1436 elapsed=18.8s
+checkpoint vwrs-0 n=1149/1436 elapsed=26.9s
+checkpoint vwrs-0 n=1436/1436 elapsed=31.0s
+COMPLETE vwrs-0
+checkpoint gpr-var-0 n=72/1436 elapsed=2.8s
+checkpoint vurs-0 n=288/1436 elapsed=59.4s
+checkpoint gpr-var-0 n=144/1436 elapsed=9.3s
+checkpoint gpr-var-0 n=288/1436 elapsed=72.0s
+checkpoint vurs-0 n=575/1436 elapsed=589.9s
+checkpoint gpr-var-0 n=575/1436 elapsed=555.4s
+checkpoint gpr-var-0 n=862/1436 elapsed=1981.1s
+checkpoint vurs-0 n=862/1436 elapsed=2207.7s
+checkpoint gpr-var-0 n=1149/1436 elapsed=5174.7s
+checkpoint gpr-var-0 n=1436/1436 elapsed=5198.0s
+COMPLETE gpr-var-0
+checkpoint gpr-m05-var-0 n=72/1436 elapsed=2.6s
+checkpoint gpr-m05-var-0 n=144/1436 elapsed=8.3s
+checkpoint gpr-m05-var-0 n=288/1436 elapsed=54.1s
+checkpoint vurs-0 n=1149/1436 elapsed=5538.0s
+checkpoint vurs-0 n=1436/1436 elapsed=5557.4s
+COMPLETE vurs-0
+checkpoint gpr-m25-var-0 n=72/1436 elapsed=3.0s
+checkpoint gpr-m25-var-0 n=144/1436 elapsed=10.3s
+checkpoint gpr-m25-var-0 n=288/1436 elapsed=71.1s
+checkpoint gpr-m05-var-0 n=575/1436 elapsed=548.9s
+checkpoint gpr-m25-var-0 n=575/1436 elapsed=846.4s
+checkpoint gpr-m05-var-0 n=862/1436 elapsed=2129.8s
+checkpoint gpr-m25-var-0 n=862/1436 elapsed=3445.1s
+checkpoint gpr-m05-var-0 n=1149/1436 elapsed=5461.1s
+checkpoint gpr-m05-var-0 n=1436/1436 elapsed=5481.1s
+COMPLETE gpr-m05-var-0
+checkpoint gpr-u50-g50-0 n=72/1436 elapsed=3.7s
+checkpoint gpr-u50-g50-0 n=144/1436 elapsed=13.5s
+checkpoint gpr-u50-g50-0 n=288/1436 elapsed=64.3s
+checkpoint gpr-u50-g50-0 n=575/1436 elapsed=532.2s
+checkpoint gpr-u50-g50-0 n=862/1436 elapsed=1974.4s
+checkpoint gpr-m25-var-0 n=1149/1436 elapsed=8902.4s
+checkpoint gpr-m25-var-0 n=1436/1436 elapsed=8933.6s
+COMPLETE gpr-m25-var-0
+checkpoint random-1 n=72/1436 elapsed=0.7s
+checkpoint random-1 n=144/1436 elapsed=1.6s
+checkpoint random-1 n=288/1436 elapsed=3.0s
+checkpoint random-1 n=575/1436 elapsed=6.0s
+checkpoint random-1 n=862/1436 elapsed=10.0s
+checkpoint random-1 n=1149/1436 elapsed=14.7s
+checkpoint random-1 n=1436/1436 elapsed=18.9s
+COMPLETE random-1
+checkpoint space-filling-1 n=72/1436 elapsed=1.0s
+checkpoint space-filling-1 n=144/1436 elapsed=2.3s
+checkpoint space-filling-1 n=288/1436 elapsed=4.4s
+checkpoint space-filling-1 n=575/1436 elapsed=9.1s
+checkpoint space-filling-1 n=862/1436 elapsed=15.0s
+checkpoint space-filling-1 n=1149/1436 elapsed=21.9s
+checkpoint space-filling-1 n=1436/1436 elapsed=26.0s
+COMPLETE space-filling-1
+checkpoint vurs-1 n=72/1436 elapsed=3.2s
+checkpoint vurs-1 n=144/1436 elapsed=11.8s
+checkpoint vurs-1 n=288/1436 elapsed=82.1s
+checkpoint vurs-1 n=575/1436 elapsed=692.4s
+checkpoint gpr-u50-g50-0 n=1149/1436 elapsed=4961.8s
+checkpoint gpr-u50-g50-0 n=1436/1436 elapsed=4983.6s
+COMPLETE gpr-u50-g50-0
+checkpoint vwrs-1 n=72/1436 elapsed=1.2s
+checkpoint vwrs-1 n=144/1436 elapsed=2.7s
+checkpoint vwrs-1 n=288/1436 elapsed=5.5s
+checkpoint vwrs-1 n=575/1436 elapsed=11.5s
+checkpoint vwrs-1 n=862/1436 elapsed=18.9s
+checkpoint vwrs-1 n=1149/1436 elapsed=27.2s
+checkpoint vwrs-1 n=1436/1436 elapsed=31.3s
+COMPLETE vwrs-1
+checkpoint gpr-var-1 n=72/1436 elapsed=3.4s
+checkpoint gpr-var-1 n=144/1436 elapsed=13.3s
+checkpoint gpr-var-1 n=288/1436 elapsed=69.5s
+checkpoint gpr-var-1 n=575/1436 elapsed=616.6s
+checkpoint vurs-1 n=862/1436 elapsed=2449.3s
+checkpoint gpr-var-1 n=862/1436 elapsed=2281.2s
+checkpoint vurs-1 n=1149/1436 elapsed=6181.9s
+checkpoint vurs-1 n=1436/1436 elapsed=6204.2s
+COMPLETE vurs-1
+checkpoint gpr-m05-var-1 n=72/1436 elapsed=3.0s
+checkpoint gpr-m05-var-1 n=144/1436 elapsed=11.0s
+checkpoint gpr-m05-var-1 n=288/1436 elapsed=79.2s
+checkpoint gpr-m05-var-1 n=575/1436 elapsed=680.1s
+checkpoint gpr-var-1 n=1149/1436 elapsed=6355.1s
+checkpoint gpr-var-1 n=1436/1436 elapsed=6375.1s
+COMPLETE gpr-var-1
+checkpoint gpr-m25-var-1 n=72/1436 elapsed=3.7s
+checkpoint gpr-m25-var-1 n=144/1436 elapsed=10.8s
+checkpoint gpr-m25-var-1 n=288/1436 elapsed=75.6s
+checkpoint gpr-m25-var-1 n=575/1436 elapsed=908.6s
+checkpoint gpr-m05-var-1 n=862/1436 elapsed=2453.7s
+checkpoint gpr-m25-var-1 n=862/1436 elapsed=3422.9s
+checkpoint gpr-m05-var-1 n=1149/1436 elapsed=6268.2s
+checkpoint gpr-m05-var-1 n=1436/1436 elapsed=6290.5s
+COMPLETE gpr-m05-var-1
+checkpoint gpr-u50-g50-1 n=72/1436 elapsed=3.5s
+checkpoint gpr-u50-g50-1 n=144/1436 elapsed=11.5s
+checkpoint gpr-u50-g50-1 n=288/1436 elapsed=71.1s
+checkpoint gpr-u50-g50-1 n=575/1436 elapsed=615.3s
+checkpoint gpr-u50-g50-1 n=862/1436 elapsed=2227.8s
+checkpoint gpr-m25-var-1 n=1149/1436 elapsed=9032.3s
+checkpoint gpr-m25-var-1 n=1436/1436 elapsed=9060.5s
+COMPLETE gpr-m25-var-1
+checkpoint random-2 n=72/1436 elapsed=0.8s
+checkpoint random-2 n=144/1436 elapsed=1.6s
+checkpoint random-2 n=288/1436 elapsed=3.0s
+checkpoint random-2 n=575/1436 elapsed=6.2s
+checkpoint random-2 n=862/1436 elapsed=10.2s
+checkpoint random-2 n=1149/1436 elapsed=14.9s
+checkpoint random-2 n=1436/1436 elapsed=19.2s
+COMPLETE random-2
+checkpoint space-filling-2 n=72/1436 elapsed=1.0s
+checkpoint space-filling-2 n=144/1436 elapsed=2.2s
+checkpoint space-filling-2 n=288/1436 elapsed=4.3s
+checkpoint space-filling-2 n=575/1436 elapsed=9.1s
+checkpoint space-filling-2 n=862/1436 elapsed=14.9s
+checkpoint space-filling-2 n=1149/1436 elapsed=21.6s
+checkpoint space-filling-2 n=1436/1436 elapsed=25.8s
+COMPLETE space-filling-2
+checkpoint vurs-2 n=72/1436 elapsed=3.0s
+checkpoint vurs-2 n=144/1436 elapsed=10.2s
+checkpoint vurs-2 n=288/1436 elapsed=59.7s
+checkpoint vurs-2 n=575/1436 elapsed=494.2s
+checkpoint vurs-2 n=862/1436 elapsed=1787.0s
+checkpoint gpr-u50-g50-1 n=1149/1436 elapsed=6308.0s
+checkpoint gpr-u50-g50-1 n=1436/1436 elapsed=6328.8s
+COMPLETE gpr-u50-g50-1
+checkpoint vwrs-2 n=72/1436 elapsed=1.2s
+checkpoint vwrs-2 n=144/1436 elapsed=2.8s
+checkpoint vwrs-2 n=288/1436 elapsed=5.6s
+checkpoint vwrs-2 n=575/1436 elapsed=11.7s
+checkpoint vwrs-2 n=862/1436 elapsed=18.9s
+checkpoint vwrs-2 n=1149/1436 elapsed=27.3s
+checkpoint vwrs-2 n=1436/1436 elapsed=31.6s
+COMPLETE vwrs-2
+checkpoint gpr-var-2 n=72/1436 elapsed=2.8s
+checkpoint gpr-var-2 n=144/1436 elapsed=10.4s
+checkpoint gpr-var-2 n=288/1436 elapsed=62.9s
+checkpoint gpr-var-2 n=575/1436 elapsed=510.1s
+checkpoint gpr-var-2 n=862/1436 elapsed=1776.7s
+checkpoint vurs-2 n=1149/1436 elapsed=5017.6s
+checkpoint vurs-2 n=1436/1436 elapsed=5037.3s
+COMPLETE vurs-2
+checkpoint gpr-m05-var-2 n=72/1436 elapsed=2.9s
+checkpoint gpr-m05-var-2 n=144/1436 elapsed=10.2s
+checkpoint gpr-m05-var-2 n=288/1436 elapsed=58.6s
+checkpoint gpr-m05-var-2 n=575/1436 elapsed=526.1s
+checkpoint gpr-m05-var-2 n=862/1436 elapsed=1894.1s
+checkpoint gpr-var-2 n=1149/1436 elapsed=5201.7s
+checkpoint gpr-var-2 n=1436/1436 elapsed=5225.0s
+COMPLETE gpr-var-2
+checkpoint gpr-m25-var-2 n=72/1436 elapsed=3.0s
+checkpoint gpr-m25-var-2 n=144/1436 elapsed=9.4s
+checkpoint gpr-m25-var-2 n=288/1436 elapsed=53.0s
+checkpoint gpr-m25-var-2 n=575/1436 elapsed=804.2s
+checkpoint gpr-m05-var-2 n=1149/1436 elapsed=5214.2s
+checkpoint gpr-m05-var-2 n=1436/1436 elapsed=5240.7s
+COMPLETE gpr-m05-var-2
+checkpoint gpr-u50-g50-2 n=72/1436 elapsed=4.3s
+checkpoint gpr-u50-g50-2 n=144/1436 elapsed=17.6s
+checkpoint gpr-u50-g50-2 n=288/1436 elapsed=80.8s
+checkpoint gpr-u50-g50-2 n=575/1436 elapsed=633.8s
+checkpoint gpr-m25-var-2 n=862/1436 elapsed=3858.9s
+checkpoint gpr-u50-g50-2 n=862/1436 elapsed=2406.8s

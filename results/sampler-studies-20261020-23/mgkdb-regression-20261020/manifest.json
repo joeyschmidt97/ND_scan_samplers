@@ -1,0 +1,95 @@
+{
+  "audit": {
+    "raw_dev": 1774,
+    "raw_test": 1463,
+    "valid_dev": 1482,
+    "valid_test": 1153,
+    "final_dev": 1482,
+    "groups": 28,
+    "features": [
+      "kymin",
+      "x0",
+      "beta",
+      "coll",
+      "q0",
+      "shat",
+      "minor_r",
+      "major_R",
+      "rhostar",
+      "omn_i",
+      "omt_i",
+      "temp_i",
+      "dens_i",
+      "omn_e",
+      "omt_e",
+      "temp_e",
+      "dens_e",
+      "omn_c",
+      "omt_c",
+      "temp_c",
+      "dens_c"
+    ]
+  },
+  "configs": [
+    [
+      "mean",
+      {}
+    ],
+    [
+      "ridge01",
+      {
+        "alpha": 0.1
+      }
+    ],
+    [
+      "ridge10",
+      {
+        "alpha": 10
+      }
+    ],
+    [
+      "ridge100",
+      {
+        "alpha": 100
+      }
+    ],
+    [
+      "extra1",
+      {
+        "min_samples_leaf": 1
+      }
+    ],
+    [
+      "extra4",
+      {
+        "min_samples_leaf": 4
+      }
+    ],
+    [
+      "hist15",
+      {
+        "max_leaf_nodes": 15
+      }
+    ],
+    [
+      "hist31",
+      {
+        "max_leaf_nodes": 31
+      }
+    ]
+  ],
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "sklearn": "1.9.0",
+  "python": "3.11.15 (main, Jun  2 2026, 22:29:49) [MSC v.1944 64 bit (AMD64)]",
+  "script_sha256": "228b95716d0ad382ad62f4b9bb636a4d80a19d949f26615c889fa620f1baebc8",
+  "data_sha256": {
+    "mode_ID_GENE_data_chunk_000.pkl": "a6d0bf0013f292761d7e14f22ee29b4db23b610124d698023016f3682a214be7",
+    "mode_ID_GENE_data_chunk_001.pkl": "f21f825e1351e796a91ec689a25c9a5bdce99e2b41458264016f647a1bfc9df8",
+    "mode_ID_GENE_data_chunk_002.pkl": "d13eae99714c73583d65578b566c03cf270e8d3c6bf5708656be91b1b6751d1f",
+    "mode_ID_GENE_data_chunk_003.pkl": "0c7c4bcd3f8f3b2c41bf82801474af485d388940968d70c04129e3b029213437",
+    "mode_ID_GENE_data_chunk_004.pkl": "5e6aa883bbb9d4e06fde03f720db17e3ea1084d61bff9bac9d0c18cbe9b3e906",
+    "mode_ID_GENE_data_chunk_005.pkl": "1eee8d95d4271fb23f4991edefca41d63ca7ac3f377f29af6d478f39f31c896e",
+    "mode_ID_GENE_data_chunk_006.pkl": "595716e4d46d1ad0b5a16cc3e2201705a38502b0465a7855df52e8f0b236c85e"
+  }
+}

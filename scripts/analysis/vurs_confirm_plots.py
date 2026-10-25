@@ -99,8 +99,7 @@ def geometries(path, entropy=DEV_ENTROPY, per_stratum=4, dim=2):
                          fontsize=8, color=INK)
             ax.set_xticks([])
             ax.set_yticks([])
-    where = "" if dim == 2 else (f"
-{dim}-D slices: interior peak along its two most curved directions,"
+    where = "" if dim == 2 else (f"\n{dim}-D slices: interior peak along its two most curved directions,"
                                  " else box centre across the switch; blank = outside the box")
     fig.suptitle(f"Development geometries: gamma (colour), dominant-mode switch (white){where}",
                  color=INK, fontsize=10)

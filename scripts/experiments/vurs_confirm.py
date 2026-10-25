@@ -14,9 +14,12 @@ written, not dropped, and is retried only with --retry-failed.
 Sequential arms share one Latin-hypercube start of 2d+1 points drawn from the
 block's acquisition seed. sg_lib pays only its own prescribed nodes, with no
 LHS start; it has no acquisition randomness, so one run per geometry is all
-there is.
+there is. sg_lib runs at tol = 1e-6 per direction, the value of sg_lib's own
+example drivers (the 2-D development pilot of 2026-10-25 used the historical
+tol = 0 adapter). --dim picks the case dimension; 2-D is guidance, 5-D/6-D the
+primary test.
 
-    python -m ND_scan_samplers.scripts.experiments.vurs_confirm --namespace dev --blocks 0-7,20-27,40-47,60-67 --output outputs/vurs-confirm
+    python -m ND_scan_samplers.scripts.experiments.vurs_confirm --namespace dev --dim 5 --blocks 0-7,20-27,40-47,60-67 --output outputs/vurs-confirm-5d
 """
 import argparse
 import json
@@ -37,6 +40,7 @@ from ND_scan_samplers.tests.benchmarks.benchmarknd.core import Observations
 BUDGET = 256
 ARMS = ("vurs", "space-filling", "gpr-var-m12", "gpr-var-m32", "gpr-var-m52", "moe", "sglib")
 GP_NU = {"gpr-var-m12": .5, "gpr-var-m32": 1.5, "gpr-var-m52": 2.5}
+SGLIB_TOL = 1e-6
 
 
 def parse_blocks(text):
@@ -48,21 +52,23 @@ def parse_blocks(text):
 
 
 def shared_start(entropy, block, dim=2):
-    return qmc.LatinHypercube(dim, seed=role_seed(entropy, block, "acquisition")).random(2*dim+1)
+    return qmc.LatinHypercube(dim, seed=role_seed(entropy, block, "acquisition", dim)).random(2*dim+1)
 
 
-def trajectory(entropy, block, arm):
-    case = ConfirmationCase(entropy, block)
+def trajectory(entropy, block, arm, dim=2):
+    case = ConfirmationCase(entropy, block, dim)
     start = np.empty((0, case.dim)) if arm == "sglib" else shared_start(entropy, block, case.dim)
     obs = Observations(case, BUDGET, case.dim, shared=start)
-    seed = role_seed(entropy, block, "acquisition")
+    seed = role_seed(entropy, block, "acquisition", dim)
     out = dict(block=block, arm=arm, case=case.describe(), budget=BUDGET, start=len(start))
+    if arm == "sglib":
+        out["sglib_tol"] = SGLIB_TOL
     began = time.perf_counter()
     try:
         if arm in GP_NU:
             _, info = strategies.gpr(obs, seed, nu=GP_NU[arm])
         else:
-            _, info = strategies.run_arm(arm, obs, seed)
+            _, info = strategies.run_arm(arm, obs, seed, sglib_tol=SGLIB_TOL)
         out.update(status="complete", info={k: v for k, v in info.items()
                                              if k in ("batch_sizes", "kernel", "matern_nu", "fit_warnings")})
     except Exception as error:
@@ -74,8 +80,8 @@ def trajectory(entropy, block, arm):
     return out
 
 
-def _work(entropy, block, arm, path):
-    result = trajectory(entropy, block, arm)
+def _work(entropy, block, arm, path, dim):
+    result = trajectory(entropy, block, arm, dim)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result))
     return block, arm, result["status"], result["n"], result["seconds"]
@@ -85,6 +91,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--namespace", choices=("dev", "confirm"), required=True)
     parser.add_argument("--manifest-commit", help="frozen manifest commit; required for --namespace confirm")
+    parser.add_argument("--dim", type=int, default=2)
     parser.add_argument("--blocks", required=True, help="e.g. 0-7,20-27")
     parser.add_argument("--arms", default=",".join(ARMS))
     parser.add_argument("--output", required=True)
@@ -113,7 +120,7 @@ def main():
     jobs.sort(key=lambda job: job[1] != "sglib")
     print(f"{len(jobs)} trajectories to run, {args.workers} workers", flush=True)
     with ProcessPoolExecutor(args.workers) as pool:
-        futures = [pool.submit(_work, entropy, *job) for job in jobs]
+        futures = [pool.submit(_work, entropy, *job, args.dim) for job in jobs]
         for future in as_completed(futures):
             block, arm, status, n, seconds = future.result()
             print(f"block{block:3d} {arm:14s} {status:8s} n={n:3d} {seconds:7.1f}s", flush=True)

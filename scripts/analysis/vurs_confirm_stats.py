@@ -202,12 +202,17 @@ def main():
     if not dev and not args.manifest_commit:
         parser.error("confirm runs need --manifest-commit")
     entropy = DEV_ENTROPY if dev else confirmation_entropy(args.manifest_commit)
-    values, incomplete = block_values(load(args.input))
+    table = load(args.input)
+    dims = {row.get("dim", 2) for rows in table.values() for row in rows.values()}
+    if len(dims) != 1:
+        parser.error(f"one dimension per run directory, found {sorted(dims)}")
+    dim = dims.pop()
+    values, incomplete = block_values(table)
     blocks = sorted(values)
     strata = [values[b]["stratum"] for b in blocks]
-    result = dict(namespace="dev" if dev else "confirm", blocks=len(values), incomplete=incomplete)
+    result = dict(namespace="dev" if dev else "confirm", dim=dim, blocks=len(values), incomplete=incomplete)
     if args.command == "board":
-        cases = {b: ConfirmationCase(entropy, b) for b in blocks}
+        cases = {b: ConfirmationCase(entropy, b, dim) for b in blocks}
         widths = {b: cases[b].peak_width() for b in blocks}
         result["rows"] = decide(values, np.random.default_rng(BOOTSTRAP_SEED))
         result["width_slopes"] = width_slopes(values, widths, np.random.default_rng(BOOTSTRAP_SEED+1))

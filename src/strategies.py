@@ -617,7 +617,8 @@ def pfn_entropy_sampling(obs, seed):
                       realized_label_bits=realized)
 
 
-def run_arm(name, obs, seed):
+def run_arm(name, obs, seed, sglib_tol=0.):
+    """`sglib_tol` defaults to the historical tol=0 adapter; sg_lib's own examples use 1e-6."""
     if name == "space-filling":
         return space_filling(obs, seed)
     if name == "moe":
@@ -657,7 +658,7 @@ def run_arm(name, obs, seed):
         return gpr(obs, seed, blend=.5, noise_aware=True)
     if name == "sglib":
         from ND_scan_samplers.src.arms.sglib_arm import SgLibArm
-        arm = SgLibArm(tol=0., max_level=20, budget_driven=True, nan_policy="error")
+        arm = SgLibArm(tol=sglib_tol, max_level=20, budget_driven=True, nan_policy="error")
     elif name == "sgpp":
         from ND_scan_samplers.src.arms.sgpp_arm import SGppArm
         arm = SGppArm(basis="modlinear", refine="surplus", refine_batch=1, target_surplus=-1., nan_policy="error")

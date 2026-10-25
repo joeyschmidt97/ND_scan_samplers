@@ -81,14 +81,15 @@ def c2_scores(yhat, truth, region, n_modes, scale):
 def score_trajectory(entropy, path):
     run = json.loads(path.read_text())
     out = dict(block=run["block"], arm=run["arm"], status=run["status"], n_paid=run["n"],
-               seconds=run["seconds"], stratum=run["case"]["stratum"])
+               seconds=run["seconds"], stratum=run["case"]["stratum"], dim=run["case"].get("dim", 2))
     if run["status"] != "complete":
         return out
-    case = ConfirmationCase(entropy, run["block"])
+    dim = run["case"].get("dim", 2)
+    case = ConfirmationCase(entropy, run["block"], dim)
     x, y, labels = np.array(run["x"]), np.array(run["y"]), np.array(run["labels"])
-    seed = role_seed(entropy, run["block"], "predictor")
+    seed = role_seed(entropy, run["block"], "predictor", dim)
     for replicate in (0, 1):
-        grid = grader_cloud(entropy, run["block"], replicate)
+        grid = grader_cloud(entropy, run["block"], replicate, dim=dim)
         truth, region = case(grid), case.region(grid)
         tag = "" if replicate == 0 else "_g2"
         for n in C1_CHECKPOINTS:

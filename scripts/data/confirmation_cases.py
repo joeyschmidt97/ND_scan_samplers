@@ -1,4 +1,4 @@
-"""Fresh 2-D analytic geometries for the VURS confirmation study.
+"""Fresh analytic geometries (2-D guidance, 5-D/6-D primary) for the VURS confirmation study.
 
 Protocol: `wiki/queries/2026-10-24-vurs-confirmation-protocol` (Vulcan wiki).
 Each case is K smooth branch growth rates g_k on the unit square; the oracle
@@ -15,6 +15,16 @@ Four equally weighted strata, one generator each:
   islands  a broad base branch plus one or two island branches that win only
            inside small disconnected bumps (1-5% of the square each)
 
+Above 2-D the same four strata are drawn by `_*_nd` generators (`dim` > 2).
+Their peaks are anisotropic in a random orthonormal frame: broad bumps have
+every axis width in the 2-D broad range; a narrow peak is narrow (sigma
+0.03-0.08, the 2-D narrow range) along one or two directions and broad (0.15-
+0.35) along the rest, so it occupies a resolvable volume at N = 256 while its
+fit-free width l still reports the narrow direction. Tilts are scaled by
+sqrt(2/d) so their range over the box matches 2-D. Island bumps take the drawn
+volume share through the d-ball volume formula. The 2-D generators are
+unchanged, so 2-D development blocks reproduce exactly.
+
 Orientation and anisotropy are drawn per case. Draws failing the validity
 checks on a fixed reference cloud are redrawn from the next child seed; the
 attempt count is recorded, never hidden.
@@ -29,6 +39,7 @@ from dataclasses import dataclass, field
 import hashlib
 
 import numpy as np
+from scipy.special import gammaln
 from scipy.stats import qmc
 
 STRATA = ("smooth", "curved", "narrow", "islands")
@@ -50,20 +61,24 @@ def stratum_of(block):
     return STRATA[block // BLOCKS_PER_STRATUM % len(STRATA)]
 
 
-def role_seed(entropy, block, role):
-    """Integer seed for one role of one block; roles never share a stream."""
-    sequence = np.random.SeedSequence([entropy, block, ROLES[role]])
+def role_seed(entropy, block, role, dim=2):
+    """Integer seed for one role of one block; roles and dimensions never share a stream.
+
+    2-D keeps its original three-word key so existing 2-D blocks reproduce.
+    """
+    key = [entropy, block, ROLES[role]] + ([] if dim == 2 else [dim])
+    sequence = np.random.SeedSequence(key)
     return int(sequence.generate_state(1, np.uint32)[0])
 
 
-def reference_cloud(n=16384):
-    return qmc.Sobol(2, scramble=True, seed=REFERENCE_SEED).random_base2(int(np.log2(n)))
+def reference_cloud(n=16384, dim=2):
+    return qmc.Sobol(dim, scramble=True, seed=REFERENCE_SEED).random_base2(int(np.log2(n)))
 
 
-def grader_cloud(entropy, block, replicate=0, n=65536):
+def grader_cloud(entropy, block, replicate=0, n=65536, dim=2):
     """Independent scrambled-Sobol grading cloud; replicate 1 is the integration check."""
-    seed = np.random.SeedSequence(role_seed(entropy, block, "grader")).spawn(2)[replicate]
-    return qmc.Sobol(2, scramble=True, seed=np.random.default_rng(seed)).random_base2(int(np.log2(n)))
+    seed = np.random.SeedSequence(role_seed(entropy, block, "grader", dim)).spawn(2)[replicate]
+    return qmc.Sobol(dim, scramble=True, seed=np.random.default_rng(seed)).random_base2(int(np.log2(n)))
 
 
 def _rotation(theta):
@@ -84,9 +99,14 @@ class Branch:
     """g(x) = c + b.(x-.5) + (x-m)^T Q (x-m) + sum_j A_j exp(-.5 (x-p_j)^T M_j (x-p_j))."""
     c: float
     b: np.ndarray
-    m: np.ndarray = field(default_factory=lambda: np.full(2, .5))
-    q: np.ndarray = field(default_factory=lambda: np.zeros((2, 2)))
+    m: np.ndarray = None
+    q: np.ndarray = None
     bumps: list = field(default_factory=list)       # (amplitude, center, metric)
+
+    def __post_init__(self):
+        d = len(self.b)
+        self.m = np.full(d, .5) if self.m is None else self.m
+        self.q = np.zeros((d, d)) if self.q is None else self.q
 
     def __call__(self, x):
         d = x-self.m
@@ -168,6 +188,107 @@ def _islands(rng):
 GENERATORS = dict(smooth=_smooth, curved=_curved, narrow=_narrow, islands=_islands)
 
 
+# --- d > 2 -------------------------------------------------------------------
+
+def _frame(rng, d):
+    """Random orthonormal frame (Haar, sign-fixed QR)."""
+    q, r = np.linalg.qr(rng.standard_normal((d, d)))
+    return q*np.sign(np.diag(r))
+
+
+def _metric_nd(rng, widths):
+    r = _frame(rng, len(widths))
+    return r @ np.diag(1/np.asarray(widths)**2) @ r.T
+
+
+def _broad_widths(rng, d, major):
+    """Major width on one axis, the rest shrunk by log-uniform ratios in [1, 4]."""
+    rho = np.exp(rng.uniform(0., np.log(4.), d))
+    rho[0] = 1.
+    return np.maximum(major/rho, .05)
+
+
+def _narrow_widths(rng, d):
+    """Narrow (0.03-0.08) along one or two directions, broad (0.15-0.35) along the rest."""
+    widths = rng.uniform(.15, .35, d)
+    narrow = rng.integers(1, 3)
+    widths[:narrow] = rng.uniform(.03, .08, narrow)
+    return widths
+
+
+def _tilt_nd(rng, d, size):
+    u = rng.standard_normal(d)
+    return size*np.sqrt(2/d)*u/np.linalg.norm(u)
+
+
+def _quadratic_nd(rng, d, bound):
+    r = _frame(rng, d)
+    return r @ np.diag(rng.uniform(-bound, bound, d)) @ r.T
+
+
+def _smooth_nd(rng, d):
+    bump = (rng.uniform(.3, .7), rng.uniform(.15, .85, d),
+            _metric_nd(rng, _broad_widths(rng, d, rng.uniform(.25, .45))))
+    return [Branch(rng.uniform(-.1, .1), _tilt_nd(rng, d, rng.uniform(.3, .8)), m=rng.uniform(.2, .8, d),
+                   q=_quadratic_nd(rng, d, .6), bumps=[bump]) for _ in range(2)]
+
+
+def _curved_nd(rng, d):
+    branches = []
+    for _ in range(rng.integers(2, 4)):
+        bump = (rng.uniform(.3, .7), rng.uniform(.15, .85, d),
+                _metric_nd(rng, _broad_widths(rng, d, rng.uniform(.15, .30))))
+        branches.append(Branch(rng.uniform(-.15, .15), _tilt_nd(rng, d, rng.uniform(.2, .6)),
+                               m=rng.uniform(.2, .8, d), q=_quadratic_nd(rng, d, 2.5), bumps=[bump]))
+    return branches
+
+
+def _narrow_nd(rng, d):
+    branches = [Branch(rng.uniform(-.05, .05), _tilt_nd(rng, d, rng.uniform(.3, .8))) for _ in range(2)]
+    for k, branch in enumerate(branches):
+        for _ in range(rng.integers(1, 3)):
+            for _ in range(500):
+                center = rng.uniform(.05, .95, d)
+                if _winner(branches, center[None])[0] == k:
+                    break
+            else:
+                return None
+            branch.bumps.append((rng.uniform(.5, 1.), center, _metric_nd(rng, _narrow_widths(rng, d))))
+    return branches
+
+
+def _islands_nd(rng, d):
+    base = Branch(0., _tilt_nd(rng, d, rng.uniform(.3, .8)),
+                  bumps=[(rng.uniform(.3, .6), rng.uniform(.2, .8, d),
+                          _metric_nd(rng, _broad_widths(rng, d, rng.uniform(.25, .45))))])
+    branches, centers = [base], []
+    log_ball = d/2*np.log(np.pi)-gammaln(d/2+1)          # log volume of the unit d-ball
+    for _ in range(rng.integers(1, 3)):
+        island = Branch(base.c, base.b.copy(), bumps=list(base.bumps))
+        island.c -= rng.uniform(.15, .3)                 # loses everywhere but its bumps
+        for _ in range(rng.integers(1, 3)):
+            for _ in range(500):
+                center = rng.uniform(.15, .85, d)
+                if all(np.linalg.norm(center-c) > .4 for c in centers):
+                    break
+            else:
+                return None
+            centers.append(center)
+            # bump > depth inside e^T M e < r^2 with r^2 = 2 ln(A/depth), volume
+            # V_d r^d / sqrt(det M); scaling a fixed shape sets the drawn share
+            area = rng.uniform(*ISLAND_MASS)
+            amplitude, depth = rng.uniform(.5, .9), base.c-island.c
+            shape = _metric_nd(rng, _broad_widths(rng, d, 1.))
+            r2 = 2*np.log(amplitude/depth)
+            log_scale = 2/d*(log_ball+d/2*np.log(r2)-np.log(area)-.5*np.linalg.slogdet(shape)[1])
+            island.bumps.append((amplitude, center, shape*np.exp(log_scale)))
+        branches.append(island)
+    return branches
+
+
+GENERATORS_ND = dict(smooth=_smooth_nd, curved=_curved_nd, narrow=_narrow_nd, islands=_islands_nd)
+
+
 def _winner(branches, x):
     return np.argmax(np.column_stack([g(x) for g in branches]), axis=1)
 
@@ -189,14 +310,16 @@ class ConfirmationCase:
     `scale` is the case's response range on the reference cloud, fixed before
     any acquisition and shared by every arm.
     """
-    def __init__(self, entropy, block):
+    def __init__(self, entropy, block, dim=2):
         self.entropy, self.block = int(entropy), int(block)
         self.stratum = stratum_of(block)
-        self.dim = 2
-        cloud = reference_cloud()
-        sequence = np.random.SeedSequence(role_seed(entropy, block, "geometry"))
+        self.dim = int(dim)
+        cloud = reference_cloud(dim=self.dim)
+        sequence = np.random.SeedSequence(role_seed(entropy, block, "geometry", self.dim))
         for attempt, child in enumerate(sequence.spawn(MAX_ATTEMPTS)):
-            branches = GENERATORS[self.stratum](np.random.default_rng(child))
+            rng = np.random.default_rng(child)
+            branches = (GENERATORS[self.stratum](rng) if self.dim == 2
+                        else GENERATORS_ND[self.stratum](rng, self.dim))
             if branches is not None and _valid(self.stratum, branches, cloud):
                 break
         else:
@@ -225,7 +348,7 @@ class ConfirmationCase:
         curvature, has no interior peak and gets `cap` (broad).
         """
         from scipy.optimize import minimize
-        cloud = reference_cloud()
+        cloud = reference_cloud(dim=self.dim)
         truth, region = self(cloud), self.region(cloud)
         out = []
         for m in range(self.n_modes):
@@ -258,5 +381,5 @@ class ConfirmationCase:
         return float(np.exp(sum(a*np.log(w) for w, a in live)/sum(a for _, a in live)))
 
     def describe(self):
-        return dict(block=self.block, stratum=self.stratum, n_modes=self.n_modes, attempts=self.attempts,
+        return dict(block=self.block, dim=self.dim, stratum=self.stratum, n_modes=self.n_modes, attempts=self.attempts,
                     scale=self.scale, reference_mass=self.reference_mass.round(4).tolist())

@@ -3,7 +3,10 @@
 Reads the outputs of `vurs_confirm_stats` (board.json, power.json) in a results
 directory and writes four PNGs beside them:
 
-    geometries.png   four example cases per stratum (gamma, dominant-mode switch)
+    geometries.png   four example cases per stratum (gamma, dominant-mode switch);
+                     above 2-D a slice through an interior maximum along its two
+                     most curved directions, else through the box centre across
+                     the mode switch
     board.png        C1 difference and C2 geometric-mean ratio per comparator, 95% bootstrap-t
     width.png        C2-w: block error ratio against peak width l, per comparator
     power.png        C2 power at the planning alternative against blocks per stratum
@@ -21,7 +24,7 @@ import numpy as np
 
 from ND_scan_samplers.scripts.analysis.vurs_confirm_stats import COMPARATORS, MARGIN
 from ND_scan_samplers.scripts.data.confirmation_cases import (BLOCKS_PER_STRATUM, DEV_ENTROPY, STRATA,
-                                                              ConfirmationCase)
+                                                              ConfirmationCase, reference_cloud)
 
 # validated categorical slots 1-4 (dataviz reference palette, light mode); a
 # marker shape per stratum keeps identity off colour alone
@@ -41,23 +44,66 @@ def _style(ax):
     ax.tick_params(colors=MUTED, labelsize=8)
 
 
-def geometries(path, entropy=DEV_ENTROPY, per_stratum=4):
+def _slice(case, n, step=1e-3):
+    """Plane for a d > 2 case, with its in-box mask and coordinate axis.
+
+    An interior maximum (every coordinate >= 0.05 from the box edge) is viewed
+    through itself along gamma's two most curved directions, +/-0.5. Otherwise
+    (the broad strata, maxima on the box edge) the plane passes through the box
+    centre, spanned by the switch normal (gradient of the leading branch minus
+    the runner-up) and the gamma gradient, +/-0.9.
+    """
+    cloud = reference_cloud(dim=case.dim)
+    peak = cloud[int(np.argmax(case(cloud)))]
+    eye = np.eye(case.dim)*step
+
+    def gradient(f, p):
+        return np.array([(f(p+e)-f(p-e))[0]/(2*step) for e in eye])
+
+    if np.min(np.minimum(peak, 1-peak)) >= .05:
+        centre, half = peak, .5
+        hessian = np.array([[(case(peak+a+b)-case(peak+a-b)-case(peak-a+b)+case(peak-a-b))[0]/(4*step**2)
+                             for b in eye] for a in eye])
+        basis = np.linalg.eigh(hessian)[1][:, :2]   # most negative curvature first
+    else:
+        centre, half = np.full(case.dim, .5), .9
+        lead, second = np.argsort(case._stack(centre)[0])[::-1][:2]
+        normal = gradient(lambda p: case.branches[lead](np.atleast_2d(p))
+                          - case.branches[second](np.atleast_2d(p)), centre)
+        basis = np.linalg.qr(np.column_stack([normal, gradient(case, centre)]))[0]
+    s = np.linspace(-half, half, n)
+    u, v = np.meshgrid(s, s)
+    x = centre+u.reshape(-1, 1)*basis[:, 0]+v.reshape(-1, 1)*basis[:, 1]
+    return x, np.all((x >= 0) & (x <= 1), axis=1), s
+
+
+def geometries(path, entropy=DEV_ENTROPY, per_stratum=4, dim=2):
     n = 200
     grid = np.linspace(0, 1, n)
-    x = np.array(np.meshgrid(grid, grid)).reshape(2, -1).T
     fig, axes = plt.subplots(len(STRATA), per_stratum, figsize=(2.6*per_stratum, 2.7*len(STRATA)))
     for i, stratum in enumerate(STRATA):
         for j in range(per_stratum):
-            case = ConfirmationCase(entropy, BLOCKS_PER_STRATUM*i+j)
+            case = ConfirmationCase(entropy, BLOCKS_PER_STRATUM*i+j, dim)
             ax = axes[i, j]
-            ax.imshow(case(x).reshape(n, n), origin="lower", extent=(0, 1, 0, 1), cmap="viridis")
-            ax.contour(grid, grid, case.region(x).reshape(n, n), levels=np.arange(case.n_modes)+.5,
+            if dim == 2:
+                x, inside, axis = np.array(np.meshgrid(grid, grid)).reshape(2, -1).T, None, grid
+            else:
+                x, inside, axis = _slice(case, n)
+            image = case(x)
+            if inside is not None:
+                image = np.where(inside, image, np.nan)
+            ax.imshow(image.reshape(n, n), origin="lower", extent=(axis[0], axis[-1])*2, cmap="viridis")
+            ax.contour(axis, axis, case.region(x).reshape(n, n), levels=np.arange(case.n_modes)+.5,
                        colors="white", linewidths=1.2)
             ax.set_title(f"{stratum}, block {case.block}\nK = {case.n_modes}, l = {case.peak_width():.3f}",
                          fontsize=8, color=INK)
             ax.set_xticks([])
             ax.set_yticks([])
-    fig.suptitle("Development geometries: gamma (colour), dominant-mode switch (white)", color=INK)
+    where = "" if dim == 2 else (f"
+{dim}-D slices: interior peak along its two most curved directions,"
+                                 " else box centre across the switch; blank = outside the box")
+    fig.suptitle(f"Development geometries: gamma (colour), dominant-mode switch (white){where}",
+                 color=INK, fontsize=10)
     fig.tight_layout()
     fig.savefig(path, dpi=110)
     plt.close(fig)
@@ -166,12 +212,18 @@ def power(rows, path, label):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--results", required=True)
+    parser.add_argument("--geometries-only", type=int, metavar="DIM",
+                        help="write only geometries.png for this dimension (design review, no runs needed)")
     args = parser.parse_args()
     root = pathlib.Path(args.results)
+    if args.geometries_only:
+        root.mkdir(parents=True, exist_ok=True)
+        geometries(root/"geometries.png", dim=args.geometries_only)
+        return
     board_data = json.loads((root/"board.json").read_text())
     label = "DEV pilot" if board_data["namespace"] == "dev" else "Confirmation"
     if board_data["namespace"] == "dev":
-        geometries(root/"geometries.png")
+        geometries(root/"geometries.png", dim=board_data.get("dim", 2))
     board(board_data["rows"], root/"board.png", label)
     width(board_data["blocks_detail"], board_data["width_slopes"], root/"width.png", label)
     if (root/"power.json").exists():

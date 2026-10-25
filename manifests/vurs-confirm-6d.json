@@ -1,0 +1,29 @@
+{
+  "study": "VURS confirmation, core analytic field, 6-D",
+  "protocol": "Vulcan wiki wiki/queries/2026-10-24-vurs-confirmation-protocol, with amendments 2026-10-25 and 2026-10-25 (2)",
+  "role": "separate extension; never pooled with 5-D",
+  "code_commit": "db17d56",
+  "frozen": "2026-10-25",
+  "entropy": "confirmation_entropy(<commit that adds this file>) in scripts/data/confirmation_cases.py; seed key [entropy, block, role, dim]",
+  "dimension": 6,
+  "blocks": "0-159",
+  "strata": {"smooth": "0-19,80-99", "curved": "20-39,100-119", "narrow": "40-59,120-139", "islands": "60-79,140-159"}, "stratum_rule": "STRATA[block // 20 % 4]",
+  "blocks_per_stratum": 40,
+  "budget": 512,
+  "arms": ["vurs", "space-filling", "gpr-var-m12", "gpr-var-m32", "gpr-var-m52", "moe", "sglib"],
+  "reference_arm": "vurs",
+  "shared_start": "Latin hypercube of 2d+1 points from the acquisition seed; sglib pays its own nodes only",
+  "sglib": {"tol": 1e-6, "max_level": 20, "budget_driven": true, "sg_lib_commit": "d13bc46"},
+  "c1": {"checkpoints": [32, 64, 98], "primary": "Dirichlet-kNN label surprise, Jeffreys 1/2, k = 2d+1", "second_scorer": "GP classifier", "margin_bits": -0.05},
+  "c2": {"primary_n": 512, "secondary_n": 256, "reconstruction": "fixed GP Matern-3/2 primary; 1/2 and 5/2 robustness", "score": "mass-weighted top-decile RMSE per mode / case scale", "statistic": "equal-stratum mean of log(E_vurs/E_comparator)", "margin_ratio": 0.90},
+  "c2_w": "OLS slope of the C2 log ratio on log fit-free peak width l; secondary family, Holm over 6",
+  "tests": {"method": "stratified bootstrap-t", "B": 10000, "seed": 20261028, "family": "Holm over 12 core contrasts at 0.05", "superiority": "95% upper bound below margin and Holm rejection"},
+  "grading": "65,536-point scrambled Sobol cloud per block; second scramble as integration check",
+  "power_basis": "5-D dev pilot at N = 256 (results/vurs-confirm-dev-5d-2026-10-25): C2 power >= 0.94 at 40 blocks/stratum; N = 512 adopted by user decision, power at 512 not separately simulated",
+  "environment": {"python": "3.13.14", "numpy": "2.5.0", "scipy": "1.18.0", "scikit-learn": "1.9.0"},
+  "commands": [
+    "python -m ND_scan_samplers.scripts.experiments.vurs_confirm --namespace confirm --manifest-commit <hash> --dim 6 --budget 512 --blocks 0-159 --output ND_scan_samplers/outputs/vurs-confirm-6d-n512",
+    "python -m ND_scan_samplers.scripts.analysis.vurs_confirm_score --input ND_scan_samplers/outputs/vurs-confirm-6d-n512/confirm --manifest-commit <hash>",
+    "python -m ND_scan_samplers.scripts.analysis.vurs_confirm_stats board --input <results>/confirm --manifest-commit <hash> --output <results>/board.json"
+  ]
+}

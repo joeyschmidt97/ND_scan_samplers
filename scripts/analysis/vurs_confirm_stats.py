@@ -47,7 +47,7 @@ from ND_scan_samplers.scripts.data.confirmation_cases import (DEV_ENTROPY, STRAT
 REFERENCE = "vurs"
 COMPARATORS = ("space-filling", "gpr-var-m12", "gpr-var-m32", "gpr-var-m52", "moe", "sglib")
 C1_KEYS = ("c1_knn_32", "c1_knn_64", "c1_knn_98")
-C2_KEY = "c2_m32_top_decile_256"
+C2_KEY = "c2_m32_top_decile_{budget}"     # primary C2 at the full budget
 MARGIN = dict(c1=-.05, c2=float(np.log(.90)))
 ALTERNATIVE = dict(c1=-.10, c2=float(np.log(.80)))
 FAMILY_ALPHA = .05
@@ -65,7 +65,7 @@ def load(root):
     return table
 
 
-def block_values(table, comparators=COMPARATORS):
+def block_values(table, comparators=COMPARATORS, budget=256):
     """Per-block contrast values; blocks missing any arm are reported, not dropped."""
     arms = (REFERENCE,)+tuple(comparators)
     out, incomplete = {}, []
@@ -74,7 +74,7 @@ def block_values(table, comparators=COMPARATORS):
             incomplete.append(block)
             continue
         c1 = {a: float(np.mean([rows[a][k] for k in C1_KEYS])) for a in arms}
-        c2 = {a: max(rows[a][C2_KEY], ERROR_FLOOR) for a in arms}
+        c2 = {a: max(rows[a][C2_KEY.format(budget=budget)], ERROR_FLOOR) for a in arms}
         out[block] = dict(stratum=next(iter(rows.values()))["stratum"],
                           c1={c: c1[REFERENCE]-c1[c] for c in comparators},
                           c2={c: float(np.log(c2[REFERENCE]/c2[c])) for c in comparators})
@@ -207,10 +207,14 @@ def main():
     if len(dims) != 1:
         parser.error(f"one dimension per run directory, found {sorted(dims)}")
     dim = dims.pop()
-    values, incomplete = block_values(table)
+    budgets = {row.get("budget", 256) for rows in table.values() for row in rows.values()}
+    if len(budgets) != 1:
+        parser.error(f"one budget per run directory, found {sorted(budgets)}")
+    budget = budgets.pop()
+    values, incomplete = block_values(table, budget=budget)
     blocks = sorted(values)
     strata = [values[b]["stratum"] for b in blocks]
-    result = dict(namespace="dev" if dev else "confirm", dim=dim, blocks=len(values), incomplete=incomplete)
+    result = dict(namespace="dev" if dev else "confirm", dim=dim, budget=budget, blocks=len(values), incomplete=incomplete)
     if args.command == "board":
         cases = {b: ConfirmationCase(entropy, b, dim) for b in blocks}
         widths = {b: cases[b].peak_width() for b in blocks}

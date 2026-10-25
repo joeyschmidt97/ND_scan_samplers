@@ -108,7 +108,7 @@ def geometries(path, entropy=DEV_ENTROPY, per_stratum=4, dim=2):
     plt.close(fig)
 
 
-def board(rows, path, label):
+def board(rows, path, label, budget=256):
     fig, (left, right) = plt.subplots(1, 2, figsize=(10, 3.6))
     y = np.arange(len(COMPARATORS))[::-1]
     for ax, endpoint in ((left, "c1"), (right, "c2")):
@@ -130,7 +130,7 @@ def board(rows, path, label):
             ticks = [.2, .3, .5, .7, .9, 1., 1.5]
             ax.set_xticks(ticks, [f"{t:g}" for t in ticks])
             ax.minorticks_off()
-            ax.set_xlabel("C2: geometric-mean error ratio VURS / comparator (N = 256)", fontsize=9, color=INK)
+            ax.set_xlabel(f"C2: geometric-mean error ratio VURS / comparator (N = {budget})", fontsize=9, color=INK)
             ax.set_yticklabels([])
         else:
             ax.set_xlabel("C1: label surprise VURS - comparator, bits (N = 32, 64, 98)", fontsize=9, color=INK)
@@ -223,7 +223,7 @@ def main():
     label = "DEV pilot" if board_data["namespace"] == "dev" else "Confirmation"
     if board_data["namespace"] == "dev":
         geometries(root/"geometries.png", dim=board_data.get("dim", 2))
-    board(board_data["rows"], root/"board.png", label)
+    board(board_data["rows"], root/"board.png", label, board_data.get("budget", 256))
     width(board_data["blocks_detail"], board_data["width_slopes"], root/"width.png", label)
     if (root/"power.json").exists():
         power(json.loads((root/"power.json").read_text())["rows"], root/"power.png", label)

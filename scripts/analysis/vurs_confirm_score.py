@@ -10,7 +10,8 @@ C1, broad mode map, at N = 32, 64, 98:
     Dirichlet-kNN (Jeffreys 1/2, k = min(2d+1, N)); the GP classifier of
     `benchmarknd.surprise` is the second common scorer. Diagnostics: per-mode
     recall of the kNN argmax and fill-distance P95.
-C2, high-growth regions, at N = 256 (159 secondary):
+C2, high-growth regions, at the full budget (N = 512 primary, 256 secondary;
+    the 256-budget dev pilots used 256 and 159):
     a fixed GP reconstruction (Matern-3/2 primary; 1/2 and 5/2 robustness) is
     fitted to the prefix; RMSE on each true mode's top growth-rate decile is
     divided by the case scale and the mode errors are averaged with the modes'
@@ -39,7 +40,7 @@ from ND_scan_samplers.scripts.data.confirmation_cases import (DEV_ENTROPY, Confi
 from ND_scan_samplers.tests.benchmarks.benchmarknd.surprise import gp_label_posterior, label_posterior
 
 C1_CHECKPOINTS = (32, 64, 98)
-C2_CHECKPOINTS = (256, 159)
+C2_CHECKPOINTS = {256: (256, 159), 512: (512, 256)}     # budget -> (primary, secondary)
 KERNELS = (1.5, .5, 2.5)            # primary first
 TOP = .9                            # top-decile threshold within each mode
 
@@ -81,7 +82,7 @@ def c2_scores(yhat, truth, region, n_modes, scale):
 def score_trajectory(entropy, path):
     run = json.loads(path.read_text())
     out = dict(block=run["block"], arm=run["arm"], status=run["status"], n_paid=run["n"],
-               seconds=run["seconds"], stratum=run["case"]["stratum"], dim=run["case"].get("dim", 2))
+               seconds=run["seconds"], stratum=run["case"]["stratum"], dim=run["case"].get("dim", 2), budget=run["budget"])
     if run["status"] != "complete":
         return out
     dim = run["case"].get("dim", 2)
@@ -102,7 +103,7 @@ def score_trajectory(entropy, path):
             out[f"fill_p95_{n}"] = float(np.quantile(cKDTree(x[:n]).query(grid)[0], .95))
             out[f"c1_gpc_{n}"] = float(label_bits(x[:n], labels[:n], grid, region,
                                                   case.n_modes, "gpc")[0].mean())
-        for n in C2_CHECKPOINTS:
+        for n in C2_CHECKPOINTS[run["budget"]]:
             for nu in (KERNELS[:1] if replicate else KERNELS):
                 yhat = fit_reconstruction(x[:n], y[:n], nu, seed).predict(grid)
                 for key, value in c2_scores(yhat, truth, region, case.n_modes, case.scale).items():

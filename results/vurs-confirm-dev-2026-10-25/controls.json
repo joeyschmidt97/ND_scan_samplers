@@ -1,0 +1,115 @@
+{
+ "namespace": "dev",
+ "blocks": 32,
+ "incomplete": [],
+ "rows": [
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "space-filling",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.008,
+   "reject_unadjusted": 0.032
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "gpr-var-m12",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.005,
+   "reject_unadjusted": 0.022
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "gpr-var-m32",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.005,
+   "reject_unadjusted": 0.032
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "gpr-var-m52",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.004,
+   "reject_unadjusted": 0.02
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "moe",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.009,
+   "reject_unadjusted": 0.033
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c1",
+   "comparator": "sglib",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.003,
+   "reject_unadjusted": 0.018
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "space-filling",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.006,
+   "reject_unadjusted": 0.025
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "gpr-var-m12",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.003,
+   "reject_unadjusted": 0.021
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "gpr-var-m32",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.003,
+   "reject_unadjusted": 0.016
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "gpr-var-m52",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.004,
+   "reject_unadjusted": 0.019
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "moe",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.002,
+   "reject_unadjusted": 0.016
+  },
+  {
+   "per_stratum": 20,
+   "endpoint": "c2",
+   "comparator": "sglib",
+   "scenario": "null at margin",
+   "inflate": 1.0,
+   "reject_bonferroni": 0.004,
+   "reject_unadjusted": 0.027
+  }
+ ]
+}

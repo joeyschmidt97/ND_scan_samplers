@@ -1,0 +1,83 @@
+{
+  "study": "VURS confirmation, core analytic field, 5-D, reduced (amendment 3)",
+  "protocol": "Vulcan wiki wiki/queries/2026-10-24-vurs-confirmation-protocol, with amendments 2026-10-25 and 2026-10-25 (2) and 2026-10-25 (3)",
+  "role": "primary",
+  "code_commit": "db17d56",
+  "frozen": "2026-10-25",
+  "entropy": "confirmation_entropy('5732ecfe243f662cf406cb56eb3457d8d959c71a') -- unchanged from the parent manifest, so every case geometry is the same; pass that hash as --manifest-commit",
+  "dimension": 5,
+  "blocks": "0-83,100-103,120-123,140-143",
+  "strata": {
+    "smooth": "0-19,80-83",
+    "curved": "20-39,100-103",
+    "narrow": "40-59,120-123",
+    "islands": "60-79,140-143"
+  },
+  "stratum_rule": "STRATA[block // 20 % 4]",
+  "blocks_per_stratum": 24,
+  "budget": 512,
+  "arms": [
+    "vurs",
+    "space-filling",
+    "gpr-var-m32",
+    "moe",
+    "sglib"
+  ],
+  "reference_arm": "vurs",
+  "shared_start": "Latin hypercube of 2d+1 points from the acquisition seed; sglib pays its own nodes only",
+  "sglib": {
+    "tol": 1e-06,
+    "max_level": 20,
+    "budget_driven": true,
+    "sg_lib_commit": "d13bc46"
+  },
+  "c1": {
+    "checkpoints": [
+      32,
+      64,
+      98
+    ],
+    "primary": "Dirichlet-kNN label surprise, Jeffreys 1/2, k = 2d+1",
+    "second_scorer": "GP classifier",
+    "margin_bits": -0.05
+  },
+  "c2": {
+    "primary_n": 512,
+    "secondary_n": 256,
+    "reconstruction": "fixed GP Matern-3/2 primary; 1/2 and 5/2 robustness",
+    "score": "mass-weighted top-decile RMSE per mode / case scale",
+    "statistic": "equal-stratum mean of log(E_vurs/E_comparator)",
+    "margin_ratio": 0.9
+  },
+  "c2_w": "OLS slope of the C2 log ratio on log fit-free peak width l; secondary family, Holm over 4",
+  "tests": {
+    "method": "stratified bootstrap-t",
+    "B": 10000,
+    "seed": 20261028,
+    "family": "Holm over 8 core contrasts at 0.05",
+    "superiority": "95% upper bound below margin and Holm rejection"
+  },
+  "grading": "65,536-point scrambled Sobol cloud per block; second scramble as integration check",
+  "power_basis": "5-D dev pilot at N = 256, 4-comparator family, 24 blocks/stratum, alpha/8 (results/vurs-confirm-dev-5d-2026-10-25/power-24.json): C2 power 0.97 space-filling, 0.89 gpr-var-m32, 1.00 moe, 0.78 sglib (below the 0.80 target; accepted by user decision); C1 1.00",
+  "environment": {
+    "python": "3.13.14",
+    "numpy": "2.5.0",
+    "scipy": "1.18.0",
+    "scikit-learn": "1.9.0"
+  },
+  "commands": [
+    "python -m ND_scan_samplers.scripts.experiments.vurs_confirm --namespace confirm --manifest-commit 5732ecfe243f662cf406cb56eb3457d8d959c71a --dim 5 --budget 512 --blocks 0-83,100-103,120-123,140-143 --arms vurs,space-filling,gpr-var-m32,moe,sglib --output ND_scan_samplers/outputs/vurs-confirm-5d-n512",
+    "python -m ND_scan_samplers.scripts.analysis.vurs_confirm_score --input ND_scan_samplers/outputs/vurs-confirm-5d-n512/confirm --manifest-commit 5732ecfe243f662cf406cb56eb3457d8d959c71a",
+    "python -m ND_scan_samplers.scripts.analysis.vurs_confirm_stats board --input <results>/confirm --manifest-commit 5732ecfe243f662cf406cb56eb3457d8d959c71a --comparators space-filling,gpr-var-m32,moe,sglib --output <results>/board.json"
+  ],
+  "amends": "manifests/vurs-confirm-5d.json frozen at 5732ecfe243f662cf406cb56eb3457d8d959c71a",
+  "amendment": "local compute only (no NERSC): 24 blocks per stratum instead of 40, gpr-var-m12 and gpr-var-m52 dropped; made before any confirmation trajectory was scored; blocks fixed by rule (first 24 per stratum in block order), not by run status",
+  "entropy_commit": "5732ecfe243f662cf406cb56eb3457d8d959c71a",
+  "comparators": [
+    "space-filling",
+    "gpr-var-m32",
+    "moe",
+    "sglib"
+  ],
+  "reused": "finished trajectories from the parent run in the kept blocks and arms are kept (same entropy, code, budget); dropped-arm and out-of-set files stay on disk, unscored"
+}

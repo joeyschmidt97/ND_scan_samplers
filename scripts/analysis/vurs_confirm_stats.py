@@ -31,7 +31,11 @@ Subcommands:
     board     decision table and width slopes (dev tables are labelled DEV)
     controls  type-I error with the population exactly at the margin
     power     power at the planning alternatives (0.10 bits; R = 0.80) for
-              20/30/40 blocks per stratum, resampled from dev-block variance
+              --per-stratum blocks per stratum (20/30/40 by default),
+              resampled from dev-block variance
+
+--comparators restricts the family (the 2026-10-25 (3) amendment keeps
+space-filling, gpr-var-m32, moe and sglib: Holm over 8).
 
     python -m ND_scan_samplers.scripts.analysis.vurs_confirm_stats power --input outputs/vurs-confirm/dev
 """
@@ -124,20 +128,20 @@ def holm(pvalues, alpha=FAMILY_ALPHA):
     return reject
 
 
-def decide(values, rng):
-    """The 12-contrast core family: C1 and C2 of VURS against each comparator."""
+def decide(values, rng, comparators=COMPARATORS):
+    """The core family: C1 and C2 of VURS against each comparator (Holm over 2 x comparators)."""
     blocks = sorted(values)
     strata = [values[b]["stratum"] for b in blocks]
     rows = [dict(endpoint=e, comparator=c,
                  **contrast(strata, [values[b][e][c] for b in blocks], e, rng))
-            for e in ("c1", "c2") for c in COMPARATORS]
+            for e in ("c1", "c2") for c in comparators]
     for r, rejected in zip(rows, holm(np.array([r["p_margin"] for r in rows]))):
         r["holm_reject"] = bool(rejected)
         r["superior"] = bool(rejected and r["ci_below_margin"])
     return rows
 
 
-def width_slopes(values, widths, rng, size=BOOTSTRAP):
+def width_slopes(values, widths, rng, size=BOOTSTRAP, comparators=COMPARATORS):
     """C2-w: OLS slope of the C2 log ratio on log peak width, per comparator."""
     blocks = sorted(values)
     strata = np.array([values[b]["stratum"] for b in blocks])
@@ -145,7 +149,7 @@ def width_slopes(values, widths, rng, size=BOOTSTRAP):
     groups = _groups(strata)
     rows = np.concatenate([g[rng.integers(0, len(g), (size, len(g)))] for g in groups], axis=1)
     out = []
-    for c in COMPARATORS:
+    for c in comparators:
         y = np.array([values[b]["c2"][c] for b in blocks])
         slope = float(np.polyfit(x, y, 1)[0])
         xs, ys = x[rows], y[rows]
@@ -197,7 +201,13 @@ def main():
     parser.add_argument("--sims", type=int, default=400)
     parser.add_argument("--size", type=int, default=2000, help="bootstrap draws inside each simulation")
     parser.add_argument("--output", help="write the JSON result here")
+    parser.add_argument("--comparators", default=",".join(COMPARATORS))
+    parser.add_argument("--per-stratum", default="20,30,40", help="power only: blocks per stratum to simulate")
     args = parser.parse_args()
+    comparators = tuple(args.comparators.split(","))
+    if not set(comparators) <= set(COMPARATORS):
+        parser.error(f"unknown comparator in {comparators}")
+    family = 2*len(comparators)
     dev = pathlib.Path(args.input).name == "dev"
     if not dev and not args.manifest_commit:
         parser.error("confirm runs need --manifest-commit")
@@ -211,15 +221,17 @@ def main():
     if len(budgets) != 1:
         parser.error(f"one budget per run directory, found {sorted(budgets)}")
     budget = budgets.pop()
-    values, incomplete = block_values(table, budget=budget)
+    values, incomplete = block_values(table, comparators, budget=budget)
     blocks = sorted(values)
     strata = [values[b]["stratum"] for b in blocks]
-    result = dict(namespace="dev" if dev else "confirm", dim=dim, budget=budget, blocks=len(values), incomplete=incomplete)
+    result = dict(namespace="dev" if dev else "confirm", dim=dim, budget=budget, blocks=len(values),
+                  incomplete=incomplete, comparators=list(comparators), family=family)
     if args.command == "board":
         cases = {b: ConfirmationCase(entropy, b, dim) for b in blocks}
         widths = {b: cases[b].peak_width() for b in blocks}
-        result["rows"] = decide(values, np.random.default_rng(BOOTSTRAP_SEED))
-        result["width_slopes"] = width_slopes(values, widths, np.random.default_rng(BOOTSTRAP_SEED+1))
+        result["rows"] = decide(values, np.random.default_rng(BOOTSTRAP_SEED), comparators)
+        result["width_slopes"] = width_slopes(values, widths, np.random.default_rng(BOOTSTRAP_SEED+1),
+                                              comparators=comparators)
         result["blocks_detail"] = [dict(block=b, stratum=values[b]["stratum"], peak_width=widths[b],
                                         mode_widths=cases[b].peak_widths(), c1=values[b]["c1"],
                                         c2_log_ratio=values[b]["c2"]) for b in blocks]
@@ -227,20 +239,21 @@ def main():
             print(("DEV " if dev else "")+json.dumps(r))
     else:
         settings = ([(20, MARGIN, "null at margin", 1.)] if args.command == "controls" else
-                    [(n, ALTERNATIVE, "planning alternative", f) for n in (20, 30, 40) for f in (1., 1.25)])
+                    [(int(n), ALTERNATIVE, "planning alternative", f)
+                     for n in args.per_stratum.split(",") for f in (1., 1.25)])
         rows = []
         for per_stratum, targets, label, inflate in settings:
             for endpoint in ("c1", "c2"):
-                for k, comparator in enumerate(COMPARATORS):
+                for k, comparator in enumerate(comparators):
                     seed = BOOTSTRAP_SEED+1000*per_stratum+10*k+(endpoint == "c2")
                     common = (strata, [values[b][endpoint][comparator] for b in blocks], endpoint,
                               targets[endpoint], per_stratum)
                     row = dict(per_stratum=per_stratum, endpoint=endpoint, comparator=comparator,
                                scenario=label, inflate=inflate,
-                               # one alternative among 12 nulls: Holm's first step, alpha/12
-                               reject_bonferroni=rejection_rate(*common, FAMILY_ALPHA/12, args.sims,
+                               # one alternative among the nulls: Holm's first step, alpha/family
+                               reject_bonferroni=rejection_rate(*common, FAMILY_ALPHA/family, args.sims,
                                                                 args.size, seed, inflate),
-                               # all twelve alternatives: Holm's last step, the CI bound binds
+                               # all alternatives true: Holm's last step, the CI bound binds
                                reject_unadjusted=rejection_rate(*common, FAMILY_ALPHA, args.sims,
                                                                 args.size, seed, inflate))
                     rows.append(row)

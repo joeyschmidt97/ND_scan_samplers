@@ -108,13 +108,20 @@ def geometries(path, entropy=DEV_ENTROPY, per_stratum=4, dim=2):
     plt.close(fig)
 
 
+def _present(rows):
+    """Comparators in the run's family, in the frozen display order."""
+    names = {r["comparator"] for r in rows}
+    return [c for c in COMPARATORS if c in names]
+
+
 def board(rows, path, label, budget=256):
-    fig, (left, right) = plt.subplots(1, 2, figsize=(10, 3.6))
-    y = np.arange(len(COMPARATORS))[::-1]
+    comparators = _present(rows)
+    fig, (left, right) = plt.subplots(1, 2, figsize=(10, 1.2+.4*len(comparators)))
+    y = np.arange(len(comparators))[::-1]
     for ax, endpoint in ((left, "c1"), (right, "c2")):
         part = {r["comparator"]: r for r in rows if r["endpoint"] == endpoint}
         key = ("estimate", "low", "high") if endpoint == "c1" else ("ratio", "ratio_low", "ratio_high")
-        for yi, c in zip(y, COMPARATORS):
+        for yi, c in zip(y, comparators):
             r = part[c]
             ax.plot([r[key[1]], r[key[2]]], [yi, yi], color=INK, lw=2, solid_capstyle="round")
             ax.plot(r[key[0]], yi, "o", ms=8, color="#2a78d6" if r["superior"] else "white",
@@ -123,7 +130,7 @@ def board(rows, path, label, budget=256):
         margin = MARGIN["c1"] if endpoint == "c1" else float(np.exp(MARGIN["c2"]))
         ax.axvline(null, color=MUTED, lw=1)
         ax.axvline(margin, color=INK, lw=1, ls="--")
-        ax.set_yticks(y, COMPARATORS)
+        ax.set_yticks(y, comparators)
         _style(ax)
         if endpoint == "c2":
             ax.set_xscale("log")
@@ -134,7 +141,7 @@ def board(rows, path, label, budget=256):
             ax.set_yticklabels([])
         else:
             ax.set_xlabel("C1: label surprise VURS - comparator, bits (N = 32, 64, 98)", fontsize=9, color=INK)
-        ax.text(margin, len(COMPARATORS)-.4, " margin", fontsize=8, color=INK, va="bottom")
+        ax.text(margin, len(comparators)-.4, " margin", fontsize=8, color=INK, va="bottom")
     fig.suptitle(f"{label}: VURS vs each comparator, 95% bootstrap-t (filled = practical superiority "
                  f"after Holm)", fontsize=10, color=INK)
     fig.tight_layout()
@@ -143,10 +150,12 @@ def board(rows, path, label, budget=256):
 
 
 def width(detail, slopes, path, label):
+    comparators = _present(slopes)
     slopes = {s["comparator"]: s for s in slopes}
-    fig, axes = plt.subplots(2, 3, figsize=(11, 6.4), sharex=True, sharey=True)
+    columns = 3 if len(comparators) > 4 else 2
+    fig, axes = plt.subplots(2, columns, figsize=(3.7*columns, 6.4), sharex=True, sharey=True)
     lx = np.log([d["peak_width"] for d in detail])
-    for ax, c in zip(axes.flat, COMPARATORS):
+    for ax, c in zip(axes.flat, comparators):
         ly = np.array([d["c2_log_ratio"][c] for d in detail])
         for stratum in STRATA:
             rows = [i for i, d in enumerate(detail) if d["stratum"] == stratum]
@@ -175,10 +184,10 @@ def width(detail, slopes, path, label):
     plt.close(fig)
 
 
-def power(rows, path, label):
+def power(rows, path, label, family=12):
     fig, ax = plt.subplots(figsize=(7, 4.2))
     ends = {}
-    for c in COMPARATORS:
+    for c in _present(rows):
         for inflate, ls, lw in ((1., "-", 2), (1.25, ":", 1.5)):
             part = sorted((r["per_stratum"], r["reject_bonferroni"]) for r in rows
                           if r["endpoint"] == "c2" and r["comparator"] == c and r["inflate"] == inflate)
@@ -195,11 +204,11 @@ def power(rows, path, label):
         ax.text(n[-1]+.6, y, f"{c} {ends[c]:.2f}", fontsize=8, color=INK, va="center")
     ax.axhline(.8, color=INK, lw=1, ls="--")
     ax.text(18.3, .815, "80% target", fontsize=8, color=INK)
-    ax.set_xticks([20, 30, 40])
+    ax.set_xticks(sorted({r["per_stratum"] for r in rows}))
     ax.set_xlim(18, 50)
     ax.set_ylim(0, 1)
     ax.set_xlabel("independent blocks per stratum (x4 strata)", fontsize=9, color=INK)
-    ax.set_ylabel("power, Holm first step (alpha/12)", fontsize=9, color=INK)
+    ax.set_ylabel(f"power, Holm first step (alpha/{family})", fontsize=9, color=INK)
     _style(ax)
     fig.suptitle(f"{label}: C2 power at R = 0.80; solid = dev spread, dotted = spread x1.25\n"
                  f"(C1 power is 1.00 at every size)", fontsize=10, color=INK)
@@ -226,7 +235,8 @@ def main():
     board(board_data["rows"], root/"board.png", label, board_data.get("budget", 256))
     width(board_data["blocks_detail"], board_data["width_slopes"], root/"width.png", label)
     if (root/"power.json").exists():
-        power(json.loads((root/"power.json").read_text())["rows"], root/"power.png", label)
+        power_data = json.loads((root/"power.json").read_text())
+        power(power_data["rows"], root/"power.png", label, power_data.get("family", 12))
 
 
 if __name__ == "__main__":

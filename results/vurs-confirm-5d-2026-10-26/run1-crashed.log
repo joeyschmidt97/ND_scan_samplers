@@ -1,0 +1,101 @@
+1120 trajectories to run, 15 workers
+block  5 sglib          complete n=512   425.4s
+block  3 sglib          complete n=512   562.5s
+block  9 sglib          complete n=512   598.8s
+block  1 sglib          complete n=512   639.3s
+block 13 sglib          complete n=512   648.1s
+block  4 sglib          complete n=512   657.0s
+block  0 sglib          complete n=512   661.5s
+block 14 sglib          complete n=512   838.9s
+block  2 sglib          complete n=512   895.3s
+block  8 sglib          complete n=512   923.7s
+block 10 sglib          complete n=512  1031.0s
+block 21 sglib          complete n=512   443.3s
+block 15 sglib          complete n=512   692.4s
+block  7 sglib          complete n=512  1120.7s
+block 17 sglib          complete n=512   655.6s
+block 16 sglib          complete n=512   746.0s
+block 18 sglib          complete n=512   727.8s
+block 11 sglib          complete n=512  1372.0s
+block 20 sglib          complete n=512   720.3s
+block 19 sglib          complete n=512   764.6s
+block 23 sglib          complete n=512   583.2s
+block  6 sglib          complete n=512  1636.0s
+block 24 sglib          complete n=512   754.6s
+block 12 sglib          complete n=512  1853.3s
+block 22 sglib          complete n=512  1082.5s
+block 25 sglib          complete n=512  1047.0s
+block 29 sglib          complete n=512   932.8s
+block 33 sglib          complete n=512   911.6s
+block 31 sglib          complete n=512   928.1s
+block 27 sglib          complete n=512  1179.2s
+block 32 sglib          complete n=512   963.5s
+block 35 sglib          complete n=512   940.9s
+block 26 sglib          complete n=512  1331.0s
+block 37 sglib          complete n=512   820.3s
+block 36 sglib          complete n=512   911.6s
+block 39 sglib          complete n=512   722.1s
+block 40 sglib          complete n=512   672.2s
+block 46 sglib          complete n=512   388.2s
+block 42 sglib          complete n=512   744.5s
+block 41 sglib          complete n=512   899.2s
+block 45 sglib          complete n=512   824.8s
+block 47 sglib          complete n=512   733.8s
+block 28 sglib          complete n=512  2307.1s
+block 48 sglib          complete n=512   949.0s
+block 51 sglib          complete n=512   747.7s
+block 44 sglib          complete n=512  1227.4s
+block 52 sglib          complete n=512   778.6s
+block 54 sglib          complete n=512   555.0s
+block 34 sglib          complete n=512  2272.7s
+block 55 sglib          complete n=512   534.5s
+block 38 sglib          complete n=512  1922.2s
+block 56 sglib          complete n=512   651.0s
+block 49 sglib          complete n=512  1330.0s
+block 53 sglib          complete n=512   891.8s
+block 57 sglib          complete n=512   642.6s
+block 59 sglib          complete n=512   633.7s
+block 58 sglib          complete n=512   857.3s
+block 30 sglib          complete n=512  2997.6s
+block 62 sglib          complete n=512   683.4s
+block 61 sglib          complete n=512   800.4s
+block 64 sglib          complete n=512   744.1s
+block 63 sglib          complete n=512   754.6s
+block 50 sglib          complete n=512  1801.3s
+block 65 sglib          complete n=512   730.3s
+block 68 sglib          complete n=512   643.6s
+block 60 sglib          complete n=512  1047.0s
+block 66 sglib          complete n=512   767.8s
+block 67 sglib          complete n=512   802.9s
+block 79 sglib          complete n=512   554.5s
+block 74 sglib          complete n=512   741.8s
+block 77 sglib          complete n=512   683.6s
+block 78 sglib          complete n=512   731.8s
+block 73 sglib          complete n=512   994.0s
+block 82 sglib          complete n=512   718.5s
+block 69 sglib          complete n=512  1353.6s
+block 81 sglib          complete n=512   905.6s
+block 70 sglib          complete n=512  1393.0s
+block 71 sglib          complete n=512  1247.1s
+block 80 sglib          complete n=512  1099.8s
+block 72 sglib          complete n=512  1375.8s
+block 84 sglib          complete n=512   678.8s
+block 83 sglib          complete n=512   824.0s
+block 76 sglib          complete n=512  1581.3s
+block 90 sglib          complete n=512   561.3s
+block 85 sglib          complete n=512   946.1s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\joesc\git\ND_scan_samplers\scripts\experiments\vurs_confirm.py", line 134, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\joesc\git\ND_scan_samplers\scripts\experiments\vurs_confirm.py", line 126, in main
+    block, arm, status, n, seconds = future.result()
+                                     ~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 453, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 402, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.

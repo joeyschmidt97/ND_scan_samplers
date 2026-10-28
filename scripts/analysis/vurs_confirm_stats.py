@@ -50,9 +50,11 @@ from ND_scan_samplers.scripts.data.confirmation_cases import (DEV_ENTROPY, STRAT
 
 REFERENCE = "vurs"
 COMPARATORS = ("space-filling", "gpr-var-m12", "gpr-var-m32", "gpr-var-m52", "moe", "sglib")
-C1_KEYS = ("c1_knn_32", "c1_knn_64", "c1_knn_98")
-C2_KEY = "c2_m32_top_decile_{budget}"     # primary C2 at the full budget
+C1_CHECKPOINTS = (32, 64, 98)
+C1_KEY = "c1_{scorer}_{n}{grading}"         # primary: kNN scorer, first grading scramble
+C2_KEY = "c2_{kernel}_top_decile_{budget}{grading}"   # primary: Matern-3/2 at the full budget
 MARGIN = dict(c1=-.05, c2=float(np.log(.90)))
+NONINFERIORITY = dict(c1=.05, c2=float(np.log(1.10)))
 ALTERNATIVE = dict(c1=-.10, c2=float(np.log(.80)))
 FAMILY_ALPHA = .05
 BOOTSTRAP = 10000
@@ -69,16 +71,24 @@ def load(root):
     return table
 
 
-def block_values(table, comparators=COMPARATORS, budget=256):
-    """Per-block contrast values; blocks missing any arm are reported, not dropped."""
+def block_values(table, comparators=COMPARATORS, budget=256, c1_scorer="knn", c2_kernel="m32", grading=""):
+    """Per-block contrast values; blocks missing any arm are reported, not dropped.
+
+    The defaults are the registered primaries. The other settings are the
+    registered robustness checks: C1 under the GP-classifier scorer (`gpc`),
+    C2 refit under Matern-1/2 or 5/2 (`m12`, `m52`) or at N = 256, and both
+    on the second grading scramble (`grading="_g2"`).
+    """
     arms = (REFERENCE,)+tuple(comparators)
     out, incomplete = {}, []
     for block, rows in sorted(table.items()):
         if any(rows.get(a, {}).get("status") != "complete" for a in arms):
             incomplete.append(block)
             continue
-        c1 = {a: float(np.mean([rows[a][k] for k in C1_KEYS])) for a in arms}
-        c2 = {a: max(rows[a][C2_KEY.format(budget=budget)], ERROR_FLOOR) for a in arms}
+        c1_keys = [C1_KEY.format(scorer=c1_scorer, n=n, grading=grading) for n in C1_CHECKPOINTS]
+        c2_key = C2_KEY.format(kernel=c2_kernel, budget=budget, grading=grading)
+        c1 = {a: float(np.mean([rows[a][k] for k in c1_keys])) for a in arms}
+        c2 = {a: max(rows[a][c2_key], ERROR_FLOOR) for a in arms}
         out[block] = dict(stratum=next(iter(rows.values()))["stratum"],
                           c1={c: c1[REFERENCE]-c1[c] for c in comparators},
                           c2={c: float(np.log(c2[REFERENCE]/c2[c])) for c in comparators})
@@ -110,8 +120,12 @@ def contrast(strata, values, endpoint, rng, size=BOOTSTRAP):
     low, high = estimate-q_high*se, estimate-q_low*se
     margin = MARGIN[endpoint]
     p = (1+np.sum(t <= (estimate-margin)/max(se, 1e-12)))/(size+1)
+    # Noninferiority: H0 mean v >= the noninferiority margin, same studentized distribution.
+    limit = NONINFERIORITY[endpoint]
+    p_ni = (1+np.sum(t <= (estimate-limit)/max(se, 1e-12)))/(size+1)
     out = dict(estimate=float(estimate), se=float(se), low=float(low), high=float(high),
-               p_margin=float(p), ci_below_margin=bool(high < margin))
+               p_margin=float(p), ci_below_margin=bool(high < margin),
+               p_noninferior=float(p_ni), ci_below_noninferior=bool(high < limit))
     if endpoint == "c2":
         out.update(ratio=float(np.exp(estimate)), ratio_low=float(np.exp(low)), ratio_high=float(np.exp(high)))
     return out
@@ -138,6 +152,11 @@ def decide(values, rng, comparators=COMPARATORS):
     for r, rejected in zip(rows, holm(np.array([r["p_margin"] for r in rows]))):
         r["holm_reject"] = bool(rejected)
         r["superior"] = bool(rejected and r["ci_below_margin"])
+    # Noninferiority family per endpoint, Holm over the comparators (added 2026-10-27, post-result).
+    for e in ("c1", "c2"):
+        part = [r for r in rows if r["endpoint"] == e]
+        for r, rejected in zip(part, holm(np.array([r["p_noninferior"] for r in part]))):
+            r["noninferior"] = bool(rejected and r["ci_below_noninferior"])
     return rows
 
 
@@ -203,6 +222,10 @@ def main():
     parser.add_argument("--output", help="write the JSON result here")
     parser.add_argument("--comparators", default=",".join(COMPARATORS))
     parser.add_argument("--per-stratum", default="20,30,40", help="power only: blocks per stratum to simulate")
+    parser.add_argument("--c1-scorer", default="knn", choices=("knn", "gpc"), help="C1 label scorer")
+    parser.add_argument("--c2-kernel", default="m32", choices=("m12", "m32", "m52"), help="C2 refit kernel")
+    parser.add_argument("--c2-budget", type=int, help="C2 budget; default is the run budget")
+    parser.add_argument("--grading", default="", choices=("", "g2"), help="g2 = second grading scramble")
     args = parser.parse_args()
     comparators = tuple(args.comparators.split(","))
     if not set(comparators) <= set(COMPARATORS):
@@ -221,10 +244,14 @@ def main():
     if len(budgets) != 1:
         parser.error(f"one budget per run directory, found {sorted(budgets)}")
     budget = budgets.pop()
-    values, incomplete = block_values(table, comparators, budget=budget)
+    c2_budget = args.c2_budget or budget
+    grading = "_"+args.grading if args.grading else ""
+    values, incomplete = block_values(table, comparators, budget=c2_budget, c1_scorer=args.c1_scorer,
+                                      c2_kernel=args.c2_kernel, grading=grading)
     blocks = sorted(values)
     strata = [values[b]["stratum"] for b in blocks]
-    result = dict(namespace="dev" if dev else "confirm", dim=dim, budget=budget, blocks=len(values),
+    result = dict(namespace="dev" if dev else "confirm", dim=dim, budget=c2_budget, blocks=len(values),
+                  c1_scorer=args.c1_scorer, c2_kernel=args.c2_kernel, grading=args.grading,
                   incomplete=incomplete, comparators=list(comparators), family=family)
     if args.command == "board":
         cases = {b: ConfirmationCase(entropy, b, dim) for b in blocks}

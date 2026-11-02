@@ -159,7 +159,9 @@ def run_ask_tell(arm, obs, seed):
 
 
 def compute_checkpoints(start, budget, count=8):
-    return [float(c) for c in np.unique(np.round(np.geomspace(start, budget, count), 6))]
+    # Unrounded: rounding could put the first checkpoint a hair below the
+    # start's own cost and score a prefix missing part of the start.
+    return [float(c) for c in np.unique(np.geomspace(start, budget, count))]
 
 
 def execute(task):
@@ -180,7 +182,7 @@ def execute(task):
         sunk = competition > SINK_AT
         rows = []
         for compute in compute_checkpoints(spent[len(CORNERS)-1], budget, checkpoint_count):
-            n = int(np.searchsorted(spent, compute+1e-9, side="right"))
+            n = max(int(np.searchsorted(spent, compute+1e-9, side="right")), len(CORNERS))
             rows.append(dict(**trial, compute=compute, n=n, status="ok",
                              sink_share=float(costs[:n][sunk[:n]].sum()/spent[n-1]),
                              contested_share=float(sunk[:n].mean()),

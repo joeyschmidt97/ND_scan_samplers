@@ -1,0 +1,23 @@
+2160 complete trajectories, 0 failed rows; vurs-cost == vurs at c=1 on 60/60 pairs
+
+end_to_end_error, ratio vs vurs (median over pairs), Holm over 32 tests
+arm                              c=1                   c=2                   c=4                   c=8
+space-filling    1.215  worse p0.000   1.267  worse p0.000   1.285  worse p0.000   1.292  worse p0.000
+vurs-a           1.075  worse p0.008   1.065  worse p0.004   1.061    tie p0.069   1.097  worse p0.002
+vurs-avoid       1.000    tie p1.000   0.981    tie p1.000   1.014    tie p1.000   0.975    tie p1.000
+vurs-cost        1.000    tie p1.000   1.051  worse p0.007   1.179  worse p0.000   1.260  worse p0.000
+vurs-flag        1.016    tie p1.000   1.019    tie p1.000   1.019    tie p1.000   1.029    tie p1.000
+vurs-n           1.007    tie p1.000   0.994    tie p1.000   0.999    tie p1.000   1.019    tie p1.000
+vurs-prod        1.004    tie p1.000   1.003    tie p1.000   0.996    tie p1.000   1.033    tie p1.000
+vwrs             1.019    tie p1.000   1.016    tie p0.967   1.032    tie p1.000   1.030    tie p1.000
+
+geometric-mean end_to_end_error / sink share / points
+space-filling     0.0309 0.10   256    0.0337 0.15   223    0.0377 0.23   178    0.0450 0.31   127
+vurs              0.0254 0.17   256    0.0265 0.23   211    0.0290 0.30   159    0.0342 0.37   107
+vurs-a            0.0272 0.09   256    0.0284 0.13   223    0.0307 0.20   178    0.0373 0.28   126
+vurs-avoid        0.0258 0.09   256    0.0266 0.14   223    0.0292 0.20   177    0.0335 0.27   127
+vurs-cost         0.0254 0.17   256    0.0285 0.12   225    0.0343 0.12   198    0.0435 0.13   169
+vurs-flag         0.0256 0.15   256    0.0270 0.21   213    0.0298 0.29   161    0.0351 0.36   109
+vurs-n            0.0257 0.12   256    0.0266 0.17   218    0.0292 0.25   167    0.0353 0.34   114
+vurs-prod         0.0257 0.13   256    0.0265 0.19   216    0.0292 0.26   164    0.0356 0.34   112
+vwrs              0.0260 0.35   256    0.0274 0.39   192    0.0298 0.40   138    0.0362 0.41    95

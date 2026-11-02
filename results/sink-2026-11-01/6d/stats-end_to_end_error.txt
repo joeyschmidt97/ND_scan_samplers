@@ -1,0 +1,23 @@
+2880 complete trajectories, 0 failed rows; vurs-cost == vurs at c=1 on 80/80 pairs
+
+end_to_end_error, ratio vs vurs (median over pairs), Holm over 32 tests
+arm                              c=1                   c=2                   c=4                   c=8
+space-filling    1.001    tie p1.000   1.026    tie p0.402   1.032    tie p0.174   1.085  worse p0.000
+vurs-a           0.976    tie p0.706   0.990    tie p1.000   0.999    tie p1.000   1.027    tie p0.152
+vurs-avoid       0.979    tie p1.000   0.978    tie p1.000   0.971    tie p1.000   0.982    tie p1.000
+vurs-cost        1.000    tie p1.000   0.979    tie p0.106   0.951 better p0.000   0.966    tie p0.328
+vurs-flag        1.002    tie p1.000   1.002    tie p1.000   0.995    tie p1.000   0.987    tie p1.000
+vurs-n           1.000    tie p1.000   1.000    tie p1.000   1.000    tie p1.000   1.000    tie p1.000
+vurs-prod        1.000    tie p1.000   1.000    tie p1.000   1.003    tie p1.000   1.008    tie p1.000
+vwrs             1.081  worse p0.000   1.085  worse p0.000   1.110  worse p0.000   1.112  worse p0.000
+
+geometric-mean end_to_end_error / sink share / points
+space-filling     0.0151 0.15   256    0.0163 0.24   214    0.0181 0.35   161    0.0219 0.47   107
+vurs              0.0151 0.14   256    0.0158 0.21   216    0.0173 0.32   164    0.0202 0.42   112
+vurs-a            0.0147 0.15   256    0.0156 0.24   213    0.0174 0.35   159    0.0213 0.46   105
+vurs-avoid        0.0147 0.13   256    0.0155 0.21   216    0.0171 0.31   166    0.0199 0.42   113
+vurs-cost         0.0151 0.14   256    0.0153 0.19   220    0.0165 0.27   175    0.0194 0.38   123
+vurs-flag         0.0152 0.13   256    0.0159 0.20   217    0.0173 0.30   166    0.0200 0.41   113
+vurs-n            0.0150 0.14   256    0.0157 0.21   215    0.0174 0.32   164    0.0201 0.42   112
+vurs-prod         0.0150 0.14   256    0.0158 0.21   216    0.0173 0.31   165    0.0202 0.42   111
+vwrs              0.0169 0.13   256    0.0175 0.20   216    0.0193 0.29   166    0.0222 0.40   114

@@ -36,7 +36,10 @@ sampling is local to the transition, not piled on the tie. `vurs-cost` cuts the
 wrong share to 8.4% at c = 4 without an error gain. The single-seed pilot that
 suggested a VURS-specific penalty did not hold up.
 
-Secondary: space-filling has lower label surprise than every VURS arm
+Secondary: on placement error (true values at the same designs) space-filling
+is Holm-significantly worse than `vurs` in every cell (1.04-1.07x), so VURS's
+designs are better; the wrong values it is handed erase that edge end to end.
+Space-filling has lower label surprise than every VURS arm
 (0.88-0.90x, as in the sink sweep); `vurs-cost` also lower at c = 4 (0.96-0.97x).
 `vwrs` is worse than `vurs` everywhere.
 

@@ -7,6 +7,9 @@ arm x c_max tests. Also the vurs vs space-filling gap per c_max (the sink
 penalty), mean sink share and points placed, and the wiring check that
 `vurs-cost` reproduces `vurs` at c_max = 1.
 
+Rows from the wrong-mode sweep (`run_wrongmode_nd`) also carry `flip_peak`;
+a cell is then a (flip_peak, c_max) pair and the Holm family spans all cells.
+
     python -m ND_scan_samplers.scripts.analysis.sink_stats --input ND_scan_samplers/results/sink-2026-11-01/6d
 """
 import argparse
@@ -31,6 +34,15 @@ def holm(pvalues):
     return adjusted
 
 
+def cell(row):
+    """The sweep cell a row belongs to: c_max, or (flip_peak, c_max) when flips were swept."""
+    return (row["flip_peak"], row["c_max"]) if "flip_peak" in row else row["c_max"]
+
+
+def cell_label(c):
+    return f"p={c[0]:g},c={c[1]:g}" if isinstance(c, tuple) else f"c={c:g}"
+
+
 def final_rows(path):
     # Committed runs are gzipped: the 6D results.json exceeds GitHub's file limit.
     raw = path/"results.json"
@@ -38,7 +50,7 @@ def final_rows(path):
             gzip.decompress((path/"results.json.gz").read_bytes()).decode("utf-8"))
     rows = json.loads(text)["rows"]
     failed = [r for r in rows if r["status"] != "ok"]
-    final = {(r["case"], r["seed"], r["arm"], r["c_max"]): r for r in rows
+    final = {(r["case"], r["seed"], r["arm"], cell(r)): r for r in rows
              if r["status"] == "ok" and "seconds" in r}
     return final, failed
 
@@ -60,8 +72,9 @@ def main():
     arms = sorted({a for _, _, a, _ in final})
     costs = sorted({c for *_, c in final})
 
-    wiring = [k for k in final if k[2] == BASELINE and k[3] == 1. and (k[0], k[1], "vurs-cost", 1.) in final]
-    mismatched = sum(final[k]["x"] != final[(k[0], k[1], "vurs-cost", 1.)]["x"] for k in wiring)
+    unit = [c for c in costs if (c[1] if isinstance(c, tuple) else c) == 1.]
+    wiring = [k for k in final if k[2] == BASELINE and k[3] in unit and (k[0], k[1], "vurs-cost", k[3]) in final]
+    mismatched = sum(final[k]["x"] != final[(k[0], k[1], "vurs-cost", k[3])]["x"] for k in wiring)
     print(f"{len(final)} complete trajectories, {len(failed)} failed rows; "
           f"vurs-cost == vurs at c=1 on {len(wiring)-mismatched}/{len(wiring)} pairs")
 
@@ -83,13 +96,14 @@ def main():
     for arm in arms:
         for c in costs:
             group = [r for k, r in final.items() if k[2] == arm and k[3] == c]
-            summary[f"{arm}|{c:g}"] = dict(
+            summary[f"{arm}|{cell_label(c)}"] = dict(
                 error=float(np.exp(np.mean(np.log([r[args.metric] for r in group])))),
                 sink_share=float(np.mean([r["sink_share"] for r in group])),
+                wrong_share=float(np.mean([r.get("wrong_share", 0.) for r in group])),
                 points=float(np.mean([r["n"] for r in group])))
 
     print(f"\n{args.metric}, ratio vs {BASELINE} (median over pairs), Holm over {len(tests)} tests")
-    print(f"{'arm':14s}" + "".join(f"{'c=' + format(c, 'g'):>22s}" for c in costs))
+    print(f"{'arm':14s}" + "".join(f"{cell_label(c):>22s}" for c in costs))
     for arm in arms:
         if arm == BASELINE:
             continue
@@ -98,11 +112,12 @@ def main():
             t = next(t for t in tests if t["arm"] == arm and t["c_max"] == c)
             cells.append(f"{t['median_ratio']:.3f} {t['verdict']:>6s} p{t['p_holm']:.3f}")
         print(f"{arm:14s}" + "".join(f"{cell:>22s}" for cell in cells))
-    print(f"\ngeometric-mean {args.metric} / sink share / points")
+    print(f"\ngeometric-mean {args.metric} / sink share / wrong share / points")
     for arm in arms:
+        cells = [summary[f"{arm}|{cell_label(c)}"] for c in costs]
         print(f"{arm:14s}" + "".join(
-            f"{summary[f'{arm}|{c:g}']['error']:>10.4f} {summary[f'{arm}|{c:g}']['sink_share']:.2f} "
-            f"{summary[f'{arm}|{c:g}']['points']:5.0f}" for c in costs))
+            f"{s['error']:>10.4f} {s['sink_share']:.2f} {s['wrong_share']:.3f} {s['points']:4.0f}"
+            for s in cells))
     if args.output:
         args.output.write_text(json.dumps(dict(metric=args.metric, tests=tests, summary=summary,
                                                wiring_pairs=len(wiring), wiring_mismatched=mismatched,
